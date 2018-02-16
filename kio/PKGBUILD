@@ -1,0 +1,69 @@
+# Maintainer: pavbaranov <pavbaranov@gmail.com> for version with bugfixes from github build upon original
+# PKGBUILDs made by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kio
+pkgver=5.43.0
+pkgrel=1.1
+pkgdesc='Resource and network access abstraction'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(solid kjobwidgets kbookmarks libxslt kwallet desktop-file-utils)
+makedepends=(extra-cmake-modules kdoctools python doxygen qt5-tools)
+optdepends=('kio-extras: extra protocols support (sftp, fish and more)' 'kdoctools: for the help kioslave'
+            'knetattach: to add new kio-remote entries')
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+	kdebug-389595.patch::"https://cgit.kde.org/kio.git/patch/?id=f06403a4"
+	kdebug-388887.patch::"https://cgit.kde.org/kio.git/patch/?id=8b809b71"
+	kdebug-382437.patch::"https://cgit.kde.org/kio.git/patch/?id=0f8c2d79"
+	improve-D10124.patch::"https://cgit.kde.org/kio.git/patch/?id=42fed2e70a"
+	improve-D10045.patch::"https://cgit.kde.org/kio.git/patch/?id=4d153df735"
+	ccbug-384561.patch::"https://cgit.kde.org/kio.git/patch/?id=8d73867b3")
+sha256sums=('e6ecd2290d19e0680f4bc35dc157cf8f4df85ab3a967521dd510163843a372d5'
+            'SKIP'
+            'a6f83cd4e3801cea45b261c94901f90628662afe9f63e39f7d0127be99921ad3'
+            '9cf135a904169d09422607d7527833649e3b0a83fc226af2a18909d803c22393'
+            '43cd80b6fb07fa1ccd49823fce74bd854ad6964aa1ec5aa87a3a0d85f074965f'
+            'ccc30e005622d4c144a25064bfd1ca5b8cf9f23136b5d8c50365654512d70de9'
+            'f4cd60ceaa0a77f824e99c631e533f46d1f19cb21ab3b5254100eecbe4725f91'
+            'aac48b294b9c2f620db1d3fde055585d267ee4e3b9235cb63dae1a2ff6b26464')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+
+  cd $pkgname-$pkgver
+	msg "kdebug 389595 patch"
+  patch -p1 -i ../kdebug-389595.patch
+	msg "kdebug 388887 patch"
+  patch -p1 -i ../kdebug-388887.patch
+    msg "kdebug 382437 patch"
+  patch -p1 -i ../kdebug-382437.patch
+    msg "D10124 patch"
+  patch -p1 -i ../improve-D10124.patch
+	msg "D10045 patch"
+  patch -p1 -i ../improve-D10045.patch
+	msg "CCBUG 384561 patch"
+  patch -p1 -i ../ccbug-384561.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
