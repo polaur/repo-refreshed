@@ -1,0 +1,25 @@
+diff --git a/effects/blur/blur.kcfg b/effects/blur/blur.kcfg
+--- a/effects/blur/blur.kcfg
++++ b/effects/blur/blur.kcfg
+@@ -6,7 +6,7 @@
+     <kcfgfile arg="true"/>
+     <group name="Effect-Blur">
+         <entry name="BlurStrength" type="Int">
+-            <default>5</default>
++            <default>10</default>
+         </entry>
+         <entry name="UseSimpleBlur" type="Bool">
+             <default>false</default>
+diff --git a/effects/blur/blur_config.ui b/effects/blur/blur_config.ui
+--- a/effects/blur/blur_config.ui
++++ b/effects/blur/blur_config.ui
+@@ -58,7 +58,7 @@
+         <number>1</number>
+        </property>
+        <property name="value">
+-        <number>5</number>
++        <number>10</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+

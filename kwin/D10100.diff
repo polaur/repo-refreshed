@@ -1,0 +1,34 @@
+diff --git a/effects/blur/CMakeLists.txt b/effects/blur/CMakeLists.txt
+old mode 100755
+new mode 100644
+diff --git a/effects/blur/blur.h b/effects/blur/blur.h
+old mode 100755
+new mode 100644
+diff --git a/effects/blur/blur.cpp b/effects/blur/blur.cpp
+old mode 100755
+new mode 100644
+diff --git a/effects/blur/blur.kcfg b/effects/blur/blur.kcfg
+old mode 100755
+new mode 100644
+diff --git a/effects/blur/blur_config.h b/effects/blur/blur_config.h
+old mode 100755
+new mode 100644
+diff --git a/effects/blur/blur_config.cpp b/effects/blur/blur_config.cpp
+old mode 100755
+new mode 100644
+diff --git a/effects/blur/blur_config.desktop b/effects/blur/blur_config.desktop
+old mode 100755
+new mode 100644
+diff --git a/effects/blur/blur_config.ui b/effects/blur/blur_config.ui
+old mode 100755
+new mode 100644
+diff --git a/effects/blur/blurconfig.kcfgc b/effects/blur/blurconfig.kcfgc
+old mode 100755
+new mode 100644
+diff --git a/effects/blur/blurshader.h b/effects/blur/blurshader.h
+old mode 100755
+new mode 100644
+diff --git a/effects/blur/blurshader.cpp b/effects/blur/blurshader.cpp
+old mode 100755
+new mode 100644
+
