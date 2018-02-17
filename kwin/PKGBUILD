@@ -6,7 +6,7 @@
 
 pkgname=kwin
 pkgver=5.12.1
-pkgrel=1.1
+pkgrel=2.1
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
