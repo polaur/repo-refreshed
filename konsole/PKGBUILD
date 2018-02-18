@@ -1,0 +1,51 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for version with bugfix from github
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=konsole
+pkgver=17.12.2
+pkgrel=1.1
+arch=(x86_64)
+url='https://kde.org/applications/system/konsole/'
+pkgdesc="KDE's terminal emulator"
+license=(GPL LGPL FDL)
+groups=(kde-applications kdebase)
+depends=(knotifyconfig kpty kparts kinit)
+makedepends=(extra-cmake-modules kdoctools python)
+optdepends=('keditbookmarks: to manage bookmarks')
+source=("https://download.kde.org/stable/applications/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+        kdebug-384620.patch::"https://cgit.kde.org/konsole.git/patch/?id=b8a2f0cf"
+	kdebug-338997.patch::"https://cgit.kde.org/konsole.git/patch/?id=f98c752b")
+sha256sums=('ece6ea3c07074128bb2a601f49cade8e5d6d3cccc17c58a1052e34c0b1ab7ab5'
+            'SKIP'
+            'dfbc53016665dd9681addc5c110952c2430de5a92f2bf9bfd1c893f3b3720158'
+            '7b3402aace31e30b55a9dc6711f711d3117ad166b1ec4941ffd21f2ce9887d23')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+
+prepare() {
+  mkdir -p build
+
+  cd $pkgname-$pkgver
+	msg "kdebug 384620 patch"
+  patch -p1 -i ../kdebug-384620.patch # See: https://bugs.kde.org/show_bug.cgi?id=384620
+	msg "kdebug 338997 patch"
+  patch -p1 -i ../kdebug-338997.patch # See: https://bugs.kde.org/show_bug.cgi?id=338997
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
