@@ -1,0 +1,71 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for version with patches from upcomming releases
+# made on the work by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=gwenview
+pkgver=17.12.2
+pkgrel=1.1
+pkgdesc="A fast and easy to use image viewer"
+url='https://kde.org/applications/graphics/gwenview/'
+arch=(x86_64)
+license=(GPL LGPL FDL)
+groups=(kde-applications kdegraphics)
+depends=(kactivities baloo libkipi libkdcraw kparts kitemmodels cfitsio)
+optdepends=('qt5-imageformats: support for tiff, webp, and more image formats'
+            'kimageformats: support for dds, xcf, exr, psd, and more image formats'
+            'kipi-plugins: export to various online services')
+makedepends=(extra-cmake-modules kdoctools python cfitsio)
+source=("https://download.kde.org/stable/applications/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-390331.patch::"https://cgit.kde.org/gwenview.git/patch/?id=e913496b73"
+kdebug-305659.patch::"https://cgit.kde.org/gwenview.git/patch/?id=1e9a4482d9"
+kdebug-385242.patch::"https://cgit.kde.org/gwenview.git/patch/?id=5bcb8cc92d"
+kdebug-306835.patch::"https://cgit.kde.org/gwenview.git/patch/?id=8a6a4ea6b9"
+kdebug-359909.patch::"https://cgit.kde.org/gwenview.git/patch/?id=338ffeee4d"
+kdebug-164847.patch::"https://cgit.kde.org/gwenview.git/patch/?id=4a87ed952e")
+sha256sums=('f9f5bb6d45f72d734ba4ac2d9ae04f7e0930fb4ca4921620db40d4b9283ffb32'
+            'SKIP'
+            '888a1f8f603ea82abdc8f898a005cabdc3d5f20296c5ab5c2c26c6077d67fb4f'
+            'f701a47c36a0a4fc4216a4d25621d2d089f8a960dca53947a655f7b867c1e30d'
+            'e9c708154e3f0848b99d745f00a65e7e2d762327786b8e4634f6c3ec001e8d54'
+            '6307dac6b86af4d68f3af07bf85af0afaaf5556da2f49244f7143bfd2eb36f99'
+            'be241ef93292dda518fbdb4e3d625b2a2a878c2b270fed13e7fe356d6270e331'
+            'ba512859af7bf5815906b247f68bc726e2db20d44f4971769ea87d854ac3c848')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Add KDEBUG 390331 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390331
+  patch -p1 -i ../kdebug-390331.patch
+  msg "Add KDEBUG 305659 patch" # See: https://bugs.kde.org/show_bug.cgi?id=305659
+  patch -p1 -i ../kdebug-305659.patch
+  msg "Add KDEBUG 385242 patch" # See: https://bugs.kde.org/show_bug.cgi?id=385242
+  patch -p1 -i ../kdebug-385242.patch
+  msg "Add KDEBUG 306835 patch" # See: https://bugs.kde.org/show_bug.cgi?id=306835
+  patch -p1 -i ../kdebug-306835.patch
+  msg "Add KDEBUG 359909 patch" # See: https://bugs.kde.org/show_bug.cgi?id=359909 Fixed in 18.04
+  patch -p1 -i ../kdebug-359909.patch
+  msg "Add KDEBUG 164847 patch" # See: https://bugs.kde.org/show_bug.cgi?id=164847 Fixed in 18.04
+  patch -p1 -i ../kdebug-164847.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DGWENVIEW_SEMANTICINFO_BACKEND="Baloo" \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
