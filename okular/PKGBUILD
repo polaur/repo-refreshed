@@ -1,0 +1,75 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for version with patches from upcomming releases
+# made on the work by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=okular
+pkgver=17.12.2
+pkgrel=1.1
+pkgdesc='Document Viewer'
+arch=(x86_64)
+url="https://kde.org/applications/graphics/okular/"
+license=(GPL LGPL FDL)
+groups=(kde-applications kdegraphics)
+depends=(djvulibre libspectre libkexiv2 poppler-qt5 qca-qt5 kpty kactivities threadweaver kjs kparts purpose)
+makedepends=(extra-cmake-modules ebook-tools kdegraphics-mobipocket kdoctools khtml python chmlib discount)
+optdepends=('ebook-tools: mobi and epub support' 'discount: markdown support'
+            'kdegraphics-mobipocket: mobi support' 'kirigami2: mobile UI' 'libzip: CHM support'
+            'khtml: CHM support' 'chmlib: CHM support' 'calligra: ODT and ODP support')
+conflicts=(kdegraphics-okular)
+replaces=(kdegraphics-okular)
+source=("https://download.kde.org/stable/applications/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+fix-potential-crash-in-document-saving.patch::"https://cgit.kde.org/okular.git/patch/?id=e8d9feed70d74ed"
+fix-pdf-potential-crash.patch::"https://cgit.kde.org/okular.git/patch/?id=83374b97df101e3"
+fix-regression-in-refreshPixmaps.patch::"https://cgit.kde.org/okular.git/patch/?id=9f458a54cf923ff"
+fix-crash-on-save-when-we-had-edited-forms.patch::"https://cgit.kde.org/okular.git/patch/?id=f656f1b23f70368"
+kdebug-387426.patch::"https://cgit.kde.org/okular.git/patch/?id=ce7fa7b9d8790b9"
+kdebug-390355.patch::"https://cgit.kde.org/okular.git/patch/?id=42d4710198a7665"
+kdebug-388511.patch::"https://cgit.kde.org/okular.git/patch/?id=e44d50558323f31"
+)
+sha256sums=('fdfaf0b385958a892ede7383b41c4172cac1dfab4cdac335de8cf13c2ecf3383'
+            'SKIP'
+            '903d69f371b8b9e5cc78add4347f1b322d66caefebecf0a94d972dee4a072b2e'
+            '43e773cbf1f11acc67568ff9fd4bea895259c11b97881b9151a4b682ebc781a9'
+            '21f9a421415917b199b2e0882748a2e041fab7233aaa14949f451b3dffb700b5'
+            'fab3d798f73a03f23057bf0f915ad0df0f8b117ce45e68c8be1671e478733d8e'
+            'ec0fdde9a08b4bfabcb9e7aa4826682212277ad66078fbc77351a7506e926b65'
+            '35e6ff08d8b0815c38bf7f74f820620ffde0c3e88593c68bc370d886a2d05d70'
+            '7ef35e867d16174894804b120987a74ff639f422a82a9692327a6c09ddc5ab7a')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Add patch for fixing potential crash in document saving" # See: https://cgit.kde.org/okular.git/commit/?id=e8d9feed70d74ed3ac06a7b8d5b25eaac2d2b018
+  patch -p1 -i ../fix-potential-crash-in-document-saving.patch
+  msg "Add fix for potential crash with PDF" # See: https://cgit.kde.org/okular.git/commit/?id=83374b97df101e3408ad0f8cc7b3327ddf805fda
+  patch -p1 -i ../fix-pdf-potential-crash.patch
+  msg "Add fix for regression in refreshPixmaps" # See: https://cgit.kde.org/okular.git/commit/?id=9f458a54cf923ff85c9a5e241429dfd8ec673ccc
+  msg "Add fix for crash on save when we had edited forms patch" # See: https://cgit.kde.org/okular.git/commit/?id=f656f1b23f7036831c04f9af6cb9eeceb5d3222c
+  msg "Add KDEBUG 387426 patch" # See: https://bugs.kde.org/show_bug.cgi?id=387426
+  patch -p1 -i ../kdebug-387426.patch
+  msg "Add KDEBUG 390355 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390355
+  patch -p1 -i ../kdebug-390355.patch
+  msg "Add KDEBUG 388511 patch" # See: https://bugs.kde.org/show_bug.cgi?id=388511
+  patch -p1 -i ../kdebug-388511.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
