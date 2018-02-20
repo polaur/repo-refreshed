@@ -1,4 +1,5 @@
 # Maintainer: pavbaranov <pavbaranov@gmail.com> 
+# Contributor: worldofpeace
 #for this version based on the original version make for Arch Linux by:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
@@ -6,7 +7,7 @@
 
 pkgname=kwin
 pkgver=5.12.1
-pkgrel=2.3
+pkgrel=2.4
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
