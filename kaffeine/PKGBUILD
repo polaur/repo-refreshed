@@ -1,0 +1,62 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for version with bugfix from upcomming version
+# made upon the original work by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Pierre Schmitz <pierre@archlinux.de>
+
+pkgname=kaffeine
+pkgver=2.0.14
+pkgrel=1.1
+pkgdesc='KDE media player'
+license=(GPL)
+arch=(x86_64)
+url="https://kaffeine.kde.org"
+depends=(kio libxss vlc)
+makedepends=(extra-cmake-modules kidletime kdoctools)
+source=("https://download.kde.org/stable/$pkgname/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-388962.patch::"https://cgit.kde.org/kaffeine.git/patch/?id=d20576484774737aad92b4f5cf28938e8b79d312"
+kdebug-389783.patch::"https://cgit.kde.org/kaffeine.git/patch/?id=73307da9a81bebbfae745e715c097104914963fc"
+kdebug-388367-1.patch::"https://cgit.kde.org/kaffeine.git/patch/?id=26d6ce62732baaa87f9eea432513db3e5e78cb47"
+kdebug-388367-2.patch::"https://cgit.kde.org/kaffeine.git/patch/?id=daa7865398d0897cc2fef7d218b3a8fbce6ea664"
+kdebug-384507.patch::"https://cgit.kde.org/kaffeine.git/patch/?id=f83a71be4a1e86a118cdd7b1357c29d67b8c7546"
+)
+sha256sums=('2c73fd473f0579cffa7e797e3d00c41b09d7fb4dee486bb507877a56bd1d7f3a'
+            'SKIP'
+            '27ec03963dffbd8f2b8a8273ab2b1652f6cc64dba8ef95d3838b80425faacef7'
+            'd76fd5d978bdad9e648a622d42cf8e2f74f2857286a3df6ba1ca7800c01f3669'
+            'd03cc94dd27900e06031c8da7529e710183c478461e19ee30fe9486509591747'
+            'fe7368b19d13fe952918d492762b3c8c614d254ef141c8f5d11b27840d57d3c5'
+            'fa272325a54a0f70b86d1a8be37e4c6f852eebf7422dbac8b3ea0827892d8bcb')
+validpgpkeys=(F909AE68FC11DF09C1755C00085F3EBD8EE4E115) # Mauro Carvalho Chehab <mchehab@s-opensource.com>
+
+prepare() {
+  mkdir -p build
+
+  rm -r $pkgname-$pkgver/po/pt_BR/docs # Doesn't build
+  
+  cd $pkgname-$pkgver
+  msg "Add KDEBUG 388962 patch" # See: https://bugs.kde.org/show_bug.cgi?id=388962
+  patch -p1 -i ../kdebug-388962.patch 
+  msg "Add KDEBUG 389783 patch" # See: https://bugs.kde.org/show_bug.cgi?id=389783
+  patch -p1 -i ../kdebug-389783.patch
+  msg "Add first KDEBUG 388367 patch" # See: https://bugs.kde.org/show_bug.cgi?id=388367
+  patch -p1 -i ../kdebug-388367-1.patch
+  msg "Add second KDEBUG 388367 patch" # See: https://bugs.kde.org/show_bug.cgi?id=388367
+  patch -p1 -i ../kdebug-388367-2.patch
+  msg "Add KDEBUG 384507 patch" # See: https://bugs.kde.org/show_bug.cgi?id=384507
+  patch -p1 -i ../kdebug-384507.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
