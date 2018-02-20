@@ -1,0 +1,14 @@
+diff --git a/src/solid/devices/backends/udisks2/udisksstorageaccess.cpp b/src/solid/devices/backends/udisks2/udisksstorageaccess.cpp
+--- a/src/solid/devices/backends/udisks2/udisksstorageaccess.cpp
++++ b/src/solid/devices/backends/udisks2/udisksstorageaccess.cpp
+@@ -111,7 +111,8 @@
+ 
+     const QString path = filePath();
+ 
+-    return !path.startsWith(QLatin1String("/media/"))
++    return !path.isEmpty()
++               && !path.startsWith(QLatin1String("/media/"))
+                && !path.startsWith(QLatin1String("/run/media/"))
+                && !path.startsWith(QDir::homePath());
+ }
+
