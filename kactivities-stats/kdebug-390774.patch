@@ -1,0 +1,16 @@
+diff --git a/src/common/database/Database.cpp b/src/common/database/Database.cpp
+--- a/src/common/database/Database.cpp
++++ b/src/common/database/Database.cpp
+@@ -202,9 +202,10 @@
+     auto walResult = ptr->pragma(QStringLiteral("journal_mode = WAL"));
+ 
+     if (walResult != "wal") {
+-        qFatal("KActivities: Database can not be opened in WAL mode. Check the "
++        qWarning("KActivities: Database can not be opened in WAL mode. Check the "
+                "SQLite version (required >3.7.0). And whether your filesystem "
+                "supports shared memory");
++        return nullptr;
+     }
+ 
+     // We don't have a big database, lets flush the WAL when
+

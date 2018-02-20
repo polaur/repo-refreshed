@@ -1,0 +1,47 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for version with bugfixes from upcoming version
+# made upon of the original work by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kactivities-stats
+pkgver=5.43.0
+pkgrel=1.1
+arch=('x86_64')
+pkgdesc="A library for accessing the usage data collected by the activities system"
+url='https://community.kde.org/Frameworks'
+license=('LGPL')
+depends=('kactivities')
+makedepends=('extra-cmake-modules' 'boost' 'doxygen' 'qt5-tools')
+groups=('kf5')
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-390774.patch)
+sha256sums=('016630c2123df34e48704497f40c2bbbaae53450ddbba2ee707efba87b0b36e7'
+            'SKIP'
+            'f323fcf0840f3738acb0e9b96eb9af454f1fbb548211850b8c3b6c247175ef99')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Add KDEBUG 390774 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390774
+  patch -p1 -i ../kdebug-390774.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}
