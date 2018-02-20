@@ -7,7 +7,7 @@
 
 pkgname=kio
 pkgver=5.43.0
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -25,7 +25,8 @@ source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgve
 	improve-D10045.patch::"https://cgit.kde.org/kio.git/patch/?id=4d153df735"
 	ccbug-384561.patch::"https://cgit.kde.org/kio.git/patch/?id=8d73867b3"
 	kdebug-389635.patch::"https://cgit.kde.org/kio.git/patch/?id=03be39f3709"
-	kdebug-385942.patch::"https://cgit.kde.org/kio.git/patch/?id=e3a80661c9c")
+	kdebug-385942.patch::"https://cgit.kde.org/kio.git/patch/?id=e3a80661c9c"
+	kdebug-390748.patch)
 sha256sums=('e6ecd2290d19e0680f4bc35dc157cf8f4df85ab3a967521dd510163843a372d5'
             'SKIP'
             'a6f83cd4e3801cea45b261c94901f90628662afe9f63e39f7d0127be99921ad3'
@@ -35,7 +36,8 @@ sha256sums=('e6ecd2290d19e0680f4bc35dc157cf8f4df85ab3a967521dd510163843a372d5'
             'f4cd60ceaa0a77f824e99c631e533f46d1f19cb21ab3b5254100eecbe4725f91'
             'aac48b294b9c2f620db1d3fde055585d267ee4e3b9235cb63dae1a2ff6b26464'
             '9575bc5edbfa617addc5a8e0268580ed8bc865685ef50440b2cad9b7f8e6c63c'
-            '00d34e2b3b632316b2f48c708b47526be529ac05ca6e19983ef25ede0d3afd9f')
+            '00d34e2b3b632316b2f48c708b47526be529ac05ca6e19983ef25ede0d3afd9f'
+            '855874bae044bba697877ff8feb55553f3ce032c381bb18c2873094d9ec0b686')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -58,6 +60,8 @@ prepare() {
   patch -p1 -i ../kdebug-389635.patch
     msg "Add KDEBUG 385942 patch" # See: https://bugs.kde.org/show_bug.cgi?id=385942
   patch -p1 -i ../kdebug-385942.patch
+    msg "Add KDEBUG 390748 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390748 Fixed in 5.44
+  patch -p1 -i ../kdebug-390748.patch
 }
 
 build() {
