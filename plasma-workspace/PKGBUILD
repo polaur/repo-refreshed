@@ -8,7 +8,7 @@
 
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace kuiserver plasma-wayland-session)
-pkgver=5.12.1
+pkgver=5.12.2
 pkgrel=1.1
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
@@ -23,7 +23,7 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgbase-$pkgver.tar.xz"
 ccbug-358231-342056.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=e1fe26f1fc78"
 kdebug-375207.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=8227e4e2b7f0"
 kdebug-390499.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=53ed39aaa477")
-sha256sums=('d84da641be1d8491378fa73425564b620e806face7b8462bb06967af975356c6'
+sha256sums=('2d7e45761730c7eecbb91a6951c9ae3a4d08dc0a5a80fec640cc1cbfe2569dec'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
             '1acfd90910c110e0dccba413831b7493a0a08a9e75c857212c8741149d4a4c96'
