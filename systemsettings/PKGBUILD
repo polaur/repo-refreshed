@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=systemsettings
-pkgver=5.12.1
-pkgrel=1.1
+pkgver=5.12.2
+pkgrel=1
 pkgdesc='KDE system settings'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -16,9 +16,8 @@ depends=(kirigami2 kcmutils kactivities-stats qt5-quickcontrols)
 makedepends=(extra-cmake-modules kdoctools python khtml)
 optdepends=('khtml: for the tree view')
 groups=(plasma)
-source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-384638.patch::"https://cgit.kde.org/systemsettings.git/patch/?id=6f5b6e41ec4dec")
-sha256sums=('1b1a2a9fdabfe6a12a3987a052dbc077458845869b75da14525c888df462fadb'
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}")
+sha256sums=('965cab685c5c37fcbe295743fff4b4f0e7c7757cfac41bcd2bf15b769bef8e19'
             'SKIP'
             '29c6a4424b1cc6a63bca837ce538d3385f241644a68d60458d4cd85ef7897f30')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
@@ -29,9 +28,7 @@ validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
 prepare() {
   mkdir -p build
   
-  cd $pkgname-$pkgver
-  msg "Add KDEBUG 384638 patch" # See: https://bugs.kde.org/show_bug.cgi?id=384638 Fixed in 5.12.2
-  patch -p1 -i ../kdebug-384638.patch
+#  cd $pkgname-$pkgver
 }
 
 build() {
