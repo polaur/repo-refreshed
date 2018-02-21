@@ -5,8 +5,10 @@
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
+# So now, this version is exactly the same as 5.12.2 in oficial repository
+
 pkgname=kdeplasma-addons
-pkgver=5.12.1
+pkgver=5.12.2
 pkgrel=1.1
 pkgdesc='All kind of addons to improve your Plasma experience'
 arch=(x86_64)
@@ -20,14 +22,10 @@ optdepends=('kross: comic applet'
             'qt5-webengine: dictionary applet')
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-390571.patch::"https://cgit.kde.org/kdeplasma-addons.git/patch/?id=5bf2d077895"
-kdebug-371023-361939.patch::"https://cgit.kde.org/kdeplasma-addons.git/patch/?id=30c6d45645"
-kdebug-389259.patch::"https://cgit.kde.org/kdeplasma-addons.git/patch/?id=ca059f3362c")
-sha256sums=('287125ad19e76444fe0f47ff45211039398c446b15b084f537fc49848f546d88'
+kdebug-390571.patch::"https://cgit.kde.org/kdeplasma-addons.git/patch/?id=5bf2d077895")
+sha256sums=('533c0c913fded64d1ca20ee0aa6aa2f1883a78a33dfde27181ee1c2e5193a003'
             'SKIP'
-            'ab54b41fee51b009640a6be668e76e16dafe9806c84505e186a60c2ce7869ea3'
-            '4ef0da2ee83e53bb97367f2204907b21f204032a1b297fe9f1b58841220f6702'
-            'cc2c46b3987cc5f2a56b3ff7b70148e5a703e537cbbbff6a48d566bc75809488')
+            'ab54b41fee51b009640a6be668e76e16dafe9806c84505e186a60c2ce7869ea3')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -36,14 +34,7 @@ validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
 prepare() {
   mkdir -p build
   
-  cd $pkgname-$pkgver
-  #msg "Add KDEBUG 371023 and 361939 patch" # See: https://bugs.kde.org/show_bug.cgi?id=371023 and See: https://bugs.kde.org/show_bug.cgi?id=361939 Fixed in 5.12.2
-  #patch -p1 -i ../kdebug-371023-361939.patch
-  msg "Add KDEBUG 389259 patch" # See: https://bugs.kde.org/show_bug.cgi?id=389259 Fixed in 5.12.2
-  patch -p1 -i ../kdebug-389259.patch
-  #msg "Add KDEBUG 390571 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390571
-  #patch -p1 -i ../kdebug-390571.patch
-
+#  cd $pkgname-$pkgver
 }
 
 build() {
