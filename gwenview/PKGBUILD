@@ -7,7 +7,7 @@
 
 pkgname=gwenview
 pkgver=17.12.2
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="A fast and easy to use image viewer"
 url='https://kde.org/applications/graphics/gwenview/'
 arch=(x86_64)
@@ -24,7 +24,8 @@ kdebug-305659.patch::"https://cgit.kde.org/gwenview.git/patch/?id=1e9a4482d9"
 kdebug-385242.patch::"https://cgit.kde.org/gwenview.git/patch/?id=5bcb8cc92d"
 kdebug-306835.patch::"https://cgit.kde.org/gwenview.git/patch/?id=8a6a4ea6b9"
 kdebug-359909.patch::"https://cgit.kde.org/gwenview.git/patch/?id=338ffeee4d"
-kdebug-164847.patch::"https://cgit.kde.org/gwenview.git/patch/?id=4a87ed952e")
+kdebug-164847.patch::"https://cgit.kde.org/gwenview.git/patch/?id=4a87ed952e"
+kdebug-245091.patch::"https://cgit.kde.org/gwenview.git/patch/?id=aa368aea25")
 sha256sums=('f9f5bb6d45f72d734ba4ac2d9ae04f7e0930fb4ca4921620db40d4b9283ffb32'
             'SKIP'
             '888a1f8f603ea82abdc8f898a005cabdc3d5f20296c5ab5c2c26c6077d67fb4f'
@@ -32,7 +33,8 @@ sha256sums=('f9f5bb6d45f72d734ba4ac2d9ae04f7e0930fb4ca4921620db40d4b9283ffb32'
             'e9c708154e3f0848b99d745f00a65e7e2d762327786b8e4634f6c3ec001e8d54'
             '6307dac6b86af4d68f3af07bf85af0afaaf5556da2f49244f7143bfd2eb36f99'
             'be241ef93292dda518fbdb4e3d625b2a2a878c2b270fed13e7fe356d6270e331'
-            'ba512859af7bf5815906b247f68bc726e2db20d44f4971769ea87d854ac3c848')
+            'ba512859af7bf5815906b247f68bc726e2db20d44f4971769ea87d854ac3c848'
+            'f8a33c92e65d93e01b9770f9612df0853a1bd0442d2d0b3ae690127498f06753')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
@@ -52,6 +54,7 @@ prepare() {
   patch -p1 -i ../kdebug-359909.patch
   msg "Add KDEBUG 164847 patch" # See: https://bugs.kde.org/show_bug.cgi?id=164847 Fixed in 18.04
   patch -p1 -i ../kdebug-164847.patch
+  msg "Add KDEBUG 245091 patch" # See: https://bugs.kde.org/show_bug.cgi?id=245091
 }
 
 build() {
