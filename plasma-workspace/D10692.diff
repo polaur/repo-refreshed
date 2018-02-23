@@ -1,0 +1,51 @@
+diff --git a/applets/systemtray/package/contents/ui/ExpandedRepresentation.qml b/applets/systemtray/package/contents/ui/ExpandedRepresentation.qml
+--- a/applets/systemtray/package/contents/ui/ExpandedRepresentation.qml
++++ b/applets/systemtray/package/contents/ui/ExpandedRepresentation.qml
+@@ -26,6 +26,9 @@
+ Item {
+     id: expandedRepresentation
+ 
++    //set width/height to avoid an useless Dialog resize
++    width: Layout.minimumWidth
++    height: Layout.minimumHeight
+     Layout.minimumWidth: units.gridUnit * 24
+     Layout.minimumHeight: units.gridUnit * 21
+     Layout.preferredWidth: Layout.minimumWidth
+diff --git a/applets/systemtray/package/contents/ui/main.qml b/applets/systemtray/package/contents/ui/main.qml
+--- a/applets/systemtray/package/contents/ui/main.qml
++++ b/applets/systemtray/package/contents/ui/main.qml
+@@ -105,6 +105,7 @@
+         if (!plasmoidItemComponent) {
+             plasmoidItemComponent = Qt.createComponent("items/PlasmoidItem.qml");
+         }
++        //Allow the plasmoid expander to know in what window it will be
+         var plasmoidContainer = plasmoidItemComponent.createObject(invisibleEntriesContainer, {"x": x, "y": y, "applet": applet});
+ 
+         applet.parent = plasmoidContainer
+@@ -114,6 +115,25 @@
+         applet.width = plasmoidContainer.height
+         applet.visible = true
+         plasmoidContainer.visible = true
++        
++        //This is to make preloading effective, minimizes the scene changes
++        if (applet.fullRepresentationItem) {
++            applet.fullRepresentationItem.width = expandedRepresentation.width
++            applet.fullRepresentationItem.width = expandedRepresentation.height
++            applet.fullRepresentationItem.parent = preloadedStorage;
++        } else {
++            applet.fullRepresentationItemChanged.connect(function() {
++                applet.fullRepresentationItem.width = expandedRepresentation.width
++                applet.fullRepresentationItem.width = expandedRepresentation.height
++                applet.fullRepresentationItem.parent = preloadedStorage;
++            });
++        }
++    }
++
++    //being there forces the items to fully load, and they will be reparented in the popup one by one, this item is *never* visible
++    Item {
++        id: preloadedStorage
++        visible: false
+     }
+ 
+     Containment.onAppletRemoved: {
+
