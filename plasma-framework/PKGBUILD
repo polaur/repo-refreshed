@@ -1,13 +1,11 @@
-# Maintainer: pavbaranov <pavbaranov at gmail dot com>
-# for version with patches from upcomming releases
-# made on the work by:
+# $Id$
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=plasma-framework
 pkgver=5.43.0
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='Plasma library and runtime components based upon KF5 and Qt5'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -23,7 +21,8 @@ D10653.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=bf4facd8c1b90
 fix_setting_default_preload_policy_if_no_environment_variable_is_set.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=fa9d4be5d1663e912e34a5ed581a3bfee159dab8"
 qtbug-66446.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=1ff405cca5b3a5efcfe143dd870799b2b90510c9"
 D10533.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=c05b1bdec7901293ad0ad9c06b352a89fe33c3b5"
-D10644.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=581dc48ff836cc5228704ef766ea50e6515a45d0")
+D10644.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=581dc48ff836cc5228704ef766ea50e6515a45d0"
+D10764.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=48b62d1a2763a83cecf78ce86f28dbc6d1af4f68")
 sha256sums=('c6108fd4d2cf516cbb97c77c2c58f136b670afc01a7f49face60812f4156eeec'
             'SKIP'
             '33fc25d3f9ea48c265d4f719a1cb0b0d83939b0f8dc873bfe031c89240a2f506'
@@ -33,7 +32,8 @@ sha256sums=('c6108fd4d2cf516cbb97c77c2c58f136b670afc01a7f49face60812f4156eeec'
             'fab3773f0f94cd193fdc7a96db52339491e79dd3d418888f9441b31bd55d62dd'
             'bb934c0c01df2f604f47fc59885cf24cb060b86f897677dbe4b41486371a7e0a'
             '189c4dfc17ac5a9d2e63c444f1d35c14ec2791f598ed3ccfcd6d141430a1dc4f'
-            '631ebc54e5e563ffb2309cd18f981d960141644268c5fc5b0cd1a7dc6c6fb85c')
+            '631ebc54e5e563ffb2309cd18f981d960141644268c5fc5b0cd1a7dc6c6fb85c'
+            'f8981987c44e0284403403d24051c31284c53375dd31a76abf133f11df7fc732')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -56,6 +56,8 @@ prepare() {
   patch -p1 -i ../D10533.patch
   msg "Add D10644 patch"
   patch -p1 -i ../D10644.patch
+  msg "Add D10764 patch"
+  patch -p1 -i ../D10764.patch
 }
 
 build() {
