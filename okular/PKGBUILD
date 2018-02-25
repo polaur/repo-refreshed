@@ -7,7 +7,7 @@
 
 pkgname=okular
 pkgver=17.12.2
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='Document Viewer'
 arch=(x86_64)
 url="https://kde.org/applications/graphics/okular/"
@@ -28,7 +28,8 @@ fix-crash-on-save-when-we-had-edited-forms.patch::"https://cgit.kde.org/okular.g
 kdebug-387426.patch::"https://cgit.kde.org/okular.git/patch/?id=ce7fa7b9d8790b9"
 kdebug-390355.patch::"https://cgit.kde.org/okular.git/patch/?id=42d4710198a7665"
 kdebug-388511.patch::"https://cgit.kde.org/okular.git/patch/?id=e44d50558323f31"
-)
+kdebug-386600.patch::"https://cgit.kde.org/okular.git/patch/?id=d19834f231acc31")
+
 sha256sums=('fdfaf0b385958a892ede7383b41c4172cac1dfab4cdac335de8cf13c2ecf3383'
             'SKIP'
             '903d69f371b8b9e5cc78add4347f1b322d66caefebecf0a94d972dee4a072b2e'
@@ -37,7 +38,8 @@ sha256sums=('fdfaf0b385958a892ede7383b41c4172cac1dfab4cdac335de8cf13c2ecf3383'
             'fab3d798f73a03f23057bf0f915ad0df0f8b117ce45e68c8be1671e478733d8e'
             'ec0fdde9a08b4bfabcb9e7aa4826682212277ad66078fbc77351a7506e926b65'
             '35e6ff08d8b0815c38bf7f74f820620ffde0c3e88593c68bc370d886a2d05d70'
-            '7ef35e867d16174894804b120987a74ff639f422a82a9692327a6c09ddc5ab7a')
+            '7ef35e867d16174894804b120987a74ff639f422a82a9692327a6c09ddc5ab7a'
+            'ae0cd1118294d07a0700f5050ebba5e2101c1189728522df71f8552192170daa')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
@@ -57,6 +59,8 @@ prepare() {
   patch -p1 -i ../kdebug-390355.patch
   msg "Add KDEBUG 388511 patch" # See: https://bugs.kde.org/show_bug.cgi?id=388511
   patch -p1 -i ../kdebug-388511.patch
+  msg "Add KDEBUG 386600 patch" # See: https://bugs.kde.org/show_bug.cgi?id=386600
+  patch -p1 -i ../kdebug-386600.patch
 }
 
 build() {
