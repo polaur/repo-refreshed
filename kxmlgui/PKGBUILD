@@ -1,0 +1,47 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for version with patches from upcoming releases
+# made on the original work by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kxmlgui
+pkgver=5.43.0
+pkgrel=1.1
+pkgdesc='User configurable main windows'
+arch=('x86_64')
+url='https://community.kde.org/Frameworks'
+license=('LGPL')
+depends=('kglobalaccel' 'ktextwidgets')
+makedepends=('extra-cmake-modules' 'python' 'mesa' 'doxygen' 'qt5-tools')
+groups=('kf5')
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-373653.patch::"https://cgit.kde.org/kxmlgui.git/patch/?id=5381b8b4b76cc1fced0c32aed22653e3a52ebc7a")
+sha256sums=('a3fd16055c5c37130edc80cc331356dea0be78ad227ed4bf00d45bb59dbfccca'
+            'SKIP'
+            '03eb944c8da4ed18967b8e8c0f43a592c3fa34263d88955e8f530b49f5f1d462')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+
+	cd $pkgname-$pkgver
+	msg "Add KDE 373653 patch" # See: https://bugs.kde.org/show_bug.cgi?id=373653
+	patch -p1 -i ../kdebug-373653.patch
+}
+
+build() {
+  cd build
+  cmake ../${pkgname}-${pkgver} \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DKDE_INSTALL_LIBDIR=lib \
+    -DKDE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}
