@@ -6,7 +6,7 @@
 
 pkgname=kxmlgui
 pkgver=5.43.0
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='User configurable main windows'
 arch=('x86_64')
 url='https://community.kde.org/Frameworks'
@@ -15,10 +15,12 @@ depends=('kglobalaccel' 'ktextwidgets')
 makedepends=('extra-cmake-modules' 'python' 'mesa' 'doxygen' 'qt5-tools')
 groups=('kf5')
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-373653.patch::"https://cgit.kde.org/kxmlgui.git/patch/?id=5381b8b4b76cc1fced0c32aed22653e3a52ebc7a")
+kdebug-373653.patch::"https://cgit.kde.org/kxmlgui.git/patch/?id=5381b8b4b76cc1fced0c32aed22653e3a52ebc7a"
+kdebug-398623.patch::"https://cgit.kde.org/kxmlgui.git/patch/?id=8361ddef086795cffc43ef9757198642af2439f9")
 sha256sums=('a3fd16055c5c37130edc80cc331356dea0be78ad227ed4bf00d45bb59dbfccca'
             'SKIP'
-            '03eb944c8da4ed18967b8e8c0f43a592c3fa34263d88955e8f530b49f5f1d462')
+            '03eb944c8da4ed18967b8e8c0f43a592c3fa34263d88955e8f530b49f5f1d462'
+            'b92017b825c956b356dabb58acef8d1bd5cf389db7d6da6afff184479a2f0fcf')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -27,6 +29,7 @@ prepare() {
 	cd $pkgname-$pkgver
 	msg "Add KDE 373653 patch" # See: https://bugs.kde.org/show_bug.cgi?id=373653
 	patch -p1 -i ../kdebug-373653.patch
+	msg "Add KDE 390623 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390623
 }
 
 build() {
