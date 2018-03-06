@@ -7,7 +7,7 @@
 
 pkgname=kwin
 pkgver=5.12.2
-pkgrel=1.5
+pkgrel=1.6
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -27,7 +27,9 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
         # kdebug-374880.patch::"https://cgit.kde.org/kwin.git/patch/?id=b554e54e87b5d1ccd94d5bdde761356dd760a2cd"
         kdebug-386231.patch::"https://cgit.kde.org/kwin.git/patch/?id=911176a887be639a1e123a3c633fb05870fda33d"
         kdebug-390314.patch::"https://cgit.kde.org/kwin.git/patch/?id=2ea5153e1c979760c56bd81f3d47f2fb373130c9"
-        kdebug-390953.patch::"https://cgit.kde.org/kwin.git/patch/?id=e1afef3d4563803249dc25487bc086f753c4e0ea")
+        kdebug-390953.patch::"https://cgit.kde.org/kwin.git/patch/?id=e1afef3d4563803249dc25487bc086f753c4e0ea"
+	
+D11066.patch::"https://cgit.kde.org/kwin.git/patch/?id=68a2ec5d63652ddb7afbc646270c73e25a4a70f9")
 sha256sums=('7c92745d7c8b36cac596ba1913b3c672034e830f82b85ccf5f52762deb8cde52'
             'SKIP'
             'bf2a8d0a34e4079f11f83de611f3d547265888532215e6fd229f3cc12f3b97c3'
@@ -39,7 +41,8 @@ sha256sums=('7c92745d7c8b36cac596ba1913b3c672034e830f82b85ccf5f52762deb8cde52'
             '500be855eb5ee0b7d233faf8eb3fc6b77d5c22504e615fa31bdb7c93998949b3'
             '8e2c40810223d25774826a36a1a670b5beaa9875c5ae8439d8c516bff3818c8b'
             'd3e20e93d04abfc01691a30d4ccdace2cd78de72e0b97683f988a129a3294052'
-            '1cfcb1453cb1ac02bf672873b681b817c28b98d322150b56da87eb65fbf9d472')
+            '1cfcb1453cb1ac02bf672873b681b817c28b98d322150b56da87eb65fbf9d472'
+            '5f170abfc02d8de97e7f8b84cc8e32916a7b637340d20e33303b89344fd351f1')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '348C8651206633FD983A8FC4DEACEA00075E1D76'  # KDE Neon
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -72,6 +75,8 @@ prepare() {
   #   patch -p1 -i ../kdebug-374880.patch
   msg "KDEBUG 390953 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390953 Fixed in 5.12.3
      patch -p1 -i ../kdebug-390953.patch
+  msg "Convert EffectView to a QQuickWidget patch" # See: https://phabricator.kde.org/D11066
+     patch -p1 -i ../D11066.patch
   }
 
 build() {
