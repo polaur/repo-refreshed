@@ -7,13 +7,14 @@
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
 pkgver=5.12.3
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
 license=(LGPL)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-391432.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=3a763498b6a47d273f1d526a2974727af503053d"
+D10890.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=ca96f850efbf290a9c7252160eae12f0dd45b2cf"
 )
 
 depends=(polkit-kde-agent libcanberra libxkbfile kmenuedit appstream-qt systemsettings ksysguard kpeople baloo 
@@ -23,7 +24,8 @@ makedepends=(extra-cmake-modules kdoctools boost xf86-input-evdev xf86-input-syn
 groups=(plasma)
 sha256sums=('086b2ae9b8f55875a98cc617d77513d3360567d4e6cf76bc0ab61ec64e06e2d7'
             'SKIP'
-            '6979b9e5c1d7a0264004b7e2c9511994890d7e3012f5befabab1ebbe8c4aa0dd')
+            '6979b9e5c1d7a0264004b7e2c9511994890d7e3012f5befabab1ebbe8c4aa0dd'
+            'b57383a43c8254c5e0ee996fe76903b129108254a01ae18432438f0b97c388ab')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '348C8651206633FD983A8FC4DEACEA00075E1D76'  # KDE Neon
               'D07BD8662C56CB291B316EB2F5675605C74E02CF') # David Edmundson
@@ -34,6 +36,8 @@ prepare() {
     cd $pkgname-$pkgver
     msg "Add KDEBUG 391432 patch" # See: https://bugs.kde.org/show_bug.cgi?id=391432
     patch -p1 -i ../kdebug-391432.patch
+    msg "Add don't skip certain recent documents in kicker and taskmanager aka D10890 patch" # See: Don't skip certain recent documents in kicker and taskmanager
+    patch -p1 -i ../D10890.patch
 	}
 
 build() {
