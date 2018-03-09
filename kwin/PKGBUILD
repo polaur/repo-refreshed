@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kwin
-pkgver=5.12.2
+pkgver=5.12.3
 pkgrel=1.6
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
@@ -30,7 +30,7 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
         kdebug-390953.patch::"https://cgit.kde.org/kwin.git/patch/?id=e1afef3d4563803249dc25487bc086f753c4e0ea"
 	
 D11066.patch::"https://cgit.kde.org/kwin.git/patch/?id=68a2ec5d63652ddb7afbc646270c73e25a4a70f9")
-sha256sums=('7c92745d7c8b36cac596ba1913b3c672034e830f82b85ccf5f52762deb8cde52'
+sha256sums=('e1682fc3c7cb6bfcfdeae0968c4a6676e041fdaff83231e3cbfd85b92d8e5877'
             'SKIP'
             'bf2a8d0a34e4079f11f83de611f3d547265888532215e6fd229f3cc12f3b97c3'
             '0aeeaff76df00460edf9cf4734fe6f96082d32b41e242b333160a7a34323e0db'
@@ -65,18 +65,6 @@ prepare() {
      patch -p1 -i ../D10281.diff # See https://phabricator.kde.org/D10281
   msg "Phabricator D9638 ("new slide effect") patch"
      patch -p1 -i ../D9638.diff # See https://phabricator.kde.org/D9638
-  msg "KDEBUG 390113 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390113 Fixed in 5.12.3
-     patch -p1 -i ../kdebug-390113.patch
-  msg "KDEBUG 386231 patch" # See: https://bugs.kde.org/show_bug.cgi?id=386231 Fixed in 5.12.3
-     patch -p1 -i ../kdebug-386231.patch
-  msg "KDEBUG 390314 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390314 Fixed in 5.12.3
-     patch -p1 -i ../kdebug-390314.patch
-     #msg "KDEBUD 374880 patch" # See: https://bugs.kde.org/show_bug.cgi?id=374880 Fixed in 5.12.3
-  #   patch -p1 -i ../kdebug-374880.patch
-  msg "KDEBUG 390953 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390953 Fixed in 5.12.3
-     patch -p1 -i ../kdebug-390953.patch
-  msg "Convert EffectView to a QQuickWidget patch" # See: https://phabricator.kde.org/D11066
-     patch -p1 -i ../D11066.patch
   }
 
 build() {
