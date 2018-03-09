@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kwin
-pkgver=5.12.2
-pkgrel=1.6
+pkgver=5.12.3
+pkgrel=1.1
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -23,26 +23,15 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
         D10181.diff
         D10281.diff
         D9638.diff
-        kdebug-390113.patch::"https://cgit.kde.org/kwin.git/patch/?id=338c7362c9fbb37f1fb8beb9a50644b585d8135e"
-        # kdebug-374880.patch::"https://cgit.kde.org/kwin.git/patch/?id=b554e54e87b5d1ccd94d5bdde761356dd760a2cd"
-        kdebug-386231.patch::"https://cgit.kde.org/kwin.git/patch/?id=911176a887be639a1e123a3c633fb05870fda33d"
-        kdebug-390314.patch::"https://cgit.kde.org/kwin.git/patch/?id=2ea5153e1c979760c56bd81f3d47f2fb373130c9"
-        kdebug-390953.patch::"https://cgit.kde.org/kwin.git/patch/?id=e1afef3d4563803249dc25487bc086f753c4e0ea"
-	
-D11066.patch::"https://cgit.kde.org/kwin.git/patch/?id=68a2ec5d63652ddb7afbc646270c73e25a4a70f9")
-sha256sums=('7c92745d7c8b36cac596ba1913b3c672034e830f82b85ccf5f52762deb8cde52'
+        )
+sha256sums=('e1682fc3c7cb6bfcfdeae0968c4a6676e041fdaff83231e3cbfd85b92d8e5877'
             'SKIP'
             'bf2a8d0a34e4079f11f83de611f3d547265888532215e6fd229f3cc12f3b97c3'
             '0aeeaff76df00460edf9cf4734fe6f96082d32b41e242b333160a7a34323e0db'
             '1eb9e53f847f63b4ac3935ca525d3c18ba0d28540e1026cdcc0e48755c80f1ac'
             '327670f2895e0711856a6069ac5e4a751a9b8a09c5f37a09117ba2cdfbb0f013'
             '6fa338210de655c47078423c69b2bed7456960fea4efa488b99e6cd39f5089b4'
-            '95feb31a5942bbeb585fbb4c923b4aa2786dd39adfa67474a2c75af4de2603c0'
-            '500be855eb5ee0b7d233faf8eb3fc6b77d5c22504e615fa31bdb7c93998949b3'
-            '8e2c40810223d25774826a36a1a670b5beaa9875c5ae8439d8c516bff3818c8b'
-            'd3e20e93d04abfc01691a30d4ccdace2cd78de72e0b97683f988a129a3294052'
-            '1cfcb1453cb1ac02bf672873b681b817c28b98d322150b56da87eb65fbf9d472'
-            '5f170abfc02d8de97e7f8b84cc8e32916a7b637340d20e33303b89344fd351f1')
+            '95feb31a5942bbeb585fbb4c923b4aa2786dd39adfa67474a2c75af4de2603c0')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '348C8651206633FD983A8FC4DEACEA00075E1D76'  # KDE Neon
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -65,18 +54,6 @@ prepare() {
      patch -p1 -i ../D10281.diff # See https://phabricator.kde.org/D10281
   msg "Phabricator D9638 ("new slide effect") patch"
      patch -p1 -i ../D9638.diff # See https://phabricator.kde.org/D9638
-  msg "KDEBUG 390113 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390113 Fixed in 5.12.3
-     patch -p1 -i ../kdebug-390113.patch
-  msg "KDEBUG 386231 patch" # See: https://bugs.kde.org/show_bug.cgi?id=386231 Fixed in 5.12.3
-     patch -p1 -i ../kdebug-386231.patch
-  msg "KDEBUG 390314 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390314 Fixed in 5.12.3
-     patch -p1 -i ../kdebug-390314.patch
-     #msg "KDEBUD 374880 patch" # See: https://bugs.kde.org/show_bug.cgi?id=374880 Fixed in 5.12.3
-  #   patch -p1 -i ../kdebug-374880.patch
-  msg "KDEBUG 390953 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390953 Fixed in 5.12.3
-     patch -p1 -i ../kdebug-390953.patch
-  msg "Convert EffectView to a QQuickWidget patch" # See: https://phabricator.kde.org/D11066
-     patch -p1 -i ../D11066.patch
   }
 
 build() {
