@@ -7,7 +7,11 @@
 
 pkgname=kwin
 pkgver=5.12.3
+<<<<<<< HEAD
 pkgrel=1.1
+=======
+pkgrel=1.6
+>>>>>>> 139710584bfa425454b24967aba1185235d016a4
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -23,7 +27,17 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
         D10181.diff
         D10281.diff
         D9638.diff
+<<<<<<< HEAD
         )
+=======
+        kdebug-390113.patch::"https://cgit.kde.org/kwin.git/patch/?id=338c7362c9fbb37f1fb8beb9a50644b585d8135e"
+        # kdebug-374880.patch::"https://cgit.kde.org/kwin.git/patch/?id=b554e54e87b5d1ccd94d5bdde761356dd760a2cd"
+        kdebug-386231.patch::"https://cgit.kde.org/kwin.git/patch/?id=911176a887be639a1e123a3c633fb05870fda33d"
+        kdebug-390314.patch::"https://cgit.kde.org/kwin.git/patch/?id=2ea5153e1c979760c56bd81f3d47f2fb373130c9"
+        kdebug-390953.patch::"https://cgit.kde.org/kwin.git/patch/?id=e1afef3d4563803249dc25487bc086f753c4e0ea"
+	
+D11066.patch::"https://cgit.kde.org/kwin.git/patch/?id=68a2ec5d63652ddb7afbc646270c73e25a4a70f9")
+>>>>>>> 139710584bfa425454b24967aba1185235d016a4
 sha256sums=('e1682fc3c7cb6bfcfdeae0968c4a6676e041fdaff83231e3cbfd85b92d8e5877'
             'SKIP'
             'bf2a8d0a34e4079f11f83de611f3d547265888532215e6fd229f3cc12f3b97c3'
