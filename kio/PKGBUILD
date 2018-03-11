@@ -1,13 +1,13 @@
 # Maintainer: pavbaranov <pavbaranov at gmail dot com>
 # for version with patches from upcoming releases
-# build against the work of:
+# made on the original works by:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kio
-pkgver=5.43.0
-pkgrel=1.4
+pkgver=5.44.0
+pkgrel=1.1
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -18,59 +18,27 @@ optdepends=('kio-extras: extra protocols support (sftp, fish and more)' 'kdoctoo
             'knetattach: to add new kio-remote entries')
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-	kdebug-389595.patch::"https://cgit.kde.org/kio.git/patch/?id=f06403a4"
-	kdebug-388887.patch::"https://cgit.kde.org/kio.git/patch/?id=8b809b71"
-	kdebug-382437.patch::"https://cgit.kde.org/kio.git/patch/?id=0f8c2d79"
-	improve-D10124.patch::"https://cgit.kde.org/kio.git/patch/?id=42fed2e70a"
-	improve-D10045.patch::"https://cgit.kde.org/kio.git/patch/?id=4d153df735"
-	ccbug-384561.patch::"https://cgit.kde.org/kio.git/patch/?id=8d73867b3"
-	kdebug-389635.patch::"https://cgit.kde.org/kio.git/patch/?id=03be39f3709"
-	kdebug-385942.patch::"https://cgit.kde.org/kio.git/patch/?id=e3a80661c9c"
-	kdebug-390748.patch
-	kdebug-380287.patch::"https://cgit.kde.org/kio.git/patch/?id=4a6a3b81bed")
-sha256sums=('e6ecd2290d19e0680f4bc35dc157cf8f4df85ab3a967521dd510163843a372d5'
+kdebug-387387.patch::"https://cgit.kde.org/kio.git/patch/?id=032709c17f004d2fca50ff4bc485785519cf58ad"
+D11107.patch::"https://cgit.kde.org/kio.git/patch/?id=a9625a3be6b18d92ce92b277c279160fdd625c0e")
+sha256sums=('7a8fc6f0af101c4a16270d328806fbf96ee8855e756b033d6a08ce744e7071b7'
             'SKIP'
-            'a6f83cd4e3801cea45b261c94901f90628662afe9f63e39f7d0127be99921ad3'
-            '9cf135a904169d09422607d7527833649e3b0a83fc226af2a18909d803c22393'
-            '43cd80b6fb07fa1ccd49823fce74bd854ad6964aa1ec5aa87a3a0d85f074965f'
-            'ccc30e005622d4c144a25064bfd1ca5b8cf9f23136b5d8c50365654512d70de9'
-            'f4cd60ceaa0a77f824e99c631e533f46d1f19cb21ab3b5254100eecbe4725f91'
-            'aac48b294b9c2f620db1d3fde055585d267ee4e3b9235cb63dae1a2ff6b26464'
-            '9575bc5edbfa617addc5a8e0268580ed8bc865685ef50440b2cad9b7f8e6c63c'
-            '00d34e2b3b632316b2f48c708b47526be529ac05ca6e19983ef25ede0d3afd9f'
-            '855874bae044bba697877ff8feb55553f3ce032c381bb18c2873094d9ec0b686'
-            '480244021a98822ddc1f92ce5589b706e5c7eda67ed0c8cae1d3cc35ec30f3bf')
+            '08e466ed4d721b9baa0575eef904c41698a62eabadad139897c0009228942f27'
+            '0d0f4f730785dcb222ea9fa8a6c930e0765397f528141cef0f99dc6fd8e8c227')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
   mkdir -p build
-
+  
   cd $pkgname-$pkgver
-	msg " Add KDEBUG 389595 patch" # See: https://bugs.kde.org/show_bug.cgi?id=389595 Fixed in 5.44
-  patch -p1 -i ../kdebug-389595.patch
-	msg "Add KDEBUG 388887 patch" # See: https://bugs.kde.org/show_bug.cgi?id=388887 Fixed in KDE Apps 18.04
-  patch -p1 -i ../kdebug-388887.patch
-    msg "Add KDEBUG 382437 patch" # See: https://bugs.kde.org/show_bug.cgi?id=382437 Fixed in 5.44
-  patch -p1 -i ../kdebug-382437.patch
-    msg "Add D10124 patch" # See: https://phabricator.kde.org/D10124
-  patch -p1 -i ../improve-D10124.patch
-	msg "Add D10045 patch" # See: https://phabricator.kde.org/D10045
-  patch -p1 -i ../improve-D10045.patch
-	msg "Add CCBUG 384561 patch"
-  patch -p1 -i ../ccbug-384561.patch
-	msg "Add KDEBUG 389635 patch" # See: https://bugs.kde.org/show_bug.cgi?id=389635
-  patch -p1 -i ../kdebug-389635.patch
-    msg "Add KDEBUG 385942 patch" # See: https://bugs.kde.org/show_bug.cgi?id=385942
-  patch -p1 -i ../kdebug-385942.patch
-    msg "Add KDEBUG 390748 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390748 Fixed in 5.44
-  patch -p1 -i ../kdebug-390748.patch
-    msg "Add KDEBUG 380287 patch" # See: https://bugs.kde.org/show_bug.cgi?id=380287 Fixed in 5.44
+  msg "Add KDEBUG 387387 patch" # See: https://bugs.kde.org/show_bug.cgi?id=387387 : 
+  patch -p1 -i ../kdebug-387387.patch
+  msg "Add D11107 patch" # See: https://phabricator.kde.org/D11107
+  patch -p1 -i ../D11107.patch
 }
 
 build() {
   cd build
   cmake ../$pkgname-$pkgver \
-    -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_INSTALL_LIBEXECDIR=lib \
