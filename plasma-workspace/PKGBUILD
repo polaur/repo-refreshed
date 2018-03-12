@@ -32,7 +32,6 @@ sha256sums=('9e39fbb94812198800b8d163929cdefebb6a405431f0ef4c7becf0d33c36232f'
             '08745bd6c66e51937dd7c28ce7846dca6fe9335b237af4e3b8f4bdeac0bc5beb'
             '2546c42475d9c62a5efbd6c709f52062194df233c098dbee1ce653f2de9376ce'
             'f3f56921ec3b801e9856f496af657b9f368a31675abb2da9bf684107832c1ce4'
-            'f92e4fb1cf0c32cb8db2e982329c9aa8fb9f42a37703f333db59b567b6d97eaf'
             'dc2e4145df5f87a882229461a612e1d3a1af24bc6a173022ab932b5dde3fc7d6')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
