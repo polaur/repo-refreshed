@@ -9,7 +9,7 @@
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace kuiserver plasma-wayland-session)
 pkgver=5.12.3
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -25,7 +25,11 @@ kdebug-375207.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=8227e4
 kdebug-390499.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=53ed39aaa477"
 D10692.diff
 kdebug-390280.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=d511a766779b"
-kdebug-386068.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=8c83cc687d4d")
+kdebug-386068.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=8c83cc687d4d"
+D10461.diff
+cgit-85ca8db.patch::'https://cgit.kde.org/plasma-workspace.git/patch/?id=85ca8dbb9f6fc2d632ce129ef1e5ea9899c594e2'
+cgit-f2feef0.patch::'https://cgit.kde.org/plasma-workspace.git/patch/?id=f2feef047ab21a6163988a8c0ed64728148f7ccd'
+cgit-d9c2f4e.patch::'https://cgit.kde.org/plasma-workspace.git/patch/?id=d9c2f4ecb9fb773821152cf15d66d5133ef38d1c')
 sha256sums=('9e39fbb94812198800b8d163929cdefebb6a405431f0ef4c7becf0d33c36232f'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
@@ -34,7 +38,11 @@ sha256sums=('9e39fbb94812198800b8d163929cdefebb6a405431f0ef4c7becf0d33c36232f'
             '2546c42475d9c62a5efbd6c709f52062194df233c098dbee1ce653f2de9376ce'
             'f3f56921ec3b801e9856f496af657b9f368a31675abb2da9bf684107832c1ce4'
             'dc2e4145df5f87a882229461a612e1d3a1af24bc6a173022ab932b5dde3fc7d6'
-            'c3960d66fbe31466975e65cac5e47d6ffd48400914265ede5d0fe4d03f8ed251')
+            'c3960d66fbe31466975e65cac5e47d6ffd48400914265ede5d0fe4d03f8ed251'
+            '5e1ef2d39c46492d1ce6a1193656606436eeadffbcdeac6c79ffe19efc9b0919'
+            '44c17eff52914d3236e5eaf49678214befc0796b6237e6dd37d330dbc04aafc1'
+            '3230293683109b4c97b06db3626e9c6fdae18a3cbb3d936037783f4f83165382'
+            'c885e635e7a224eedebe6e78e1c719e478ca27b80851ca2402c6d1ba060d107e')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -54,8 +62,15 @@ prepare() {
   patch -p1 -i ../D10692.diff
   msg "Add KDEBUG 390280 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390280
   patch -p1 -i ../kdebug-390280.patch
-  msg "Ass KDEBUG 386068 patch" # See: https://bugs.kde.org/show_bug.cgi?id=386068 Fixed in 5.13.0
+  msg "Add KDEBUG 386068 patch" # See: https://bugs.kde.org/show_bug.cgi?id=386068 Fixed in 5.13.0
   patch -p1 -i ../kdebug-386068.patch
+  msg "Add D10461 patch" # See: https://phabricator.kde.org/D10461 Fixed in 5.13.0
+  patch -p1 -i ../D10461.diff
+  msg "Add cgit-85ca8db patch" # See: https://cgit.kde.org/plasma-workspace.git/commit/?id=85ca8dbb9f6fc2d632ce129ef1e5ea9899c594e2
+  patch -p1 -i ../cgit-85ca8db.patch
+  msg "Add cgit-f2feef0 patch" # See: https://cgit.kde.org/plasma-workspace.git/commit/?id=f2feef047ab21a6163988a8c0ed64728148f7ccd
+  patch -p1 -i ../cgit-f2feef0.patch
+  msg "Add cgit-d9c2f4e patch" # See: https://cgit.kde.org/plasma-workspace.git/commit/?id=d9c2f4ecb9fb773821152cf15d66d5133ef38d1c
 }
 
 build() {
