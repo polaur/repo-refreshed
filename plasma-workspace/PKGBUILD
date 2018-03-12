@@ -9,7 +9,7 @@
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace kuiserver plasma-wayland-session)
 pkgver=5.12.3
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -24,7 +24,8 @@ ccbug-358231-342056.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=
 kdebug-375207.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=8227e4e2b7f0"
 kdebug-390499.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=53ed39aaa477"
 D10692.diff
-kdebug-390280.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=d511a766779b")
+kdebug-390280.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=d511a766779b"
+kdebug-386068.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=8c83cc687d4d")
 sha256sums=('9e39fbb94812198800b8d163929cdefebb6a405431f0ef4c7becf0d33c36232f'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
@@ -32,8 +33,8 @@ sha256sums=('9e39fbb94812198800b8d163929cdefebb6a405431f0ef4c7becf0d33c36232f'
             '08745bd6c66e51937dd7c28ce7846dca6fe9335b237af4e3b8f4bdeac0bc5beb'
             '2546c42475d9c62a5efbd6c709f52062194df233c098dbee1ce653f2de9376ce'
             'f3f56921ec3b801e9856f496af657b9f368a31675abb2da9bf684107832c1ce4'
-            'f92e4fb1cf0c32cb8db2e982329c9aa8fb9f42a37703f333db59b567b6d97eaf'
-            'dc2e4145df5f87a882229461a612e1d3a1af24bc6a173022ab932b5dde3fc7d6')
+            'dc2e4145df5f87a882229461a612e1d3a1af24bc6a173022ab932b5dde3fc7d6'
+            'c3960d66fbe31466975e65cac5e47d6ffd48400914265ede5d0fe4d03f8ed251')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -53,6 +54,8 @@ prepare() {
   patch -p1 -i ../D10692.diff
   msg "Add KDEBUG 390280 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390280
   patch -p1 -i ../kdebug-390280.patch
+  msg "Ass KDEBUG 386068 patch" # See: https://bugs.kde.org/show_bug.cgi?id=386068 Fixed in 5.13.0
+  patch -p1 -i ../kdebug-386068.patch
 }
 
 build() {
