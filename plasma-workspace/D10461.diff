@@ -1,0 +1,2721 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -166,6 +166,8 @@
+ 
+ ecm_optional_add_subdirectory(xembed-sni-proxy)
+ 
++ecm_optional_add_subdirectory(gmenu-dbusmenu-proxy)
++
+ add_subdirectory(soliduiserver)
+ 
+ if(KF5Holidays_FOUND)
+diff --git a/gmenu-dbusmenu-proxy/CMakeLists.txt b/gmenu-dbusmenu-proxy/CMakeLists.txt
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/CMakeLists.txt
+@@ -0,0 +1,48 @@
++add_definitions(-DTRANSLATION_DOMAIN=\"gmenu_dbusmenu_proxy\")
++
++add_definitions(-DQT_NO_CAST_TO_ASCII
++-DQT_NO_CAST_FROM_ASCII
++-DQT_NO_URL_CAST_FROM_STRING
++-DQT_NO_CAST_FROM_BYTEARRAY)
++
++find_package(XCB
++    REQUIRED COMPONENTS
++        XCB
++)
++
++set(GMENU_DBUSMENU_PROXY_SRCS
++    main.cpp
++    menuproxy.cpp
++    window.cpp
++    menu.cpp
++    actions.cpp
++    gdbusmenutypes_p.cpp
++    icons.cpp
++    utils.cpp
++    ../libdbusmenuqt/dbusmenutypes_p.cpp
++ )
++
++qt5_add_dbus_adaptor(GMENU_DBUSMENU_PROXY_SRCS ../libdbusmenuqt/com.canonical.dbusmenu.xml window.h Window)
++
++ecm_qt_declare_logging_category(GMENU_DBUSMENU_PROXY_SRCS HEADER debug.h
++                                               IDENTIFIER DBUSMENUPROXY
++                                               CATEGORY_NAME kde.dbusmenuproxy
++                                               DEFAULT_SEVERITY Info)
++
++add_executable(gmenudbusmenuproxy ${GMENU_DBUSMENU_PROXY_SRCS})
++
++set_package_properties(XCB PROPERTIES TYPE REQUIRED)
++
++target_link_libraries(gmenudbusmenuproxy
++    Qt5::Core
++    Qt5::X11Extras
++    Qt5::DBus
++    KF5::ConfigCore
++    KF5::WindowSystem
++    KF5::I18n
++    XCB::XCB
++)
++
++install(TARGETS gmenudbusmenuproxy ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
++install(FILES gmenudbusmenuproxy.desktop DESTINATION ${KDE_INSTALL_AUTOSTARTDIR})
++
+diff --git a/gmenu-dbusmenu-proxy/Messages.sh b/gmenu-dbusmenu-proxy/Messages.sh
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/Messages.sh
+@@ -0,0 +1,2 @@
++#! /bin/sh
++$XGETTEXT *.cpp -o $podir/gmenu_dbusmenu_proxy.pot
+diff --git a/gmenu-dbusmenu-proxy/actions.h b/gmenu-dbusmenu-proxy/actions.h
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/actions.h
+@@ -0,0 +1,62 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#pragma once
++
++#include <QObject>
++#include <QString>
++
++#include "gdbusmenutypes_p.h"
++
++class QStringList;
++
++class Actions : public QObject
++{
++    Q_OBJECT
++
++public:
++    Actions(const QString &serviceName, const QString &objectPath, QObject *parent = nullptr);
++    ~Actions();
++
++    void load();
++
++    bool get(const QString &name, GMenuAction &action) const;
++    GMenuActionMap getAll() const;
++    void trigger(const QString &name, uint timestamp = 0);
++
++    bool isValid() const; // basically "has actions"
++
++signals:
++    void loaded();
++    void failedToLoad(); // expose error?
++    void actionsChanged(const QStringList &dirtyActions);
++
++private slots:
++    void onActionsChanged(const QStringList &removed,
++                          const StringBoolMap &enabledChanges,
++                          const QVariantMap &stateChanges,
++                          const GMenuActionMap &added);
++
++private:
++    GMenuActionMap m_actions;
++
++    QString m_serviceName;
++    QString m_objectPath;
++
++};
+diff --git a/gmenu-dbusmenu-proxy/actions.cpp b/gmenu-dbusmenu-proxy/actions.cpp
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/actions.cpp
+@@ -0,0 +1,216 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#include "actions.h"
++
++#include "debug.h"
++
++#include <QDBusConnection>
++#include <QDBusMessage>
++#include <QDBusPendingCallWatcher>
++#include <QDBusPendingReply>
++#include <QDebug>
++#include <QStringList>
++#include <QVariantList>
++
++static const QString s_orgGtkActions = QStringLiteral("org.gtk.Actions");
++
++Actions::Actions(const QString &serviceName, const QString &objectPath, QObject *parent)
++    : QObject(parent)
++    , m_serviceName(serviceName)
++    , m_objectPath(objectPath)
++{
++    Q_ASSERT(!serviceName.isEmpty());
++    Q_ASSERT(!m_objectPath.isEmpty());
++
++    if (!QDBusConnection::sessionBus().connect(serviceName,
++                                               objectPath,
++                                               s_orgGtkActions,
++                                               QStringLiteral("Changed"),
++                                               this,
++                                               SLOT(onActionsChanged(QStringList,StringBoolMap,QVariantMap,GMenuActionMap)))) {
++        qCWarning(DBUSMENUPROXY) << "Failed to subscribe to action changes for" << parent << "on" << serviceName << "at" << objectPath;
++    }
++}
++
++Actions::~Actions() = default;
++
++void Actions::load()
++{
++    QDBusMessage msg = QDBusMessage::createMethodCall(m_serviceName,
++                                                      m_objectPath,
++                                                      s_orgGtkActions,
++                                                      QStringLiteral("DescribeAll"));
++
++    QDBusPendingReply<GMenuActionMap> reply = QDBusConnection::sessionBus().asyncCall(msg);
++    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
++    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher *watcher) {
++        QDBusPendingReply<GMenuActionMap> reply = *watcher;
++        if (reply.isError()) {
++            qCWarning(DBUSMENUPROXY) << "Failed to get actions from" << m_serviceName << "at" << m_objectPath << reply.error();
++            emit failedToLoad();
++        } else {
++            m_actions = reply.value();
++            emit loaded();
++        }
++        watcher->deleteLater();
++    });
++}
++
++bool Actions::get(const QString &name, GMenuAction &action) const
++{
++    auto it = m_actions.find(name);
++    if (it == m_actions.constEnd()) {
++        return false;
++    }
++
++    action = *it;
++    return true;
++}
++
++GMenuActionMap Actions::getAll() const
++{
++    return m_actions;
++}
++
++void Actions::trigger(const QString &name, uint timestamp)
++{
++    if (!m_actions.contains(name)) {
++        qCWarning(DBUSMENUPROXY) << "Cannot invoke action" << name << "which doesn't exist";
++        return;
++    }
++
++    QDBusMessage msg = QDBusMessage::createMethodCall(m_serviceName,
++                                                      m_objectPath,
++                                                      s_orgGtkActions,
++                                                      QStringLiteral("Activate"));
++    msg << name;
++    // TODO use the arguments provided by "target" in the menu item
++    msg << QVariant::fromValue(QVariantList());
++
++    QVariantMap platformData;
++
++    if (timestamp) {
++        // From documentation:
++        // If the startup notification id is not available, this can be just "_TIMEtime", where
++        // time is the time stamp from the event triggering the call.
++        // see also gtkwindow.c extract_time_from_startup_id and startup_id_is_fake
++        platformData.insert(QStringLiteral("desktop-startup-id"), QStringLiteral("_TIME") + QString::number(timestamp));
++    }
++
++    msg << platformData;
++
++    QDBusPendingReply<void> reply = QDBusConnection::sessionBus().asyncCall(msg);
++    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
++    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, name](QDBusPendingCallWatcher *watcher) {
++        QDBusPendingReply<void> reply = *watcher;
++        if (reply.isError()) {
++            qCWarning(DBUSMENUPROXY) << "Failed to invoke action" << name << "on" << m_serviceName << "at" << m_objectPath << reply.error();
++        }
++        watcher->deleteLater();
++    });
++}
++
++bool Actions::isValid() const
++{
++    return !m_actions.isEmpty();
++}
++
++void Actions::onActionsChanged(const QStringList &removed,
++                               const StringBoolMap &enabledChanges,
++                               const QVariantMap &stateChanges,
++                               const GMenuActionMap &added)
++{
++    // Collect the actions that we removed, altered, or added, so we can eventually signal changes for all menus that contain one of those actions
++    QStringList dirtyActions;
++
++    // TODO I bet for most of the loops below we could use a nice short std algorithm
++
++    for (const QString &removedAction : removed) {
++        if (m_actions.remove(removedAction)) {
++            dirtyActions.append(removedAction);
++        }
++    }
++
++    for (auto it = enabledChanges.constBegin(), end = enabledChanges.constEnd(); it != end; ++it) {
++        const QString &actionName = it.key();
++        const bool enabled = it.value();
++
++        auto actionIt = m_actions.find(actionName);
++        if (actionIt == m_actions.end()) {
++            qCInfo(DBUSMENUPROXY) << "Got enabled changed for action" << actionName << "which we don't know";
++            continue;
++        }
++
++        GMenuAction &action = *actionIt;
++        if (action.enabled != enabled) {
++            action.enabled = enabled;
++            dirtyActions.append(actionName);
++        } else {
++            qCInfo(DBUSMENUPROXY) << "Got enabled change for action" << actionName << "which didn't change it";
++        }
++    }
++
++    for (auto it = stateChanges.constBegin(), end = stateChanges.constEnd(); it != end; ++it) {
++        const QString &actionName = it.key();
++        const QVariant &state = it.value();
++
++        auto actionIt = m_actions.find(actionName);
++        if (actionIt == m_actions.end()) {
++            qCInfo(DBUSMENUPROXY) << "Got state changed for action" << actionName << "which we don't know";
++            continue;
++        }
++
++        GMenuAction &action = *actionIt;
++
++        if (action.state.isEmpty()) {
++            qCDebug(DBUSMENUPROXY) << "Got new state for action" << actionName << "that didn't have any state before";
++            action.state.append(state);
++            dirtyActions.append(actionName);
++        } else {
++            // Action state is a list but the state change only sends us a single variant, so just overwrite the first one
++            QVariant &firstState = action.state.first();
++            if (firstState != state) {
++                firstState = state;
++                dirtyActions.append(actionName);
++            } else {
++                qCInfo(DBUSMENUPROXY) << "Got state change for action" << actionName << "which didn't change it";
++            }
++        }
++    }
++
++    // unite() will result in keys being present multiple times, do it manually and overwrite existing ones
++    for (auto it = added.constBegin(), end = added.constEnd(); it != end; ++it) {
++        const QString &actionName = it.key();
++
++        if (DBUSMENUPROXY().isInfoEnabled()) {
++            if (m_actions.contains(actionName)) {
++                qCInfo(DBUSMENUPROXY) << "Got new action" << actionName << "that we already have, overwriting existing one";
++            }
++        }
++
++        m_actions.insert(actionName, it.value());
++
++        dirtyActions.append(actionName);
++    }
++
++    if (!dirtyActions.isEmpty()) {
++        emit actionsChanged(dirtyActions);
++    }
++}
+diff --git a/gmenu-dbusmenu-proxy/gdbusmenutypes_p.h b/gmenu-dbusmenu-proxy/gdbusmenutypes_p.h
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/gdbusmenutypes_p.h
+@@ -0,0 +1,107 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#pragma once
++
++#include <QDBusSignature>
++#include <QList>
++#include <QMap>
++#include <QVariant>
++
++class QDBusArgument;
++
++// Various
++using VariantMapList = QList<QVariantMap>;
++Q_DECLARE_METATYPE(VariantMapList);
++
++using StringBoolMap = QMap<QString, bool>;
++Q_DECLARE_METATYPE(StringBoolMap);
++
++// Menu item itself (Start method)
++struct GMenuItem
++{
++    uint id;
++    uint section;
++    VariantMapList items;
++};
++Q_DECLARE_METATYPE(GMenuItem);
++
++QDBusArgument &operator<<(QDBusArgument &argument, const GMenuItem &item);
++const QDBusArgument &operator>>(const QDBusArgument &argument, GMenuItem &item);
++
++using GMenuItemList = QList<GMenuItem>;
++Q_DECLARE_METATYPE(GMenuItemList);
++
++// Information about what section or submenu to use for a particular entry
++struct GMenuSection
++{
++    uint subscription;
++    uint menu;
++};
++Q_DECLARE_METATYPE(GMenuSection);
++
++QDBusArgument &operator<<(QDBusArgument &argument, const GMenuSection &item);
++const QDBusArgument &operator>>(const QDBusArgument &argument, GMenuSection &item);
++
++// Changes of a menu item (Changed signal)
++struct GMenuChange
++{
++    uint subscription;
++    uint menu;
++
++    uint changePosition;
++    uint itemsToRemoveCount;
++    VariantMapList itemsToInsert;
++};
++Q_DECLARE_METATYPE(GMenuChange);
++
++QDBusArgument &operator<<(QDBusArgument &argument, const GMenuChange &item);
++const QDBusArgument &operator>>(const QDBusArgument &argument, GMenuChange &item);
++
++using GMenuChangeList = QList<GMenuChange>;
++Q_DECLARE_METATYPE(GMenuChangeList);
++
++// An application action
++struct GMenuAction
++{
++    bool enabled;
++    QDBusSignature signature;
++    QVariantList state;
++};
++Q_DECLARE_METATYPE(GMenuAction);
++
++QDBusArgument &operator<<(QDBusArgument &argument, const GMenuAction &item);
++const QDBusArgument &operator>>(const QDBusArgument &argument, GMenuAction &item);
++
++using GMenuActionMap = QMap<QString, GMenuAction>;
++Q_DECLARE_METATYPE(GMenuActionMap);
++
++struct GMenuActionsChange
++{
++    QStringList removed;
++    QMap<QString, bool> enabledChanged;
++    QVariantMap stateChanged;
++    GMenuActionMap added;
++};
++Q_DECLARE_METATYPE(GMenuActionsChange);
++
++QDBusArgument &operator<<(QDBusArgument &argument, const GMenuActionsChange &item);
++const QDBusArgument &operator>>(const QDBusArgument &argument, GMenuActionsChange &item);
++
++void GDBusMenuTypes_register();
+diff --git a/gmenu-dbusmenu-proxy/gdbusmenutypes_p.cpp b/gmenu-dbusmenu-proxy/gdbusmenutypes_p.cpp
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/gdbusmenutypes_p.cpp
+@@ -0,0 +1,132 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#include "gdbusmenutypes_p.h"
++
++#include <QDBusArgument>
++#include <QDBusMetaType>
++
++// GMenuItem
++QDBusArgument &operator<<(QDBusArgument &argument, const GMenuItem &item)
++{
++    argument.beginStructure();
++    argument << item.id << item.section << item.items;
++    argument.endStructure();
++    return argument;
++}
++
++const QDBusArgument &operator>>(const QDBusArgument &argument, GMenuItem &item)
++{
++    argument.beginStructure();
++    argument >> item.id >> item.section >> item.items;
++    argument.endStructure();
++    return argument;
++}
++
++// GMenuSection
++QDBusArgument &operator<<(QDBusArgument &argument, const GMenuSection &item)
++{
++    argument.beginStructure();
++    argument << item.subscription << item.menu;
++    argument.endStructure();
++    return argument;
++}
++
++const QDBusArgument &operator>>(const QDBusArgument &argument, GMenuSection &item)
++{
++    argument.beginStructure();
++    argument >> item.subscription >> item.menu;
++    argument.endStructure();
++    return argument;
++}
++
++// GMenuChange
++QDBusArgument &operator<<(QDBusArgument &argument, const GMenuChange &item)
++{
++    argument.beginStructure();
++    argument << item.subscription << item.menu << item.changePosition << item.itemsToRemoveCount << item.itemsToInsert;
++    argument.endStructure();
++    return argument;
++}
++
++const QDBusArgument &operator>>(const QDBusArgument &argument, GMenuChange &item)
++{
++    argument.beginStructure();
++    argument >> item.subscription >> item.menu >> item.changePosition >> item.itemsToRemoveCount >> item.itemsToInsert;
++    argument.endStructure();
++    return argument;
++}
++
++// GMenuActionProperty
++QDBusArgument &operator<<(QDBusArgument &argument, const GMenuAction &item)
++{
++    argument.beginStructure();
++    argument << item.enabled << item.signature << item.state;
++    argument.endStructure();
++    return argument;
++}
++
++const QDBusArgument &operator>>(const QDBusArgument &argument, GMenuAction &item)
++{
++    argument.beginStructure();
++    argument >> item.enabled >> item.signature >> item.state;
++    argument.endStructure();
++    return argument;
++}
++
++// GMenuActionsChange
++QDBusArgument &operator<<(QDBusArgument &argument, const GMenuActionsChange &item)
++{
++    argument.beginStructure();
++    argument << item.removed << item.enabledChanged << item.stateChanged << item.added;
++    argument.endStructure();
++    return argument;
++}
++
++const QDBusArgument &operator>>(const QDBusArgument &argument, GMenuActionsChange &item)
++{
++    argument.beginStructure();
++    argument >> item.removed >> item.enabledChanged >> item.stateChanged >> item.added;
++    argument.endStructure();
++    return argument;
++}
++
++void GDBusMenuTypes_register()
++{
++    static bool registered = false;
++    if (registered) {
++        return;
++    }
++
++    qDBusRegisterMetaType<GMenuItem>();
++    qDBusRegisterMetaType<GMenuItemList>();
++
++    qDBusRegisterMetaType<GMenuSection>();
++
++    qDBusRegisterMetaType<GMenuChange>();
++    qDBusRegisterMetaType<GMenuChangeList>();
++
++    qDBusRegisterMetaType<GMenuAction>();
++    qDBusRegisterMetaType<GMenuActionMap>();
++
++    qDBusRegisterMetaType<GMenuActionsChange>();
++    qDBusRegisterMetaType<StringBoolMap>();
++
++    registered = true;
++}
+diff --git a/gmenu-dbusmenu-proxy/gmenudbusmenuproxy.desktop b/gmenu-dbusmenu-proxy/gmenudbusmenuproxy.desktop
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/gmenudbusmenuproxy.desktop
+@@ -0,0 +1,7 @@
++[Desktop Entry]
++Exec=gmenudbusmenuproxy
++Name=GMenuDBusMenuProxy
++Type=Application
++X-KDE-StartupNotify=false
++OnlyShowIn=KDE;
++X-KDE-autostart-phase=1
+diff --git a/gmenu-dbusmenu-proxy/icons.h b/gmenu-dbusmenu-proxy/icons.h
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/icons.h
+@@ -0,0 +1,29 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#pragma once
++
++#include <QString>
++
++namespace Icons
++{
++
++QString actionIcon(const QString &actionName);
++
++}
+diff --git a/gmenu-dbusmenu-proxy/icons.cpp b/gmenu-dbusmenu-proxy/icons.cpp
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/icons.cpp
+@@ -0,0 +1,279 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#include "icons.h"
++
++#include <QHash>
++
++QString Icons::actionIcon(const QString &actionName)
++{
++    QString icon;
++
++    QString action = actionName;
++
++    if (action.isEmpty()) {
++        return icon;
++    }
++
++    static const QHash<QString, QString> s_icons {
++        {QStringLiteral("image-new"), QStringLiteral("document-new")}, // Gimp "New" item
++        {QStringLiteral("adddirect"), QStringLiteral("document-new")}, // LibreOffice "New" item
++        {QStringLiteral("filenew"), QStringLiteral("document-new")}, // Pluma "New" item
++        {QStringLiteral("new-window"), QStringLiteral("window-new")},
++        {QStringLiteral("newwindow"), QStringLiteral("window-new")},
++        {QStringLiteral("new-tab"), QStringLiteral("tab-new")},
++        {QStringLiteral("open"), QStringLiteral("document-open")},
++        {QStringLiteral("open-location"), QStringLiteral("document-open-remote")},
++        {QStringLiteral("openremote"), QStringLiteral("document-open-remote")},
++        {QStringLiteral("save"), QStringLiteral("document-save")},
++        {QStringLiteral("save-as"), QStringLiteral("document-save-as")},
++        {QStringLiteral("saveas"), QStringLiteral("document-save-as")},
++        {QStringLiteral("save-all"), QStringLiteral("document-save-all")},
++        {QStringLiteral("saveall"), QStringLiteral("document-save-all")},
++        {QStringLiteral("export"), QStringLiteral("document-export")},
++        {QStringLiteral("exportto"), QStringLiteral("document-export")}, // LibreOffice
++        {QStringLiteral("exporttopdf"), QStringLiteral("viewpdf")}, // LibreOffice, the icon it uses but the name is quite random
++        {QStringLiteral("webhtml"), QStringLiteral("text-html")}, // LibreOffice
++        {QStringLiteral("printpreview"), QStringLiteral("document-print-preview")},
++        {QStringLiteral("print"), QStringLiteral("document-print")},
++        {QStringLiteral("print-gtk"), QStringLiteral("document-print")}, // Gimp
++        {QStringLiteral("mail-image"), QStringLiteral("mail-message-new")}, // Gimp
++        {QStringLiteral("sendmail"), QStringLiteral("mail-message-new")}, // LibreOffice
++        {QStringLiteral("sendviabluetooth"), QStringLiteral("preferences-system-bluetooth")}, // LibreOffice
++        {QStringLiteral("close"), QStringLiteral("document-close")},
++        {QStringLiteral("closedoc"), QStringLiteral("document-close")},
++        {QStringLiteral("close-all"), QStringLiteral("document-close")},
++        {QStringLiteral("closeall"), QStringLiteral("document-close")},
++        {QStringLiteral("closewin"), QStringLiteral("window-close")}, // LibreOffice
++        {QStringLiteral("quit"), QStringLiteral("application-exit")},
++
++        {QStringLiteral("undo"), QStringLiteral("edit-undo")},
++        {QStringLiteral("redo"), QStringLiteral("edit-redo")},
++        {QStringLiteral("revert"), QStringLiteral("document-revert")},
++        {QStringLiteral("cut"), QStringLiteral("edit-cut")},
++        {QStringLiteral("copy"), QStringLiteral("edit-copy")},
++        {QStringLiteral("paste"), QStringLiteral("edit-paste")},
++        {QStringLiteral("duplicate"), QStringLiteral("edit-duplicate")},
++
++        {QStringLiteral("preferences"), QStringLiteral("settings-configure")},
++        {QStringLiteral("optionstreedialog"), QStringLiteral("settings-configure")}, // LibreOffice
++        {QStringLiteral("keyboard-shortcuts"), QStringLiteral("configure-shortcuts")},
++
++        {QStringLiteral("fullscreen"), QStringLiteral("view-fullscreen")},
++
++        {QStringLiteral("find"), QStringLiteral("edit-find")},
++        {QStringLiteral("searchfind"), QStringLiteral("edit-find")},
++        {QStringLiteral("replace"), QStringLiteral("edit-find-replace")},
++        {QStringLiteral("searchreplace"), QStringLiteral("edit-find-replace")}, // LibreOffice
++        {QStringLiteral("searchdialog"), QStringLiteral("edit-find-replace")}, // LibreOffice
++        {QStringLiteral("select-all"), QStringLiteral("edit-select-all")},
++        {QStringLiteral("selectall"), QStringLiteral("edit-select-all")},
++        {QStringLiteral("select-none"), QStringLiteral("edit-select-invert")},
++        {QStringLiteral("select-invert"), QStringLiteral("edit-select-invert")},
++
++        {QStringLiteral("increasesize"), QStringLiteral("zoom-in")},
++        {QStringLiteral("decreasesize"), QStringLiteral("zoom-out")},
++        {QStringLiteral("zoom-in"), QStringLiteral("zoom-in")},
++        {QStringLiteral("zoom-out"), QStringLiteral("zoom-out")},
++        {QStringLiteral("zoomfit"), QStringLiteral("zoom-fit-best")},
++        {QStringLiteral("zoom-fit-in"), QStringLiteral("zoom-fit-best")},
++        {QStringLiteral("show-guides"), QStringLiteral("show-guides")},
++        {QStringLiteral("show-grid"), QStringLiteral("show-grid")},
++
++        {QStringLiteral("rotateclockwise"), QStringLiteral("object-rotate-right")},
++        {QStringLiteral("rotatecounterclockwise"), QStringLiteral("object-rotate-left")},
++        {QStringLiteral("fliphorizontally"), QStringLiteral("object-flip-horizontal")},
++        {QStringLiteral("image-flip-horizontal"), QStringLiteral("object-flip-horizontal")},
++        {QStringLiteral("flipvertically"), QStringLiteral("object-flip-vertical")},
++        {QStringLiteral("image-flip-vertical"), QStringLiteral("object-flip-vertical")},
++        {QStringLiteral("image-scale"), QStringLiteral("transform-scale")},
++
++        {QStringLiteral("bold"), QStringLiteral("format-text-bold")},
++        {QStringLiteral("italic"), QStringLiteral("format-text-italic")},
++        {QStringLiteral("underline"), QStringLiteral("format-text-underline")},
++        {QStringLiteral("strikeout"), QStringLiteral("format-text-strikethrough")},
++        {QStringLiteral("superscript"), QStringLiteral("format-text-superscript")},
++        {QStringLiteral("subscript"), QStringLiteral("format-text-subscript")},
++        // "grow" is a bit unspecific to always set it to "grow font", so use the exact ID here
++        {QStringLiteral(".uno:Grow"), QStringLiteral("format-font-size-more")}, // LibreOffice
++        {QStringLiteral(".uno:Shrink"), QStringLiteral("format-font-size-less")}, // LibreOffice
++        // also a bit unspecific?
++        {QStringLiteral("alignleft"), QStringLiteral("format-justify-left")},
++        {QStringLiteral("alignhorizontalcenter"), QStringLiteral("format-justify-center")},
++        {QStringLiteral("alignright"), QStringLiteral("format-justify-right")},
++        {QStringLiteral("alignjustified"), QStringLiteral("format-justify-fill")},
++        {QStringLiteral("incrementindent"), QStringLiteral("format-indent-more")},
++        {QStringLiteral("decrementindent"), QStringLiteral("format-indent-less")},
++        {QStringLiteral("defaultbullet"), QStringLiteral("format-list-unordered")}, // LibreOffice
++        {QStringLiteral("defaultnumbering"), QStringLiteral("format-list-ordered")}, // LibreOffice
++
++        {QStringLiteral("sortascending"), QStringLiteral("view-sort-ascending")},
++        {QStringLiteral("sortdescending"), QStringLiteral("view-sort-descending")},
++
++        {QStringLiteral("autopilotmenu"), QStringLiteral("tools-wizard")}, // LibreOffice
++
++        {QStringLiteral("layers-new"), QStringLiteral("layer-new")},
++        {QStringLiteral("layers-duplicate"), QStringLiteral("layer-duplicate")},
++        {QStringLiteral("layers-delete"), QStringLiteral("layer-delete")},
++        {QStringLiteral("layers-anchor"), QStringLiteral("anchor")},
++
++        {QStringLiteral("slideshow"), QStringLiteral("media-playback-start")}, // Gwenview uses this icon for that
++        {QStringLiteral("playvideo"), QStringLiteral("media-playback-start")},
++
++        {QStringLiteral("addtags"), QStringLiteral("tag-new")},
++        {QStringLiteral("newevent"), QStringLiteral("appointment-new")},
++
++        {QStringLiteral("previous-document"), QStringLiteral("go-previous")},
++        {QStringLiteral("prevphoto"), QStringLiteral("go-previous")},
++        {QStringLiteral("next-document"), QStringLiteral("go-next")},
++        {QStringLiteral("nextphoto"), QStringLiteral("go-next")},
++
++        {QStringLiteral("redeye"), QStringLiteral("redeyes")},
++        {QStringLiteral("crop"), QStringLiteral("transform-crop")},
++        {QStringLiteral("move"), QStringLiteral("transform-move")},
++        {QStringLiteral("rotate"), QStringLiteral("transform-rotate")},
++        {QStringLiteral("scale"), QStringLiteral("transform-scale")},
++        {QStringLiteral("shear"), QStringLiteral("transform-shear")},
++        {QStringLiteral("flip"), QStringLiteral("object-flip-horizontal")},
++        {QStringLiteral("flag"), QStringLiteral("flag-red")}, // is there a "mark" or "important" icon that isn't email?
++
++        {QStringLiteral("tools-measure"), QStringLiteral("measure")},
++        {QStringLiteral("tools-text"), QStringLiteral("draw-text")},
++        {QStringLiteral("tools-color-picker"), QStringLiteral("color-picker")},
++        {QStringLiteral("tools-paintbrush"), QStringLiteral("draw-brush")},
++        {QStringLiteral("tools-eraser"), QStringLiteral("draw-eraser")},
++        {QStringLiteral("tools-paintbrush"), QStringLiteral("draw-brush")},
++
++        {QStringLiteral("help"), QStringLiteral("help-contents")},
++        {QStringLiteral("helpindex"), QStringLiteral("help-contents")},
++        {QStringLiteral("helpcontents"), QStringLiteral("help-contents")},
++        {QStringLiteral("context-help"), QStringLiteral("help-whatsthis")},
++        {QStringLiteral("extendedhelp"), QStringLiteral("help-whatsthis")}, // LibreOffice
++        {QStringLiteral("helpreportproblem"), QStringLiteral("tools-report-bug")},
++        {QStringLiteral("sendfeedback"), QStringLiteral("tools-report-bug")}, // LibreOffice
++        {QStringLiteral("about"), QStringLiteral("help-about")},
++
++        {QStringLiteral("emptytrash"), QStringLiteral("trash-empty")},
++        {QStringLiteral("movetotrash"), QStringLiteral("user-trash-symbolic")},
++
++        // LibreOffice documents in its New menu
++        {QStringLiteral("private:factory/swriter"), QStringLiteral("application-vnd.oasis.opendocument.text")},
++        {QStringLiteral("private:factory/scalc"), QStringLiteral("application-vnd.oasis.opendocument.spreadsheet")},
++        {QStringLiteral("private:factory/simpress"), QStringLiteral("application-vnd.oasis.opendocument.presentation")},
++        {QStringLiteral("private:factory/sdraw"), QStringLiteral("application-vnd.oasis.opendocument.graphics")},
++        {QStringLiteral("private:factory/swriter/web"), QStringLiteral("text-html")},
++        {QStringLiteral("private:factory/smath"), QStringLiteral("application-vnd.oasis.opendocument.formula")},
++    };
++
++    // Sometimes we get additional arguments (?slot=123) we don't care about
++    const int questionMarkIndex = action.indexOf(QLatin1Char('?'));
++    if (questionMarkIndex > -1) {
++        action.truncate(questionMarkIndex);
++    }
++
++    icon = s_icons.value(action);
++
++    if (icon.isEmpty()) {
++        const int dotIndex = action.indexOf(QLatin1Char('.')); // app., win., or unity. prefix
++        if (dotIndex > -1) {
++            action = action.mid(dotIndex + 1);
++        }
++
++        icon = s_icons.value(action);
++    }
++
++    if (icon.isEmpty()) {
++        static const auto s_dup1Prefix = QStringLiteral("dup:1:"); // can it be dup2 also?
++        if (action.startsWith(s_dup1Prefix)) {
++            action = action.mid(s_dup1Prefix.length());
++        }
++
++        static const auto s_unoPrefix = QStringLiteral(".uno:"); // LibreOffice with appmenu-gtk
++        if (action.startsWith(s_unoPrefix)) {
++            action = action.mid(s_unoPrefix.length());
++        }
++
++        // LibreOffice's "Open" entry is always "OpenFromAppname" so we just chop that off
++        if (action.startsWith(QLatin1String("OpenFrom"))) {
++            action = action.left(4); // basically "Open"
++        }
++
++        icon = s_icons.value(action);
++    }
++
++    if (icon.isEmpty()) {
++        static const auto s_commonPrefix = QStringLiteral("Common");
++        if (action.startsWith(s_commonPrefix)) {
++            action = action.mid(s_commonPrefix.length());
++        }
++
++        icon = s_icons.value(action);
++    }
++
++    if (icon.isEmpty()) {
++        static const auto s_prefixes = QStringList{ // Gimp with appmenu-gtk
++            QStringLiteral("file-"),
++            QStringLiteral("edit-"),
++            QStringLiteral("view-"),
++            QStringLiteral("image-"),
++            QStringLiteral("layers-"),
++            QStringLiteral("colors-"),
++            QStringLiteral("tools-"),
++            QStringLiteral("plug-in-"),
++            QStringLiteral("windows-"),
++            QStringLiteral("dialogs-"),
++            QStringLiteral("help-"),
++        };
++
++        for (const QString &prefix : s_prefixes) {
++            if (action.startsWith(prefix)) {
++                action = action.mid(prefix.length());
++                break;
++            }
++        }
++
++        icon = s_icons.value(action);
++    }
++
++    if (icon.isEmpty()) {
++        action = action.toLower();
++        icon = s_icons.value(action);
++    }
++
++    if (icon.isEmpty()) {
++        static const auto s_prefixes = QStringList{ // Pluma with appmenu-gtk
++            QStringLiteral("file"),
++            QStringLiteral("edit"),
++            QStringLiteral("view"),
++            QStringLiteral("help"),
++        };
++
++
++        for (const QString &prefix : s_prefixes) {
++            if (action.startsWith(prefix)) {
++                action = action.mid(prefix.length());
++                break;
++            }
++        }
++
++        icon = s_icons.value(action);
++    }
++
++    return icon;
++}
+diff --git a/gmenu-dbusmenu-proxy/main.cpp b/gmenu-dbusmenu-proxy/main.cpp
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/main.cpp
+@@ -0,0 +1,50 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#include <QGuiApplication>
++#include <QSessionManager>
++
++#include <KWindowSystem>
++
++#include "menuproxy.h"
++
++int main(int argc, char ** argv)
++{
++    qputenv("QT_QPA_PLATFORM", "xcb");
++
++    QGuiApplication::setDesktopSettingsAware(false);
++
++    QGuiApplication app(argc, argv);
++
++    if (!KWindowSystem::isPlatformX11()) {
++        qFatal("qdbusmenuproxy is only useful XCB. Aborting");
++    }
++
++    auto disableSessionManagement = [](QSessionManager &sm) {
++        sm.setRestartHint(QSessionManager::RestartNever);
++    };
++    QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
++    QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
++
++    app.setQuitOnLastWindowClosed(false);
++
++    MenuProxy proxy;
++
++    return app.exec();
++}
+diff --git a/gmenu-dbusmenu-proxy/menu.h b/gmenu-dbusmenu-proxy/menu.h
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/menu.h
+@@ -0,0 +1,81 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#pragma once
++
++#include <QObject>
++#include <QString>
++#include <QVector>
++
++#include "gdbusmenutypes_p.h"
++#include "../libdbusmenuqt/dbusmenutypes_p.h"
++
++class Menu : public QObject
++{
++    Q_OBJECT
++
++public:
++    Menu(const QString &serviceName, const QString &objectPath, QObject *parent = nullptr);
++    ~Menu();
++
++    void init();
++    void cleanup();
++
++    void start(uint id);
++    void stop(const QList<uint> &ids);
++
++    bool hasMenu() const;
++    bool hasSubscription(uint subscription) const;
++
++    GMenuItem getSection(int id, bool *ok = nullptr) const;
++    GMenuItem getSection(int subscription, int sectionId, bool *ok = nullptr) const;
++
++    QVariantMap getItem(int id) const; // bool ok argument?
++    QVariantMap getItem(int subscription, int sectionId, int id) const;
++
++public slots:
++    void actionsChanged(const QStringList &dirtyActions, const QString &prefix);
++
++signals:
++    void menuAppeared(); // emitted the first time a menu was successfully loaded
++    void menuDisappeared();
++
++    void subscribed(uint id);
++    void failedToSubscribe(uint id);
++
++    void itemsChanged(const QVector<uint> &itemIds);
++    void menusChanged(const QVector<uint> &menuIds);
++
++private slots:
++    void onMenuChanged(const GMenuChangeList &changes);
++
++private:
++    void initMenu();
++
++    void menuChanged(const GMenuChangeList &changes);
++
++    // QSet?
++    QList<uint> m_subscriptions; // keeps track of which menu trees we're subscribed to
++
++    QHash<uint, GMenuItemList> m_menus;
++
++    QString m_serviceName;
++    QString m_objectPath;
++
++};
+diff --git a/gmenu-dbusmenu-proxy/menu.cpp b/gmenu-dbusmenu-proxy/menu.cpp
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/menu.cpp
+@@ -0,0 +1,354 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#include "menu.h"
++
++#include "debug.h"
++
++#include <QDBusConnection>
++#include <QDBusMessage>
++#include <QDBusPendingCallWatcher>
++#include <QDBusPendingReply>
++#include <QDebug>
++#include <QVariantList>
++
++#include <algorithm>
++
++#include "utils.h"
++
++static const QString s_orgGtkMenus = QStringLiteral("org.gtk.Menus");
++
++Menu::Menu(const QString &serviceName, const QString &objectPath, QObject *parent)
++    : QObject(parent)
++    , m_serviceName(serviceName)
++    , m_objectPath(objectPath)
++{
++    Q_ASSERT(!serviceName.isEmpty());
++    Q_ASSERT(!m_objectPath.isEmpty());
++
++    if (!QDBusConnection::sessionBus().connect(m_serviceName,
++                                               m_objectPath,
++                                               s_orgGtkMenus,
++                                               QStringLiteral("Changed"),
++                                               this,
++                                               SLOT(onMenuChanged(GMenuChangeList)))) {
++        qCWarning(DBUSMENUPROXY) << "Failed to subscribe to menu changes for" << parent << "on" << serviceName << "at" << objectPath;
++    }
++}
++
++Menu::~Menu() = default;
++
++void Menu::cleanup()
++{
++    stop(m_subscriptions);
++}
++
++void Menu::start(uint id)
++{
++    if (m_subscriptions.contains(id)) {
++        return;
++    }
++
++    // TODO watch service disappearing?
++
++    // dbus-send --print-reply --session --dest=:1.103 /org/libreoffice/window/104857641/menus/menubar org.gtk.Menus.Start array:uint32:0
++
++    QDBusMessage msg = QDBusMessage::createMethodCall(m_serviceName,
++                                                      m_objectPath,
++                                                      s_orgGtkMenus,
++                                                      QStringLiteral("Start"));
++    msg.setArguments({
++        QVariant::fromValue(QList<uint>{id})
++    });
++
++    QDBusPendingReply<GMenuItemList> reply = QDBusConnection::sessionBus().asyncCall(msg);
++    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
++    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, id](QDBusPendingCallWatcher *watcher) {
++        QScopedPointer<QDBusPendingCallWatcher, QScopedPointerDeleteLater> watcherPtr(watcher);
++
++        QDBusPendingReply<GMenuItemList> reply = *watcherPtr;
++        if (reply.isError()) {
++            qCWarning(DBUSMENUPROXY) << "Failed to start subscription to" << id << "on" << m_serviceName << "at" << m_objectPath << reply.error();
++            emit failedToSubscribe(id);
++        } else {
++            const bool hadMenu = !m_menus.isEmpty();
++
++            const auto menus = reply.value();
++            for (auto menu : menus) {
++                m_menus[menu.id].append(menus);
++            }
++
++            // LibreOffice on startup fails to give us some menus right away, we'll also subscribe in onMenuChanged() if neccessary
++            if (menus.isEmpty()) {
++                qCWarning(DBUSMENUPROXY) << "Got an empty menu for" << id << "on" << m_serviceName << "at" << m_objectPath;
++                return;
++            }
++
++            // TODO are we subscribed to all it returns or just to the ones we requested?
++            m_subscriptions.append(id);
++
++            // do we have a menu now? let's tell everyone
++            if (!hadMenu && !m_menus.isEmpty()) {
++                emit menuAppeared();
++            }
++
++            emit subscribed(id);
++        }
++    });
++}
++
++void Menu::stop(const QList<uint> &ids)
++{
++    QDBusMessage msg = QDBusMessage::createMethodCall(m_serviceName,
++                                                      m_objectPath,
++                                                      s_orgGtkMenus,
++                                                      QStringLiteral("End"));
++    msg.setArguments({
++        QVariant::fromValue(ids) // don't let it unwrap it, hence in a variant
++    });
++
++    QDBusPendingReply<void> reply = QDBusConnection::sessionBus().asyncCall(msg);
++    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
++    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, ids](QDBusPendingCallWatcher *watcher) {
++        QDBusPendingReply<void> reply = *watcher;
++        if (reply.isError()) {
++            qCWarning(DBUSMENUPROXY) << "Failed to stop subscription to" << ids << "on" << m_serviceName << "at" << m_objectPath << reply.error();
++        } else {
++            // remove all subscriptions that we unsubscribed from
++            // TODO is there a nicer algorithm for that?
++            // TODO remove all m_menus also?
++            m_subscriptions.erase(std::remove_if(m_subscriptions.begin(), m_subscriptions.end(),
++                                      std::bind(&QList<uint>::contains, m_subscriptions, std::placeholders::_1)),
++                                  m_subscriptions.end());
++
++            if (m_subscriptions.isEmpty()) {
++                emit menuDisappeared();
++            }
++        }
++        watcher->deleteLater();
++    });
++}
++
++bool Menu::hasMenu() const
++{
++    return !m_menus.isEmpty();
++}
++
++bool Menu::hasSubscription(uint subscription) const
++{
++    return m_subscriptions.contains(subscription);
++}
++
++GMenuItem Menu::getSection(int id, bool *ok) const
++{
++    int subscription;
++    int section;
++    int index;
++    Utils::intToTreeStructure(id, subscription, section, index);
++    return getSection(subscription, section, ok);
++}
++
++GMenuItem Menu::getSection(int subscription, int section, bool *ok) const
++{
++    const auto menu = m_menus.value(subscription);
++
++    auto it = std::find_if(menu.begin(), menu.end(), [section](const GMenuItem &item) {
++        return item.section == section;
++    });
++
++    if (it == menu.end()) {
++        if (ok) {
++            *ok = false;
++        }
++        return GMenuItem();
++    }
++
++    if (ok) {
++        *ok = true;
++    }
++    return *it;
++}
++
++QVariantMap Menu::getItem(int id) const
++{
++    int subscription;
++    int section;
++    int index;
++    Utils::intToTreeStructure(id, subscription, section, index);
++    return getItem(subscription, section, index);
++}
++
++QVariantMap Menu::getItem(int subscription, int sectionId, int index) const
++{
++    bool ok;
++    const GMenuItem section = getSection(subscription, sectionId, &ok);
++
++    if (!ok) {
++        return QVariantMap();
++    }
++
++    const auto items = section.items;
++
++    if (items.count() < index) {
++        qCWarning(DBUSMENUPROXY) << "Cannot get action" << subscription << sectionId << index << "which is out of bounds";
++        return QVariantMap();
++    }
++
++    // 0 is the menu itself, items start at 1
++    return items.at(index - 1);
++}
++
++void Menu::onMenuChanged(const GMenuChangeList &changes)
++{
++    const bool hadMenu = !m_menus.isEmpty();
++
++    QVector<uint> dirtyMenus;
++    QVector<uint> dirtyItems;
++
++    for (const auto &change : changes) {
++        auto updateSection = [&](GMenuItem &section) {
++            // Check if the amount of inserted items is identical to the items to be removed,
++            // just update the existing items and signal a change for that.
++            // LibreOffice tends to do that e.g. to update its Undo menu entry
++            if (change.itemsToRemoveCount == change.itemsToInsert.count()) {
++                for (int i = 0; i < change.itemsToInsert.count(); ++i) {
++                    const auto &newItem = change.itemsToInsert.at(i);
++
++                    section.items[change.changePosition + i] = newItem;
++
++                    // 0 is the menu itself, items start at 1
++                    dirtyItems.append(Utils::treeStructureToInt(change.subscription, change.menu, change.changePosition + i + 1));
++                }
++            } else {
++                for (int i = 0; i < change.itemsToRemoveCount; ++i) {
++                    section.items.removeAt(change.changePosition); // TODO bounds check
++                }
++
++                for (int i = 0; i < change.itemsToInsert.count(); ++i) {
++                    section.items.insert(change.changePosition + i, change.itemsToInsert.at(i));
++                }
++
++                dirtyMenus.append(Utils::treeStructureToInt(change.subscription, change.menu, 0));
++            }
++        };
++
++        // shouldn't happen, it says only Start() subscribes to changes
++        if (!m_subscriptions.contains(change.subscription)) {
++            qCDebug(DBUSMENUPROXY) << "Got menu change for menu" << change.subscription << "that we are not subscribed to, subscribing now";
++            // LibreOffice doesn't give us a menu right away but takes a while and then signals us a change
++            start(change.subscription);
++            continue;
++        }
++
++        auto &menu = m_menus[change.subscription];
++
++        bool sectionFound = false;
++        // TODO findSectionRef
++        for (GMenuItem &section : menu) {
++            if (section.section != change.menu) {
++                continue;
++            }
++
++            qCInfo(DBUSMENUPROXY) << "Updating existing section" << change.menu << "in subscription" << change.subscription;
++
++            sectionFound = true;
++            updateSection(section);
++            break;
++        }
++
++        // Insert new section
++        if (!sectionFound) {
++            qCInfo(DBUSMENUPROXY) << "Creating new section" << change.menu << "in subscription" << change.subscription;
++
++            if (change.itemsToRemoveCount > 0) {
++                qCWarning(DBUSMENUPROXY) << "Menu change requested to remove items from a new (and as such empty) section";
++            }
++
++            GMenuItem newSection;
++            newSection.id = change.subscription;
++            newSection.section = change.menu;
++            updateSection(newSection);
++            menu.append(newSection);
++        }
++    }
++
++    // do we have a menu now? let's tell everyone
++    if (!hadMenu && !m_menus.isEmpty()) {
++        emit menuAppeared();
++    } else if (hadMenu && m_menus.isEmpty()) {
++        emit menuDisappeared();
++    }
++
++    if (!dirtyItems.isEmpty()) {
++        emit itemsChanged(dirtyItems);
++    }
++
++    emit menusChanged(dirtyMenus);
++}
++
++void Menu::actionsChanged(const QStringList &dirtyActions, const QString &prefix)
++{
++    auto forEachMenuItem = [this](const std::function<bool(int subscription, int section, int index, const QVariantMap &item)> &cb) {
++        for (auto it = m_menus.constBegin(), end = m_menus.constEnd(); it != end; ++it) {
++            const int subscription = it.key();
++
++            for (const auto &menu : it.value()) {
++                const int section = menu.section;
++
++                int count = 0;
++
++                const auto items = menu.items;
++                for (const auto &item : items) {
++                    ++count; // 0 is a menu, entries start at 1
++
++                    if (!cb(subscription, section, count, item)) {
++                        goto loopExit; // hell yeah
++                        break;
++                    }
++                }
++            }
++        }
++
++        loopExit: // loop exit
++        return;
++    };
++
++    // now find in which menus these actions are and emit a change accordingly
++    QVector<uint> dirtyItems;
++
++    for (const QString &action : dirtyActions) {
++        const QString prefixedAction = prefix + action;
++
++        forEachMenuItem([this, &prefixedAction, &dirtyItems](int subscription, int section, int index, const QVariantMap &item) {
++            const QString actionName = Utils::itemActionName(item);
++
++            if (actionName == prefixedAction) {
++                dirtyItems.append(Utils::treeStructureToInt(subscription, section, index));
++                return false; // break
++            }
++
++            return true; // continue
++        });
++    }
++
++    if (!dirtyItems.isEmpty()) {
++        emit itemsChanged(dirtyItems);
++    }
++}
++
+diff --git a/gmenu-dbusmenu-proxy/menuproxy.h b/gmenu-dbusmenu-proxy/menuproxy.h
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/menuproxy.h
+@@ -0,0 +1,62 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#pragma once
++
++#include <QObject>
++#include <QByteArray>
++#include <QHash>
++#include <QWindow> // for WId
++
++#include <xcb/xcb_atom.h>
++
++class QDBusServiceWatcher;
++
++class Window;
++
++class MenuProxy : public QObject
++{
++    Q_OBJECT
++
++public:
++    MenuProxy();
++    ~MenuProxy() override;
++
++private Q_SLOTS:
++    void onWindowAdded(WId id);
++    void onWindowRemoved(WId id);
++
++private:
++    bool init();
++    void teardown();
++
++    void setGtkShellShowsMenuBar(bool show);
++
++    xcb_connection_t *m_xConnection;
++
++    // FIXME the get one reads "UTF8String" (reads gnome) the write thing writes "String" (writes kde)
++    QByteArray getWindowPropertyString(WId id, const QByteArray &name);
++    void writeWindowProperty(WId id, const QByteArray &name, const QByteArray &value);
++    xcb_atom_t getAtom(const QByteArray &name);
++
++    QHash<WId, Window *> m_windows;
++
++    QDBusServiceWatcher *m_serviceWatcher;
++
++};
+diff --git a/gmenu-dbusmenu-proxy/menuproxy.cpp b/gmenu-dbusmenu-proxy/menuproxy.cpp
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/menuproxy.cpp
+@@ -0,0 +1,294 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#include "menuproxy.h"
++
++#include <config-X11.h>
++
++#include "debug.h"
++
++#include <QByteArray>
++#include <QCoreApplication>
++#include <QDBusConnection>
++#include <QDBusConnectionInterface>
++#include <QDBusServiceWatcher>
++#include <QDir>
++#include <QFileInfo>
++#include <QHash>
++#include <QStandardPaths>
++
++#include <KConfigGroup>
++#include <KSharedConfig>
++#include <KWindowSystem>
++
++#include <QX11Info>
++#include <xcb/xcb.h>
++#include <xcb/xcb_atom.h>
++
++#include "window.h"
++
++static const QString s_ourServiceName = QStringLiteral("org.kde.plasma.gmenu_dbusmenu_proxy");
++
++static const QString s_dbusMenuRegistrar = QStringLiteral("com.canonical.AppMenu.Registrar");
++
++static const QByteArray s_gtkUniqueBusName = QByteArrayLiteral("_GTK_UNIQUE_BUS_NAME");
++
++static const QByteArray s_gtkApplicationObjectPath = QByteArrayLiteral("_GTK_APPLICATION_OBJECT_PATH");
++static const QByteArray s_unityObjectPath = QByteArrayLiteral("_UNITY_OBJECT_PATH");
++static const QByteArray s_gtkWindowObjectPath = QByteArrayLiteral("_GTK_WINDOW_OBJECT_PATH");
++static const QByteArray s_gtkMenuBarObjectPath = QByteArrayLiteral("_GTK_MENUBAR_OBJECT_PATH");
++// that's the generic app menu with Help and Options and will be used if window doesn't have a fully-blown menu bar
++static const QByteArray s_gtkAppMenuObjectPath = QByteArrayLiteral("_GTK_APP_MENU_OBJECT_PATH");
++
++static const QByteArray s_kdeNetWmAppMenuServiceName = QByteArrayLiteral("_KDE_NET_WM_APPMENU_SERVICE_NAME");
++static const QByteArray s_kdeNetWmAppMenuObjectPath = QByteArrayLiteral("_KDE_NET_WM_APPMENU_OBJECT_PATH");
++
++MenuProxy::MenuProxy()
++    : QObject()
++    , m_xConnection(QX11Info::connection())
++    , m_serviceWatcher(new QDBusServiceWatcher(this))
++{
++    m_serviceWatcher->setConnection(QDBusConnection::sessionBus());
++    m_serviceWatcher->setWatchMode(QDBusServiceWatcher::WatchForUnregistration |
++                                     QDBusServiceWatcher::WatchForRegistration);
++    m_serviceWatcher->addWatchedService(s_dbusMenuRegistrar);
++
++    connect(m_serviceWatcher, &QDBusServiceWatcher::serviceRegistered, this, [this](const QString &service) {
++        Q_UNUSED(service);
++        qCDebug(DBUSMENUPROXY) << "Global menu service became available, starting";
++        init();
++    });
++    connect(m_serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, [this](const QString &service) {
++        Q_UNUSED(service);
++        qCDebug(DBUSMENUPROXY) << "Global menu service disappeared, cleaning up";
++        teardown();
++    });
++
++    // It's fine to do a blocking call here as we're a separate binary with no UI
++    if (QDBusConnection::sessionBus().interface()->isServiceRegistered(s_dbusMenuRegistrar)) {
++        qCDebug(DBUSMENUPROXY) << "Global menu service is running, starting right away";
++        init();
++    } else {
++        qCDebug(DBUSMENUPROXY) << "No global menu service available, waiting for it to start before doing anything";
++
++        // be sure when started to restore gtk menus when there's no dbus menu around in case we crashed
++        setGtkShellShowsMenuBar(false);
++    }
++}
++
++MenuProxy::~MenuProxy()
++{
++    teardown();
++}
++
++bool MenuProxy::init()
++{
++    if (!QDBusConnection::sessionBus().registerService(s_ourServiceName)) {
++        qCWarning(DBUSMENUPROXY) << "Failed to register DBus service" << s_ourServiceName;
++        return false;
++    }
++
++    setGtkShellShowsMenuBar(true);
++
++    connect(KWindowSystem::self(), &KWindowSystem::windowAdded, this, &MenuProxy::onWindowAdded);
++    connect(KWindowSystem::self(), &KWindowSystem::windowRemoved, this, &MenuProxy::onWindowRemoved);
++
++    const auto windows = KWindowSystem::windows();
++    for (WId id : windows) {
++        onWindowAdded(id);
++    }
++
++    if (m_windows.isEmpty()) {
++        qCDebug(DBUSMENUPROXY) << "Up and running but no windows with menus in sight";
++    }
++
++    return true;
++}
++
++void MenuProxy::teardown()
++{
++    setGtkShellShowsMenuBar(false);
++
++    QDBusConnection::sessionBus().unregisterService(s_ourServiceName);
++
++    disconnect(KWindowSystem::self(), &KWindowSystem::windowAdded, this, &MenuProxy::onWindowAdded);
++    disconnect(KWindowSystem::self(), &KWindowSystem::windowRemoved, this, &MenuProxy::onWindowRemoved);
++
++    qDeleteAll(m_windows);
++    m_windows.clear();
++}
++
++void MenuProxy::setGtkShellShowsMenuBar(bool show)
++{
++    qCDebug(DBUSMENUPROXY) << "Setting gtk-shell-shows-menu-bar to" << show << "which will" << (show ? "hide" : "show") << "menu bars in applications";
++
++    // mostly taken from kde-gtk-config
++    QString root = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation);
++    if (root.isEmpty()) {
++        root = QFileInfo(QDir::home(), QStringLiteral(".config")).absoluteFilePath();
++    }
++
++    const QString settingsFilePath = root + QStringLiteral("/gtk-3.0/settings.ini");
++
++    auto cfg = KSharedConfig::openConfig(settingsFilePath, KConfig::NoGlobals);
++    KConfigGroup group(cfg, "Settings");
++
++    if (show) {
++        group.writeEntry("gtk-shell-shows-menubar", true);
++    } else {
++        group.deleteEntry("gtk-shell-shows-menubar");
++    }
++
++    group.sync();
++
++    // TODO use gconf/dconf directly or at least signal a change somehow?
++}
++
++void MenuProxy::onWindowAdded(WId id)
++{
++    if (m_windows.contains(id)) {
++        return;
++    }
++
++    KWindowInfo info(id, NET::WMWindowType);
++
++    NET::WindowType wType = info.windowType(NET::NormalMask | NET::DesktopMask | NET::DockMask |
++                                            NET::ToolbarMask | NET::MenuMask | NET::DialogMask |
++                                            NET::OverrideMask | NET::TopMenuMask |
++                                            NET::UtilityMask | NET::SplashMask);
++
++    // Only top level windows typically have a menu bar, dialogs, such as settings don't
++    if (wType != NET::Normal) {
++        qCInfo(DBUSMENUPROXY) << "Ignoring window" << id << "of type" << wType;
++        return;
++    }
++
++    const QString serviceName = QString::fromUtf8(getWindowPropertyString(id, s_gtkUniqueBusName));
++
++    if (serviceName.isEmpty()) {
++        return;
++    }
++
++    const QString applicationObjectPath = QString::fromUtf8(getWindowPropertyString(id, s_gtkApplicationObjectPath));
++    const QString unityObjectPath = QString::fromUtf8(getWindowPropertyString(id, s_unityObjectPath));
++    const QString windowObjectPath = QString::fromUtf8(getWindowPropertyString(id, s_gtkWindowObjectPath));
++
++    const QString applicationMenuObjectPath = QString::fromUtf8(getWindowPropertyString(id, s_gtkAppMenuObjectPath));
++    const QString menuBarObjectPath = QString::fromUtf8(getWindowPropertyString(id, s_gtkMenuBarObjectPath));
++
++    if (applicationMenuObjectPath.isEmpty() && menuBarObjectPath.isEmpty()) {
++        return;
++    }
++
++    Window *window = new Window(serviceName);
++    window->setWinId(id);
++    window->setApplicationObjectPath(applicationObjectPath);
++    window->setUnityObjectPath(unityObjectPath);
++    window->setWindowObjectPath(windowObjectPath);
++    window->setApplicationMenuObjectPath(applicationMenuObjectPath);
++    window->setMenuBarObjectPath(menuBarObjectPath);
++    m_windows.insert(id, window);
++
++    connect(window, &Window::requestWriteWindowProperties, this, [this, window] {
++       Q_ASSERT(!window->proxyObjectPath().isEmpty());
++
++       writeWindowProperty(window->winId(), s_kdeNetWmAppMenuServiceName, s_ourServiceName.toUtf8());
++       writeWindowProperty(window->winId(), s_kdeNetWmAppMenuObjectPath, window->proxyObjectPath().toUtf8());
++    });
++    connect(window, &Window::requestRemoveWindowProperties, this, [this, window] {
++        writeWindowProperty(window->winId(), s_kdeNetWmAppMenuServiceName, QByteArray());
++        writeWindowProperty(window->winId(), s_kdeNetWmAppMenuObjectPath, QByteArray());
++    });
++
++    window->init();
++}
++
++void MenuProxy::onWindowRemoved(WId id)
++{
++    // no need to cleanup() (which removes window properties) when the window is gone, delete right away
++    delete m_windows.take(id);
++}
++
++QByteArray MenuProxy::getWindowPropertyString(WId id, const QByteArray &name)
++{
++    auto *c = QX11Info::connection(); // FIXME cache
++
++    QByteArray value;
++
++    auto atom = getAtom(name);
++    if (atom == XCB_ATOM_NONE) {
++        return value;
++    }
++
++    // GTK properties aren't XCB_ATOM_STRING but a custom one
++    auto utf8StringAtom = getAtom(QByteArrayLiteral("UTF8_STRING"));
++
++    static const long MAX_PROP_SIZE = 10000;
++    // FIXME figure out what "UT8String" is as atom type, it's 392 or 378 but I don't find that enum
++    auto propertyCookie = xcb_get_property(c, false, id, atom, utf8StringAtom, 0, MAX_PROP_SIZE);
++    QScopedPointer<xcb_get_property_reply_t, QScopedPointerPodDeleter> propertyReply(xcb_get_property_reply(c, propertyCookie, NULL));
++    if (propertyReply.isNull()) {
++        qCWarning(DBUSMENUPROXY) << "XCB property reply for atom" << name << "on" << id << "was null";
++        return value;
++    }
++
++    if (propertyReply->type == utf8StringAtom && propertyReply->format == 8 && propertyReply->value_len > 0) {
++        const char *data = (const char *) xcb_get_property_value(propertyReply.data());
++        int len = propertyReply->value_len;
++        if (data) {
++            value = QByteArray(data, data[len - 1] ? len : len - 1);
++        }
++    }
++
++    return value;
++}
++
++void MenuProxy::writeWindowProperty(WId id, const QByteArray &name, const QByteArray &value)
++{
++    auto atom = getAtom(name);
++    if (atom == XCB_ATOM_NONE) {
++        return;
++    }
++
++    if (value.isEmpty()) {
++        xcb_delete_property(m_xConnection, id, atom);
++    } else {
++        xcb_change_property(m_xConnection, XCB_PROP_MODE_REPLACE, id, atom, XCB_ATOM_STRING,
++                            8, value.length(), value.constData());
++    }
++}
++
++xcb_atom_t MenuProxy::getAtom(const QByteArray &name)
++{
++    static QHash<QByteArray, xcb_atom_t> s_atoms;
++
++    auto atom = s_atoms.value(name, XCB_ATOM_NONE);
++    if (atom == XCB_ATOM_NONE) {
++        const xcb_intern_atom_cookie_t atomCookie = xcb_intern_atom(m_xConnection, false, name.length(), name.constData());
++        QScopedPointer<xcb_intern_atom_reply_t, QScopedPointerPodDeleter> atomReply(xcb_intern_atom_reply(m_xConnection, atomCookie, Q_NULLPTR));
++        if (!atomReply.isNull()) {
++            atom = atomReply->atom;
++            if (atom != XCB_ATOM_NONE) {
++                s_atoms.insert(name, atom);
++            }
++        }
++    }
++
++    return atom;
++}
+diff --git a/gmenu-dbusmenu-proxy/utils.h b/gmenu-dbusmenu-proxy/utils.h
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/utils.h
+@@ -0,0 +1,33 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#pragma once
++
++#include <QString>
++#include <QVariantMap>
++
++namespace Utils
++{
++
++int treeStructureToInt(int subscription, int section, int index);
++void intToTreeStructure(int source, int &subscription, int &section, int &index);
++
++QString itemActionName(const QVariantMap &item);
++
++}
+diff --git a/gmenu-dbusmenu-proxy/utils.cpp b/gmenu-dbusmenu-proxy/utils.cpp
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/utils.cpp
+@@ -0,0 +1,42 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#include "utils.h"
++
++int Utils::treeStructureToInt(int subscription, int section, int index)
++{
++    return subscription * 1000000 + section * 1000 + index;
++}
++
++void Utils::intToTreeStructure(int source, int &subscription, int &section, int &index)
++{
++    // TODO some better math :) or bit shifting or something
++    index = source % 1000;
++    section = (source / 1000) % 1000;
++    subscription = source / 1000000;
++}
++
++QString Utils::itemActionName(const QVariantMap &item)
++{
++    QString actionName = item.value(QStringLiteral("action")).toString();
++    if (actionName.isEmpty()) {
++        actionName = item.value(QStringLiteral("submenu-action")).toString();
++    }
++    return actionName;
++}
+diff --git a/gmenu-dbusmenu-proxy/window.h b/gmenu-dbusmenu-proxy/window.h
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/window.h
+@@ -0,0 +1,140 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#pragma once
++
++#include <QObject>
++#include <QDBusContext>
++#include <QString>
++#include <QVector>
++#include <QWindow> // for WId
++
++#include <functional>
++
++#include "gdbusmenutypes_p.h"
++#include "../libdbusmenuqt/dbusmenutypes_p.h"
++
++class QDBusVariant;
++
++class Actions;
++class Menu;
++
++class Window : public QObject, protected QDBusContext
++{
++    Q_OBJECT
++
++    // DBus
++    Q_PROPERTY(QString Status READ status)
++    Q_PROPERTY(uint Version READ version)
++
++public:
++    Window(const QString &serviceName);
++    ~Window();
++
++    void init();
++
++    WId winId() const;
++    void setWinId(WId winId);
++
++    QString serviceName() const;
++
++    QString applicationObjectPath() const;
++    void setApplicationObjectPath(const QString &applicationObjectPath);
++
++    QString unityObjectPath() const;
++    void setUnityObjectPath(const QString &unityObjectPath);
++
++    QString windowObjectPath() const;
++    void setWindowObjectPath(const QString &windowObjectPath);
++
++    QString applicationMenuObjectPath() const;
++    void setApplicationMenuObjectPath(const QString &applicationMenuObjectPath);
++
++    QString menuBarObjectPath() const;
++    void setMenuBarObjectPath(const QString &menuBarObjectPath);
++
++    QString currentMenuObjectPath() const;
++
++    QString proxyObjectPath() const;
++
++    // DBus
++    bool AboutToShow(int id);
++    void Event(int id, const QString &eventId, const QDBusVariant &data, uint timestamp);
++    DBusMenuItemList GetGroupProperties(const QList<int> &ids, const QStringList &propertyNames);
++    uint GetLayout(int parentId, int recursionDepth, const QStringList &propertyNames, DBusMenuLayoutItem &dbusItem);
++    QDBusVariant GetProperty(int id, const QString &property);
++
++    QString status() const;
++    uint version() const;
++
++signals:
++    // don't want to pollute X stuff into Menu, let all of that be in MenuProxy
++    void requestWriteWindowProperties();
++    void requestRemoveWindowProperties();
++
++    // DBus
++    void ItemActivationRequested(int id, uint timestamp);
++    void ItemsPropertiesUpdated(const DBusMenuItemList &updatedProps, const DBusMenuItemKeysList &removedProps);
++    void LayoutUpdated(uint revision, int parent);
++
++private:
++    void initMenu();
++
++    bool registerDBusObject();
++    void updateWindowProperties();
++
++    bool getAction(const QString &name, GMenuAction &action) const;
++    void triggerAction(const QString &name, uint timestamp = 0);
++    Actions *getActionsForAction(const QString &name, QString &lookupName) const;
++
++    void menuChanged(const QVector<uint> &menuIds);
++    void menuItemsChanged(const QVector<uint> &itemIds);
++
++    void onActionsChanged(const QStringList &dirty, const QString &prefix);
++    void onMenuSubscribed(uint id);
++
++    QVariantMap gMenuToDBusMenuProperties(const QVariantMap &source) const;
++
++    WId m_winId = 0;
++    QString m_serviceName; // original GMenu service (the gtk app)
++
++    QString m_applicationObjectPath;
++    QString m_unityObjectPath;
++    QString m_windowObjectPath;
++    QString m_applicationMenuObjectPath;
++    QString m_menuBarObjectPath;
++
++    QString m_currentMenuObjectPath;
++
++    QString m_proxyObjectPath; // our object path on this proxy app
++
++    QHash<int, QDBusMessage> m_pendingGetLayouts;
++
++    Menu *m_applicationMenu = nullptr;
++    Menu *m_menuBar = nullptr;
++
++    Menu *m_currentMenu = nullptr;
++
++    Actions *m_applicationActions = nullptr;
++    Actions *m_unityActions = nullptr;
++    Actions *m_windowActions = nullptr;
++
++    bool m_menuInited = false;
++
++};
+diff --git a/gmenu-dbusmenu-proxy/window.cpp b/gmenu-dbusmenu-proxy/window.cpp
+new file mode 100644
+--- /dev/null
++++ b/gmenu-dbusmenu-proxy/window.cpp
+@@ -0,0 +1,680 @@
++/*
++ * Copyright (C) 2018 Kai Uwe Broulik <kde@privat.broulik.de>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#include "window.h"
++
++#include "debug.h"
++
++#include <QDBusConnection>
++#include <QDBusMessage>
++#include <QDBusPendingCallWatcher>
++#include <QDBusPendingReply>
++#include <QDebug>
++#include <QList>
++#include <QMutableListIterator>
++#include <QVariantList>
++
++#include <KLocalizedString>
++
++#include <algorithm>
++
++#include "actions.h"
++#include "dbusmenuadaptor.h"
++#include "icons.h"
++#include "menu.h"
++#include "utils.h"
++
++#include "../libdbusmenuqt/dbusmenushortcut_p.h"
++
++static const QString s_orgGtkActions = QStringLiteral("org.gtk.Actions");
++static const QString s_orgGtkMenus = QStringLiteral("org.gtk.Menus");
++
++static const QString s_applicationActionsPrefix = QStringLiteral("app.");
++static const QString s_unityActionsPrefix = QStringLiteral("unity.");
++static const QString s_windowActionsPrefix = QStringLiteral("win.");
++
++Window::Window(const QString &serviceName)
++    : QObject()
++    , m_serviceName(serviceName)
++{
++    qCDebug(DBUSMENUPROXY) << "Created menu on" << serviceName;
++
++    Q_ASSERT(!serviceName.isEmpty());
++
++    GDBusMenuTypes_register();
++    DBusMenuTypes_register();
++}
++
++Window::~Window() = default;
++
++void Window::init()
++{
++     qCDebug(DBUSMENUPROXY) << "Inited window with menu for" << m_winId << "on" << m_serviceName << "at app" << m_applicationObjectPath << "win" << m_windowObjectPath << "unity" << m_unityObjectPath;
++
++     if (!m_applicationMenuObjectPath.isEmpty()) {
++         m_applicationMenu = new Menu(m_serviceName, m_applicationMenuObjectPath, this);
++         connect(m_applicationMenu, &Menu::menuAppeared, this, &Window::updateWindowProperties);
++         connect(m_applicationMenu, &Menu::menuDisappeared, this, &Window::updateWindowProperties);
++         connect(m_applicationMenu, &Menu::subscribed, this, &Window::onMenuSubscribed);
++         // basically so it replies on DBus no matter what
++         connect(m_applicationMenu, &Menu::failedToSubscribe, this, &Window::onMenuSubscribed);
++         connect(m_applicationMenu, &Menu::itemsChanged, this, &Window::menuItemsChanged);
++         connect(m_applicationMenu, &Menu::menusChanged, this, &Window::menuChanged);
++     }
++
++     if (!m_menuBarObjectPath.isEmpty()) {
++         m_menuBar = new Menu(m_serviceName, m_menuBarObjectPath, this);
++         connect(m_menuBar, &Menu::menuAppeared, this, &Window::updateWindowProperties);
++         connect(m_menuBar, &Menu::menuDisappeared, this, &Window::updateWindowProperties);
++         connect(m_menuBar, &Menu::subscribed, this, &Window::onMenuSubscribed);
++         connect(m_menuBar, &Menu::failedToSubscribe, this, &Window::onMenuSubscribed);
++         connect(m_menuBar, &Menu::itemsChanged, this, &Window::menuItemsChanged);
++         connect(m_menuBar, &Menu::menusChanged, this, &Window::menuChanged);
++     }
++
++    if (!m_applicationObjectPath.isEmpty()) {
++        m_applicationActions = new Actions(m_serviceName, m_applicationObjectPath, this);
++        connect(m_applicationActions, &Actions::actionsChanged, this, [this](const QStringList &dirtyActions) {
++            onActionsChanged(dirtyActions, s_applicationActionsPrefix);
++        });
++        connect(m_applicationActions, &Actions::loaded, this, [this] {
++            if (m_menuInited) {
++                onActionsChanged(m_applicationActions->getAll().keys(), s_applicationActionsPrefix);
++            } else {
++                initMenu();
++            }
++        });
++        m_applicationActions->load();
++    }
++
++    if (!m_unityObjectPath.isEmpty()) {
++        m_unityActions = new Actions(m_serviceName, m_unityObjectPath, this);
++        connect(m_unityActions, &Actions::actionsChanged, this, [this](const QStringList &dirtyActions) {
++            onActionsChanged(dirtyActions, s_unityActionsPrefix);
++        });
++        connect(m_unityActions, &Actions::loaded, this, [this] {
++            if (m_menuInited) {
++                onActionsChanged(m_unityActions->getAll().keys(), s_unityActionsPrefix);
++            } else {
++                initMenu();
++            }
++        });
++        m_unityActions->load();
++    }
++
++    if (!m_windowObjectPath.isEmpty()) {
++        m_windowActions = new Actions(m_serviceName, m_windowObjectPath, this);
++        connect(m_windowActions, &Actions::actionsChanged, this, [this](const QStringList &dirtyActions) {
++            onActionsChanged(dirtyActions, s_windowActionsPrefix);
++        });
++        connect(m_windowActions, &Actions::loaded, this, [this] {
++            if (m_menuInited) {
++                onActionsChanged(m_windowActions->getAll().keys(), s_windowActionsPrefix);
++            } else {
++                initMenu();
++            }
++        });
++        m_windowActions->load();
++    }
++}
++
++WId Window::winId() const
++{
++    return m_winId;
++}
++
++void Window::setWinId(WId winId)
++{
++    m_winId = winId;
++}
++
++QString Window::serviceName() const
++{
++    return m_serviceName;
++}
++
++QString Window::applicationObjectPath() const
++{
++    return m_applicationObjectPath;
++}
++
++void Window::setApplicationObjectPath(const QString &applicationObjectPath)
++{
++    m_applicationObjectPath = applicationObjectPath;
++}
++
++QString Window::unityObjectPath() const
++{
++    return m_unityObjectPath;
++}
++
++void Window::setUnityObjectPath(const QString &unityObjectPath)
++{
++    m_unityObjectPath = unityObjectPath;
++}
++
++QString Window::applicationMenuObjectPath() const
++{
++    return m_applicationMenuObjectPath;
++}
++
++void Window::setApplicationMenuObjectPath(const QString &applicationMenuObjectPath)
++{
++    m_applicationMenuObjectPath = applicationMenuObjectPath;
++}
++
++QString Window::menuBarObjectPath() const
++{
++    return m_menuBarObjectPath;
++}
++
++void Window::setMenuBarObjectPath(const QString &menuBarObjectPath)
++{
++    m_menuBarObjectPath = menuBarObjectPath;
++}
++
++QString Window::windowObjectPath() const
++{
++    return m_windowObjectPath;
++}
++
++void Window::setWindowObjectPath(const QString &windowObjectPath)
++{
++    m_windowObjectPath = windowObjectPath;
++}
++
++QString Window::currentMenuObjectPath() const
++{
++    return m_currentMenuObjectPath;
++}
++
++QString Window::proxyObjectPath() const
++{
++    return m_proxyObjectPath;
++}
++
++void Window::initMenu()
++{
++    if (m_menuInited) {
++        return;
++    }
++
++    if (!registerDBusObject()) {
++        return;
++    }
++
++    // appmenu-gtk-module always announces a menu bar on every GTK window even if there is none
++    // so we subscribe to the menu bar as soon as it shows up so we can figure out
++    // if we have a menu bar, an app menu, or just nothing
++    if (m_applicationMenu) {
++        m_applicationMenu->start(0);
++    }
++
++    if (m_menuBar) {
++        m_menuBar->start(0);
++    }
++
++    m_menuInited = true;
++}
++
++void Window::menuItemsChanged(const QVector<uint> &itemIds)
++{
++    if (qobject_cast<Menu*>(sender()) != m_currentMenu) {
++        return;
++    }
++
++    DBusMenuItemList items;
++
++    for (uint id : itemIds) {
++        const auto newItem = m_currentMenu->getItem(id);
++
++        DBusMenuItem dBusItem{
++            // 0 is menu, items start at 1
++            id,
++            gMenuToDBusMenuProperties(newItem)
++        };
++        items.append(dBusItem);
++    }
++
++    emit ItemsPropertiesUpdated(items, {});
++}
++
++void Window::menuChanged(const QVector<uint> &menuIds)
++{
++    if (qobject_cast<Menu*>(sender()) != m_currentMenu) {
++        return;
++    }
++
++    for (uint menu : menuIds) {
++        emit LayoutUpdated(3 /*revision*/, menu);
++    }
++}
++
++void Window::onMenuSubscribed(uint id)
++{
++    // When it was a delayed GetLayout request, send the reply now
++    const auto pendingReplies = m_pendingGetLayouts.values(id);
++    if (!pendingReplies.isEmpty()) {
++        for (const auto &pendingReply : pendingReplies) {
++            if (pendingReply.type() != QDBusMessage::InvalidMessage) {
++                auto reply = pendingReply.createReply();
++
++                DBusMenuLayoutItem item;
++                uint revision = GetLayout(Utils::treeStructureToInt(id, 0, 0), 0, {}, item);
++
++                reply << revision << QVariant::fromValue(item);
++
++                QDBusConnection::sessionBus().send(reply);
++            }
++        }
++        m_pendingGetLayouts.remove(id);
++    } else {
++        emit LayoutUpdated(2 /*revision*/, id);
++    }
++}
++
++bool Window::getAction(const QString &name, GMenuAction &action) const
++{
++    QString lookupName;
++    Actions *actions = getActionsForAction(name, lookupName);
++
++    if (!actions) {
++        return false;
++    }
++
++    return actions->get(lookupName, action);
++}
++
++void Window::triggerAction(const QString &name, uint timestamp)
++{
++    QString lookupName;
++    Actions *actions = getActionsForAction(name, lookupName);
++
++    if (!actions) {
++        return;
++    }
++
++    actions->trigger(lookupName, timestamp);
++}
++
++Actions *Window::getActionsForAction(const QString &name, QString &lookupName) const
++{
++    if (name.startsWith(QLatin1String("app."))) {
++        lookupName = name.mid(4);
++        return m_applicationActions;
++    } else if (name.startsWith(QLatin1String("unity."))) {
++        lookupName = name.mid(6);
++        return m_unityActions;
++    } else if (name.startsWith(QLatin1String("win."))) {
++        lookupName = name.mid(4);
++        return m_windowActions;
++    }
++
++    return nullptr;
++}
++
++void Window::onActionsChanged(const QStringList &dirty, const QString &prefix)
++{
++    if (m_applicationMenu) {
++        m_applicationMenu->actionsChanged(dirty, prefix);
++    }
++    if (m_menuBar) {
++        m_menuBar->actionsChanged(dirty, prefix);
++    }
++}
++
++bool Window::registerDBusObject()
++{
++    Q_ASSERT(m_proxyObjectPath.isEmpty());
++
++    static int menus = 0;
++    ++menus;
++
++    new DbusmenuAdaptor(this);
++
++    const QString objectPath = QStringLiteral("/MenuBar/%1").arg(QString::number(menus));
++    qCDebug(DBUSMENUPROXY) << "Registering DBus object path" << objectPath;
++
++    if (!QDBusConnection::sessionBus().registerObject(objectPath, this)) {
++        qCWarning(DBUSMENUPROXY) << "Failed to register object";
++        return false;
++    }
++
++    m_proxyObjectPath = objectPath;
++
++    return true;
++}
++
++void Window::updateWindowProperties()
++{
++    const bool hasMenu = ((m_applicationMenu && m_applicationMenu->hasMenu())
++                           || (m_menuBar && m_menuBar->hasMenu()));
++
++    if (!hasMenu) {
++        emit requestRemoveWindowProperties();
++        return;
++    }
++
++    Menu *oldMenu = m_currentMenu;
++    Menu *newMenu = qobject_cast<Menu*>(sender());
++    // set current menu as needed
++    if (!m_currentMenu) {
++        m_currentMenu = newMenu;
++    // Menu Bar takes precedence over application menu
++    } else if (m_currentMenu == m_applicationMenu && newMenu == m_menuBar) {
++        qCDebug(DBUSMENUPROXY) << "Switching from application menu to menu bar";
++        m_currentMenu = newMenu;
++        // TODO update layout
++    }
++
++    if (m_currentMenu != oldMenu) {
++        // update entire menu now
++        emit LayoutUpdated(4 /*revision*/, 0);
++    }
++
++    emit requestWriteWindowProperties();
++}
++
++// DBus
++bool Window::AboutToShow(int id)
++{
++    // We always request the first time GetLayout is called and keep up-to-date internally
++    // No need to have us prepare anything here
++    Q_UNUSED(id);
++    return false;
++}
++
++void Window::Event(int id, const QString &eventId, const QDBusVariant &data, uint timestamp)
++{
++    Q_UNUSED(data);
++
++    if (!m_currentMenu) {
++        return;
++    }
++
++    // GMenu dbus doesn't have any "opened" or "closed" signals, we'll only handle "clicked"
++
++    if (eventId == QLatin1String("clicked")) {
++        const QString action = m_currentMenu->getItem(id).value(QStringLiteral("action")).toString();
++        if (!action.isEmpty()) {
++            triggerAction(action, timestamp);
++        }
++    }
++
++}
++
++DBusMenuItemList Window::GetGroupProperties(const QList<int> &ids, const QStringList &propertyNames)
++{
++    Q_UNUSED(ids);
++    Q_UNUSED(propertyNames);
++    return DBusMenuItemList();
++}
++
++uint Window::GetLayout(int parentId, int recursionDepth, const QStringList &propertyNames, DBusMenuLayoutItem &dbusItem)
++{
++    Q_UNUSED(recursionDepth); // TODO
++    Q_UNUSED(propertyNames);
++
++    int subscription;
++    int sectionId;
++    int index;
++
++    Utils::intToTreeStructure(parentId, subscription, sectionId, index);
++
++    if (!m_currentMenu) {
++        return 1;
++    }
++
++    if (!m_currentMenu->hasSubscription(subscription)) {
++        // let's serve multiple similar requests in one go once we've processed them
++        m_pendingGetLayouts.insertMulti(subscription, message());
++        setDelayedReply(true);
++
++        m_currentMenu->start(subscription);
++        return 1;
++    }
++
++    bool ok;
++    const GMenuItem section = m_currentMenu->getSection(subscription, sectionId, &ok);
++
++    if (!ok) {
++        qCDebug(DBUSMENUPROXY) << "There is no section on" << subscription << "at" << sectionId << "with" << parentId;
++        return 1;
++    }
++
++    // If a particular entry is requested, see what it is and resolve as neccessary
++    // for example the "File" entry on root is 0,0,1 but is a menu reference to e.g. 1,0,0
++    // so resolve that and return the correct menu
++    if (index > 0) {
++        // non-zero index indicates item within a menu but the index in the list still starts at zero
++        if (section.items.count() < index) {
++            qCDebug(DBUSMENUPROXY) << "Requested index" << index << "on" << subscription << "at" << sectionId << "with" << parentId << "is out of bounds";
++            return 0;
++        }
++
++        const auto &requestedItem = section.items.at(index - 1);
++
++        auto it = requestedItem.constFind(QStringLiteral(":submenu"));
++        if (it != requestedItem.constEnd()) {
++            const GMenuSection gmenuSection = qdbus_cast<GMenuSection>(it->value<QDBusArgument>());
++            return GetLayout(Utils::treeStructureToInt(gmenuSection.subscription, gmenuSection.menu, 0), recursionDepth, propertyNames, dbusItem);
++        } else {
++            // TODO
++            return 0;
++        }
++    }
++
++    dbusItem.id = parentId; // TODO
++    dbusItem.properties = {
++        {QStringLiteral("label"), i18n("Menu")}, // TODO use application name?
++        {QStringLiteral("children-display"), QStringLiteral("submenu")}
++    };
++
++    int count = 0;
++
++    const auto itemsToBeAdded = section.items;
++    for (const auto &item : itemsToBeAdded) {
++
++        DBusMenuLayoutItem child{
++            Utils::treeStructureToInt(section.id, sectionId, ++count),
++            gMenuToDBusMenuProperties(item),
++            {} // children
++        };
++        dbusItem.children.append(child);
++
++        // Now resolve section aliases
++        auto it = item.constFind(QStringLiteral(":section"));
++        if (it != item.constEnd()) {
++
++            // references another place, add it instead
++            GMenuSection gmenuSection = qdbus_cast<GMenuSection>(it->value<QDBusArgument>());
++
++            // remember where the item came from and give it an appropriate ID
++            // so updates signalled by the app will map to the right place
++            int originalSubscription = gmenuSection.subscription;
++            int originalMenu = gmenuSection.menu;
++
++            // TODO start subscription if we don't have it
++            auto items = m_currentMenu->getSection(gmenuSection.subscription, gmenuSection.menu).items;
++
++            // Check whether it's an alias to an alias
++            // FIXME make generic/recursive
++            if (items.count() == 1) {
++                const auto &aliasedItem = items.constFirst();
++                auto findIt = aliasedItem.constFind(QStringLiteral(":section"));
++                if (findIt != aliasedItem.constEnd()) {
++                    GMenuSection gmenuSection2 = qdbus_cast<GMenuSection>(findIt->value<QDBusArgument>());
++                    items = m_currentMenu->getSection(gmenuSection2.subscription, gmenuSection2.menu).items;
++
++                    originalSubscription = gmenuSection2.subscription;
++                    originalMenu = gmenuSection2.menu;
++                }
++            }
++
++            int aliasedCount = 0;
++            for (const auto &aliasedItem : qAsConst(items)) {
++                DBusMenuLayoutItem aliasedChild{
++                    Utils::treeStructureToInt(originalSubscription, originalMenu, ++aliasedCount),
++                    gMenuToDBusMenuProperties(aliasedItem),
++                    {} // children
++                };
++                dbusItem.children.append(aliasedChild);
++            }
++        }
++    }
++
++    // revision, unused in libdbusmenuqt
++    return 1;
++}
++
++QDBusVariant Window::GetProperty(int id, const QString &property)
++{
++    Q_UNUSED(id);
++    Q_UNUSED(property);
++    QDBusVariant value;
++    return value;
++}
++
++QString Window::status() const
++{
++    return QStringLiteral("normal");
++}
++
++uint Window::version() const
++{
++    return 4;
++}
++
++QVariantMap Window::gMenuToDBusMenuProperties(const QVariantMap &source) const
++{
++    QVariantMap result;
++
++    result.insert(QStringLiteral("label"), source.value(QStringLiteral("label")).toString());
++
++    if (source.contains(QStringLiteral(":section"))) {
++        result.insert(QStringLiteral("type"), QStringLiteral("separator"));
++    }
++
++    const bool isMenu = source.contains(QStringLiteral(":submenu"));
++    if (isMenu) {
++        result.insert(QStringLiteral("children-display"), QStringLiteral("submenu"));
++    }
++
++    QString accel = source.value(QStringLiteral("accel")).toString();
++    if (!accel.isEmpty()) {
++        QStringList shortcut;
++
++        // TODO use regexp or something
++        if (accel.contains(QLatin1String("<Primary>")) || accel.contains(QLatin1String("<Control>"))) {
++            shortcut.append(QStringLiteral("Control"));
++            accel.remove(QLatin1String("<Primary>"));
++            accel.remove(QLatin1String("<Control>"));
++        }
++
++        if (accel.contains(QLatin1String("<Shift>"))) {
++            shortcut.append(QStringLiteral("Shift"));
++            accel.remove(QLatin1String("<Shift>"));
++        }
++
++        if (accel.contains(QLatin1String("<Alt>"))) {
++            shortcut.append(QStringLiteral("Alt"));
++            accel.remove(QLatin1String("<Alt>"));
++        }
++
++        if (accel.contains(QLatin1String("<Super>"))) {
++            shortcut.append(QStringLiteral("Super"));
++            accel.remove(QLatin1String("<Super>"));
++        }
++
++        if (!accel.isEmpty()) {
++            // TODO replace "+" by "plus" and "-" by "minus"
++            shortcut.append(accel);
++
++            // TODO does gmenu support multiple?
++            DBusMenuShortcut dbusShortcut;
++            dbusShortcut.append(shortcut); // don't let it unwrap the list we append
++
++            result.insert(QStringLiteral("shortcut"), QVariant::fromValue(dbusShortcut));
++        }
++    }
++
++    bool enabled = true;
++
++    const QString actionName = Utils::itemActionName(source);
++
++    GMenuAction action;
++    // if no action is specified this is fine but if there is an action we don't have
++    // disable the menu entry
++    bool actionOk = true;
++    if (!actionName.isEmpty()) {
++        actionOk = getAction(actionName, action);
++        enabled = actionOk && action.enabled;
++    }
++
++    // we used to only send this if not enabled but then dbusmenuimporter does not
++    // update the enabled state when it changes from disabled to enabled
++    result.insert(QStringLiteral("enabled"), enabled);
++
++    bool visible = true;
++    const QString hiddenWhen = source.value(QStringLiteral("hidden-when")).toString();
++    if (hiddenWhen == QLatin1String("action-disabled") && (!actionOk || !enabled)) {
++        visible = false;
++    } else if (hiddenWhen == QLatin1String("action-missing") && !actionOk) {
++        visible = false;
++    // While we have Global Menu we don't have macOS menu (where Quit, Help, etc is separate)
++    } else if (hiddenWhen == QLatin1String("macos-menubar")) {
++        visible = true;
++    }
++
++    result.insert(QStringLiteral("visible"), visible);
++
++    QString icon = source.value(QStringLiteral("icon")).toString();
++    if (icon.isEmpty()) {
++        icon = source.value(QStringLiteral("verb-icon")).toString();
++    }
++
++    icon = Icons::actionIcon(actionName);
++    if (!icon.isEmpty()) {
++        result.insert(QStringLiteral("icon-name"), icon);
++    }
++
++    if (actionOk) {
++        const auto args = action.state;
++        if (args.count() == 1) {
++            const auto &firstArg = args.first();
++            // assume this is a checkbox
++            if (!isMenu) {
++                if (firstArg.type() == QVariant::Bool) {
++                    result.insert(QStringLiteral("toggle-type"), QStringLiteral("checkbox"));
++                    result.insert(QStringLiteral("toggle-state"), firstArg.toBool() ? 1 : 0);
++                } else if (firstArg.type() == QVariant::String) {
++                    result.insert(QStringLiteral("toggle-type"), QStringLiteral("radio"));
++                    const QString checkedAction = firstArg.toString();
++                    if (!checkedAction.isEmpty() && actionName.endsWith(checkedAction)) {
++                        result.insert(QStringLiteral("toggle-state"), 1);
++                    } else {
++                        result.insert(QStringLiteral("toggle-state"), 0);
++                    }
++                }
++            }
++        }
++    }
++
++    return result;
++}
+
