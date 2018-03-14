@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=gwenview
-pkgver=17.12.2
-pkgrel=1.3
+pkgver=17.12.3
+pkgrel=1.1
 pkgdesc="A fast and easy to use image viewer"
 url='https://kde.org/applications/graphics/gwenview/'
 arch=(x86_64)
@@ -19,25 +19,22 @@ optdepends=('qt5-imageformats: support for tiff, webp, and more image formats'
             'kipi-plugins: export to various online services')
 makedepends=(extra-cmake-modules kdoctools python cfitsio)
 source=("https://download.kde.org/stable/applications/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-390331.patch::"https://cgit.kde.org/gwenview.git/patch/?id=e913496b73"
 kdebug-305659.patch::"https://cgit.kde.org/gwenview.git/patch/?id=1e9a4482d9"
 kdebug-385242.patch::"https://cgit.kde.org/gwenview.git/patch/?id=5bcb8cc92d"
 kdebug-306835.patch::"https://cgit.kde.org/gwenview.git/patch/?id=8a6a4ea6b9"
 kdebug-164847.patch::"https://cgit.kde.org/gwenview.git/patch/?id=4a87ed952e"
-kdebug-245091.patch::"https://cgit.kde.org/gwenview.git/patch/?id=aa368aea25"
-kdebug-390332.patch::"https://cgit.kde.org/gwenview.git/patch/?id=00ee923ede"
 kdebug-359909.patch::"https://cgit.kde.org/gwenview.git/patch/?id=338ffeee4d"
+kdebug-388353.patch::"https://cgit.kde.org/gwenview.git/patch/?id=8b11365cac"
 )
-sha256sums=('f9f5bb6d45f72d734ba4ac2d9ae04f7e0930fb4ca4921620db40d4b9283ffb32'
+
+sha256sums=('3987dcfbfaea60130d98d7708f7c0f468eec3efff6f45241aeb08751882aff0d'
             'SKIP'
-            '888a1f8f603ea82abdc8f898a005cabdc3d5f20296c5ab5c2c26c6077d67fb4f'
             'f701a47c36a0a4fc4216a4d25621d2d089f8a960dca53947a655f7b867c1e30d'
             'e9c708154e3f0848b99d745f00a65e7e2d762327786b8e4634f6c3ec001e8d54'
             '6307dac6b86af4d68f3af07bf85af0afaaf5556da2f49244f7143bfd2eb36f99'
             'ba512859af7bf5815906b247f68bc726e2db20d44f4971769ea87d854ac3c848'
-            'f8a33c92e65d93e01b9770f9612df0853a1bd0442d2d0b3ae690127498f06753'
-            'b482a21907683bb120b6a645d34b8a9426fea5e4fe9542a1c43c895cfcb3e4e3'
-            'be241ef93292dda518fbdb4e3d625b2a2a878c2b270fed13e7fe356d6270e331')
+            'be241ef93292dda518fbdb4e3d625b2a2a878c2b270fed13e7fe356d6270e331'
+            'd9d1d1545d76093c6c2349b9e0e22282a700a90f49353ecae8e664cf52fa6bda')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
@@ -45,8 +42,6 @@ prepare() {
   mkdir -p build
   
   cd $pkgname-$pkgver
-  msg "Add KDEBUG 390331 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390331
-  patch -p1 -i ../kdebug-390331.patch
   msg "Add KDEBUG 305659 patch" # See: https://bugs.kde.org/show_bug.cgi?id=305659
   patch -p1 -i ../kdebug-305659.patch
   msg "Add KDEBUG 385242 patch" # See: https://bugs.kde.org/show_bug.cgi?id=385242
@@ -55,12 +50,10 @@ prepare() {
   patch -p1 -i ../kdebug-306835.patch
   msg "Add KDEBUG 164847 patch" # See: https://bugs.kde.org/show_bug.cgi?id=164847 Fixed in 18.04
   patch -p1 -i ../kdebug-164847.patch
-  msg "Add KDEBUG 245091 patch" # See: https://bugs.kde.org/show_bug.cgi?id=245091
-  patch -p1 -i ../kdebug-245091.patch
-  msg "Add KDEBUG 390332 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390332
-  patch -p1 -i ../kdebug-390332.patch
-  msg "Add KDEBUG 359909 parch"
+  msg "Add KDEBUG 359909 patch"
   patch -p1 -i ../kdebug-359909.patch
+  msg "Add KDEBUG 388353 patch" # See: https//bugs.kde.org/show_bug.cgi?id=388535
+  patch -p1 -i ../kdebug-388353.patch
 }
 
 build() {
