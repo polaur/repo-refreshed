@@ -1,0 +1,54 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for version with patches from upcomming releases
+# made on the original PKGBUILD by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kget
+pkgver=17.12.3
+pkgrel=1.1
+pkgdesc='Download Manager'
+url='https://kde.org/applications/internet/kget/'
+arch=(x86_64)
+license=(GPL LGPL FDL)
+groups=(kde-applications kdenetwork)
+depends=(kcmutils knotifyconfig qca-qt5 qgpgme kdelibs4support hicolor-icon-theme)
+makedepends=(extra-cmake-modules boost libktorrent kdoctools kdesignerplugin)
+optdepends=('libktorrent: torrent support')
+conflicts=(kdenetwork-kget)
+replaces=(kdenetwork-kget)
+source=("https://download.kde.org/stable/applications/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+0001-Port-shutdown-actions.patch::"https://cgit.kde.org/kget.git/patch/?id=bd31daab5163f2c161efa382865ea84a69787395"
+0002-Call-the-right-shutdown-action.patch::"https://cgit.kde.org/kget.git/patch/?id=bead030253a42117fd101d6a1684e43ab04e6aee"
+)
+sha256sums=('9c7f1f406de28b11f6fc7842c84becada04307d2a6a80f0fe81969735adc5dcd'
+            'SKIP'
+            '55e6ca7e34e00a53183f8646d8801f43442e7c5271e76a99fb24277a138bd903'
+            '73ed3725a47ea024a180ac24bc4b59fae9feae57c88812728603c666174d05f4')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Add suspend, hibernate and shutdown missing actions"
+  patch -p1 -i ../0001-Port-shutdown-actions.patch
+  patch -p1 -i ../0002-Call-the-right-shutdown-action.patch  
+  }
+
+build() {
+  cd build
+  cmake ../kget-$pkgver \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
