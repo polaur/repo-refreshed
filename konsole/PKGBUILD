@@ -1,0 +1,141 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# Co-Maintainer: worldofpeace
+# for version with bugfix from cgit
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=konsole
+pkgver=17.12.3
+pkgrel=1.1
+arch=(x86_64)
+url='https://kde.org/applications/system/konsole/'
+pkgdesc="KDE's terminal emulator"
+license=(GPL LGPL FDL)
+groups=(kde-applications kdebase)
+depends=(knotifyconfig kpty kparts kinit)
+makedepends=(extra-cmake-modules kdoctools python)
+optdepends=('keditbookmarks: to manage bookmarks')
+source=("https://download.kde.org/stable/applications/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-384620.patch::"https://cgit.kde.org/konsole.git/patch/?id=b8a2f0cf"
+kdebug-338997.patch::"https://cgit.kde.org/konsole.git/patch/?id=f98c752b"
+kdebug-353382.patch::"https://cgit.kde.org/konsole.git/patch/?id=f4fbec0c"
+kdebug-386762.patch::"https://cgit.kde.org/konsole.git/patch/?id=d25e5ac7"
+kdebug-389163.patch::"https://cgit.kde.org/konsole.git/patch/?id=f268b33d"
+kdebug-343071.patch::"https://cgit.kde.org/konsole.git/patch/?id=a7c3bda7"
+kdebug-340281.patch::"https://cgit.kde.org/konsole.git/patch/?id=cfa2e015"
+kdebug-387397.patch::"https://cgit.kde.org/konsole.git/patch/?id=caf0ab2b"
+kdebug-372348.patch::"https://cgit.kde.org/konsole.git/patch/?id=b392dd49"
+ccbug-390736.patch::"https://cgit.kde.org/konsole.git/patch/?id=b85c469ef"
+kdebug-355106.patch::"https://cgit.kde.org/konsole.git/patch/?id=17c77a87"
+kdebug-328287.patch::"https://cgit.kde.org/konsole.git/patch/?id=7934bcff"
+kdebug-386264.patch::"https://cgit.kde.org/konsole.git/patch/?id=9db70622"
+cgit-2e86be0.patch::"https://cgit.kde.org/konsole.git/patch/?id=2e86be0"
+cgit-881eb74.patch::"https://cgit.kde.org/konsole.git/patch/?id=881eb74"
+kdebug-369481.patch::"https://cgit.kde.org/konsole.git/patch/?id=0d95c7f"
+cgit-14589ca.patch::"https://cgit.kde.org/konsole.git/patch/?id=14589ca"
+cgit-bed548e.patch::"https://cgit.kde.org/konsole.git/patch/?id=bed548e"
+cgit-2ffcca1.patch::"https://cgit.kde.org/konsole.git/patch/?id=2ffcca1"
+)
+sha256sums=('fa0997c14a96252177e4808636ec43509eadb1482d54bb8a86b85810283f6cbc'
+            'SKIP'
+            'dfbc53016665dd9681addc5c110952c2430de5a92f2bf9bfd1c893f3b3720158'
+            '7b3402aace31e30b55a9dc6711f711d3117ad166b1ec4941ffd21f2ce9887d23'
+            '91ebbea3d84b3b3cd63bfc09b0fdab4acd90c7cb65fb48f1d26cded088d7d066'
+            '3aa977bb8634a5864176c9579b1b06a9852306ae6515e30d04e5afdff4e8de43'
+            '0cbc40b1c80af61193c38d02d92f046c1fe9eb21e045c643b6ac042f3f76cebb'
+            '31cd4dfb497bff8815e6f8939496254705bd75d1f70c2a9f8a25c5fb5cc92646'
+            '1745a48e45ba432d046fa5d469b4a41ea84b9027f32349ecd60d6257f2f1738a'
+            'b214ec7141694e32db4481102b4b723e4ccbe56381e65b37caedb0098506ab8e'
+            '26dead0abe10e0213abda029f1630a815a7fb1fc44617239660ef943e66206b1'
+            '5c1e42dbef8b60ee0e95229162507903b877b438c482e094a312e4cb265fb26a'
+            'a5ad35f2f57faee19c9401c0dd2f63a1fe7ac1f1ea902ecbda8ac3cad345ca6e'
+            'e048cdfd9fb5cccbbe90108a6330326cc1dfe1a1264916ddacca88b13c8de86b'
+            '195105842e16188c671e0012e6f95a248f66484eb0381d3f0a26ba0669d78084'
+            'a68bea75ae92ade930dbd9d32b51617443782ab15ee84b5ab7fd7c1d5457b0c7'
+            '56ebc46d5d7fbc78a4de813199232631093ff48156222709611cfbc27d21cef2'
+            'ee2217c8f4a49fc8c0f0f249daa601a3b05f6d7e2f0f7c26c0071bd975bf7358'
+            'b6cb7b6d072396d44de0f097a27ae1546602730505c869f1d922c54d8df5f66a'
+            '3f9f5f0c0d3df09432b5ccf80496c07069f9d78fbaf262d69ed6cfdc9a158fe6'
+            'af52aa81411395f7aec9621ff512d69d5cd9faad4ab9bf1f238f42fad8dd007d')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+
+prepare() {
+  mkdir -p build
+
+  cd $pkgname-$pkgver
+  
+  
+  msg "kdebug 338997 patch"
+    patch -p1 -i ../kdebug-338997.patch # See: https://bugs.kde.org/show_bug.cgi?id=338997
+
+  msg "kdebug 384620 patch"
+    patch -p1 -i ../kdebug-384620.patch # See: https://bugs.kde.org/show_bug.cgi?id=384620
+  
+  msg "kdebug 386762 patch"
+    patch -p1 -i ../kdebug-386762.patch # See: https://bugs.kde.org/show_bug.cgi?id=386762 fixed in 18.04
+
+  msg "kdebug 343071 patch"
+    patch -p1 -i ../kdebug-343071.patch # See: https://bugs.kde.org/show_bug.cgi?id=343071
+  
+  msg "cgit 2e86be0 patch"
+    patch -p1 -i ../cgit-2e86be0.patch # See https://phabricator.kde.org/D8381 and https://phabricator.kde.org/D8417
+  
+  msg "kdebug 389163 patch"
+    patch -p1 -i ../kdebug-389163.patch # See: https://bugs.kde.org/show_bug.cgi?id=389163
+  
+  msg "kdebug 340281 patch"
+    patch -p1 -i ../kdebug-340281.patch # See: https://bugs.kde.org/show_bug.cgi?id=340281
+
+  msg "kdebug 369481 patch"
+    patch -p1 -i ../kdebug-369481.patch # See https://bugs.kde.org/show_bug.cgi?id=369481 fixed in 18.04
+  
+  msg "cgit 881eb74 patch"
+    patch -p1 -i ../cgit-881eb74.patch # See https://cgit.kde.org/konsole.git/patch/?id=881eb74
+  
+  msg "cgit 14589ca patch"
+    patch -p1 -i ../cgit-14589ca.patch # See https://cgit.kde.org/konsole.git/patch/?id=14589ca
+  
+  msg "kdebug 387397 patch"
+    patch -p1 -i ../kdebug-387397.patch # See: https://bugs.kde.org/show.bug.cgi?id=387397 fixed in 18.04
+  
+  msg "kdebug 353382 patch"
+    patch -p1 -i ../kdebug-353382.patch # See: https://bugs.kde.org/show_bug.cgi?id=353382
+  
+  msg "kdebug 372348 patch"
+    patch -p1 -i ../kdebug-372348.patch # See: https://bugs.kde.org/show_bug.cgi?id=372348
+  
+  msg "CCBUG 390736 patch"
+    patch -p1 -i ../ccbug-390736.patch
+  
+  msg "cgit 2ffcca1 patch"
+    patch -p1 -i ../cgit-2ffcca1.patch # See: https://cgit.kde.org/konsole.git/patch/?id=2ffcca1
+  
+  msg "cgit bed548e patch"
+    patch -p1 -i ../cgit-bed548e.patch # See: https://cgit.kde.org/konsole.git/patch/?id=bed548e
+  
+  msg "kdebug-355106 patch" # See: https://bugs.kde.org/show_bug.cgi?id=355106 Fixed in 18.04.0
+    patch -p1 -i ../kdebug-355106.patch
+  
+  msg "kdebug 328287 patch" # See: https://bugs.kde.org/show_bug.cgi?id=328287 Fixed in 18.04.0
+    patch -p1 -i ../kdebug-328287.patch
+  
+  msg "kdebug 386264 patch" # See: https://bugs.kde.org/show_bug.cgi?id-386264 Fixed in 18.04.0
+    patch -p1 -i ../kdebug-386264.patch   
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
