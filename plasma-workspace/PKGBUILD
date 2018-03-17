@@ -50,7 +50,7 @@ validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
 
 prepare() {
   mkdir -p build
-  
+
   cd $pkgname-$pkgver
   msg "Add CCBUG 358231 & CCBUG 342056 patch" # See: https://cgit.kde.org/plasma-workspace.git/commit/?id=8227e4e2b7f034166cbf5efb01e4e715028b4606
   patch -p1 -i ../ccbug-358231-342056.patch
@@ -71,6 +71,7 @@ prepare() {
   msg "Add cgit-f2feef0 patch" # See: https://cgit.kde.org/plasma-workspace.git/commit/?id=f2feef047ab21a6163988a8c0ed64728148f7ccd
   patch -p1 -i ../cgit-f2feef0.patch
   msg "Add cgit-d9c2f4e patch" # See: https://cgit.kde.org/plasma-workspace.git/commit/?id=d9c2f4ecb9fb773821152cf15d66d5133ef38d1c
+  patch -p1 -i ../cgit-d9c2f4e.patch
 }
 
 build() {
