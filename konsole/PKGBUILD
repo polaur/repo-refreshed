@@ -60,7 +60,7 @@ sha256sums=('fa0997c14a96252177e4808636ec43509eadb1482d54bb8a86b85810283f6cbc'
             'b6cb7b6d072396d44de0f097a27ae1546602730505c869f1d922c54d8df5f66a'
             '3f9f5f0c0d3df09432b5ccf80496c07069f9d78fbaf262d69ed6cfdc9a158fe6'
             'af52aa81411395f7aec9621ff512d69d5cd9faad4ab9bf1f238f42fad8dd007d'
-            '0ef7aafaebbee42387a207fcacb711da61644f84285cfb160002679116996c7d')
+            'aeac1cbe4e889e26fe649b90e919c6af5a7137a72621c6c3ebfb9a4f473f2b5a')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
@@ -126,6 +126,7 @@ prepare() {
   
   msg "kdebug 386264 patch" # See: https://bugs.kde.org/show_bug.cgi?id-386264 Fixed in 18.04.0
     patch -p1 -i ../kdebug-386264.patch 
+
   msg "scrollbars patch" # See: https://phabricator.kde.org/D11184
     patch -p1 -i ../cgit-2a71f06.patch
 }
