@@ -1,0 +1,128 @@
+diff --git a/effects/zoom/zoom.cpp b/effects/zoom/zoom.cpp
+--- a/effects/zoom/zoom.cpp
++++ b/effects/zoom/zoom.cpp
+@@ -82,33 +82,33 @@
+     a = new QAction(this);
+     a->setObjectName(QStringLiteral("MoveZoomLeft"));
+     a->setText(i18n("Move Zoomed Area to Left"));
+-    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Left);
+-    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Left);
+-    effects->registerGlobalShortcut(Qt::META + Qt::Key_Left, a);
++    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Left);
++    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Left);
++    effects->registerGlobalShortcut(Qt::META + Qt::CTRL + Qt::Key_Left, a);
+     connect(a, SIGNAL(triggered(bool)), this, SLOT(moveZoomLeft()));
+ 
+     a = new QAction(this);
+     a->setObjectName(QStringLiteral("MoveZoomRight"));
+     a->setText(i18n("Move Zoomed Area to Right"));
+-    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Right);
+-    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Right);
+-    effects->registerGlobalShortcut(Qt::META + Qt::Key_Right, a);
++    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Right);
++    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Right);
++    effects->registerGlobalShortcut(Qt::META + Qt::CTRL + Qt::Key_Right, a);
+     connect(a, SIGNAL(triggered(bool)), this, SLOT(moveZoomRight()));
+ 
+     a = new QAction(this);
+     a->setObjectName(QStringLiteral("MoveZoomUp"));
+     a->setText(i18n("Move Zoomed Area Upwards"));
+-    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Up);
+-    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Up);
+-    effects->registerGlobalShortcut(Qt::META + Qt::Key_Up, a);
++    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Up);
++    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Up);
++    effects->registerGlobalShortcut(Qt::META + Qt::CTRL + Qt::Key_Up, a);
+     connect(a, SIGNAL(triggered(bool)), this, SLOT(moveZoomUp()));
+ 
+     a = new QAction(this);
+     a->setObjectName(QStringLiteral("MoveZoomDown"));
+     a->setText(i18n("Move Zoomed Area Downwards"));
+-    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Down);
+-    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Down);
+-    effects->registerGlobalShortcut(Qt::META + Qt::Key_Down, a);
++    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Down);
++    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Down);
++    effects->registerGlobalShortcut(Qt::META + Qt::CTRL + Qt::Key_Down, a);
+     connect(a, SIGNAL(triggered(bool)), this, SLOT(moveZoomDown()));
+ 
+     // TODO: these two actions don't belong into the effect. They need to be moved into KWin core
+diff --git a/effects/zoom/zoom_config.cpp b/effects/zoom/zoom_config.cpp
+--- a/effects/zoom/zoom_config.cpp
++++ b/effects/zoom/zoom_config.cpp
+@@ -86,29 +86,29 @@
+     a->setIcon(QIcon::fromTheme(QStringLiteral("go-previous")));
+     a->setText(i18n("Move Left"));
+     a->setProperty("isConfigurationAction", true);
+-    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Left);
+-    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Left);
++    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Left);
++    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Left);
+ 
+     a = actionCollection->addAction(QStringLiteral("MoveZoomRight"));
+     a->setIcon(QIcon::fromTheme(QStringLiteral("go-next")));
+     a->setText(i18n("Move Right"));
+     a->setProperty("isConfigurationAction", true);
+-    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Right);
+-    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Right);
++    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Right);
++    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Right);
+ 
+     a = actionCollection->addAction(QStringLiteral("MoveZoomUp"));
+     a->setIcon(QIcon::fromTheme(QStringLiteral("go-up")));
+     a->setText(i18n("Move Up"));
+     a->setProperty("isConfigurationAction", true);
+-    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Up);
+-    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Up);
++    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Up);
++    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Up);
+ 
+     a = actionCollection->addAction(QStringLiteral("MoveZoomDown"));
+     a->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
+     a->setText(i18n("Move Down"));
+     a->setProperty("isConfigurationAction", true);
+-    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Down);
+-    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::Key_Down);
++    KGlobalAccel::self()->setDefaultShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Down);
++    KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << Qt::META + Qt::CTRL + Qt::Key_Down);
+ 
+     a = actionCollection->addAction(QStringLiteral("MoveMouseToFocus"));
+     a->setIcon(QIcon::fromTheme(QStringLiteral("view-restore")));
+diff --git a/kwinbindings.cpp b/kwinbindings.cpp
+--- a/kwinbindings.cpp
++++ b/kwinbindings.cpp
+@@ -55,13 +55,13 @@
+ DEF2("Window Close", I18N_NOOP("Close Window"),
+      Qt::ALT + Qt::Key_F4, slotWindowClose);
+ DEF2("Window Maximize", I18N_NOOP("Maximize Window"),
+-     0, slotWindowMaximize);
++     Qt::META + Qt::Key_PageUp, slotWindowMaximize);
+ DEF2("Window Maximize Vertical", I18N_NOOP("Maximize Window Vertically"),
+      0, slotWindowMaximizeVertical);
+ DEF2("Window Maximize Horizontal", I18N_NOOP("Maximize Window Horizontally"),
+      0, slotWindowMaximizeHorizontal);
+ DEF2("Window Minimize", I18N_NOOP("Minimize Window"),
+-     0, slotWindowMinimize);
++     Qt::META + Qt::Key_PageDown, slotWindowMinimize);
+ DEF2("Window Shade", I18N_NOOP("Shade Window"),
+      0, slotWindowShade);
+ DEF2("Window Move", I18N_NOOP("Move Window"),
+@@ -103,13 +103,13 @@
+ DEF2("Window Shrink Vertical", I18N_NOOP("Pack Shrink Window Vertically"),
+      0, slotWindowShrinkVertical);
+ DEF4("Window Quick Tile Left", I18N_NOOP("Quick Tile Window to the Left"),
+-     0, std::bind(&Workspace::quickTileWindow, this, QuickTileFlag::Left));
++     Qt::META + Qt::Key_Left, std::bind(&Workspace::quickTileWindow, this, QuickTileFlag::Left));
+ DEF4("Window Quick Tile Right", I18N_NOOP("Quick Tile Window to the Right"),
+-     0, std::bind(&Workspace::quickTileWindow, this, QuickTileFlag::Right));
++     Qt::META + Qt::Key_Right, std::bind(&Workspace::quickTileWindow, this, QuickTileFlag::Right));
+ DEF4("Window Quick Tile Top", I18N_NOOP("Quick Tile Window to the Top"),
+-     0, std::bind(&Workspace::quickTileWindow, this, QuickTileFlag::Top));
++     Qt::META + Qt::Key_Up, std::bind(&Workspace::quickTileWindow, this, QuickTileFlag::Top));
+ DEF4("Window Quick Tile Bottom", I18N_NOOP("Quick Tile Window to the Bottom"),
+-     0, std::bind(&Workspace::quickTileWindow, this, QuickTileFlag::Bottom));
++     Qt::META + Qt::Key_Down, std::bind(&Workspace::quickTileWindow, this, QuickTileFlag::Bottom));
+ DEF4("Window Quick Tile Top Left", I18N_NOOP("Quick Tile Window to the Top Left"),
+      0, std::bind(&Workspace::quickTileWindow, this, QuickTileFlag::Top | QuickTileFlag::Left));
+ DEF4("Window Quick Tile Bottom Left", I18N_NOOP("Quick Tile Window to the Bottom Left"),
+
