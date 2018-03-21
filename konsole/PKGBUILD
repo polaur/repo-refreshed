@@ -131,6 +131,7 @@ prepare() {
 
   msg "scrollbars patch" # See: https://phabricator.kde.org/D11184
     patch -p1 -i ../cgit-2a71f06.patch
+  
   msg "blur patch" # See: https://phabricator.kde.org/D10015
     patch -p1 -i ../blur.patch
 }
