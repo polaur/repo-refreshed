@@ -1,0 +1,315 @@
+ 
+From c63525fcdc52b3c3d6a82364bb21e8b41bd60c4d Mon Sep 17 00:00:00 2001
+From: Kurt Hindenburg <kurt.hindenburg@gmail.com>
+Date: Thu, 1 Feb 2018 08:52:05 -0500
+Subject: Add option to ColorScheme to blur transparent background
+
+Note that this does not affect KonsolePart; it is up to the app using
+it to enable transparency (see src/tests/demo_konsolepart).
+
+Patch by anemeth
+
+FEATURE: 198175
+Differential Revision: https://phabricator.kde.org/D10015
+---
+ src/ColorScheme.cpp       | 14 ++++++++++++++
+ src/ColorScheme.h         | 14 ++++++++++++++
+ src/ColorSchemeEditor.cpp | 12 ++++++++++++
+ src/ColorSchemeEditor.h   |  1 +
+ src/ColorSchemeEditor.ui  |  7 +++++++
+ src/MainWindow.cpp        | 16 ++++++++++++++++
+ src/MainWindow.h          |  1 +
+ src/SessionController.h   |  6 +++---
+ src/ViewManager.cpp       |  7 +++++++
+ src/ViewManager.h         |  7 +++++++
+ 10 files changed, 82 insertions(+), 3 deletions(-)
+
+diff --git a/src/ColorScheme.cpp b/src/ColorScheme.cpp
+index 15f0b1c..5cef6ce 100644
+--- a/src/ColorScheme.cpp
++++ b/src/ColorScheme.cpp
+@@ -164,6 +164,7 @@ ColorScheme::ColorScheme() :
+     _table(nullptr),
+     _randomTable(nullptr),
+     _opacity(1.0),
++    _blur(false),
+     _wallpaper(nullptr)
+ {
+     setWallpaper(QString());
+@@ -175,6 +176,7 @@ ColorScheme::ColorScheme(const ColorScheme &other) :
+     _table(nullptr),
+     _randomTable(nullptr),
+     _opacity(other._opacity),
++    _blur(other._blur),
+     _wallpaper(other._wallpaper)
+ {
+     setName(other.name());
+@@ -358,6 +360,16 @@ qreal ColorScheme::opacity() const
+     return _opacity;
+ }
+ 
++void ColorScheme::setBlur(bool blur)
++{
++    _blur = blur;
++}
++
++bool ColorScheme::blur() const
++{
++    return _blur;
++}
++
+ void ColorScheme::read(const KConfig &config)
+ {
+     KConfigGroup configGroup = config.group("General");
+@@ -366,6 +378,7 @@ void ColorScheme::read(const KConfig &config)
+ 
+     _description = i18n(schemeDescription.toUtf8().constData());
+     _opacity = configGroup.readEntry("Opacity", 1.0);
++    _blur = configGroup.readEntry("Blur", false);
+     setWallpaper(configGroup.readEntry("Wallpaper", QString()));
+ 
+     for (int i = 0; i < TABLE_COLORS; i++) {
+@@ -402,6 +415,7 @@ void ColorScheme::write(KConfig &config) const
+ 
+     configGroup.writeEntry("Description", _description);
+     configGroup.writeEntry("Opacity", _opacity);
++    configGroup.writeEntry("Blur", _blur);
+     configGroup.writeEntry("Wallpaper", _wallpaper->path());
+ 
+     for (int i = 0; i < TABLE_COLORS; i++) {
+diff --git a/src/ColorScheme.h b/src/ColorScheme.h
+index d76301a..43ad153 100644
+--- a/src/ColorScheme.h
++++ b/src/ColorScheme.h
+@@ -153,6 +153,17 @@ public:
+      */
+     qreal opacity() const;
+ 
++    /**
++     * Enables blur behind the transparent window
++     *
++     * Defaults to false.
++     */
++    void setBlur(bool blur);
++    /**
++     * Returns whether blur is enabled for this color scheme, see setBlur()
++     */
++    bool blur() const;
++
+     void setWallpaper(const QString &path);
+ 
+     ColorSchemeWallpaper::Ptr wallpaper() const;
+@@ -222,6 +233,9 @@ private:
+ 
+     qreal _opacity;
+ 
++    // enables blur behind the terminal window
++    bool _blur;
++
+     ColorSchemeWallpaper::Ptr _wallpaper;
+ 
+     static const quint16 MAX_HUE = 340;
+diff --git a/src/ColorSchemeEditor.cpp b/src/ColorSchemeEditor.cpp
+index 7967187..8ca3a51 100644
+--- a/src/ColorSchemeEditor.cpp
++++ b/src/ColorSchemeEditor.cpp
+@@ -93,6 +93,10 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget *aParent) :
+     connect(_ui->transparencySlider, &QSlider::valueChanged, this,
+             &Konsole::ColorSchemeEditor::setTransparencyPercentLabel);
+ 
++    // blur behind window
++    connect(_ui->blurCheckBox, &QCheckBox::toggled, this,
++            &Konsole::ColorSchemeEditor::setBlur);
++
+     // randomized background
+     connect(_ui->randomizedBackgroundCheck, &QCheckBox::toggled, this,
+             &Konsole::ColorSchemeEditor::setRandomizedBackgroundColor);
+@@ -248,6 +252,11 @@ void ColorSchemeEditor::setTransparencyPercentLabel(int percent)
+     _colors->setOpacity(opacity);
+ }
+ 
++void ColorSchemeEditor::setBlur(bool blur)
++{
++    _colors->setBlur(blur);
++}
++
+ void ColorSchemeEditor::setRandomizedBackgroundColor(bool randomize)
+ {
+     _colors->setRandomizedBackgroundColor(randomize);
+@@ -279,6 +288,9 @@ void ColorSchemeEditor::setup(const ColorScheme *scheme, bool isNewScheme)
+     _ui->transparencySlider->setValue(transparencyPercent);
+     setTransparencyPercentLabel(transparencyPercent);
+ 
++    // blur behind window checkbox
++    _ui->blurCheckBox->setChecked(scheme->blur());
++
+     // randomized background color checkbox
+     _ui->randomizedBackgroundCheck->setChecked(scheme->randomizedBackgroundColor());
+ 
+diff --git a/src/ColorSchemeEditor.h b/src/ColorSchemeEditor.h
+index 20582dc..500794f 100644
+--- a/src/ColorSchemeEditor.h
++++ b/src/ColorSchemeEditor.h
+@@ -77,6 +77,7 @@ public Q_SLOTS:
+ 
+ private Q_SLOTS:
+     void setTransparencyPercentLabel(int percent);
++    void setBlur(bool blur);
+     void setRandomizedBackgroundColor(bool randomized);
+     void editColorItem(QTableWidgetItem *item);
+     void wallpaperPathChanged(const QString &path);
+diff --git a/src/ColorSchemeEditor.ui b/src/ColorSchemeEditor.ui
+index 45f9446..440a6b8 100644
+--- a/src/ColorSchemeEditor.ui
++++ b/src/ColorSchemeEditor.ui
+@@ -42,6 +42,13 @@
+     </widget>
+    </item>
+    <item>
++    <widget class="QCheckBox" name="blurCheckBox">
++     <property name="text">
++      <string>Blur background</string>
++     </property>
++    </widget>
++   </item>
++   <item>
+     <layout class="QHBoxLayout">
+      <item>
+       <widget class="QLabel" name="transparencyLabel">
+diff --git a/src/MainWindow.cpp b/src/MainWindow.cpp
+index ce9fa79..e78858d 100644
+--- a/src/MainWindow.cpp
++++ b/src/MainWindow.cpp
+@@ -31,6 +31,7 @@
+ #include <KLocalizedString>
+ #include <KToggleAction>
+ #include <KToggleFullScreenAction>
++#include <KWindowEffects>
+ 
+ #include <QMenu>
+ #include <QMenuBar>
+@@ -98,6 +99,8 @@ MainWindow::MainWindow() :
+             &Konsole::MainWindow::disconnectController);
+     connect(_viewManager, &Konsole::ViewManager::viewPropertiesChanged,
+             bookmarkHandler(), &Konsole::BookmarkHandler::setViews);
++    connect(_viewManager, &Konsole::ViewManager::blurSettingChanged,
++            this, &Konsole::MainWindow::setBlur);
+ 
+     connect(_viewManager, &Konsole::ViewManager::updateWindowIcon, this,
+             &Konsole::MainWindow::updateWindowIcon);
+@@ -240,6 +243,8 @@ void MainWindow::activeViewChanged(SessionController *controller)
+     Q_ASSERT(controller);
+     _pluggedController = controller;
+ 
++    setBlur(ViewManager::profileHasBlurEnabled(SessionManager::instance()->sessionProfile(_pluggedController->session())));
++
+     // listen for title changes from the current session
+     connect(controller, &Konsole::SessionController::titleChanged, this,
+             &Konsole::MainWindow::activeViewTitleChanged);
+@@ -876,6 +881,17 @@ void MainWindow::configureNotifications()
+     KNotifyConfigWidget::configure(this);
+ }
+ 
++void MainWindow::setBlur(bool blur)
++{
++    if (_pluggedController == nullptr) {
++        return;
++    }
++
++    if (!_pluggedController->isKonsolePart()) {
++        KWindowEffects::enableBlurBehind(winId(), blur);
++    }
++}
++
+ void MainWindow::setMenuBarInitialVisibility(bool visible)
+ {
+     _menuBarInitialVisibility = visible;
+diff --git a/src/MainWindow.h b/src/MainWindow.h
+index 6908ccc..a912d56 100644
+--- a/src/MainWindow.h
++++ b/src/MainWindow.h
+@@ -158,6 +158,7 @@ private Q_SLOTS:
+ 
+     void profileListChanged(const QList<QAction *> &sessionActions);
+     void configureNotifications();
++    void setBlur(bool blur);
+ 
+     void updateWindowIcon();
+     void updateWindowCaption();
+diff --git a/src/SessionController.h b/src/SessionController.h
+index 81fef60..638bff1 100644
+--- a/src/SessionController.h
++++ b/src/SessionController.h
+@@ -173,6 +173,9 @@ public:
+         return _allControllers;
+     }
+ 
++    /* Returns true if called within a KPart; false if called within Konsole. */
++    bool isKonsolePart() const;
++
+ Q_SIGNALS:
+     /**
+      * Emitted when the view associated with the controller is focused.
+@@ -309,9 +312,6 @@ private:
+     void setFindNextPrevEnabled(bool enabled);
+     void listenForScreenWindowUpdates();
+ 
+-    /* Returns true if called within a KPart; false if called within Konsole. */
+-    bool isKonsolePart() const;
+-
+ private:
+     void updateSessionIcon();
+ 
+diff --git a/src/ViewManager.cpp b/src/ViewManager.cpp
+index a1a9455..f3d7eb3 100644
+--- a/src/ViewManager.cpp
++++ b/src/ViewManager.cpp
+@@ -860,6 +860,11 @@ const ColorScheme *ViewManager::colorSchemeForProfile(const Profile::Ptr profile
+     return colorScheme;
+ }
+ 
++bool ViewManager::profileHasBlurEnabled(const Profile::Ptr profile)
++{
++    return colorSchemeForProfile(profile)->blur();
++}
++
+ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr profile)
+ {
+     Q_ASSERT(profile);
+@@ -874,6 +879,8 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr p
+     view->setOpacity(colorScheme->opacity());
+     view->setWallpaper(colorScheme->wallpaper());
+ 
++    emit blurSettingChanged(colorScheme->blur());
++
+     // load font
+     view->setAntialias(profile->antiAliasFonts());
+     view->setBoldIntense(profile->boldIntense());
+diff --git a/src/ViewManager.h b/src/ViewManager.h
+index 62d0ee4..2e612d5 100644
+--- a/src/ViewManager.h
++++ b/src/ViewManager.h
+@@ -179,6 +179,11 @@ public:
+         return _sessionMap.values();
+     }
+ 
++    /**
++     * Returns whether the @p profile has the blur setting enabled
++     */
++    static bool profileHasBlurEnabled(const Profile::Ptr profile);
++
+ Q_SIGNALS:
+     /** Emitted when the last view is removed from the view manager */
+     void empty();
+@@ -222,6 +227,8 @@ Q_SIGNALS:
+     void setMenuBarVisibleRequest(bool);
+     void updateWindowIcon();
+ 
++    void blurSettingChanged(bool);
++
+     /** Requests creation of a new view with the default profile. */
+     void newViewRequest();
+     /** Requests creation of a new view, with the selected profile. */
+-- 
+cgit v0.11.2
+
