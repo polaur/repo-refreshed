@@ -7,7 +7,7 @@
 
 pkgname=kwin
 pkgver=5.12.3
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -23,6 +23,7 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
         D10181.diff
         D10281.diff
         D9638.diff
+        D11377.diff
         )
 sha256sums=('e1682fc3c7cb6bfcfdeae0968c4a6676e041fdaff83231e3cbfd85b92d8e5877'
             'SKIP'
@@ -31,7 +32,8 @@ sha256sums=('e1682fc3c7cb6bfcfdeae0968c4a6676e041fdaff83231e3cbfd85b92d8e5877'
             '1eb9e53f847f63b4ac3935ca525d3c18ba0d28540e1026cdcc0e48755c80f1ac'
             '327670f2895e0711856a6069ac5e4a751a9b8a09c5f37a09117ba2cdfbb0f013'
             '6fa338210de655c47078423c69b2bed7456960fea4efa488b99e6cd39f5089b4'
-            '95feb31a5942bbeb585fbb4c923b4aa2786dd39adfa67474a2c75af4de2603c0')
+            '95feb31a5942bbeb585fbb4c923b4aa2786dd39adfa67474a2c75af4de2603c0'
+            '3909ee89975e75df2d887f32f9488c5b702055d3769d8c06eda58795214155ea')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '348C8651206633FD983A8FC4DEACEA00075E1D76'  # KDE Neon
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -43,17 +45,19 @@ prepare() {
   cd $pkgname-$pkgver
 
   msg "Phabricator D9848 ("new blur") patch"
-     patch -p1 -i ../D9848.diff  # See https://phabricator.kde.org/D9848
+     patch -p1 -i ../D9848.diff  # See: https://phabricator.kde.org/D9848
   msg "Phabricator D10100 ("permissions fix") patch"
-     patch -p1 -i ../D10100.diff # See https://phabricator.kde.org/D10100
+     patch -p1 -i ../D10100.diff # See: https://phabricator.kde.org/D10100
   msg "Phabricator D10180 ("higher default blur") patch"
-     patch -p1 -i ../D10180.diff # See https://phabricator.kde.org/D10180
+     patch -p1 -i ../D10180.diff # See: https://phabricator.kde.org/D10180
   msg "Phabricator D10181 ("removed fastblur")  patch"
-     patch -p1 -i ../D10181.diff # See https://phabricator.kde.org/D10181
+     patch -p1 -i ../D10181.diff # See: https://phabricator.kde.org/D10181
   msg "Phabricator D10281 ("noise blur")  patch"
-     patch -p1 -i ../D10281.diff # See https://phabricator.kde.org/D10281
+     patch -p1 -i ../D10281.diff # See: https://phabricator.kde.org/D10281
   msg "Phabricator D9638 ("new slide effect") patch"
-     patch -p1 -i ../D9638.diff # See https://phabricator.kde.org/D9638
+     patch -p1 -i ../D9638.diff # See: https://phabricator.kde.org/D9638
+  msg "Phabricator D11377 ("better default shortcuts") patch"
+    patch -p1 -i ../D11377.diff # See: https://phabricator.kde.org/D11377
   }
 
 build() {
