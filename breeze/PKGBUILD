@@ -9,7 +9,7 @@
 pkgbase=breeze
 pkgname=(breeze breeze-kde4)
 pkgver=5.12.3
-pkgrel=1.1
+pkgrel=1
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
 license=(LGPL)
