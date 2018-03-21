@@ -7,7 +7,7 @@
 
 pkgname=kio
 pkgver=5.44.0
-pkgrel=1.1
+pkgrel=1.3
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -19,11 +19,16 @@ optdepends=('kio-extras: extra protocols support (sftp, fish and more)' 'kdoctoo
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-387387.patch::"https://cgit.kde.org/kio.git/patch/?id=032709c17f004d2fca50ff4bc485785519cf58ad"
-D11107.patch::"https://cgit.kde.org/kio.git/patch/?id=a9625a3be6b18d92ce92b277c279160fdd625c0e")
+D11107.patch::"https://cgit.kde.org/kio.git/patch/?id=a9625a3be6b18d92ce92b277c279160fdd625c0e"
+D11088.patch::"https://cgit.kde.org/kio.git/patch/?id=cbedf15311aa895984000769d973d69ecb0f93fc"
+kdebug-392100.patch::"https://cgit.kde.org/kio.git/patch/?id=7d6e4965dfcd7fc12e8cba7b1506dde22de5d2dd"
+)
 sha256sums=('7a8fc6f0af101c4a16270d328806fbf96ee8855e756b033d6a08ce744e7071b7'
             'SKIP'
             '08e466ed4d721b9baa0575eef904c41698a62eabadad139897c0009228942f27'
-            '0d0f4f730785dcb222ea9fa8a6c930e0765397f528141cef0f99dc6fd8e8c227')
+            '0d0f4f730785dcb222ea9fa8a6c930e0765397f528141cef0f99dc6fd8e8c227'
+            '4544bd2da9e539cd1092f235f55bcff612b86123a0b51e32afcb1fdbe5ead767'
+            '3d5c1b7c765be40e79d42fbdb0194ca9678a818f0bd28136d9e24bff3b177a73')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -34,6 +39,10 @@ prepare() {
   patch -p1 -i ../kdebug-387387.patch
   msg "Add D11107 patch" # See: https://phabricator.kde.org/D11107
   patch -p1 -i ../D11107.patch
+  msg "Add D11088 patch" # See: https://phabricator.kde.org/D11088
+  patch -p1 -i ../D11088.patch
+  msg "Add kdebug 392100" # See: https://bugs.kde.org/show_bug.cgi?id=392100
+  patch -p1 -i ../kdebug-392100.patch
 }
 
 build() {
