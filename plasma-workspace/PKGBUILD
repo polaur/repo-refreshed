@@ -81,6 +81,7 @@ prepare() {
   msg "Add kdebug-380347 patch" # See: https://bugs.kde.org/show_bug.cgi?id=380347
   patch -p1 -i ../kdebug-380347.patch
   msg "Add ccbug-391868 patch" # See: 
+  patch -p1 -i ../ccbug-391868.patch
   msg "Add kdebug-391180 patch" # See: https://bugs.kde.org/show_bug.cgi?391180 Fixed in 5.12.4 
   patch -p1 -i ../kdebug-391180.patch
 }
