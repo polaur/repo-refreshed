@@ -1,0 +1,46 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for version with (mainly bugfix) patches from upcoming releases
+# made on the original work by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+
+pkgname=akregator
+pkgver=17.12.3
+pkgrel=1.1
+pkgdesc="A Feed Reader by KDE"
+arch=(x86_64)
+url="https://community.kde.org/KDE_PIM"
+license=(GPL2)
+depends=(kontactinterface messagelib knotifyconfig ktexteditor kde-syndication)
+makedepends=(extra-cmake-modules boost kdoctools python)
+optdepends=('kdepim-addons: additional plugins')
+groups=(kde-applications kdepim)
+source=("https://download.kde.org/stable/applications/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-382587.patch::"https://cgit.kde.org/akregator.git/patch/?id=84b4da183fb85c752cccf10a7b0378477ae5be44")
+sha256sums=('57b722c072e7ecd39d9e4854c461be97dd78a6eb65318d2f4c62f25ec0936200'
+            'SKIP'
+            'dad9e31eaa9741d83fa3b38f2832d40ee7efda51dbe0b2ecbc457abdf6b7c68b')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Add KDEBUG 382587 patch" # See: https://bugs.kde.org/show_bug.cgi?id=382587
+  patch -p1 -i ../kdebug-382587.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
