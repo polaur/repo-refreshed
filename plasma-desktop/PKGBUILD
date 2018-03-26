@@ -7,7 +7,7 @@
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
 pkgver=5.12.3
-pkgrel=1.7
+pkgrel=1.8
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -22,6 +22,7 @@ kdebug-379432.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=8208d9b3
 kdebug-387444.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=db311474f0486d5cfcef069663e53be37d764cf2"
 kdebug-392264.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=b49b73dee7d1e555e9c82f32098df822cde7e869"
 kdebug-379888.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=2683d4c6e60a9b8cca32f9b342d9010f4cc46086"
+kdebug-392318.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=5d719c1bb374914952eeedeb2b5a931881a9a1d0"
 )
 
 depends=(polkit-kde-agent libcanberra libxkbfile kmenuedit appstream-qt systemsettings ksysguard kpeople baloo 
@@ -38,7 +39,8 @@ sha256sums=('086b2ae9b8f55875a98cc617d77513d3360567d4e6cf76bc0ab61ec64e06e2d7'
             '5a26918940efc2526ef0f37e6dc321a4681f9ff025f1662da70cd99dac73319e'
             '4fae7448f43b085fe4b4094e1efddd0acdcf730ea9274d43b40a5d775d2323be'
             '311f2dd757c3887c81dc2cfd9baddb0c1edc37863d50059ccceae92bd9f550cc'
-            '50644bacc15c2ac7062a893df2497147b71055b72bacca3ac510385c64ab56dd')
+            '50644bacc15c2ac7062a893df2497147b71055b72bacca3ac510385c64ab56dd'
+            '9a7a47627c3a73da647fa52f11b075a6e49b3a263377bc866941f6dac2e44519')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '348C8651206633FD983A8FC4DEACEA00075E1D76'  # KDE Neon
               'D07BD8662C56CB291B316EB2F5675605C74E02CF') # David Edmundson
@@ -65,6 +67,8 @@ prepare() {
     patch -p1 -i ../kdebug-392264.patch
     msg "Add KDEBUG 379888 patch" # See: https://bugs.kde.org/show_bug.cgi?id=378688
     patch -p1 -i ../kdebug-379888.patch
+    msg "Add KDEBUG 392318 patch" # See: https://bugs.kde.org/show_bug.cgi?id=392318
+    patch -p1 -i ../kdebug-392318.patch
 	}
 
 build() {
