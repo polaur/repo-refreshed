@@ -7,7 +7,7 @@
 
 pkgname=kwin
 pkgver=5.12.3
-pkgrel=1.3
+pkgrel=1.4
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -27,6 +27,7 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
 	
 kdebug-378688.patch::"https://cgit.kde.org/kwin.git/patch/?id=e3f0b537b6b4684ef2ed013c61fdf6801f879db9"
 kdebug-392012.patch::"https://cgit.kde.org/kwin.git/patch/?id=c99d329125ac745d4c764c5262a8010e9b565fde"
+kdebug-391623.patch::"https://cgit.kde.org/kwin.git/patch/?id=99fec3d24597acaef16b3e2b11b24bf647789919"
         )
 sha256sums=('e1682fc3c7cb6bfcfdeae0968c4a6676e041fdaff83231e3cbfd85b92d8e5877'
             'SKIP'
@@ -38,7 +39,8 @@ sha256sums=('e1682fc3c7cb6bfcfdeae0968c4a6676e041fdaff83231e3cbfd85b92d8e5877'
             '95feb31a5942bbeb585fbb4c923b4aa2786dd39adfa67474a2c75af4de2603c0'
             '3909ee89975e75df2d887f32f9488c5b702055d3769d8c06eda58795214155ea'
             '2b2416a66cab2a73f800cee4194e09a0218d657494861b78a45fe838c08f90a6'
-            '709939abc7c9c0db1a9c4cd7822612f09cf211e7d10e6773d69dd3f74fe13bcd')
+            '709939abc7c9c0db1a9c4cd7822612f09cf211e7d10e6773d69dd3f74fe13bcd'
+            'e938b95f50e417a1af26adbfe5d65f9b240d42ac0acee3c516993a531e2cef91')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '348C8651206633FD983A8FC4DEACEA00075E1D76'  # KDE Neon
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -67,6 +69,8 @@ prepare() {
     patch -p1 -i ../kdebug-378688.patch
   msg "Add kdebug 392012 patch" # See: https://bugs.kde.org/show_bug.cgi?id=392012
     patch -p1 -i ../kdebug-392012.patch
+  msg "Add kdebug 391623 patch" # See: https://bugs.kde.org/show_bug.cgi?id=391623
+  patch -p1 -i ../kdebug-391623.patch
   }
 
 build() {
