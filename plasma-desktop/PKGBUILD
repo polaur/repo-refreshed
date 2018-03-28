@@ -6,23 +6,20 @@
 
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
-pkgver=5.12.3
-pkgrel=1.8
+pkgver=5.12.4
+pkgrel=1.1
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
 license=(LGPL)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-391432.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=3a763498b6a47d273f1d526a2974727af503053d"
-D10890.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=ca96f850efbf290a9c7252160eae12f0dd45b2cf"
-kdebug-386546.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=d6818eac6fbe495facf558b41cd570604bb7cbcb"
-D11327.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=06c837e274ed38de16ae86b41b31ce9e5300c4b0"
+
 kdebug-379432.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=8208d9b3b3b9ba903b09a5e173031296a5688d43"
 #kdebug-392050.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=8af970fd49f3ca33450cf3ccd81856694a0dc752"
 kdebug-387444.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=db311474f0486d5cfcef069663e53be37d764cf2"
-kdebug-392264.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=b49b73dee7d1e555e9c82f32098df822cde7e869"
 kdebug-379888.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=2683d4c6e60a9b8cca32f9b342d9010f4cc46086"
-kdebug-392318.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=5d719c1bb374914952eeedeb2b5a931881a9a1d0"
+ccbug-391485.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=d6bc5f35232a4f72a705bd68727c9ea0820b70ac"
+kdebug-390888.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=20bcc8f0501bb3cd368b03797c0bdea54de9f84b"
 )
 
 depends=(polkit-kde-agent libcanberra libxkbfile kmenuedit appstream-qt systemsettings ksysguard kpeople baloo 
@@ -30,17 +27,13 @@ qt5-graphicaleffects libibus)
 makedepends=(extra-cmake-modules kdoctools boost xf86-input-evdev xf86-input-synaptics xorg-server-devel
              libibus scim python kdesignerplugin)
 groups=(plasma)
-sha256sums=('086b2ae9b8f55875a98cc617d77513d3360567d4e6cf76bc0ab61ec64e06e2d7'
+sha256sums=('bec2bf03d3cc44e12a92cb16b40957425708ea58269eee6030d49ee696dde299'
             'SKIP'
-            '6979b9e5c1d7a0264004b7e2c9511994890d7e3012f5befabab1ebbe8c4aa0dd'
-            'b57383a43c8254c5e0ee996fe76903b129108254a01ae18432438f0b97c388ab'
-            '9ab1074459b6452d3c15b98ac020b91a1b79b96b3d0b50a14b60276fc19b213f'
-            'b07fc64f04182c106c866e3ceef0b50132327d9b2f24734b538670a10babb0a9'
             '5a26918940efc2526ef0f37e6dc321a4681f9ff025f1662da70cd99dac73319e'
             '4fae7448f43b085fe4b4094e1efddd0acdcf730ea9274d43b40a5d775d2323be'
-            '311f2dd757c3887c81dc2cfd9baddb0c1edc37863d50059ccceae92bd9f550cc'
             '50644bacc15c2ac7062a893df2497147b71055b72bacca3ac510385c64ab56dd'
-            '9a7a47627c3a73da647fa52f11b075a6e49b3a263377bc866941f6dac2e44519')
+            '16b55b80c261172395cf279abc9ab4d6cad187cd8d5e7bb62f2140202c74737f'
+            '33fdd8b809d27f275e1a6f1c743f23634c8af7758570af35d32c388fdc1578e7')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '348C8651206633FD983A8FC4DEACEA00075E1D76'  # KDE Neon
               'D07BD8662C56CB291B316EB2F5675605C74E02CF') # David Edmundson
@@ -49,26 +42,19 @@ prepare() {
     mkdir -p build
     
     cd $pkgname-$pkgver
-    msg "Add KDEBUG 391432 patch" # See: https://bugs.kde.org/show_bug.cgi?id=391432
-    patch -p1 -i ../kdebug-391432.patch
-    msg "Add don't skip certain recent documents in kicker and taskmanager aka D10890 patch" # See: Don't skip certain recent documents in kicker and taskmanager
-    patch -p1 -i ../D10890.patch
-    msg "Add KDEBUG 386546 patch" # See: https://bugs.kde.org/show_bug.cgi?id=386546
-    patch -p1 -i ../kdebug-386546.patch
-    msg "Add sync() after writing settings aka D11327 patch" # See: https://phabricator.kde.org/D11327
-    patch -p1 -i ../D11327.patch
     msg "Add KDEBUG 379432 patch" # See: https://bugs.kde.org/show_bug.cgi?id=379432
     patch -p1 -i ../kdebug-379432.patch
 #    msg "Add KDEBUG 392050 patch" # See: https://bugs.kde.org/show_bug.cgi?id=392050
 #    patch -p1 -i ../kdebug-392050.patch
     msg "Add KDEBUG 387444 patch" # See: https://bugs.kde.org/show_bug.cgi?id=387444
     patch -p1 -i ../kdebug-387444.patch
-    msg "Add KDEBUG 392264 patch" # See: https://bugs.kde.org/show_bug.cgi?id=392264
-    patch -p1 -i ../kdebug-392264.patch
     msg "Add KDEBUG 379888 patch" # See: https://bugs.kde.org/show_bug.cgi?id=378688
     patch -p1 -i ../kdebug-379888.patch
-    msg "Add KDEBUG 392318 patch" # See: https://bugs.kde.org/show_bug.cgi?id=392318
-    patch -p1 -i ../kdebug-392318.patch
+    
+    msg "Add CCBUG 391485 patch"
+    patch -p1 -i ../ccbug-391485.patch
+    msg "Add KDEBUG 390888 patch"
+    patch -p1 -i ../kdebug-390888.patch
 	}
 
 build() {
