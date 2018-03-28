@@ -8,8 +8,8 @@
 
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace kuiserver plasma-wayland-session)
-pkgver=5.12.3
-pkgrel=1.5
+pkgver=5.12.4
+pkgrel=1.2
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -32,9 +32,9 @@ cgit-f2feef0.patch::'https://cgit.kde.org/plasma-workspace.git/patch/?id=f2feef0
 cgit-d9c2f4e.patch::'https://cgit.kde.org/plasma-workspace.git/patch/?id=d9c2f4ecb9fb773821152cf15d66d5133ef38d1c'
 kdebug-380347.patch::'https://cgit.kde.org/plasma-workspace.git/patch/?id=ddf452b6774f481ced47f9551e4a961622194646'
 ccbug-391868.patch::'https://cgit.kde.org/plasma-workspace.git/patch/?id=c9ba8e0cf7e518de95952762dc56d930df98339f'
-kdebug-391180.patch::'https://cgit.kde.org/plasma-workspace.git/patch/?id=f449adc1993626f1dc7e9216068ab6778e397782'
-kdebug-392197.patch::'https://cgit.kde.org/plasma-workspace.git/patch/?id=b8ffa755ed2df6bf6a47b9268e7da93355a4d856')
-sha256sums=('9e39fbb94812198800b8d163929cdefebb6a405431f0ef4c7becf0d33c36232f'
+kdebug-390375.patch::'https://cgit.kde.org/plasma-workspace.git/patch/?id=896950a819ea76800007cad7393adacac7f9bf20'
+)
+sha256sums=('07d63fc73293d0c1244d67f018e8986a79a7c570b0d5fa92d11a3b20a189c202'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
             '1acfd90910c110e0dccba413831b7493a0a08a9e75c857212c8741149d4a4c96'
@@ -49,8 +49,7 @@ sha256sums=('9e39fbb94812198800b8d163929cdefebb6a405431f0ef4c7becf0d33c36232f'
             'c885e635e7a224eedebe6e78e1c719e478ca27b80851ca2402c6d1ba060d107e'
             '6bf45d42fc01e86a0f1a6a1beaae570b325922bbe3317231d8a36f7e911d866e'
             '9a5166daae9a28b3cf2659ba1eec1be7ce95bfb9a6d47f09b72cc3f99a438a78'
-            '72e17989019d1a2e1f80a92fdfaccca482ae09c4df011ca9fba4dae66e6fbe78'
-            'c51dcfd0ee5febcfe9b9feba4588b098807b912459745b6589e058dd35aed10b')
+            'd7b3e09594d2e09dec9e3dc7c7e3a468ec905afe8f0fb617334f6b677fdbe658')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -84,11 +83,9 @@ prepare() {
   patch -p1 -i ../kdebug-380347.patch
   msg "Add ccbug-391868 patch" # See: 
   patch -p1 -i ../ccbug-391868.patch
-  msg "Add kdebug-391180 patch" # See: https://bugs.kde.org/show_bug.cgi?391180 Fixed in 5.12.4 
-  patch -p1 -i ../kdebug-391180.patch
-  msg "Add kdebug 392197 patch" # See: https://bugs.kde.org/show_bug.cgi?392197
-  patch -p1 -i ../kdebug-392197.patch
-}
+  msg "Add kdebug-390375 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390375 Fixed in 5.12.5
+  patch -p1 -i ../kdebug-390375.patch
+  }
 
 build() {
   cd build
