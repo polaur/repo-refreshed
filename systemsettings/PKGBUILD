@@ -1,0 +1,47 @@
+# $Id$
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=systemsettings
+pkgver=5.12.4
+pkgrel=1.1
+pkgdesc='KDE system settings'
+arch=(x86_64)
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=(LGPL)
+depends=(kirigami2 kcmutils kactivities-stats qt5-quickcontrols)
+makedepends=(extra-cmake-modules kdoctools python khtml)
+optdepends=('khtml: for the tree view')
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+D11764.patch::"https://cgit.kde.org/systemsettings.git/patch/?id=541598fe398a5b21987af63c4d73a7725fe13633")
+sha256sums=('8a6cc50e8d00bf6d59e087f344f011426516307fc0a3a372a347754e2ddec229'
+            'SKIP'
+            '17a76fdbda2aa473c789217fca1f84b6e3bed2dd64113173eaf381cd6d766e5f')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+  mkdir -p build
+
+  cd $pkgname-$pkgver
+  msg "Add use font.waight instead of font.bold patch aka D11764" # See: https://phabricator.kde.org/D11764
+  patch -p1 -i ../D11764.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
