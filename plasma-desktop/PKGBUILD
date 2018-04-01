@@ -7,7 +7,7 @@
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
 pkgver=5.12.4
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -20,6 +20,8 @@ kdebug-387444.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=db311474
 kdebug-379888.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=2683d4c6e60a9b8cca32f9b342d9010f4cc46086"
 ccbug-391485.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=d6bc5f35232a4f72a705bd68727c9ea0820b70ac"
 kdebug-390888.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=20bcc8f0501bb3cd368b03797c0bdea54de9f84b"
+D11468.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=4f06b7cce4216a95fcf81395e95995c3d209d1b1"
+kdebug-350688.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=6bb8cde96083f9bee6a20bbcffba7bd67c36c78b"
 )
 
 depends=(polkit-kde-agent libcanberra libxkbfile kmenuedit appstream-qt systemsettings ksysguard kpeople baloo 
@@ -33,7 +35,9 @@ sha256sums=('bec2bf03d3cc44e12a92cb16b40957425708ea58269eee6030d49ee696dde299'
             '4fae7448f43b085fe4b4094e1efddd0acdcf730ea9274d43b40a5d775d2323be'
             '50644bacc15c2ac7062a893df2497147b71055b72bacca3ac510385c64ab56dd'
             '16b55b80c261172395cf279abc9ab4d6cad187cd8d5e7bb62f2140202c74737f'
-            '33fdd8b809d27f275e1a6f1c743f23634c8af7758570af35d32c388fdc1578e7')
+            '33fdd8b809d27f275e1a6f1c743f23634c8af7758570af35d32c388fdc1578e7'
+            '3581fcdc8b697672e66261f976406e1063d7700bdc481bb215182689d9ba8281'
+            'e2bb9ab977d77714f2b5702104b7500885f0278c3b8cca8e212db4d59ab2bc6c')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '348C8651206633FD983A8FC4DEACEA00075E1D76'  # KDE Neon
               'D07BD8662C56CB291B316EB2F5675605C74E02CF') # David Edmundson
@@ -55,8 +59,11 @@ prepare() {
     patch -p1 -i ../ccbug-391485.patch
     msg "Add KDEBUG 390888 patch"
     patch -p1 -i ../kdebug-390888.patch
+    msg "Add KWin Wayland backend patch"
+    patch -p1 -i ../D11468.patch
+    msg "Add KDEBUG 350688 patch" 
+    patch -p1 -i ../kdebug-350688.patch
 	}
-
 build() {
   cd build
   cmake ../$pkgname-$pkgver \
