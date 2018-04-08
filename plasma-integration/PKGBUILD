@@ -1,0 +1,47 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for version with patches from upcoming releases
+# build based on original PKGBUILD made by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+
+pkgname=plasma-integration
+pkgver=5.12.4
+pkgrel=1.1
+pkgdesc="Qt Platform Theme integration plugins for the Plasma workspaces"
+arch=(x86_64)
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=(LGPL)
+depends=(kio kwayland libxcursor noto-fonts ttf-hack qqc2-desktop-style)
+makedepends=(extra-cmake-modules python breeze)
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-374913.patch::"https://cgit.kde.org/plasma-integration.git/patch/?id=bfd41a95530f90ee8d44cbcfd1fa8c62978334a2")
+sha256sums=('8b4e25cea0e533b95682e613b8dcc3f8ebe2e100610b03805ba08952eb64be61'
+            'SKIP'
+            '430ab4f92bfd013c231c47e988f232d04d2e65b2f0575051e537872afc563274')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Add kdebug 374913 patch" # See: 
+  patch -p1 -i ../kdebug-374913.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
