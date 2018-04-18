@@ -7,7 +7,7 @@
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
 pkgver=5.12.4
-pkgrel=1.2
+pkgrel=2.2
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -20,6 +20,11 @@ kdebug-387444.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=db311474
 kdebug-379888.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=2683d4c6e60a9b8cca32f9b342d9010f4cc46086"
 ccbug-391485.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=d6bc5f35232a4f72a705bd68727c9ea0820b70ac"
 kdebug-390888.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=20bcc8f0501bb3cd368b03797c0bdea54de9f84b"
+#kdebug-350688.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=6bb8cde96083f9bee6a20bbcffba7bd67c36c78b"
+# D11469.diff
+#  kdebug-358839.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=465e86ee7b947dd3a4d8655b00640e21760dd90c"
+kdebug-389479.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=8dedbcdf4197eccd5e06c18a66a63d15615c8171"
+D12275.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=38403268aad327f658616feeecfa78f305471e2b"
 )
 
 depends=(polkit-kde-agent libcanberra libxkbfile kmenuedit appstream-qt systemsettings ksysguard kpeople baloo 
@@ -34,7 +39,10 @@ sha256sums=('bec2bf03d3cc44e12a92cb16b40957425708ea58269eee6030d49ee696dde299'
             '50644bacc15c2ac7062a893df2497147b71055b72bacca3ac510385c64ab56dd'
             '16b55b80c261172395cf279abc9ab4d6cad187cd8d5e7bb62f2140202c74737f'
             '33fdd8b809d27f275e1a6f1c743f23634c8af7758570af35d32c388fdc1578e7'
-            'e2bb9ab977d77714f2b5702104b7500885f0278c3b8cca8e212db4d59ab2bc6c')
+            'b74f88e1a23bdfd4255b2b35e0701f5a8aa7de88c14c4efe3c16e25de6bd957d'
+            '603244fdfd36ed1519755507ae1e0a14d883cb9db92075f054a08f87693b702a'
+            'abc93c616e2341974d29668b59112d4a30bceb179c77e279bf39e6055f1f526f'
+            '76226bbdb3e4113ca93ad3793213d870a4ea8babc4c39b1e910ca94a2e9a7296')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '348C8651206633FD983A8FC4DEACEA00075E1D76'  # KDE Neon
               'D07BD8662C56CB291B316EB2F5675605C74E02CF') # David Edmundson
@@ -56,6 +64,18 @@ prepare() {
     patch -p1 -i ../ccbug-391485.patch
     msg "Add KDEBUG 390888 patch"
     patch -p1 -i ../kdebug-390888.patch
+    
+    # msg "Add KDEBUG 350688 patch"
+    # patch -i ../D11469.diff
+
+#    msg "Add KDEBUG 358839 patch"
+#    patch -p1 -i ../kdebug-358839.patch
+
+   msg "Add KDEBUG 389479 patch"
+   patch -p1 -i ../kdebug-389479.patch
+
+   msg "Add D12275 patch"
+   patch -p1 -i ../D12275.patch
 	}
 build() {
   cd build
