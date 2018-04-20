@@ -5,7 +5,7 @@
 
 pkgname=sddm-kcm
 pkgver=5.12.4
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='KDE Config Module for SDDM'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -14,10 +14,12 @@ depends=(sddm libxcursor knewstuff)
 makedepends=(extra-cmake-modules kdoctools)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
-D12323.patch::"https://cgit.kde.org/sddm-kcm.git/patch/?id=ebdfab7e08671b5165f52118cabdf4d1d6c14bb2")
+D12323.patch::"https://cgit.kde.org/sddm-kcm.git/patch/?id=ebdfab7e08671b5165f52118cabdf4d1d6c14bb2"
+D12359.patch::"https://cgit.kde.org/sddm-kcm.git/patch/?id=c879e4fa438f4cb029f1e73784489869b0d48314")
 sha256sums=('072a8f71a381fff763c62e9a09752167a4cb3a0dca63674387c0464b7281a82e'
             'SKIP'
-            'f5fdd41464e7d4b48ea1566b0980d405a63e3a1d9ea1d2927033b2b97b927974')
+            'f5fdd41464e7d4b48ea1566b0980d405a63e3a1d9ea1d2927033b2b97b927974'
+            '7f29ea60542e4eb69e382b34c20ac5a36dd00c3ce0fb51b6a6c3e9152de8966c')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -29,6 +31,8 @@ prepare() {
   cd $pkgname-$pkgver
   msg "Add D12323 patch"
   patch -p1 -i ../D12323.patch
+  msg "Add D12359 patch"
+  patch -p1 -i ../D12359.patch
 }
 
 build() {
