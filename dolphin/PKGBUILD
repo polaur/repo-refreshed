@@ -7,7 +7,7 @@
 # Contributor: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=dolphin
-pkgver=17.12.3
+pkgver=18.04.1
 pkgrel=1.1
 pkgdesc="KDE File Manager"
 arch=(x86_64)
@@ -19,10 +19,20 @@ optdepends=('kde-cli-tools: for editing file type options' 'ffmpegthumbs: video 
             'ruby: installing new service menus from KDE Store' 'kdegraphics-thumbnailers: PDF and PS thumbnails' 'konsole: terminal panel')
 groups=(kde-applications kdebase)
 source=("https://download.kde.org/stable/applications/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
-ccbug-342056.patch::"https://cgit.kde.org/dolphin.git/patch/?id=9fbf7a0b624aee6b116efdf69462e73f0275fab6")
-sha256sums=('40dc96fa05cf6a09c49329cd69c9f1079b4ddb57592c9ff0e957eec6e761a439'
+D11481.patch::"https://cgit.kde.org/dolphin.git/patch/?id=40f9cfd519a3244929190146a3215ae12b98270b"
+kdebug-390771.patch::"https://cgit.kde.org/dolphin.git/patch/?id=e0f7fe87bdc2e32778cd6ce997b59b883cb245b8"
+kdebug-374559.patch::"https://cgit.kde.org/dolphin.git/patch/?id=1441fefc07f126c1c9eddc3e9f1babff8b762b28"
+kdebug-377510.patch::"https://cgit.kde.org/dolphin.git/patch/?id=9536d1170a9ffa787b6a9809b2600c669d60d498"
+kdebug-394194.patch::"https://cgit.kde.org/dolphin.git/patch/?id=2e1cc199c3c2ef2eea5abd630821f80dfc9e0b16"
+kdebug-394355.patch::"https://cgit.kde.org/dolphin.git/patch/?id=05d5792ac303eac90aab28f617e6e72727277002")
+sha256sums=('50db0e6c59383c3141ba96f733d36ac63b8f4d3e1f3d233b4a27da5931179587'
             'SKIP'
-            'd1cecb255ccc4715ae4bfb9d1c3dee6bcaa363cec306608c43e562ec72a128ea')
+            '635121b3d7cfa968444dd59a47275c69f9c1e7d9357b08c26dd91a1cae026053'
+            '03e3895a65040b64c61a4e59e96f2c033dc5ce7babd064c078e97f518a08d78c'
+            'ff142fd9eb1e53abbeeb489f4e9fb19187f0eb0ced93db190662f5530de9ff64'
+            '9628b663219df4d28094134384291631569e8e6edb977961895440922209d70b'
+            'c091e0468cedd595a07dcd618b51f95995db621f198ce0f7c9e9336394a8f4a3'
+            '77ec0ce1f6c4dc4093f6865231b3edf117f7990a6658de51f5cbfe6335535e85')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
@@ -30,8 +40,18 @@ prepare() {
   mkdir -p build
 
 	cd $pkgname-$pkgver
-	msg "CCBUG:342056 patch"
-	patch -p1 -i ../ccbug-342056.patch
+	msg "Add D11481 patch"
+	patch -p1 -i ../D11481.patch
+	msg "Add KDEBUG 390771 patch" # See: https://bugs.kde.org/show_bug.cgi?id=390771
+	patch -p1 -i ../kdebug-390771.patch
+	msg "Add KDEBUG 374559 patch" # See: https://bugs.kde.org/show_bug.cgi?id=374559
+	patch -p1 -i ../kdebug-374559.patch
+	msg "Add KDEBUG 377510 patch"
+	patch -p1 -i ../kdebug-377510.patch
+	msg "Add KDEBUG 394194 patch" # Fixed in 18.04.2 ?
+	patch -p1 -i ../kdebug-394194.patch
+	msg "Add KDEBUG 394355 patch" 
+	patch -p1 -i ../kdebug-394355.patch
 }
 
 build() {
