@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=okular
-pkgver=17.12.3
+pkgver=18.04.1
 pkgrel=1.1
 pkgdesc='Document Viewer'
 arch=(x86_64)
@@ -21,18 +21,15 @@ optdepends=('ebook-tools: mobi and epub support' 'discount: markdown support'
 conflicts=(kdegraphics-okular)
 replaces=(kdegraphics-okular)
 source=("https://download.kde.org/stable/applications/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
-fix-regression-in-refreshPixmaps.patch::"https://cgit.kde.org/okular.git/patch/?id=9f458a54cf923ff"
-fix-crash-on-save-when-we-had-edited-forms.patch::"https://cgit.kde.org/okular.git/patch/?id=f656f1b23f70368"
-kdebug-387426.patch::"https://cgit.kde.org/okular.git/patch/?id=ce7fa7b9d8790b9"
-kdebug-388511.patch::"https://cgit.kde.org/okular.git/patch/?id=e44d50558323f31"
-)
+kdebug-389836.patch::"https://cgit.kde.org/okular.git/patch/?id=cbc6f671e35cc901a8edcc0cadda2459c0277485"
+kdebug-388532.patch::"https://cgit.kde.org/okular.git/patch/?id=48b9ca66a6fd8892c2f62b34ad56ce66c817e45c"
+kdebug-355043.patch::"https://cgit.kde.org/okular.git/patch/?id=004efa70e4a764bbd780d4f3e5bcaf40de70a1a6")
 
-sha256sums=('0a12549c2d90c13b8fa0838707924596eb12981bffc3a5b81410785a4e9e061d'
+sha256sums=('0fa82f9a31de184966303395148dd03f627c64be2d5a2eb070bf13c5a95c0e3a'
             'SKIP'
-            '21f9a421415917b199b2e0882748a2e041fab7233aaa14949f451b3dffb700b5'
-            'fab3d798f73a03f23057bf0f915ad0df0f8b117ce45e68c8be1671e478733d8e'
-            'ec0fdde9a08b4bfabcb9e7aa4826682212277ad66078fbc77351a7506e926b65'
-            '7ef35e867d16174894804b120987a74ff639f422a82a9692327a6c09ddc5ab7a')
+            'e86b0c6ef9d88e7eae4b152344a721b495be9106dea212edede59ce4f5e8fe72'
+            'ef1f4c00d46863d5811af05c4791c7dc2971fa43e90141764feb4b14fdc8fc0b'
+            '77a89527e076a1b8d8fc436c874ed76230bd0fd7dac95a25d2b1e926024d680e')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
@@ -40,14 +37,13 @@ prepare() {
   mkdir -p build
   
   cd $pkgname-$pkgver
-
-  msg "Add fix for regression in refreshPixmaps" # See: https://cgit.kde.org/okular.git/commit/?id=9f458a54cf923ff85c9a5e241429dfd8ec673ccc
-  msg "Add fix for crash on save when we had edited forms patch" # See: https://cgit.kde.org/okular.git/commit/?id=f656f1b23f7036831c04f9af6cb9eeceb5d3222c
-  msg "Add KDEBUG 387426 patch" # See: https://bugs.kde.org/show_bug.cgi?id=387426
-  patch -p1 -i ../kdebug-387426.patch
-  msg "Add KDEBUG 388511 patch" # See: https://bugs.kde.org/show_bug.cgi?id=388511
-  patch -p1 -i ../kdebug-388511.patch
-}
+  msg "Add KDEBUG 389836 patch"
+  patch -p1 -i ../kdebug-389836.patch
+  msg "Add KDEBUG 388532 patch"
+  patch -p1 -i ../kdebug-388532.patch
+  msg "Add KDEBUG 355043 patch"
+  patch -p1 -i ../kdebug-355043.patch
+  }
 
 build() {
   cd build
