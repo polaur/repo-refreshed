@@ -7,7 +7,7 @@
 
 pkgname=plasma-framework
 pkgver=5.46.0
-pkgrel=2.1
+pkgrel=2.2
 pkgdesc='Plasma library and runtime components based upon KF5 and Qt5'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -17,11 +17,13 @@ makedepends=(extra-cmake-modules qt5-tools kdoctools doxygen)
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-381242.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=11f4e5b392acade56ad240f695f66eb42377e57c"
-kdebug-394400.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=b6a6e95afce789ad3ade377edd7719bb57fb7978")
+kdebug-394400.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=b6a6e95afce789ad3ade377edd7719bb57fb7978"
+kdebug-394423.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=d15f0fa8322dc2632f15024457bea41e7dd058d7")
 sha256sums=('c70c482480661534c82c2dfe3117ad2f96a4cad810693f84f3895224c232fb7e'
             'SKIP'
             '820637edb44358d6c45d51d680ae9c5f6a7deba54a9ca73021434870358d4162'
-            '766722e0c3e4f032be7e5b79ca7c67a12f2db4bd4aad9e95fe38066e7185fee4')
+            '766722e0c3e4f032be7e5b79ca7c67a12f2db4bd4aad9e95fe38066e7185fee4'
+            '4653e456c2b20d642a7d6e92eca1760e9f8ac1d89ab061eb65449a367b05781a')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -32,6 +34,8 @@ prepare() {
   patch -p1 -i ../kdebug-381242.patch
   msg "Add KDEBUG 394400 patch"
   patch -p1 -i ../kdebug-394400.patch
+  msg "Add KDEBUG 394423 patch"
+  patch -p1 -i ../kdebug-394423.patch
 }
 
 build() {
