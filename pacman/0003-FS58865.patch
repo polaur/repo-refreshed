@@ -1,0 +1,52 @@
+[pacman-dev] [PATCH] makepkg: fix erroneous $BUILDDIR when $startdir is not an absolute path
+Eli Schwartz eschwartz at archlinux.org 
+Mon Jun 4 13:31:19 UTC 2018
+Previous message (by thread): [pacman-dev] [PATCH] PKGBUILD.5: document restriction on pkgrel
+Next message (by thread): [pacman-dev] pacman user+group support without mtree
+Messages sorted by: [ date ] [ thread ] [ subject ] [ author ]
+When comparing the $BUILDDIR to the $startdir, we used string equality
+instead of testing whether they are the same location, and ended up
+appending $pkgbase even though there's no reason to use it here.
+
+In some cases, this could result in makepkg erroring when trying to
+create $srcdir/$pkgdir, if a file with the same name as the $pkgbase
+exists. This is expected behavior if a file "src" or "pkg" exists, but
+decidedly less so for $pkgbase.
+
+This could be fixed either by setting $startdir to an absolute path, or
+by ensuring the test checks this directly; I've chosen to do both, since
+the test should really be correctly checking the thing it actually cares
+about, but since we ensure absolute paths are used everywhere else, this
+might bite us elsewhere someday. It's also more consistent.
+
+Fixes FS#58865
+
+Signed-off-by: Eli Schwartz <eschwartz at archlinux.org>
+---
+ scripts/makepkg.sh.in | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/scripts/makepkg.sh.in b/scripts/makepkg.sh.in
+index 2ed8561f..efa21e7f 100644
+--- a/scripts/makepkg.sh.in
++++ b/scripts/makepkg.sh.in
+@@ -44,7 +44,7 @@ unset GREP_OPTIONS
+ declare -r makepkg_version='@PACKAGE_VERSION@'
+ declare -r confdir='@sysconfdir@'
+ declare -r BUILDSCRIPT='@BUILDSCRIPT@'
+-declare -r startdir="$PWD"
++declare -r startdir="$(pwd -P)"
+ 
+ LIBRARY=${LIBRARY:-'@libmakepkgdir@'}
+ 
+@@ -1458,7 +1458,7 @@ fi
+ 
+ basever=$(get_full_version)
+ 
+-if [[ $BUILDDIR = "$startdir" ]]; then
++if [[ $BUILDDIR -ef "$startdir" ]]; then
+ 	srcdir="$BUILDDIR/src"
+ 	pkgdirbase="$BUILDDIR/pkg"
+ else
+-- 
+2.17.1
