@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=okular
-pkgver=18.04.1
+pkgver=18.04.2
 pkgrel=1.1
 pkgdesc='Document Viewer'
 arch=(x86_64)
@@ -23,9 +23,10 @@ replaces=(kdegraphics-okular)
 source=("https://download.kde.org/stable/applications/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-389836.patch::"https://cgit.kde.org/okular.git/patch/?id=cbc6f671e35cc901a8edcc0cadda2459c0277485"
 kdebug-388532.patch::"https://cgit.kde.org/okular.git/patch/?id=48b9ca66a6fd8892c2f62b34ad56ce66c817e45c"
-kdebug-355043.patch::"https://cgit.kde.org/okular.git/patch/?id=004efa70e4a764bbd780d4f3e5bcaf40de70a1a6")
+kdebug-355043.patch::"https://cgit.kde.org/okular.git/patch/?id=004efa70e4a764bbd780d4f3e5bcaf40de70a1a6"
+)
 
-sha256sums=('0fa82f9a31de184966303395148dd03f627c64be2d5a2eb070bf13c5a95c0e3a'
+sha256sums=('bf9e4e9ce6cc6f7fae3dfe021ea7954403c7bab77a33434974eb3efe999999c9'
             'SKIP'
             'e86b0c6ef9d88e7eae4b152344a721b495be9106dea212edede59ce4f5e8fe72'
             'ef1f4c00d46863d5811af05c4791c7dc2971fa43e90141764feb4b14fdc8fc0b'
