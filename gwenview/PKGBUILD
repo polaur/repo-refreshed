@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=gwenview
-pkgver=18.04.1
-pkgrel=2.1
+pkgver=18.04.2
+pkgrel=1.1
 pkgdesc="A fast and easy to use image viewer"
 url='https://kde.org/applications/graphics/gwenview/'
 arch=(x86_64)
@@ -26,14 +26,10 @@ D12343.patch::"https://cgit.kde.org/gwenview.git/patch/?id=23d75f4a3f83"
 kdebug-207802.patch::"https://cgit.kde.org/gwenview.git/patch/?id=25f2d4483b"
 kdebug-270980.patch::"https://cgit.kde.org/gwenview.git/patch/?id=f88db58a51"
 kdebug-203042.patch::"https://cgit.kde.org/gwenview.git/patch/?id=14199f3bc2"
-enable-redo-for-undone-image-operations.patch::"https://cgit.kde.org/gwenview.git/patch/?id=cc6f795d88910d7516da85dfa548a6a0597f23ba"
-cleanup-code-for-finishing-undo.patch::"https://cgit.kde.org/gwenview.git/patch/?id=e8e6d40b3d5978139c9ab1b37b9f4044db8553a5"
-kdebug-276255.patch::"https://cgit.kde.org/gwenview.git/patch/?id=358ff25a4ab9855a6727546f355db428dd74f8cf"
 kdebug-290294.patch::"https://cgit.kde.org/gwenview.git/patch/?id=b94861f27a29fe576867eee0157d5211187a16db"
-kdebug-394406.patch::"https://cgit.kde.org/gwenview.git/patch/?id=5d3d973593c7cae19110952ba2944365a1bab623"
 )
 
-sha256sums=('71216a4622fe4b706ebd27a54552ac475aa4680ffed18320f9d65be134e6dd73'
+sha256sums=('8443982c880e2dff038383195e9fe2bb33dbc4ea4a9de17a96c0f738ba402cce'
             'SKIP'
             '04f64c348b217c92581163880167e65011b9262784bcc232c57feee439686a3e'
             'eff596ca503982171164477a2db1dc931b7a29d56c0093fc5f104cd944ff0543'
@@ -42,11 +38,7 @@ sha256sums=('71216a4622fe4b706ebd27a54552ac475aa4680ffed18320f9d65be134e6dd73'
             '0e39015569438060cc790fb51411c99b35a2398399500055bd98e2e13b67afb0'
             '7d8eeb5ab6f4f36b770b2e44fa011ca411b835179aed2e46777f9e8c3e11a6d3'
             '9a97df735161531579b97e4c0aab1f5e473f2f1dd1a02c3074a5221eed87cb1a'
-            'fd99a40863db81f0d622d750b628f9cdaf0b9a4af865dfb4553735838194e69a'
-            '3d48ecbbd07904ebb7f1b235789dc17d6fc496ea0177957383683c6cc5141bb0'
-            '23860da9db6d5800310cf36b11a939527d0225c31143425f8f17560e540ae013'
-            '93bdc3c7f37a71dbd46a532e9d0f71f1b34b92c7fbb016d77ea212c51fa12ff7'
-            'b3287b356894ee0f04824f10236b32a6a51d618693b95f223c5736c9c414e3d9')
+            '93bdc3c7f37a71dbd46a532e9d0f71f1b34b92c7fbb016d77ea212c51fa12ff7')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
@@ -64,16 +56,8 @@ prepare() {
   patch -p1 -i ../kdebug-203042.patch
   msg "Add KDEBUG 270980 patch"
   patch -p1 -i ../kdebug-270980.patch
-  msg "Add enable redo for undone image operations" # Fixed in 18.04.2
-  patch -p1 -i ../enable-redo-for-undone-image-operations.patch
-  msg "Add next"
-  patch -p1 -i ../cleanup-code-for-finishing-undo.patch
-  msg "Add KDEBUG 276255 patch" # Fixed in 18.04.2
-  patch -p1 -i ../kdebug-276255.patch
   msg "Add KDEBUG 290294 patch"
   patch -p1 -i ../kdebug-290294.patch
-  msg "Add KDEBUG 394406 patch" # Fixed in 18.04.2
-  patch -p1 -i ../kdebug-394406.patch
 }
 
 build() {
