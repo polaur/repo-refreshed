@@ -1,0 +1,46 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for version with patches from upcoming releases
+# based on the original work by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kdeclarative
+pkgver=5.47.0
+pkgrel=1.1
+pkgdesc='Provides integration of QML and KDE Frameworks'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(qt5-declarative kio kpackage libepoxy)
+makedepends=(extra-cmake-modules doxygen qt5-tools)
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-395554.patch::"https://cgit.kde.org/kdeclarative.git/patch/?id=decced0e452d3350d8bdb7011a7b6122423e9abc")
+sha256sums=('3a55236b3aed4ca1b5c754b2b97652a4c91c1c15107396c111bc41ef8d4874a0'
+            'SKIP'
+            '6df69503d343fa3a283eb7b0efd41e3fd57edc4015bc7d9d3a8629ca1c436c65')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Add kdebug 395554 patch"
+  patch -p1 -i ../kdebug-395554.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
