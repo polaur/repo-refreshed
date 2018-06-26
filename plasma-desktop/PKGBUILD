@@ -7,34 +7,32 @@
 
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
-pkgver=5.13.1.1
-pkgrel=1.3
+pkgver=5.13.2
+pkgrel=1.1
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
 license=(LGPL)
-source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-393912.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=d234b8fde4c3c131545686a117e284b31c6a95a9"
 kdebug-388205.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=62f92fd822efb059a07dd77c93158ecba73d1ced"
 workspace_KCM_code_improvement.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=de742972bf317182a0cdff6bfa4f6d22abcf9a6a"
 kdebug-362986.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=52cd092af19934424e0f1a6d5b3e469c149de2ef"
 D13185.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=9c5d8bfd66a44b8de0ae9b79a758959aa3c3a86d"
 kdebug-395155.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=b8c8ba51ffc78d9a3e90867b849f376d6a1e89b5"
-fix-tooltip-woes.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=1e218b405bee4d75a5d26a4c28da2724d967953a"
 )
 depends=(polkit-kde-agent libcanberra libxkbfile kmenuedit appstream-qt systemsettings ksysguard kpeople baloo qt5-graphicaleffects)
 makedepends=(extra-cmake-modules kdoctools boost xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
              libibus scim kdesignerplugin)
 groups=(plasma)
-sha256sums=('c5f51c34a8549c879b691ea5de054100884c00bea32f559fc537ce338870a1bf'
+sha256sums=('116a9a149b7a43de7e6ffc3930d2de386a9cbc3d313d5224aae5c89297dcac9f'
             'SKIP'
             'e35ea3f06702cabc22cf7602f54af58d1b65256137111b68a6b25b90112f896a'
             'c35e211a45974c0aba6dc96574b76c7f0883304687c4b4e45e52bd7d9c6d462e'
             '57de03eae81e6fc447fd059e9a163051bbbee2f1a6f8b228e5b60a0ea7b5d893'
             '051cb3ce5689a7c8bba537437d206a880379ccd29ef2a0f78f3f6e391a86939c'
             'e095a0d9d162096af38f9b904461d526e7e1f071ea462e166cde426c95e70782'
-            '1d99040af0486b20b70f59daceed3e81153e054a702cd974fc0f8bc7368ae448'
-            '4cf36dc116562f09ae4188492bba3ea0e150fd96101c845e6634f9339bff576d')
+            '1d99040af0486b20b70f59daceed3e81153e054a702cd974fc0f8bc7368ae448')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -59,10 +57,6 @@ prepare() {
   
   msg "Make the string 'No touchpad found' translatable"
   patch -p1 -i ../D13185.patch
-  
-  msg "Add patch for KDEBUG: 382571, 385947, 389469 and 388749"
-  patch -p1 -i ../fix-tooltip-woes.patch
-  
   }
 
 build() {
