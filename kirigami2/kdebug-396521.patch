@@ -1,0 +1,25 @@
+From 2e023a079f5626e47d92b19baed23011741e0fd8 Mon Sep 17 00:00:00 2001
+From: Marco Martin <notmart@gmail.com>
+Date: Mon, 16 Jul 2018 16:19:02 +0200
+Subject: fix toolbar size
+
+BUG:396521
+---
+ src/controls/private/PageRowGlobalToolBarStyleGroup.qml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/controls/private/PageRowGlobalToolBarStyleGroup.qml b/src/controls/private/PageRowGlobalToolBarStyleGroup.qml
+index 918e3da..23ba443 100644
+--- a/src/controls/private/PageRowGlobalToolBarStyleGroup.qml
++++ b/src/controls/private/PageRowGlobalToolBarStyleGroup.qml
+@@ -43,6 +43,6 @@ QtObject {
+     property bool showNavigationButtons: style != Kirigami.ApplicationHeaderStyle.TabBar && (!Kirigami.Settings.isMobile || Qt.platform.os == "ios")
+ 
+     property int minimumHeight: 0
+-    property int preferredHeight: Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.smallSpacing*2
++    property int preferredHeight: Kirigami.Units.iconSizes.medium + Kirigami.Units.smallSpacing*2
+     property int maximumHeight: preferredHeight
+ }
+-- 
+cgit v0.11.2
+

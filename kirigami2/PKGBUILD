@@ -1,0 +1,48 @@
+# $Id: PKGBUILD 276984 2016-09-26 18:41:01Z arojas $
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=kirigami2
+pkgver=5.48.0
+pkgrel=1.1
+pkgdesc='A QtQuick based components set'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+groups=(kf5)
+depends=(qt5-quickcontrols qt5-quickcontrols2 qt5-graphicaleffects)
+makedepends=(extra-cmake-modules qt5-tools qt5-svg kpackage doxygen)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-396521.patch::"https://cgit.kde.org/kirigami.git/patch/?id=2e023a079f5626e47d92b19baed23011741e0fd8"
+fix-handle-sizing.patch::"https://cgit.kde.org/kirigami.git/patch/?id=1368da854339b6ea760306f39dcf7b05380b1beb")
+sha256sums=('a2d8bfbf79f33c03793631e9f3575b7c3043e09d282b0e56ad878bfdbfcd0138'
+            'SKIP'
+            '2b9cb1fcdb93347fcb9c02d5f3848740b6f1ffa17c01cfd32deeabf16bc5e445'
+            '6e8d6ff9499134333f17200a287e28f89dbc83b1d158d89844f1d2aa4f3bbd08')
+validpgpkeys=('53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB') # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+
+  cd $pkgname-$pkgver
+  msg "Fix handle sizing patch"
+  patch -p1 -i ../fix-handle-sizing.patch
+  msg "Add KDEBUG 396521 patch"
+  patch -p1 -i ../kdebug-396521.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_EXAMPLES=ON \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
+
