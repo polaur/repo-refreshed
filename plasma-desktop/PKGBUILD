@@ -7,8 +7,8 @@
 
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
-pkgver=5.13.2
-pkgrel=1.1
+pkgver=5.13.3
+pkgrel=1.2
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -20,19 +20,23 @@ workspace_KCM_code_improvement.patch::"https://cgit.kde.org/plasma-desktop.git/p
 kdebug-362986.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=52cd092af19934424e0f1a6d5b3e469c149de2ef"
 D13185.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=9c5d8bfd66a44b8de0ae9b79a758959aa3c3a86d"
 kdebug-395155.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=b8c8ba51ffc78d9a3e90867b849f376d6a1e89b5"
+kdebug-363337.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=3fe808ef8e9763edd5c349f8556b7ee2c0645702"
+kdebug-395262.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=42a74c9a79baafb222513f3ffad35b736b708454"
 )
 depends=(polkit-kde-agent libcanberra libxkbfile kmenuedit appstream-qt systemsettings ksysguard kpeople baloo qt5-graphicaleffects)
 makedepends=(extra-cmake-modules kdoctools boost xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
              libibus scim kdesignerplugin)
 groups=(plasma)
-sha256sums=('116a9a149b7a43de7e6ffc3930d2de386a9cbc3d313d5224aae5c89297dcac9f'
+sha256sums=('b01e866362ead65be0c07e437e6c9ba937a3dadccb9df109e5e236843c8225f6'
             'SKIP'
             'e35ea3f06702cabc22cf7602f54af58d1b65256137111b68a6b25b90112f896a'
             'c35e211a45974c0aba6dc96574b76c7f0883304687c4b4e45e52bd7d9c6d462e'
             '57de03eae81e6fc447fd059e9a163051bbbee2f1a6f8b228e5b60a0ea7b5d893'
             '051cb3ce5689a7c8bba537437d206a880379ccd29ef2a0f78f3f6e391a86939c'
             'e095a0d9d162096af38f9b904461d526e7e1f071ea462e166cde426c95e70782'
-            '1d99040af0486b20b70f59daceed3e81153e054a702cd974fc0f8bc7368ae448')
+            '1d99040af0486b20b70f59daceed3e81153e054a702cd974fc0f8bc7368ae448'
+            '8a32c89cd9370220e76370d683b17fcb40ef17328c89bea64745d16ebee8c801'
+            'e61cc3642971b07cc0b6b6f03e4a7ae7e45cd872b28569e82458ae3c42d6d94c')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -57,6 +61,13 @@ prepare() {
   
   msg "Make the string 'No touchpad found' translatable"
   patch -p1 -i ../D13185.patch
+
+  msg "Add KDEBUG 363337 patch"
+  patch -p1 -i ../kdebug-363337.patch
+  
+  msg "Add KDEBUG 395262 patch"
+  patch -p1 -i ../kdebug-395262.patch
+
   }
 
 build() {
