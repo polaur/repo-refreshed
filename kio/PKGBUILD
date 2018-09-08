@@ -1,35 +1,38 @@
-# Maintainer: pavbaranov <pavbaranov at gmail dot com>
-# for version with patches from upcoming releases
-# based on the original work by:
+# $Id$
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kio
-pkgver=5.48.0
+pkgver=5.50.0
 pkgrel=1.1
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
 license=(LGPL)
-depends=(solid kjobwidgets kbookmarks libxslt kwallet desktop-file-utils)
+depends=(solid kjobwidgets kbookmarks libxslt kwallet desktop-file-utils qt5-script)
 makedepends=(extra-cmake-modules kdoctools doxygen qt5-tools)
 optdepends=('kio-extras: extra protocols support (sftp, fish and more)' 'kdoctools: for the help kioslave'
             'knetattach: to add new kio-remote entries')
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-slightly-faster-UDS-constructor.patch::"https://cgit.kde.org/kio.git/patch/?id=d6a17455092ac467aa06e36fa5008a41ac1b413a")
-sha256sums=('40b9b04dc1e53a4e752e234c5dceee47b34aac521849a47b2bab45b7b81da02a'
+kdebug-331707.patch::"https://cgit.kde.org/kio.git/patch/?id=9d682612de4691a13daa69d02816d23b6a77a285"
+kdebug-397742.patch::"https://cgit.kde.org/kio.git/patch/?id=820f622e86bb0b7d44a39a3f90f84c99736b30c7")
+sha256sums=('01423f94668756dc9f644c5ef93ace0b2e1624d7dd9483f9524bdf3c0855d2ae'
             'SKIP'
-            'bb625f62b4e3bd68f5ee9d72465c411099240f1b0fd7a68a29617e413cde493b')
+            'e6bedd6b7ad228df094e13080877d781abf116b4d562c2991c45cfc07b3bc278'
+            'd04cde817ce5bc180a554fbe66c07d2f9d26462eb690d5576d49c8f1c5f49c25')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
   mkdir -p build
   
   cd $pkgname-$pkgver
-  msg "Add slightly-faster-UDS-constructor.patch"
-  patch -p1 -i ../slightly-faster-UDS-constructor.patch
+  msg "Add kdebug 331707 & 386460 patch" # Fixed in 5.51
+  patch -p1 -i ../kdebug-331707.patch
+  
+  msg "Add kdebug 397742 patch" # Fixed in 5.51
+  patch -p1 -i ../kdebug-397742.patch
 }
 
 build() {
@@ -40,7 +43,7 @@ build() {
     -DCMAKE_INSTALL_LIBEXECDIR=lib \
     -DBUILD_TESTING=OFF \
     -DBUILD_QCH=ON
-  make
+  make -j5
 }
 
 package() {
