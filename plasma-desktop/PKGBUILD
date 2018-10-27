@@ -1,0 +1,74 @@
+# $Id$
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgbase=plasma-desktop
+pkgname=(plasma-desktop knetattach)
+pkgver=5.14.2
+pkgrel=1.1
+pkgdesc='KDE Plasma Desktop'
+arch=(x86_64)
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=(LGPL)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-397693.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=48b32259e73f374a456ed836ba44e3effe2baee5"
+kdebug-389124.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=ac3c8ba3f11f6ee79cf2e72e74402f1a0e1971b6")
+depends=(polkit-kde-agent libcanberra libxkbfile kmenuedit appstream-qt systemsettings ksysguard kpeople baloo)
+makedepends=(extra-cmake-modules kdoctools boost xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
+             libibus scim kdesignerplugin)
+groups=(plasma)
+sha256sums=('2802937927449856334a1ad14b3009c96e19dc88eeda0e1657cc23b514a41180'
+            'SKIP'
+            'fb9595156c8a09d93e357995e9f92f38937419875f4a38db854e2509ceae5144'
+            'a2ca7332df41b248d338093a10fa60ed28b792f2df30ebd9fe0adcaec67e4009')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+  mkdir -p build
+
+  cd $pkgname-$pkgver
+  msg "KDEBUG 397693 patch"
+  patch -p1 -i ../kdebug-397693.patch
+  msg "KDEBUG 389124 patch"
+  patch -p1 -i ../kdebug-389124.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF \
+	-DKDE_INSTALL_PLUGINDIR=/usr/lib/qt/plugins \
+	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+	-DKDE_INSTALL_QMLDIR=/usr/lib/qt/qml
+  make 
+}
+
+package_plasma-desktop() {
+  depends+=(knetattach)
+  optdepends=('plasma-nm: Network manager applet'
+              'powerdevil: power management'
+              'ibus: kimpanel IBUS support'
+              'scim: kimpanel SCIM support'
+              'discover: manage applications installation from the launcher')
+
+  cd build
+  make DESTDIR="$pkgdir" install
+
+# Split knetattach
+  rm "$pkgdir"/usr/{bin/knetattach,share/applications/org.kde.knetattach.desktop}
+}
+
+package_knetattach() {
+  pkgdesc='Wizard which makes it easier to integrate network resources with the Plasma Desktop'
+  depends=(kdelibs4support)
+
+  cd build/knetattach
+  make DESTDIR="$pkgdir" install
+}
