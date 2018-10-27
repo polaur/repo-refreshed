@@ -1,0 +1,78 @@
+# $Id$
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kwin
+pkgver=5.14.2
+pkgrel=2.3
+pkgdesc='An easy to use, but flexible, composited Window Manager'
+arch=(x86_64)
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=(LGPL)
+depends=(kscreenlocker xcb-util-cursor plasma-framework kcmutils breeze kinit qt5-sensors)
+makedepends=(extra-cmake-modules qt5-tools kdoctools)
+optdepends=('qt5-virtualkeyboard: virtual keyboard support for kwin-wayland')
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-398100.patch::"https://cgit.kde.org/kwin.git/patch/?id=769f2659ddfff8096b826238595a26e5f21c39ad"
+kdebug-264276.patch::"https://cgit.kde.org/kwin.git/patch/?id=66a91f086196f83f79dea35004aafba529b3cad9"
+kdebug-364709.patch::"https://cgit.kde.org/kwin.git/patch/?id=30ad58f559aa0cfc5dba649be387578481e8db32"
+kdebug-361371.patch::"https://cgit.kde.org/kwin.git/patch/?id=408ed80604bb52870469a4f76704c224e15c02aa"
+kdebug-400240.patch::"https://cgit.kde.org/kwin.git/patch/?id=722af0215339e6555050fd50114ac4bf2fc921fe"
+kdebug-400082.patch::"https://cgit.kde.org/kwin.git/patch/?id=110fa039cbf8e7f414d8db7d4a68102d8fd9420f"
+kdebug-400351.patch::"https://cgit.kde.org/kwin.git/patch/?id=00c9b4c1c931c000300bf06bdca5c3a82c559b65")
+sha256sums=('3588a25e5c160aedffa01cec06c513fb3934a117be194d04dcd61d9777440971'
+            'SKIP'
+            '2fd27bea434e88b2a205839a49c5b69889c39db1f8ae88a118656e5bd3f6e029'
+            '33930ff893eaeecf4565bd92759c6f8a53a591e9f09da375e7720345479b6215'
+            'a503f898e160966df422e2b124655abd5ce2a20088fad1dbe93b07cae6450c8b'
+            '787b5d04e1d3819bbd7eb8f5d6ea9a78142e5f55537a22591d0b5cd11ef7f784'
+            'f4c110ca616741c34f05101d0a718848c4684527d95972f25524c2be08000ae7'
+            '7cae63ef7808c3046479e4ef4e11f908af7f912a9421b20a58dead785465c0ec'
+            '603a3673688702be07ab788b1ce1f980df4bcee1bb004830a0e6e8939d481d31')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Add kdebug 398100 patch"
+  patch -p1 -i ../kdebug-398100.patch
+  
+  msg "Add kdebug 264276 patch"
+  patch -p1 -i ../kdebug-264276.patch
+
+  msg "Add kdebug 364709, 380865, 368811 patch" # Fix 5.15.0
+  patch -p1 -i ../kdebug-364709.patch
+  
+  msg "Add kdebug 361371 & 364509 patch" # Fix 5.14.3
+  patch -p1 -i ../kdebug-361371.patch
+  
+  msg "Add kdebug 400082 patch"
+  patch -p1 -i ../kdebug-400082.patch
+  
+  msg "Add kdebug 400240 patch"
+  patch -p1 -i ../kdebug-400240.patch
+
+  msg "Add kdebug 400351 patch" # Fix 5.14.3
+  patch -p1 -i ../kdebug-400351.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF
+  make -j5
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
