@@ -1,11 +1,13 @@
-# $Id$
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for PKGBUILD with upcomming fixes
+# based on the original work of:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kwin
-pkgver=5.14.2
-pkgrel=2.3
+pkgver=5.14.3
+pkgrel=2.1
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -21,8 +23,13 @@ kdebug-364709.patch::"https://cgit.kde.org/kwin.git/patch/?id=30ad58f559aa0cfc5d
 kdebug-361371.patch::"https://cgit.kde.org/kwin.git/patch/?id=408ed80604bb52870469a4f76704c224e15c02aa"
 kdebug-400240.patch::"https://cgit.kde.org/kwin.git/patch/?id=722af0215339e6555050fd50114ac4bf2fc921fe"
 kdebug-400082.patch::"https://cgit.kde.org/kwin.git/patch/?id=110fa039cbf8e7f414d8db7d4a68102d8fd9420f"
-kdebug-400351.patch::"https://cgit.kde.org/kwin.git/patch/?id=00c9b4c1c931c000300bf06bdca5c3a82c559b65")
-sha256sums=('3588a25e5c160aedffa01cec06c513fb3934a117be194d04dcd61d9777440971'
+kdebug-400351.patch::"https://cgit.kde.org/kwin.git/patch/?id=00c9b4c1c931c000300bf06bdca5c3a82c559b65"
+kdebug-356600.patch::"https://cgit.kde.org/kwin.git/patch/?id=fe07909cd8d24fa3fa32119508f90f18c7dac220"
+kdebug-364710.patch::"https://cgit.kde.org/kwin.git/patch/?id=558b86e9f6c08fde10933b3a3c7c126ba287c408"
+kdebug-400248.patch::"https://cgit.kde.org/kwin.git/patch/?id=ce32b031f5a09cb0530a72e7602490cb05637ac0"
+kdebug-375708.patch::"https://cgit.kde.org/kwin.git/patch/?id=7c3a851b040e3b7d33186ce787c43683ec076525"
+)
+sha256sums=('be932a7900d64c8bed9fe578fb32594472ddfd3ec1db9a445c4ad96c92d2687b'
             'SKIP'
             '2fd27bea434e88b2a205839a49c5b69889c39db1f8ae88a118656e5bd3f6e029'
             '33930ff893eaeecf4565bd92759c6f8a53a591e9f09da375e7720345479b6215'
@@ -30,7 +37,11 @@ sha256sums=('3588a25e5c160aedffa01cec06c513fb3934a117be194d04dcd61d9777440971'
             '787b5d04e1d3819bbd7eb8f5d6ea9a78142e5f55537a22591d0b5cd11ef7f784'
             'f4c110ca616741c34f05101d0a718848c4684527d95972f25524c2be08000ae7'
             '7cae63ef7808c3046479e4ef4e11f908af7f912a9421b20a58dead785465c0ec'
-            '603a3673688702be07ab788b1ce1f980df4bcee1bb004830a0e6e8939d481d31')
+            '603a3673688702be07ab788b1ce1f980df4bcee1bb004830a0e6e8939d481d31'
+            'bd8357b5210a1aca35d32d805e7817efa2a2d2847db02befac75ffad5778db76'
+            'fa988cdac282c3700730349e188915e9158e5fdd8afe29b536e59b6ae778fccd'
+            'd312b022bdadb8787e539d1ac29c93e93d55b9445084b64ea481df8abd9fe545'
+            '9aa299eecc01603ceee14d9ffe54b25bbab3eeeecf68fc1fe65adea588a12a3b')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -45,12 +56,6 @@ prepare() {
   
   msg "Add kdebug 264276 patch"
   patch -p1 -i ../kdebug-264276.patch
-
-  msg "Add kdebug 364709, 380865, 368811 patch" # Fix 5.15.0
-  patch -p1 -i ../kdebug-364709.patch
-  
-  msg "Add kdebug 361371 & 364509 patch" # Fix 5.14.3
-  patch -p1 -i ../kdebug-361371.patch
   
   msg "Add kdebug 400082 patch"
   patch -p1 -i ../kdebug-400082.patch
@@ -58,8 +63,14 @@ prepare() {
   msg "Add kdebug 400240 patch"
   patch -p1 -i ../kdebug-400240.patch
 
-  msg "Add kdebug 400351 patch" # Fix 5.14.3
-  patch -p1 -i ../kdebug-400351.patch
+  msg "Add kdebug 356600 patch"
+  patch -p1 -i ../kdebug-356600.patch
+
+  msg "Add kdebug 400248 patch" # Fix 5.15.0
+  patch -p1 -i ../kdebug-400248.patch
+
+  msg "Add kdebug 375708 patch" # Fix 5.15.0
+  patch -p1 -i ../kdebug-375708.patch
 }
 
 build() {
@@ -69,7 +80,7 @@ build() {
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_INSTALL_LIBEXECDIR=lib \
     -DBUILD_TESTING=OFF
-  make -j5
+  make 
 }
 
 package() {
