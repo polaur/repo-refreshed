@@ -1,0 +1,47 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for PKGBUILD with upcomming fixes
+# based on the original work of:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kapidox
+pkgver=5.52.0
+pkgrel=1.1
+pkgdesc='Frameworks API Documentation Tools'
+arch=(any)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(python-jinja python-yaml)
+makedepends=(extra-cmake-modules qt5-base)
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-392428.patch::"https://cgit.kde.org/kapidox.git/patch/?id=34b86963bebd8ba8b9ec96e4235728f4623476e9"
+kdebug-379281.patch::"https://cgit.kde.org/kapidox.git/patch/?id=4441f2088afd87b168688f1cce2e79162c597f08")
+sha256sums=('a83ec6ca3be9a9e4cc9e7dead919a2936c2c471fc288f0496635432724611ef6'
+            'SKIP'
+            '57da34de4325dbe48035fc4e3bc454033eca366c0575ce6108a2ab3019719271'
+            '7d57e58cf7ccc97c63548bd130a64631f15c7923cf4deea043dd8bf3aa85ebc6')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+
+  cd $pkgname-$pkgver
+  msg "Add KDEBUG 392428 patch"
+  patch -p1 -i ../kdebug-392428.patch
+  msg "Add KDEBUG 379281 patch"
+  patch -p1 -i ../kdebug-379281.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}

@@ -53,7 +53,7 @@ build() {
 	-DKDE_INSTALL_PLUGINDIR=/usr/lib/qt/plugins \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	-DKDE_INSTALL_QMLDIR=/usr/lib/qt/qml
-  make -j5
+  make 
 }
 
 package_plasma-desktop() {
