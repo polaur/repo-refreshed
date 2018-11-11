@@ -1,11 +1,13 @@
-# $Id$
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for PKGBUILD with upcomming fixes
+# based on the original work of:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
-pkgver=5.14.2
+pkgver=5.14.3
 pkgrel=1.1
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
@@ -13,15 +15,17 @@ url='https://www.kde.org/workspaces/plasmadesktop/'
 license=(LGPL)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-397693.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=48b32259e73f374a456ed836ba44e3effe2baee5"
-kdebug-389124.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=ac3c8ba3f11f6ee79cf2e72e74402f1a0e1971b6")
+kdebug-389124.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=ac3c8ba3f11f6ee79cf2e72e74402f1a0e1971b6"
+kdebug-385547.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=a2c87ce86c8047d631988243f28fe8712c43ce01")
 depends=(polkit-kde-agent libcanberra libxkbfile kmenuedit appstream-qt systemsettings ksysguard kpeople baloo)
 makedepends=(extra-cmake-modules kdoctools boost xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
              libibus scim kdesignerplugin)
 groups=(plasma)
-sha256sums=('2802937927449856334a1ad14b3009c96e19dc88eeda0e1657cc23b514a41180'
+sha256sums=('9af54b2c36d62510810207a4dd419e494291101c852d4b9574b75ea058a1c24e'
             'SKIP'
             'fb9595156c8a09d93e357995e9f92f38937419875f4a38db854e2509ceae5144'
-            'a2ca7332df41b248d338093a10fa60ed28b792f2df30ebd9fe0adcaec67e4009')
+            'a2ca7332df41b248d338093a10fa60ed28b792f2df30ebd9fe0adcaec67e4009'
+            '892e9e45183432fc3866d21b8a8d4ad49e52f1c9afc6369dac841e1daa9bdf55')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -35,6 +39,8 @@ prepare() {
   patch -p1 -i ../kdebug-397693.patch
   msg "KDEBUG 389124 patch"
   patch -p1 -i ../kdebug-389124.patch
+  msg "KDEBUG 385547 patch" 
+  patch -p1 -i ../kdebug-385547.patch
 }
 
 build() {
@@ -47,7 +53,7 @@ build() {
 	-DKDE_INSTALL_PLUGINDIR=/usr/lib/qt/plugins \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	-DKDE_INSTALL_QMLDIR=/usr/lib/qt/qml
-  make 
+  make -j5
 }
 
 package_plasma-desktop() {
