@@ -1,0 +1,46 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for PKGBUILD with upcomming fixes
+# based on the original work of:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=ktexteditor
+pkgver=5.52.0
+pkgrel=1.1
+pkgdesc='Advanced embeddable text editor'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(kparts syntax-highlighting libgit2 editorconfig-core-c qt5-declarative)
+makedepends=(extra-cmake-modules doxygen qt5-tools)
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-401069.patch::"https://cgit.kde.org/ktexteditor.git/patch/?id=3f0c617e22ab5d2ae016ef7858c6f451f9cf0ad0")
+sha256sums=('215c38142a8ca5d001f945f98056463adc808b1c195bca0c505ad69cb4ad03a3'
+            'SKIP'
+            '137056ef2da92f837abcbb7d00b7528f2afe2d8ab9e6a95cf7a300b59cc12af0')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Add kdebug 401069 patch"
+  patch -p1 -i ../kdebug-401069.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
