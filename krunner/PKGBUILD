@@ -1,0 +1,46 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for PKGBUILD with upcomming fixes
+# based on the original work of:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=krunner
+pkgver=5.52.0
+pkgrel=1.1
+pkgdesc='Framework for providing different actions given a string query'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+groups=(kf5)
+depends=(plasma-framework threadweaver)
+makedepends=(extra-cmake-modules kdoctools doxygen qt5-tools)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-399621.patch::"https://cgit.kde.org/krunner.git/patch/?id=770f8d64a495d15a63f8b254456c62dace4f8e1c")
+sha256sums=('937d550ba0b46cb91e45416dfb983eee11d829df07a70e0b00693d192500c9af'
+            'SKIP'
+            '2ea78f96a722ce4da4b964059da7faac18cb7488faba7b56093d2d0b6a936bc3')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir build
+
+  cd $pkgname-$pkgver
+  msg "Add KDEBUG 399621 patch"
+  patch -p1 -i ../kdebug-399621.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
