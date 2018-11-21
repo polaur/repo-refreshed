@@ -7,7 +7,7 @@
 
 pkgname=kio
 pkgver=5.52.0
-pkgrel=1.3
+pkgrel=1.4
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -20,12 +20,14 @@ groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-182367.patch::"https://cgit.kde.org/kio.git/patch/?id=2ae8a0c374cd175380945fc7fae1a38957272435"
 kdebug-399659.patch::"https://cgit.kde.org/kio.git/patch/?id=45597c32627f28bd807a2497b5bbafaf7dfc1f77"
-kdebug-400990.patch::"https://cgit.kde.org/kio.git/patch/?id=4f5b4fd218ca40826300b59dadd5d360b877b9d5")
+kdebug-400990.patch::"https://cgit.kde.org/kio.git/patch/?id=4f5b4fd218ca40826300b59dadd5d360b877b9d5"
+D17065.patch::"https://cgit.kde.org/kio.git/patch/?id=8fb6431784e2db2368e2f6b951084201fddafd46")
 sha256sums=('acb05d730f057a81a263d1b217019ffadc276929462c54add202de44313524a1'
             'SKIP'
             '692bbc684c43dfe033f5f46d700e04bf12792210a74b6da3394309dfaf94b7b8'
             'abd8e0125ff50aca7a24a07c4f7b21d7b6ededbf17fcbbdfea0f39b6bf10bd17'
-            'a8a319ce19ac8d7ab870cf10ea4e1ef9a3b4de41d3f20ff7ea2a2712fb8c37f0')
+            'a8a319ce19ac8d7ab870cf10ea4e1ef9a3b4de41d3f20ff7ea2a2712fb8c37f0'
+            '4f60be9c1054c5200714eb4eacf2e3b16d5016f652927d4e9f9e1f7b040350b0')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -38,6 +40,8 @@ prepare() {
   patch -p1 -i ../kdebug-399659.patch
   msg "Add kdebug 400990 patch"
   patch -p1 -i ../kdebug-400990.patch
+  msg "Fix memory leak - add D17065 patch"
+  patch -p1 -i ../D17065.patch
 }
 
 build() {
