@@ -1,0 +1,50 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for PKGBUILD with upcomming fixes
+# based on the original work of:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kdnssd
+pkgver=5.52.0
+pkgrel=1.1
+pkgdesc='Abstraction to system DNSSD features'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(qt5-base avahi)
+makedepends=(extra-cmake-modules doxygen qt5-tools)
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+D16298.patch::"https://cgit.kde.org/kdnssd.git/patch/?id=3a41622348b9854d632338e4a8a3f9c8bf085b6b"
+D17067.patch::"https://cgit.kde.org/kdnssd.git/patch/?id=67dcc1cee8772481a9f7460f5c90696ce739c066")
+sha256sums=('fe50259eb7d16ee2a3353af34889273b6e5332859f87e7ff501491fdfc1413c1'
+            'SKIP'
+            '018526c24d7b7b2089f89081accf4c5a897895490e81d1b41f3e1d4d0bb5b870'
+            '42616cda4691330fdbe966a9d0f0099b8d0e17117a496ea17cc4e2982b21f00b')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Add D16298 patch"
+  patch -p1 -i ../D16298.patch
+  msg "Add D17067 patch"
+  patch -p1 -i ../D17067.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
