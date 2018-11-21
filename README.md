@@ -3,6 +3,13 @@
 # You install it at your own risk.
 # You've been warned.
 
+# General:
+In this repository you can find PKGBUILDs for packages in "stable" Arch's repository
+with bugfixes from upcomming release. 
+Pkgrel schema is:
+"original, Arch's pkgrel"."our pkgrel" so new pkgrel of this packages in Arch repository
+will upgrade our packages. Then if it will be still neccessary, we upgrade our packages.
+
 # Download:
 
 ```
