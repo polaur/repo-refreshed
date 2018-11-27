@@ -1,13 +1,11 @@
-# Maintainer: pavbaranov <pavbaranov at gmail dot com>
-# for PKGBUILD with upcomming fixes
-# based on the original work of:
+# $Id$
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=libksysguard
-pkgver=5.14.3
-pkgrel=1.2
+pkgver=5.14.4
+pkgrel=1.1
 pkgdesc='Libksysguard'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -15,9 +13,9 @@ license=(LGPL)
 depends=(libxres qt5-webkit kwindowsystem kconfigwidgets)
 makedepends=(extra-cmake-modules kdoctools plasma-framework)
 groups=(plasma)
-source=("1ttps://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 fix-potential-mem-leak.patch::"https://cgit.kde.org/libksysguard.git/patch/?id=b2704850538bee356116f51d4a87fc593dc3cdf1")
-sha256sums=('79ee3bf759ef9116ad9d52940732e29587a46f63533f3e740561965f61b22c25'
+sha256sums=('2233a024aa1d19c0f0d4142ae436df44cf98e0de3203da1a62556891779ad4d9'
             'SKIP'
             'd3638f2ecd269871661c8b679cbf52e939c3c1fc14922ba38c94a274b864fb81')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
@@ -39,7 +37,7 @@ build() {
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DBUILD_TESTING=OFF
-  make
+  make -j5
 }
 
 package() {
