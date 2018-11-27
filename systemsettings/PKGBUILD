@@ -1,13 +1,11 @@
-# Maintainer: pavbaranov <pavbaranov at gmail dot com>
-# for PKGBUILD with upcomming fixes
-# based on the original work of:
+# $Id$
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=systemsettings
-pkgver=5.14.3
-pkgrel=1.2
+pkgver=5.14.4
+pkgrel=1.1
 pkgdesc='KDE system manager for hardware, software, and workspaces'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -18,7 +16,7 @@ optdepends=('khtml: for the tree view')
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-342938.patch::"https://cgit.kde.org/systemsettings.git/patch/?id=ed4367d86a6324023ba17624b6731f861f68f173")
-sha256sums=('ecde7eb26b02b2c1b355e888cf363388f6c382568d059c98ca95bd60c98a46cf'
+sha256sums=('9e7a49e4448b708e6e62891f5bc2b8205f78cd828cb2da1cd0574d944e9a9e3e'
             'SKIP'
             '3a2805d712831a032c18530735b7ee6bfb7597a30ab6e87afefd001b6ff38104')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
