@@ -1,14 +1,12 @@
-# Maintainer: pavbaranov <pavbaranov at gmail dot com>
-# for PKGBUILD with upcomming fixes
-# based on the original work of:
+# $Id$
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
-pkgver=5.14.3
-pkgrel=1.4
+pkgver=5.14.4
+pkgrel=1.1
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -17,23 +15,19 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
 kdebug-397693.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=48b32259e73f374a456ed836ba44e3effe2baee5"
 kdebug-389124.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=ac3c8ba3f11f6ee79cf2e72e74402f1a0e1971b6"
 kdebug-385547.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=a2c87ce86c8047d631988243f28fe8712c43ce01"
-kdebug-400364.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=ab26ebb18b74d8def8e653dc94516fa7da935a5c"
-revert-unintended-line.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=454347370883c7c9b4e8cb29a6cdcffea9553326"
-kdebug-400720.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=e12e3cad1d7ee8c2f95cecd5939a648b508a408e"
-kdebug-401119.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=5bea4b98ad009ae48befb4095423eac519fe7886")
+kdebug-401119.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=5bea4b98ad009ae48befb4095423eac519fe7886"
+fix-leak-in-KAStatsFavoritesModel.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=7f83492a654c019c98bd288d8cec151e17ff5828")
 depends=(polkit-kde-agent libcanberra libxkbfile kmenuedit appstream-qt systemsettings ksysguard kpeople baloo)
 makedepends=(extra-cmake-modules kdoctools boost xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
              libibus scim kdesignerplugin)
 groups=(plasma)
-sha256sums=('9af54b2c36d62510810207a4dd419e494291101c852d4b9574b75ea058a1c24e'
+sha256sums=('721c684085268726591a93c11db251cddf13b2ea094d8d1f7aa9beadfc42b049'
             'SKIP'
             'fb9595156c8a09d93e357995e9f92f38937419875f4a38db854e2509ceae5144'
             'a2ca7332df41b248d338093a10fa60ed28b792f2df30ebd9fe0adcaec67e4009'
             '892e9e45183432fc3866d21b8a8d4ad49e52f1c9afc6369dac841e1daa9bdf55'
-            'be879e69e538ec55ca05ecac9c784938152f3e96dc9e6aa013196d7d8c73eb1b'
-            'c716ea00ee8c2cfb7fc47ada61d383fd0969b7c86ab4a249ee45cf44fef2cbb8'
-            '487e61b8b5cbb91519f37859318c3f4adb4fb172511ec5f3244efda2a8edb13d'
-            '4e9acea586b981f5aa0afd9fa3ce7c46693f5b28e67f3db8586afe6a408a30b5')
+            '4e9acea586b981f5aa0afd9fa3ce7c46693f5b28e67f3db8586afe6a408a30b5'
+            '88f6ef7df304464358794c47af2450ea092be4544b25d4c212a8a0fe0bffc397')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -49,14 +43,10 @@ prepare() {
   patch -p1 -i ../kdebug-389124.patch
   msg "KDEBUG 385547 patch" #Fix 5.15.0
   patch -p1 -i ../kdebug-385547.patch
-  msg "KDEBUG 400364 patch"
-  patch -p1 -i ../kdebug-400364.patch
-  msg "Revert unintended line"
-  patch -p1 -i ../revert-unintended-line.patch
-  msg "Add KDEBUG 400720 patch"
-  patch -p1 -i ../kdebug-400720.patch
   msg "Add KDEBUG 401119 patch"
   patch -p1 -i ../kdebug-401119.patch
+  msg "Fix leak in KAStatsFavoritesModel"
+  patch -p1 -i ../fix-leak-in-KAStatsFavoritesModel.patch
 }
 
 build() {
@@ -69,7 +59,7 @@ build() {
 	-DKDE_INSTALL_PLUGINDIR=/usr/lib/qt/plugins \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	-DKDE_INSTALL_QMLDIR=/usr/lib/qt/qml
-  make 
+  make -j5
 }
 
 package_plasma-desktop() {
