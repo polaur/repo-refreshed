@@ -1,12 +1,10 @@
-# Maintainer: pavbaranov <pavbaranov at gmail dot com>
-# for PKGBUILD with upcomming fixes
-# based on the original work of:
+# $Id$
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=plasma-nm
-pkgver=5.14.3
+pkgver=5.14.4
 pkgrel=1.1
 pkgdesc='Plasma applet written in QML for managing network connections'
 arch=(x86_64)
@@ -18,7 +16,7 @@ optdepends=('openconnect: Cisco AnyConnect VPN plugin')
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-401020.patch::"https://cgit.kde.org/plasma-nm.git/patch/?id=4b549b2d37d8f942b6f821077b87baede447f791")
-sha256sums=('ee456791bb8750ef6dc1b2e56f55a6bb455ed393c5582f7749f33afa6359f869'
+sha256sums=('b3cfa41e0116b896a121ffe5ae0d6bc4cbc0f599d89e7fddff0feb8595525292'
             'SKIP'
             '7dd9228297b89aa93193827cdbbec4a6e2ae1c7246548924e4edea26a18d3129')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
