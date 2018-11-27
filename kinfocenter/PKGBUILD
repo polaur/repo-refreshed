@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kinfocenter
-pkgver=5.14.3
-pkgrel=1.3
+pkgver=5.14.4
+pkgrel=1.1
 pkgdesc='A utility that provides information about a computer system'
 arch=(x86_64)
 url='https://www.kde.org/applications/system/kinfocenter/'
@@ -20,7 +20,7 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
         kcm-about-distrorc
 	kdebug-400732.patch::"https://cgit.kde.org/kinfocenter.git/patch/?id=92f9f21e496f027cc29cda1b73bc749d26d0c46a"
 	fix-mem-leak.patch::"https://cgit.kde.org/kinfocenter.git/patch/?id=dd58d2fe5d9e5036c5deafa992ac1256b878e8fb")
-sha256sums=('677856b904c977155ab905c89861a8c6f20dfc40bd4a92fd5191124756ef57cd'
+sha256sums=('2cc73fac179bd9bcf5c9ed82c9aec6c861e414d70d0042435882da76c66b09da'
             'SKIP'
             '9c6e7faea0ed66bf6ed64b134fad6316161cf146779e4e2f4cd95c644066aab2'
             '02ae86f5ef8de5fabb97db2043065c9b6b77b7c6a71a1115161e559e39c01451'
@@ -47,7 +47,7 @@ build() {
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DBUILD_TESTING=OFF
-  make
+  make -j5
 }
 
 package() {
