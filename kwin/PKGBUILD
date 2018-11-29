@@ -7,7 +7,7 @@
 
 pkgname=kwin
 pkgver=5.14.4
-pkgrel=2.3 #qt5.12rc2
+pkgrel=2.3 
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -87,7 +87,7 @@ build() {
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_INSTALL_LIBEXECDIR=lib \
     -DBUILD_TESTING=OFF
-  make -j5
+  make 
 }
 
 package() {
