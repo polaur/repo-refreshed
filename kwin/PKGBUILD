@@ -7,7 +7,7 @@
 
 pkgname=kwin
 pkgver=5.14.4
-pkgrel=2.3 
+pkgrel=2.5
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -27,6 +27,7 @@ kdebug-375708.patch::"https://cgit.kde.org/kwin.git/patch/?id=7c3a851b040e3b7d33
 kdebug-400980.patch::"https://cgit.kde.org/kwin.git/patch/?id=80da18a143f1b57751e77f9574212ff60ff14950"
 kdebug-392412.patch::"https://cgit.kde.org/kwin.git/patch/?id=8af6d4f5dc74385a9d52820562162dc190f452ff"
 kdebug-401499.patch::"https://cgit.kde.org/kwin.git/patch/?id=437d35eee2421565f505ebe16909349891f31cc6"
+kdebug-400788.patch::"https://cgit.kde.org/kwin.git/patch/?id=295138145ca2cc0b8b9d637f6071298d356084d0"
 )
 sha256sums=('d146dd3742400684328b5ae268b24ebfb118b2cce75ab1b8994ea883491a323d'
             'SKIP'
@@ -39,7 +40,8 @@ sha256sums=('d146dd3742400684328b5ae268b24ebfb118b2cce75ab1b8994ea883491a323d'
             '9aa299eecc01603ceee14d9ffe54b25bbab3eeeecf68fc1fe65adea588a12a3b'
             '42c394bfec2f17c9239040596c7df7a96fab91ed20b7a46e05e8f0ef0763c070'
             'cb4f6b4364a21056be26f32241299c98916a264aae246dc0ceebe2cc9f1aeefd'
-            '99d54a158bf66021524025adc3ef2af2564f17c4410137b3749b1ad12de12b2c')
+            '99d54a158bf66021524025adc3ef2af2564f17c4410137b3749b1ad12de12b2c'
+            'b8ae2ecc61101bbece4d880a5fe03d673a93ace42f4e626a917a53e7850bbc76')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -78,6 +80,9 @@ prepare() {
 
   msg "Add kdebug 401499 patch" #Fix 5.15.0
   patch -p1 -i ../kdebug-401499.patch
+
+  msg "Add kdebug 400788 patch" Fix 5.15.0
+  patch -p1 -i ../kdebug-400788.patch
 }
 
 build() {
@@ -87,7 +92,7 @@ build() {
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_INSTALL_LIBEXECDIR=lib \
     -DBUILD_TESTING=OFF
-  make 
+  make -j5
 }
 
 package() {
