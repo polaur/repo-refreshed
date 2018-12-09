@@ -1,0 +1,44 @@
+diff --git a/src/runtime/kwalletd/CMakeLists.txt b/src/runtime/kwalletd/CMakeLists.txt
+--- a/src/runtime/kwalletd/CMakeLists.txt
++++ b/src/runtime/kwalletd/CMakeLists.txt
+@@ -89,13 +89,15 @@
+     configure_file(org.kde.kwalletd5.service.win.in
+                    ${CMAKE_CURRENT_BINARY_DIR}/org.kde.kwalletd5.service)
+ else()
++    configure_file(org.kde.kwalletd.service.in
++                   ${CMAKE_CURRENT_BINARY_DIR}/org.kde.kwalletd.service)
+     configure_file(org.kde.kwalletd5.service.in
+                    ${CMAKE_CURRENT_BINARY_DIR}/org.kde.kwalletd5.service)
+ endif()
+ 
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.kwalletd5.service
+-        DESTINATION ${DBUS_SERVICES_INSTALL_DIR})
+-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/org.kde.kwalletd.service
++install(FILES
++        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.kwalletd.service
++        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.kwalletd5.service
+         DESTINATION ${DBUS_SERVICES_INSTALL_DIR})
+ 
+ add_executable( kwalletd5 ${kwalletd_SRCS} )
+diff --git a/src/runtime/kwalletd/org.kde.kwalletd.service b/src/runtime/kwalletd/org.kde.kwalletd.service
+deleted file mode 100644
+--- a/src/runtime/kwalletd/org.kde.kwalletd.service
++++ /dev/null
+@@ -1,6 +0,0 @@
+-# this installs an activatable service for the legacy, KDE4, kwalletd
+-# NOTE this file assumes the kwalletd daemon is installed in the usual /usr/bin directory
+-# that is because we have no means here, in KF5, to know about the KDE4 prefix
+-[D-BUS Service]
+-Name=org.kde.kwalletd
+-Exec=/usr/bin/kwalletd
+diff --git a/src/runtime/kwalletd/org.kde.kwalletd.service.in b/src/runtime/kwalletd/org.kde.kwalletd.service.in
+new file mode 100644
+--- /dev/null
++++ b/src/runtime/kwalletd/org.kde.kwalletd.service.in
+@@ -0,0 +1,5 @@
++# this installs an activatable service for the legacy, KDE4 interface
++# kwalletd5 does implement that interface too
++[D-BUS Service]
++Name=org.kde.kwalletd
++Exec=@KDE_INSTALL_FULL_BINDIR@/kwalletd5
+
