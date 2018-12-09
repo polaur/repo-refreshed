@@ -1,0 +1,54 @@
+From 8fb6431784e2db2368e2f6b951084201fddafd46 Mon Sep 17 00:00:00 2001
+From: Laurent Montel <montel@kde.org>
+Date: Wed, 21 Nov 2018 08:04:46 +0100
+Subject: Fix mem leak found with asan
+
+Summary:
+    Fix mem when I used dolphin
+
+    #0 0x7fa8cd24d900 in operator new(unsigned long) (/usr/lib64/libasan.so.5+0xed900)
+    #1 0x7fa8cbc89052 in KFilePlacesModel::Private::Private(KFilePlacesModel*) /compile/kde5/framework/frameworks/kio/src/filewidgets/kfileplacesmodel.cpp:172
+    #2 0x7fa8cbc81703 in KFilePlacesModel::KFilePlacesModel(QString const&, QObject*) /compile/kde5/framework/frameworks/kio/src/filewidgets/kfileplacesmodel.cpp:257
+    #3 0x7fa8ccf83a14 in DolphinPlacesModelSingleton::DolphinPlacesModelSingleton() /compile/kde5/framework/kde/applications/dolphin/src/dolphinplacesmodelsingleton.cpp:26
+    #4 0x7fa8ccf83b9c in DolphinPlacesModelSingleton::instance() /compile/kde5/framework/kde/applications/dolphin/src/dolphinplacesmodelsingleton.cpp:33
+
+Test Plan:
+   Relaunch dolphin with fix + asan => no problem
+
+Reviewers: dfaure
+
+Reviewed By: dfaure
+
+Subscribers: kde-frameworks-devel
+
+Tags: #frameworks
+
+Differential Revision: https://phabricator.kde.org/D17065
+---
+ src/filewidgets/kfileplacesmodel.cpp | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/filewidgets/kfileplacesmodel.cpp b/src/filewidgets/kfileplacesmodel.cpp
+index 533a8e9..29a308b 100644
+--- a/src/filewidgets/kfileplacesmodel.cpp
++++ b/src/filewidgets/kfileplacesmodel.cpp
+@@ -217,6 +217,7 @@ public:
+     ~Private()
+     {
+         qDeleteAll(items);
++        delete tagsLister;
+     }
+ 
+     KFilePlacesModel * const q;
+@@ -239,7 +240,7 @@ public:
+ 
+     QList<QString> tags;
+     const QString tagsUrlBase = QStringLiteral("tags:/");
+-    KCoreDirLister* tagsLister;
++    KCoreDirLister* tagsLister = nullptr;
+ 
+     void _k_initDeviceList();
+     void _k_deviceAdded(const QString &udi);
+-- 
+cgit v0.11.2
+
