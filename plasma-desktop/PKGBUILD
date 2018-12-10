@@ -8,7 +8,7 @@
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
 pkgver=5.14.4
-pkgrel=2.3 
+pkgrel=2.6
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -20,7 +20,9 @@ kdebug-385547.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=a2c87ce8
 kdebug-401119.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=5bea4b98ad009ae48befb4095423eac519fe7886"
 fix-leak-in-KAStatsFavoritesModel.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=7f83492a654c019c98bd288d8cec151e17ff5828"
 kdebug-401508.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=9b1f3e7e"
-kdebug-379432.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=0b654afd88844c5a0ab8eb9a4f639ab52eac6d57")
+kdebug-379432.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=0b654afd88844c5a0ab8eb9a4f639ab52eac6d57"
+kdebug-401932.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=cc8545f9d2d5854b09f302aa93e2a7e2c89469a2"
+)
 depends=(polkit-kde-agent libcanberra libxkbfile kmenuedit appstream-qt systemsettings ksysguard kpeople baloo)
 makedepends=(extra-cmake-modules kdoctools boost xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
              libibus scim kdesignerplugin)
@@ -33,7 +35,8 @@ sha256sums=('721c684085268726591a93c11db251cddf13b2ea094d8d1f7aa9beadfc42b049'
             '4e9acea586b981f5aa0afd9fa3ce7c46693f5b28e67f3db8586afe6a408a30b5'
             '88f6ef7df304464358794c47af2450ea092be4544b25d4c212a8a0fe0bffc397'
             'ab336b9566706e49303d5dd9af5048ae2fa589133a044a3cce9995c514766d04'
-            '9a09fb57af66728b25bd33d7ff9caf4892386cbc7bf36d8e8ec51a4ddca7804b')
+            '9a09fb57af66728b25bd33d7ff9caf4892386cbc7bf36d8e8ec51a4ddca7804b'
+            'bbdd4324a0b3c4efaca1bf12268e1133ebd164f832dd3f7e2ae66bb75d3c9c7d')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson
@@ -57,6 +60,8 @@ prepare() {
   patch -p1 -i ../kdebug-401508.patch
   msg "Add KDEBUG 379432 patch" #Fix 5.14.5
   patch -p1 -i ../kdebug-379432.patch 
+  msg "Add KDEBUG 401932 patch" #Fix probably in 5.14.5
+  patch -p1 -i ../kdebug-401932.patch
 }
 
 build() {
@@ -69,7 +74,7 @@ build() {
 	-DKDE_INSTALL_PLUGINDIR=/usr/lib/qt/plugins \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	-DKDE_INSTALL_QMLDIR=/usr/lib/qt/qml
-  make 
+  make
 }
 
 package_plasma-desktop() {
