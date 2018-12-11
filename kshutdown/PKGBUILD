@@ -1,0 +1,38 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for beta version
+# based on the original work of:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Alexander F Rødseth <xyproto@archlinux.org>
+# Contributor: Tobias Powalowski <tpowa@archlinux.org>
+# Contributor: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=kshutdown
+pkgver=4.99.beta
+pkgrel=1
+pkgdesc='Shutdown Utility'
+arch=(x86_64 i686)
+url='http://kshutdown.sourceforge.io/'
+license=(GPL)
+depends=(knotifyconfig kidletime hicolor-icon-theme)
+makedepends=(extra-cmake-modules python)
+source=("https://sourceforge.net/projects/$pkgname/files/KShutdown/4.99 Beta/kshutdown-source-4.99-beta.zip")
+
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-4.99-beta \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DKS_KF5=ON
+  make 
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
+md5sums=('570fa7766707713558f26c08093f6665')
