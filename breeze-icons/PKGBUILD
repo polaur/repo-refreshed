@@ -7,7 +7,7 @@
 
 pkgname=breeze-icons
 pkgver=5.53.0
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='Breeze icon themes'
 arch=(any)
 url='https://community.kde.org/Frameworks'
@@ -16,10 +16,12 @@ groups=(kf5)
 makedepends=(extra-cmake-modules qt5-base)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-401646.patch::"https://cgit.kde.org/breeze-icons.git/patch/?id=b849a63cefb3fdc0a136b8940cb9df93dcc04da9"
+kdebug-402095.patch::"https://cgit.kde.org/breeze-icons.git/patch/?id=f7fe6d889ae60dd0160e44bbcfd05947fbe1f997"
 )
 sha256sums=('aeb1c147102959838427a47ebbcae07e33779b64dbede66fe143db5c419e2298'
             'SKIP'
-            '0fe91b51c6224adfdb67a92d0d9dc2f3ce88e3f12d04315108e9a56f3ff8fc01')
+            '0fe91b51c6224adfdb67a92d0d9dc2f3ce88e3f12d04315108e9a56f3ff8fc01'
+            '387f27f5d6b4922bd2bf697de215a47eb9b33887f40983a178e6e041fded16dd')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -28,6 +30,8 @@ prepare() {
   cd $pkgname-$pkgver
   msg "Add KDEBUG 401646 patch - fix in 5.54"
   patch -p1 -i ../kdebug-401646.patch
+  msg "Add KDEBUG 402095 patch - fix in 5.54"
+  patch -p1 -i ../kdebug-402095.patch
 }
 
 build() {
@@ -36,7 +40,7 @@ build() {
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DBINARY_ICONS_RESOURCE=ON \
     -DBUILD_TESTING=OFF
-  make -j5
+  make 
 }
 
 package() {
