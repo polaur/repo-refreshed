@@ -7,19 +7,18 @@
 
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
-pkgver=5.14.4
-pkgrel=2.7
+pkgver=5.14.4.1
+pkgrel=0
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
 license=(LGPL)
-source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+source=("https://download.kde.org/stable/plasma/5.14.4/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-397693.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=48b32259e73f374a456ed836ba44e3effe2baee5"
 kdebug-389124.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=ac3c8ba3f11f6ee79cf2e72e74402f1a0e1971b6"
 kdebug-385547.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=a2c87ce86c8047d631988243f28fe8712c43ce01"
 kdebug-401119.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=5bea4b98ad009ae48befb4095423eac519fe7886"
 fix-leak-in-KAStatsFavoritesModel.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=7f83492a654c019c98bd288d8cec151e17ff5828"
-kdebug-401508.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=9b1f3e7e"
 kdebug-379432.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=0b654afd88844c5a0ab8eb9a4f639ab52eac6d57"
 kdebug-401932.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=cc8545f9d2d5854b09f302aa93e2a7e2c89469a2"
 kdebug-395575.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=61b6e098f82566f289e95938de7789fdc84ec345"
@@ -28,14 +27,13 @@ depends=(polkit-kde-agent libcanberra libxkbfile kmenuedit appstream-qt systemse
 makedepends=(extra-cmake-modules kdoctools boost xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
              libibus scim kdesignerplugin)
 groups=(plasma)
-sha256sums=('721c684085268726591a93c11db251cddf13b2ea094d8d1f7aa9beadfc42b049'
+sha256sums=('842105a5d86d953074790db0cbd7f8e0b0a5e7658bfe629b93dd3cd552c59561'
             'SKIP'
             'fb9595156c8a09d93e357995e9f92f38937419875f4a38db854e2509ceae5144'
             'a2ca7332df41b248d338093a10fa60ed28b792f2df30ebd9fe0adcaec67e4009'
             '892e9e45183432fc3866d21b8a8d4ad49e52f1c9afc6369dac841e1daa9bdf55'
             '4e9acea586b981f5aa0afd9fa3ce7c46693f5b28e67f3db8586afe6a408a30b5'
             '88f6ef7df304464358794c47af2450ea092be4544b25d4c212a8a0fe0bffc397'
-            'ab336b9566706e49303d5dd9af5048ae2fa589133a044a3cce9995c514766d04'
             '9a09fb57af66728b25bd33d7ff9caf4892386cbc7bf36d8e8ec51a4ddca7804b'
             'bbdd4324a0b3c4efaca1bf12268e1133ebd164f832dd3f7e2ae66bb75d3c9c7d'
             'a44a7b427c23460f2e727a7fce1760b7e5290c0512dc0da982b949c5d81c718b')
@@ -58,8 +56,6 @@ prepare() {
   patch -p1 -i ../kdebug-401119.patch
   msg "Fix leak in KAStatsFavoritesModel"
   patch -p1 -i ../fix-leak-in-KAStatsFavoritesModel.patch
-  msg "Add KDEBUG 401508 patch"
-  patch -p1 -i ../kdebug-401508.patch
   msg "Add KDEBUG 379432 patch" #Fix 5.14.5
   patch -p1 -i ../kdebug-379432.patch 
   msg "Add KDEBUG 401932 patch" #Fix probably in 5.14.5
@@ -78,7 +74,7 @@ build() {
 	-DKDE_INSTALL_PLUGINDIR=/usr/lib/qt/plugins \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	-DKDE_INSTALL_QMLDIR=/usr/lib/qt/qml
-  make 
+  make -j5
 }
 
 package_plasma-desktop() {
