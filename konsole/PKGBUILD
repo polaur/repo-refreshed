@@ -1,0 +1,52 @@
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=konsole
+pkgver=18.12.0
+pkgrel=1.1
+arch=(x86_64)
+url='https://kde.org/applications/system/konsole/'
+pkgdesc="KDE's terminal emulator"
+license=(GPL LGPL FDL)
+groups=(kde-applications kdebase)
+depends=(knotifyconfig kpty kparts kinit knewstuff)
+makedepends=(extra-cmake-modules kdoctools)
+optdepends=('keditbookmarks: to manage bookmarks')
+source=("https://download.kde.org/stable/applications/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-401463.patch::"https://cgit.kde.org/konsole.git/patch/?id=14b3c8be2c15ed9711b1308b4a991de4aad5802d"
+D16884.diff
+kdebug-364391.patch::"https://cgit.kde.org/konsole.git/patch/?id=d1e5296ef4e423182012a49c1e902718330798e1")
+sha256sums=('235ba8939cd0169c4ac35b6f50e1361f45e71e10db9af25be31283e57ea31513'
+            'SKIP'
+            '1237251e9e14fb169734961d1633362c5cbaab206d877f25191754bff714eda7'
+            '4ca9abb70d330f0a0e1061645f71f1e88f84ef9083793972e1b5d9f2926282b6'
+            '3e49d77d69f2321b265ceaa0b931df9f025669ccf9b674685496eee8acbce529')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Add KDEBUG 401463 patch; fix in 19.04.0"
+  patch -p1 -i ../kdebug-401463.patch
+  msg "Add D16884 patch; release for 19.04.0"
+  patch -p1 -i ../D16884.diff
+  msg "Add KDEBUG 364391 patch; fix in 19.04.0"
+  patch -p1 -i ../kdebug-364391.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF
+  make -j5
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
