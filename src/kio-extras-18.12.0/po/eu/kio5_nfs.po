@@ -1,0 +1,69 @@
+# Translation of kio_nfs.po to Euskara/Basque (eu).
+# Copyright (C) 2003-2014, Free Software Foundation, Inc.
+# This file is distributed under the same license as the kde-runtime package.
+#
+# Marcos  <marcos@euskalgnu.org>, 2003, 2006.
+# Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2013.
+# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_nfs\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2014-02-16 08:23+0100\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
+"Language-Team: Basque <kde-i18n-doc@kde.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: kio_nfs.cpp:131
+#, kde-format
+msgid "%1: Unsupported NFS version"
+msgstr ""
+
+#: kio_nfs.cpp:654
+#, kde-format
+msgid "RPC error %1"
+msgstr ""
+
+#: kio_nfs.cpp:697
+#, kde-format
+msgid "No space left on device"
+msgstr "Ez da lekurik geratzen gailuan"
+
+#: kio_nfs.cpp:700
+#, kde-format
+msgid "Read only file system"
+msgstr "Irakurtzeko soilik den fitxategi-sistema"
+
+#: kio_nfs.cpp:703
+#, kde-format
+msgid "Filename too long"
+msgstr "Fitxategi-izena luzeegia"
+
+#: kio_nfs.cpp:710
+#, kde-format
+msgid "Disk quota exceeded"
+msgstr "Disko-kuota gaindituta"
+
+#: kio_nfs.cpp:716
+#, kde-format
+msgid "NFS error %1 - %2"
+msgstr ""
+
+#: nfsv2.cpp:260 nfsv3.cpp:275
+#, kde-format
+msgid "Failed to mount %1"
+msgstr ""
+
+#: nfsv2.cpp:431 nfsv2.cpp:492 nfsv3.cpp:447 nfsv3.cpp:612
+#, kde-format
+msgid "Unknown target"
+msgstr ""
+
+#~ msgid "An RPC error occurred."
+#~ msgstr "RPC errore bat gertatu da."

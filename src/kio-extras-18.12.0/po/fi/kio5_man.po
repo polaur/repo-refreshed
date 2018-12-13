@@ -1,0 +1,196 @@
+# translation of kio_man.po to Finnish
+# KDE Finnish translation sprint participants:
+# Author: Lliehu
+# Kim Enkovaara <kim.enkovaara@iki.fi>, 2002, 2003, 2006.
+# Teemu Rytilahti <teemu.rytilahti@kde-fi.org>, 2003, 2008.
+# Ilpo Kantonen <ilpo@iki.fi>, 2005.
+# Teemu Rytilahti <teemu.rytilahti@d5k.net>, 2008.
+# Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_man\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2013-05-06 01:56+0300\n"
+"Last-Translator: Lasse Liehu <lasse.liehu@gmail.com>\n"
+"Language-Team: Finnish <lokalisointi@lists.coss.fi>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-POT-Import-Date: 2012-12-01 22:22:13+0000\n"
+"X-Generator: Lokalize 1.5\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Kim Enkovaara, Ilpo Kantonen"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kim.enkovaara@iki.fi, ilpo@iki.fi"
+
+#: kio_man.cpp:479
+#, kde-format
+msgid ""
+"No man page matching to %1 found.<br /><br />Check that you have not "
+"mistyped the name of the page that you want.<br />Check that you have typed "
+"the name using the correct upper and lower case characters.<br />If "
+"everything looks correct, then you may need to improve the search path for "
+"man pages; either using the environment variable MANPATH or using a matching "
+"file in the /etc directory."
+msgstr ""
+"Man-sivua %1 ei löydy.<br /><br />Tarkista, ettet ole kirjoittanut väärin "
+"haluamasi sivun nimeä.<br />Ole tarkka pien- ja suuraakkosten kanssa.<br /"
+">Jos kaikki näyttää olevan oikein, sinun tulee ehkä asettaa parempi "
+"etsintäpolku manuaalisivuille. Se on joko ympäristömuuttujassa MANPATH tai "
+"täsmäävässä tiedostossa kansiossa /etc."
+
+#: kio_man.cpp:510
+#, kde-format
+msgid "Open of %1 failed."
+msgstr "Osoitteen %1 avaaminen epäonnistui."
+
+#: kio_man.cpp:604 kio_man.cpp:622
+#, kde-format
+msgid "Man output"
+msgstr "Man tuloste"
+
+#: kio_man.cpp:608
+#, kde-format
+msgid "<h1>KDE Man Viewer Error</h1>"
+msgstr "<h1>Tapahtui virhe näyttäessä man-sivua</h1>"
+
+#: kio_man.cpp:626
+#, kde-format
+msgid "There is more than one matching man page."
+msgstr "Löytyi useampi kuin yksi man-sivu."
+
+#: kio_man.cpp:637
+#, kde-format
+msgid ""
+"Note: if you read a man page in your language, be aware it can contain some "
+"mistakes or be obsolete. In case of doubt, you should have a look at the "
+"English version."
+msgstr ""
+"Huom: Jos luet manuaalisivua omalla kielelläsi, ole varuillasi: se voi "
+"sisältää virheitä tai on vanhentunut. Ongelmatilanteissa sinun tulee "
+"vilkaista englanninkielistä versiota."
+
+#: kio_man.cpp:719
+#, kde-format
+msgid "Header files"
+msgstr "Otsikkotiedostot"
+
+#: kio_man.cpp:720
+#, kde-format
+msgid "Header files (POSIX)"
+msgstr "Otsikkotiedostot (POSIX)"
+
+#: kio_man.cpp:721
+#, kde-format
+msgid "User Commands"
+msgstr "Käyttäjän komennot"
+
+#: kio_man.cpp:722
+#, kde-format
+msgid "User Commands (POSIX)"
+msgstr "Käyttäjän komennot (POSIX)"
+
+#: kio_man.cpp:723
+#, kde-format
+msgid "System Calls"
+msgstr "Järjestelmäkutsut"
+
+#: kio_man.cpp:724
+#, kde-format
+msgid "Subroutines"
+msgstr "Aliohjelmat"
+
+#: kio_man.cpp:725
+#, kde-format
+msgid "Perl Modules"
+msgstr "Perl-moduulit"
+
+#: kio_man.cpp:726
+#, kde-format
+msgid "Network Functions"
+msgstr "Verkkofunktiot"
+
+#: kio_man.cpp:727
+#, kde-format
+msgid "Devices"
+msgstr "Laitteet"
+
+#: kio_man.cpp:728
+#, kde-format
+msgid "File Formats"
+msgstr "Tiedostomuodot"
+
+#: kio_man.cpp:729
+#, kde-format
+msgid "Games"
+msgstr "Pelit"
+
+#: kio_man.cpp:730
+#, kde-format
+msgid "Miscellaneous"
+msgstr "Sekalaiset"
+
+#: kio_man.cpp:731
+#, kde-format
+msgid "System Administration"
+msgstr "Järjestelmän ylläpito"
+
+#: kio_man.cpp:732
+#, kde-format
+msgid "Kernel"
+msgstr "Ydin"
+
+#: kio_man.cpp:733
+#, kde-format
+msgid "Local Documentation"
+msgstr "Paikallinen dokumentaatio"
+
+#: kio_man.cpp:734
+#, kde-format
+msgid "New"
+msgstr "Uusi"
+
+#: kio_man.cpp:769 kio_man.cpp:773 kio_man.cpp:1143
+#, kde-format
+msgid "UNIX Manual Index"
+msgstr "UNIX-manuaalihakemisto"
+
+#: kio_man.cpp:799
+#, kde-format
+msgid "Section %1"
+msgstr "Osio  %1"
+
+#: kio_man.cpp:1152
+#, kde-format
+msgid "Index for Section %1: %2"
+msgstr "Sisällysluettelo osiolle %1: %2"
+
+#: kio_man.cpp:1157
+#, kde-format
+msgid "Generating Index"
+msgstr "Luodaan hakemistoa"
+
+#: kio_man.cpp:1428
+#, kde-format
+msgid ""
+"Could not find the sgml2roff program on your system. Please install it, if "
+"necessary, and extend the search path by adjusting the environment variable "
+"PATH before starting KDE."
+msgstr ""
+"Ohjelmaa sgml2roff ei löytynyt järjestelmästäsi. Asenna se, jos se on "
+"tarpeen, ja lisää se hakupolkuun laajentamalla PATH ympäristömuuttujaa, "
+"ennen KDE:n käynnistystä."
+
+#: kmanpart.cpp:30
+#, kde-format
+msgid "KMan"
+msgstr "KMan"

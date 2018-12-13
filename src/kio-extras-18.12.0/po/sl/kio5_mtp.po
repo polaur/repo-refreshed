@@ -1,0 +1,39 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Andrej Mernik <andrejm@ubuntu.si>, 2014, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2016-11-05 18:04+0100\n"
+"Last-Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: kio_mtp.cpp:219
+#, fuzzy, kde-format
+#| msgid ""
+#| "No Storages found. Make sure your device is unlocked and has MTP enabled "
+#| "in its USB connection settings."
+msgid ""
+"No storages found. Make sure your device is unlocked and has MTP enabled in "
+"its USB connection settings."
+msgstr ""
+"Ni bilo najdenih shramb. Prepričajte se, da je vaša naprava odklenjena in "
+"ima v nastavitvah povezave USB vklopljen MTP."
+
+#: kio_mtp.cpp:513
+#, kde-format
+msgid "Cannot copy/move files on the device itself"
+msgstr "Ni mogoče kopirati/premakniti datotek na napravo samo"
+
+#~ msgid "No Storages found. Maybe you need to unlock your device?"
+#~ msgstr "Ni najdenih shramb. Morda morate odkleniti vašo napravo?"

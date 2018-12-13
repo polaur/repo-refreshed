@@ -1,0 +1,199 @@
+# translation of kio_man.po to Slovenian
+# Translation of kio_man.po to Slovenian
+# SLOVENIAN TRANSLATION OF KIO_MAN.
+# $Id: kio5_man.po 1528210 2018-11-12 06:44:57Z scripty $
+# $Source$
+#
+# Copyright (C) 2001, 2003, 2005 Free Software Foundation, Inc.
+# Marko Samastur <markos@elite.org>, 2000.
+# Gregor Rakar <gregor.rakar@kiss.si>, 2003.
+# Jure Repinc <jlp@holodeck1.com>, 2007, 2008, 2009, 2012.
+# Andrej Mernik <andrejm@ubuntu.si>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_man\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2013-06-03 17:41+0200\n"
+"Last-Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Roman Maurer,Jure Repinc,Andrej Mernik"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "roman.maurer@amis.net,jlp@holodeck1.com,andrejm@ubuntu.si"
+
+#: kio_man.cpp:479
+#, kde-format
+msgid ""
+"No man page matching to %1 found.<br /><br />Check that you have not "
+"mistyped the name of the page that you want.<br />Check that you have typed "
+"the name using the correct upper and lower case characters.<br />If "
+"everything looks correct, then you may need to improve the search path for "
+"man pages; either using the environment variable MANPATH or using a matching "
+"file in the /etc directory."
+msgstr ""
+"Ni mogoče najti strani man, ki bi ustrezala %1.<br /> <br /> Prepričajte se, "
+"da se niste zatipkali pri imenu želene strani.<br />Pazite na velikost črk!"
+"<br />Če vse izgleda pravilno, bo mogoče potrebno bolje nastaviti pot za "
+"iskanje strani man. To lahko storite z okoljsko spremenljivko MANPATH ali pa "
+"z ustrezno datoteko v mapi /etc."
+
+#: kio_man.cpp:510
+#, kde-format
+msgid "Open of %1 failed."
+msgstr "Odpiranje %1 je spodletelo."
+
+#: kio_man.cpp:604 kio_man.cpp:622
+#, kde-format
+msgid "Man output"
+msgstr "Izpis man"
+
+#: kio_man.cpp:608
+#, kde-format
+msgid "<h1>KDE Man Viewer Error</h1>"
+msgstr "<h1>Napaka pregledovalnika strani man za KDE</h1>"
+
+#: kio_man.cpp:626
+#, kde-format
+msgid "There is more than one matching man page."
+msgstr "Na voljo je več ujemanj strani man."
+
+#: kio_man.cpp:637
+#, kde-format
+msgid ""
+"Note: if you read a man page in your language, be aware it can contain some "
+"mistakes or be obsolete. In case of doubt, you should have a look at the "
+"English version."
+msgstr ""
+"Opomba: ko berete strani man v slovenščini, se morate zavedati, da lahko "
+"vsebujejo napake ali pa so zastarele. Če ste v dvomih, si oglejte različico "
+"v angleščini."
+
+#: kio_man.cpp:719
+#, kde-format
+msgid "Header files"
+msgstr "Datoteke glave"
+
+#: kio_man.cpp:720
+#, kde-format
+msgid "Header files (POSIX)"
+msgstr "Datoteke glave (POSIX)"
+
+#: kio_man.cpp:721
+#, kde-format
+msgid "User Commands"
+msgstr "Uporabniški ukazi"
+
+#: kio_man.cpp:722
+#, kde-format
+msgid "User Commands (POSIX)"
+msgstr "Uporabniški ukazi (POSIX)"
+
+#: kio_man.cpp:723
+#, kde-format
+msgid "System Calls"
+msgstr "Sistemski klici"
+
+#: kio_man.cpp:724
+#, kde-format
+msgid "Subroutines"
+msgstr "Podprogrami"
+
+#: kio_man.cpp:725
+#, kde-format
+msgid "Perl Modules"
+msgstr "Moduli Perl"
+
+#: kio_man.cpp:726
+#, kde-format
+msgid "Network Functions"
+msgstr "Omrežne funkcije"
+
+#: kio_man.cpp:727
+#, kde-format
+msgid "Devices"
+msgstr "Naprave"
+
+#: kio_man.cpp:728
+#, kde-format
+msgid "File Formats"
+msgstr "Vrste datotek"
+
+#: kio_man.cpp:729
+#, kde-format
+msgid "Games"
+msgstr "Igre"
+
+#: kio_man.cpp:730
+#, kde-format
+msgid "Miscellaneous"
+msgstr "Razno"
+
+#: kio_man.cpp:731
+#, kde-format
+msgid "System Administration"
+msgstr "Skrbništvo sistema"
+
+#: kio_man.cpp:732
+#, kde-format
+msgid "Kernel"
+msgstr "Jedro"
+
+#: kio_man.cpp:733
+#, kde-format
+msgid "Local Documentation"
+msgstr "Krajevna dokumentacija"
+
+#: kio_man.cpp:734
+#, kde-format
+msgid "New"
+msgstr "Novo"
+
+#: kio_man.cpp:769 kio_man.cpp:773 kio_man.cpp:1143
+#, kde-format
+msgid "UNIX Manual Index"
+msgstr "Kazalo za priročnik UNIX"
+
+#: kio_man.cpp:799
+#, kde-format
+msgid "Section %1"
+msgstr "Odsek %1"
+
+#: kio_man.cpp:1152
+#, kde-format
+msgid "Index for Section %1: %2"
+msgstr "Kazalo za odsek %1: %2"
+
+#: kio_man.cpp:1157
+#, kde-format
+msgid "Generating Index"
+msgstr "Ustvarjanje kazala"
+
+#: kio_man.cpp:1428
+#, kde-format
+msgid ""
+"Could not find the sgml2roff program on your system. Please install it, if "
+"necessary, and extend the search path by adjusting the environment variable "
+"PATH before starting KDE."
+msgstr ""
+"Na vašem sistemu ni bilo mogoče najti programa sgml2roff. Namestite ga, če "
+"je potrebno, in razširite poti iskanja s prilagoditvijo okoljske "
+"spremenljivke PATH pred zagonom KDE."
+
+#: kmanpart.cpp:30
+#, kde-format
+msgid "KMan"
+msgstr "KMan"

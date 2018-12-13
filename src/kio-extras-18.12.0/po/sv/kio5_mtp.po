@@ -1,0 +1,35 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2015, 2016, 2018.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2018-10-10 17:49+0100\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: kio_mtp.cpp:219
+#, kde-format
+msgid ""
+"No storages found. Make sure your device is unlocked and has MTP enabled in "
+"its USB connection settings."
+msgstr ""
+"Inga lagringsenheter hittades. Försäkra dig om att enheten är upplåst och "
+"har MTP aktiverad i inställningarna för USB-anslutning."
+
+#: kio_mtp.cpp:513
+#, kde-format
+msgid "Cannot copy/move files on the device itself"
+msgstr "Kan inte kopiera eller flytta filer på själva enheten"
+
+#~ msgid "No Storages found. Maybe you need to unlock your device?"
+#~ msgstr "Ingen lagringsenhet hittades. Kanske måste enheten låsas upp?"

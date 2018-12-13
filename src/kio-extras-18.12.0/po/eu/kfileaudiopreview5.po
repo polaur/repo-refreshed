@@ -1,0 +1,45 @@
+# translation of kfileaudiopreview4.po to Basque
+# Copyright (C) 2003, 2005, 2009 Free Software Foundation, Inc.
+#
+# Marcos  <marcos@euskalgnu.org>, 2003.
+# Mikel Goñi Larrea <golami@euskalerria.org>, 2003, 2005.
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2009.
+# marcos <marcos@euskalgnu.org>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: kfileaudiopreview4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2009-11-21 10:50+0100\n"
+"Last-Translator: marcos <marcos@euskalgnu.org>\n"
+"Language-Team: Euskara <itzulpena@euskalgnu.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: kfileaudiopreview.cpp:81
+#, kde-format
+msgid "Play &automatically"
+msgstr "Erreproduzitu &automatikoki"
+
+#: mediacontrols_p.h:51
+#, kde-format
+msgid "start playback"
+msgstr "hasi jotzen"
+
+#: mediacontrols_p.h:56
+#, kde-format
+msgid "pause playback"
+msgstr "eten jotzen"
+
+#~ msgid "stop playback"
+#~ msgstr "gelditu jotzen"
+
+#~ msgid "loop: restarts playback at end"
+#~ msgstr "Begizta: berhasi jotzen bukatzen denean"
+
+#~ msgid "Media Player"
+#~ msgstr "Multimedia erreproduzitzailea"

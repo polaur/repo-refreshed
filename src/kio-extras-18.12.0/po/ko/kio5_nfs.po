@@ -1,0 +1,67 @@
+# Korean messages for kio_nfs.
+# Copyright (C) 2002 Free Software Foundation, Inc.
+# KIM KyungHeon <tody@teoal.net>, 2002.
+# Shinjo Park <kde@peremen.name>, 2007, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_nfs\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2015-01-02 00:53+0900\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde@peremen.name>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8Bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: kio_nfs.cpp:131
+#, kde-format
+msgid "%1: Unsupported NFS version"
+msgstr "%1: 지원하지 않는 NFS 버전"
+
+#: kio_nfs.cpp:654
+#, kde-format
+msgid "RPC error %1"
+msgstr "RPC 오류 %1"
+
+#: kio_nfs.cpp:697
+#, kde-format
+msgid "No space left on device"
+msgstr "장치에 공간이 부족합니다"
+
+#: kio_nfs.cpp:700
+#, kde-format
+msgid "Read only file system"
+msgstr "읽기 전용 파일 시스템"
+
+#: kio_nfs.cpp:703
+#, kde-format
+msgid "Filename too long"
+msgstr "파일 이름이 너무 깁니다"
+
+#: kio_nfs.cpp:710
+#, kde-format
+msgid "Disk quota exceeded"
+msgstr "디스크 할당량을 초과했습니다"
+
+#: kio_nfs.cpp:716
+#, kde-format
+msgid "NFS error %1 - %2"
+msgstr "NFS 오류 %1 - %2"
+
+#: nfsv2.cpp:260 nfsv3.cpp:275
+#, kde-format
+msgid "Failed to mount %1"
+msgstr "%1을(를) 마운트할 수 없음"
+
+#: nfsv2.cpp:431 nfsv2.cpp:492 nfsv3.cpp:447 nfsv3.cpp:612
+#, kde-format
+msgid "Unknown target"
+msgstr "알 수 없는 대상"
+
+#~ msgid "An RPC error occurred."
+#~ msgstr "RPC 오류가 발생했습니다."

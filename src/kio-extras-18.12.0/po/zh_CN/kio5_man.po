@@ -1,0 +1,194 @@
+# translation of kio_man.po to 简体中文
+# Copyright (C) 2003, 2008 Free Software Foundation, Inc.
+#
+#
+# Li Zongliang <zongliang@li.com.cn>, 2001.
+# Xiong Jiang <jxiong@offtopic.org>, 2003.
+# Ni Hui <shuizhuyuanluo@126.com>, 2008, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeorg\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2018-11-12 09:23\n"
+"Last-Translator: guoyunhe <i@guoyunhe.me>\n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: crowdin.com\n"
+"X-Crowdin-Project: kdeorg\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /kf5-stable/messages/kdenetwork/kio5_man.pot\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "KDE 中国"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kde-china@kde.org"
+
+#: kio_man.cpp:479
+#, kde-format
+msgid ""
+"No man page matching to %1 found.<br /><br />Check that you have not "
+"mistyped the name of the page that you want.<br />Check that you have typed "
+"the name using the correct upper and lower case characters.<br />If "
+"everything looks correct, then you may need to improve the search path for "
+"man pages; either using the environment variable MANPATH or using a matching "
+"file in the /etc directory."
+msgstr ""
+"未找到与 %1 匹配的手册页。<br /><br />请检查您是否输入错了您想要访问的页面名"
+"称。<br />您还应该注意是否正确输入了字母的大小写。<br />如果所有内容都输入正"
+"确了的话，那么您可能需要修正手册页的搜索路径，此时应查看一下环境变量 MANPATH "
+"或 /etc 目录中的文件。"
+
+#: kio_man.cpp:510
+#, kde-format
+msgid "Open of %1 failed."
+msgstr "打开 %1 失败。"
+
+#: kio_man.cpp:604 kio_man.cpp:622
+#, kde-format
+msgid "Man output"
+msgstr "Man 输出"
+
+#: kio_man.cpp:608
+#, kde-format
+msgid "<h1>KDE Man Viewer Error</h1>"
+msgstr "<h1>KDE 手册页查看器错误</h1>"
+
+#: kio_man.cpp:626
+#, kde-format
+msgid "There is more than one matching man page."
+msgstr "有多个匹配的手册页。"
+
+#: kio_man.cpp:637
+#, kde-format
+msgid ""
+"Note: if you read a man page in your language, be aware it can contain some "
+"mistakes or be obsolete. In case of doubt, you should have a look at the "
+"English version."
+msgstr ""
+"请注意：如果您正在阅读非英语的手册页，那么该手册页很可能包含错误或已过时。如"
+"果您怀有疑问的话，请以英文版本为准。"
+
+#: kio_man.cpp:719
+#, kde-format
+msgid "Header files"
+msgstr "头文件"
+
+#: kio_man.cpp:720
+#, kde-format
+msgid "Header files (POSIX)"
+msgstr "头文件 (POSIX)"
+
+#: kio_man.cpp:721
+#, kde-format
+msgid "User Commands"
+msgstr "用户命令"
+
+#: kio_man.cpp:722
+#, kde-format
+msgid "User Commands (POSIX)"
+msgstr "用户命令 (POSIX)"
+
+#: kio_man.cpp:723
+#, kde-format
+msgid "System Calls"
+msgstr "系统调用"
+
+#: kio_man.cpp:724
+#, kde-format
+msgid "Subroutines"
+msgstr "子例程"
+
+#: kio_man.cpp:725
+#, kde-format
+msgid "Perl Modules"
+msgstr "Perl 模块"
+
+#: kio_man.cpp:726
+#, kde-format
+msgid "Network Functions"
+msgstr "网络函数"
+
+#: kio_man.cpp:727
+#, kde-format
+msgid "Devices"
+msgstr "设备"
+
+#: kio_man.cpp:728
+#, kde-format
+msgid "File Formats"
+msgstr "文件格式"
+
+#: kio_man.cpp:729
+#, kde-format
+msgid "Games"
+msgstr "游戏"
+
+#: kio_man.cpp:730
+#, kde-format
+msgid "Miscellaneous"
+msgstr "其它"
+
+#: kio_man.cpp:731
+#, kde-format
+msgid "System Administration"
+msgstr "系统管理"
+
+#: kio_man.cpp:732
+#, kde-format
+msgid "Kernel"
+msgstr "内核"
+
+#: kio_man.cpp:733
+#, kde-format
+msgid "Local Documentation"
+msgstr "本地文档"
+
+#: kio_man.cpp:734
+#, kde-format
+msgid "New"
+msgstr "新增部分"
+
+#: kio_man.cpp:769 kio_man.cpp:773 kio_man.cpp:1143
+#, kde-format
+msgid "UNIX Manual Index"
+msgstr "UNIX 手册索引"
+
+#: kio_man.cpp:799
+#, kde-format
+msgid "Section %1"
+msgstr "节 %1"
+
+#: kio_man.cpp:1152
+#, kde-format
+msgid "Index for Section %1: %2"
+msgstr "章节索引 %1：%2"
+
+#: kio_man.cpp:1157
+#, kde-format
+msgid "Generating Index"
+msgstr "生成索引"
+
+#: kio_man.cpp:1428
+#, kde-format
+msgid ""
+"Could not find the sgml2roff program on your system. Please install it, if "
+"necessary, and extend the search path by adjusting the environment variable "
+"PATH before starting KDE."
+msgstr ""
+"在您的系统中未找到 sgml2roff 程序。请安装它，并且必要的话在启动 KDE 前调整 "
+"PATH 环境变量，扩展搜索路径。"
+
+#: kmanpart.cpp:30
+#, kde-format
+msgid "KMan"
+msgstr "KMan"

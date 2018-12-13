@@ -1,0 +1,47 @@
+Determining if files util.h exist failed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_9bbcc/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9bbcc.dir/build.make CMakeFiles/cmTC_9bbcc.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9bbcc.dir/HAVE_UTIL_H.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration    -o CMakeFiles/cmTC_9bbcc.dir/HAVE_UTIL_H.c.o   -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CheckIncludeFiles/HAVE_UTIL_H.c
+/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CheckIncludeFiles/HAVE_UTIL_H.c:2:10: fatal error: util.h: Nie ma takiego pliku ani katalogu
+ #include <util.h>
+          ^~~~~~~~
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_9bbcc.dir/build.make:66: CMakeFiles/cmTC_9bbcc.dir/HAVE_UTIL_H.c.o] Błąd 1
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_9bbcc/fast] Błąd 2
+
+Source:
+/* */
+#include <util.h>
+
+
+int main(void){return 0;}
+
+Determining if files sys/types.h;libutil.h exist failed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_043d1/fast"
+/usr/bin/make -f CMakeFiles/cmTC_043d1.dir/build.make CMakeFiles/cmTC_043d1.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_043d1.dir/HAVE_LIBUTIL_H.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration    -o CMakeFiles/cmTC_043d1.dir/HAVE_LIBUTIL_H.c.o   -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CheckIncludeFiles/HAVE_LIBUTIL_H.c
+/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CheckIncludeFiles/HAVE_LIBUTIL_H.c:3:10: fatal error: libutil.h: Nie ma takiego pliku ani katalogu
+ #include <libutil.h>
+          ^~~~~~~~~~~
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_043d1.dir/build.make:66: CMakeFiles/cmTC_043d1.dir/HAVE_LIBUTIL_H.c.o] Błąd 1
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_043d1/fast] Błąd 2
+
+Source:
+/* */
+#include <sys/types.h>
+#include <libutil.h>
+
+
+int main(void){return 0;}
+

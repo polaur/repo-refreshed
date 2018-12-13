@@ -1,0 +1,192 @@
+# Korean messages for kio_man.
+# Copyright (C) 2001-2004, 2007-2008 Free Software Foundation, Inc.
+#
+# Sae-keun Kim <segni@susekorea.net>, 2001.
+# KIM KyungHeon <tody@kde.or.kr>, 2002.
+# Seok Lee <ddoman@kde.or.kr>, 2004.
+# Shinjo Park <kde@peremen.name>, 2007, 2008, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_man\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2012-10-14 02:21+0900\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <cho.sungjae@gmail.com>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Shinjo Park"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kde@peremen.name"
+
+#: kio_man.cpp:479
+#, kde-format
+msgid ""
+"No man page matching to %1 found.<br /><br />Check that you have not "
+"mistyped the name of the page that you want.<br />Check that you have typed "
+"the name using the correct upper and lower case characters.<br />If "
+"everything looks correct, then you may need to improve the search path for "
+"man pages; either using the environment variable MANPATH or using a matching "
+"file in the /etc directory."
+msgstr ""
+"%1와(과) 일치하는 man 페이지를 찾을 수 없습니다.<br /><br />원하는 페이지의 "
+"이름을 제대로 입력했는지 확인하십시오.<br />문자열의 대소문자는 구분됩니다. "
+"이것을 혼동하지 않았는지 확인하십시오.<br />만약 모든 것이 올바른 것 같다면, "
+"MANPATH 환경 변수를 편집하거나 /etc에 있는 일치하는 파일이 있는지 확인하는 식"
+"으로 man 페이지를 찾는 다른 경로를 지정하십시오."
+
+#: kio_man.cpp:510
+#, kde-format
+msgid "Open of %1 failed."
+msgstr "%1을(를) 여는 데 실패했습니다."
+
+#: kio_man.cpp:604 kio_man.cpp:622
+#, kde-format
+msgid "Man output"
+msgstr "Man 출력"
+
+#: kio_man.cpp:608
+#, kde-format
+msgid "<h1>KDE Man Viewer Error</h1>"
+msgstr "<h1>KDE Man 뷰어 오류</h1>"
+
+#: kio_man.cpp:626
+#, kde-format
+msgid "There is more than one matching man page."
+msgstr "일치하는 맨 페이지가 하나 이상입니다."
+
+#: kio_man.cpp:637
+#, kde-format
+msgid ""
+"Note: if you read a man page in your language, be aware it can contain some "
+"mistakes or be obsolete. In case of doubt, you should have a look at the "
+"English version."
+msgstr ""
+"메모: 만약 man 페이지가 여러분의 언어로 되어 있다면 몇몇 실수나 과거 항목을 "
+"포함하고 있습니다. 의심되는 경우에는 영어 버전을 참고하십시오."
+
+#: kio_man.cpp:719
+#, kde-format
+msgid "Header files"
+msgstr "헤더 파일"
+
+#: kio_man.cpp:720
+#, kde-format
+msgid "Header files (POSIX)"
+msgstr "헤더 파일 (POSIX)"
+
+#: kio_man.cpp:721
+#, kde-format
+msgid "User Commands"
+msgstr "사용자 명령"
+
+#: kio_man.cpp:722
+#, kde-format
+msgid "User Commands (POSIX)"
+msgstr "사용자 명령 (POSIX)"
+
+#: kio_man.cpp:723
+#, kde-format
+msgid "System Calls"
+msgstr "시스템 콜"
+
+#: kio_man.cpp:724
+#, kde-format
+msgid "Subroutines"
+msgstr "서브루틴"
+
+#: kio_man.cpp:725
+#, kde-format
+msgid "Perl Modules"
+msgstr "펄 모듈"
+
+#: kio_man.cpp:726
+#, kde-format
+msgid "Network Functions"
+msgstr "네트워크 함수"
+
+#: kio_man.cpp:727
+#, kde-format
+msgid "Devices"
+msgstr "장치"
+
+#: kio_man.cpp:728
+#, kde-format
+msgid "File Formats"
+msgstr "파일 형식"
+
+#: kio_man.cpp:729
+#, kde-format
+msgid "Games"
+msgstr "게임"
+
+#: kio_man.cpp:730
+#, kde-format
+msgid "Miscellaneous"
+msgstr "기타"
+
+#: kio_man.cpp:731
+#, kde-format
+msgid "System Administration"
+msgstr "시스템 관리"
+
+#: kio_man.cpp:732
+#, kde-format
+msgid "Kernel"
+msgstr "커널"
+
+#: kio_man.cpp:733
+#, kde-format
+msgid "Local Documentation"
+msgstr "로컬 문서"
+
+#: kio_man.cpp:734
+#, kde-format
+msgid "New"
+msgstr "새로운 항목"
+
+#: kio_man.cpp:769 kio_man.cpp:773 kio_man.cpp:1143
+#, kde-format
+msgid "UNIX Manual Index"
+msgstr "UNIX 설명서 색인"
+
+#: kio_man.cpp:799
+#, kde-format
+msgid "Section %1"
+msgstr "섹션 %1"
+
+#: kio_man.cpp:1152
+#, kde-format
+msgid "Index for Section %1: %2"
+msgstr "섹션 %1의 색인: %2"
+
+#: kio_man.cpp:1157
+#, kde-format
+msgid "Generating Index"
+msgstr "색인 만드는 중"
+
+#: kio_man.cpp:1428
+#, kde-format
+msgid ""
+"Could not find the sgml2roff program on your system. Please install it, if "
+"necessary, and extend the search path by adjusting the environment variable "
+"PATH before starting KDE."
+msgstr ""
+"sgml2roff 프로그램을 찾을 수 없습니다. 해당 프로그램을 설치하시고 만약 필요하"
+"다면 KDE를 시작하시기 전에 프로그램이 있는 곳으로 PATH 환경변수를 올바르게 설"
+"정하여 주십시오."
+
+#: kmanpart.cpp:30
+#, kde-format
+msgid "KMan"
+msgstr "KMan"

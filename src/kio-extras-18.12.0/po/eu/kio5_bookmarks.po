@@ -1,0 +1,73 @@
+# Translation of kio_bookmarks.po to Euskara/Basque (eu).
+# Copyright (C) 2008-2014, Free Software Foundation, Inc.
+# This file is distributed under the same license as the kde-runtime package.
+#
+# Asier Urio Larrea <asieriko@gmail.com>, 2008.
+# Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2013.
+# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_bookmarks\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2014-02-17 23:54+0100\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
+"Language-Team: Basque <kde-i18n-doc@kde.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: kio_bookmarks.cpp:87
+#, kde-format
+msgid "Root"
+msgstr "Erroa"
+
+#: kio_bookmarks.cpp:120
+#, kde-format
+msgid "Places"
+msgstr "Tokiak"
+
+#: kio_bookmarks.cpp:198
+#, kde-format
+msgid "Wrong request: %1"
+msgstr "Eskaera okerra: %1"
+
+#: kio_bookmarks_html.cpp:97
+#, kde-format
+msgid "There are no bookmarks to display yet."
+msgstr "Oraindik ez dago laster-markarik bistaratzeko."
+
+#: kio_bookmarks_html.cpp:136
+#, kde-format
+msgid ""
+"kio_bookmarks CSS file not found. Output will look ugly.\n"
+"Check your installation."
+msgstr ""
+"Ez da aurkitu kio_bookmarks-erako CSS fitxategia. Irteera ez da ondo "
+"ikusiko.\n"
+"Egiaztatu instalazioa."
+
+#: kio_bookmarks_html.cpp:145
+#, kde-format
+msgid "My Bookmarks"
+msgstr "Nire laster-markak"
+
+#~ msgid "My bookmarks"
+#~ msgstr "Nire laster-markak"
+
+#~ msgid "Xavier Vello"
+#~ msgstr "Xavier Vello"
+
+#~ msgid "Initial developer"
+#~ msgstr "Hasierako garatzailea"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Asier Urio Larrea,Hizkuntza Politikarako Sailburuordetza"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "asieriko@gmail.com,hizpol@ej-gv.es"

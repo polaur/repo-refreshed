@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../lib/libkmtp.a  CMakeFiles/kmtp.dir/kmtpdinterface.cpp.o CMakeFiles/kmtp.dir/kmtpdeviceinterface.cpp.o CMakeFiles/kmtp.dir/kmtpstorageinterface.cpp.o CMakeFiles/kmtp.dir/kmtpfile.cpp.o CMakeFiles/kmtp.dir/daemoninterface.cpp.o CMakeFiles/kmtp.dir/deviceinterface.cpp.o CMakeFiles/kmtp.dir/storageinterface.cpp.o CMakeFiles/kmtp.dir/kmtp_autogen/mocs_compilation.cpp.o
+/usr/bin/ranlib ../../lib/libkmtp.a

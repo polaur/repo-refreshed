@@ -1,0 +1,68 @@
+# translation of kio_bookmarks.po to Italian
+# Copyright (C) 2008 Free Software Foundation, Inc.
+# Vincenzo Reale <smart2128@baslug.org>, 2008, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_bookmarks\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2008-12-04 18:30+0100\n"
+"Last-Translator: Vincenzo Reale <smart2128@baslug.org>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: kio_bookmarks.cpp:87
+#, kde-format
+msgid "Root"
+msgstr "Radice"
+
+#: kio_bookmarks.cpp:120
+#, kde-format
+msgid "Places"
+msgstr "Risorse"
+
+#: kio_bookmarks.cpp:198
+#, kde-format
+msgid "Wrong request: %1"
+msgstr "Richiesta errata: %1"
+
+#: kio_bookmarks_html.cpp:97
+#, kde-format
+msgid "There are no bookmarks to display yet."
+msgstr "Non ci sono segnalibri da visualizzare."
+
+#: kio_bookmarks_html.cpp:136
+#, kde-format
+msgid ""
+"kio_bookmarks CSS file not found. Output will look ugly.\n"
+"Check your installation."
+msgstr ""
+"File CSS kio_bookmarks non trovato. Il risultato non sarà gradevole.\n"
+"Controlla la tua installazione."
+
+#: kio_bookmarks_html.cpp:145
+#, kde-format
+msgid "My Bookmarks"
+msgstr "I miei segnalibri"
+
+#~ msgid "My bookmarks"
+#~ msgstr "I miei segnalibri"
+
+#~ msgid "Xavier Vello"
+#~ msgstr "Xavier Vello"
+
+#~ msgid "Initial developer"
+#~ msgstr "Sviluppatore iniziale"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Vincenzo Reale"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "smart2128@baslug.org"

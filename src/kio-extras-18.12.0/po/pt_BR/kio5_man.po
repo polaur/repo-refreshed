@@ -1,0 +1,199 @@
+# Translation of kio_man.po to Brazilian Portuguese
+# Copyright (C) 2002, 2003, 2005, 2007, 2008, 2009, 2012, 2015 Free Software Foundation, Inc.
+#
+# Lisiane Sztoltz <lisiane@conectiva.com.br>, 2002, 2003.
+# Henrique Pinto <stampede@coltec.ufmg.br>, 2003.
+# Lisiane Sztoltz Teixeira <lisiane@kdemail.net>, 2005.
+# Diniz Bortolotto <diniz.bortolotto@gmail.com>, 2007, 2008.
+# Fernando Boaglio <boaglio@kde.org>, 2008.
+# André Marcelo Alvarenga <alvarenga@kde.org>, 2009, 2012, 2015.
+# Marcus Gama <marcus.gama@gmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_man\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2015-07-27 23:29-0300\n"
+"Last-Translator: André Marcelo Alvarenga <alvarenga@kde.org>\n"
+"Language-Team: Brazilian Portuguese <kde-i18n-pt_br@kde.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Lisiane Sztoltz Teixeira"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "lisiane@kdemail.net"
+
+#: kio_man.cpp:479
+#, kde-format
+msgid ""
+"No man page matching to %1 found.<br /><br />Check that you have not "
+"mistyped the name of the page that you want.<br />Check that you have typed "
+"the name using the correct upper and lower case characters.<br />If "
+"everything looks correct, then you may need to improve the search path for "
+"man pages; either using the environment variable MANPATH or using a matching "
+"file in the /etc directory."
+msgstr ""
+"Não foi encontrada nenhuma página de manual combinando com %1.<br /><br /"
+">Verifique se não digitou errado o nome da página que deseja procurar.<br /"
+">Esteja ciente de que precisa ter cuidado com caracteres maiúsculos e "
+"minúsculos!<br />Se tudo parecer correto, então talvez você precise "
+"configurar um caminho de busca melhor para as páginas de manual, "
+"configurando a variável de ambiente MANPATH ou um arquivo correspondente no "
+"diretório /etc."
+
+#: kio_man.cpp:510
+#, kde-format
+msgid "Open of %1 failed."
+msgstr "A abertura de %1 falhou."
+
+#: kio_man.cpp:604 kio_man.cpp:622
+#, kde-format
+msgid "Man output"
+msgstr "Saída do man"
+
+#: kio_man.cpp:608
+#, kde-format
+msgid "<h1>KDE Man Viewer Error</h1>"
+msgstr "<h1>Erro do visualizador de arquivos de manual (man) do KDE</h1>"
+
+#: kio_man.cpp:626
+#, kde-format
+msgid "There is more than one matching man page."
+msgstr "Há mais de uma página de manual relacionada."
+
+#: kio_man.cpp:637
+#, kde-format
+msgid ""
+"Note: if you read a man page in your language, be aware it can contain some "
+"mistakes or be obsolete. In case of doubt, you should have a look at the "
+"English version."
+msgstr ""
+"Observação: Se for ler uma página de manual em seu idioma, lembre-se de que "
+"ela pode conter alguns erros ou estar obsoleta. Em caso de dúvida, você deve "
+"sempre olhar a versão em inglês."
+
+#: kio_man.cpp:719
+#, kde-format
+msgid "Header files"
+msgstr "Arquivos de cabeçalho"
+
+#: kio_man.cpp:720
+#, kde-format
+msgid "Header files (POSIX)"
+msgstr "Arquivos de cabeçalho (POSIX)"
+
+#: kio_man.cpp:721
+#, kde-format
+msgid "User Commands"
+msgstr "Comandos do usuário"
+
+#: kio_man.cpp:722
+#, kde-format
+msgid "User Commands (POSIX)"
+msgstr "Comandos do usuário (POSIX)"
+
+#: kio_man.cpp:723
+#, kde-format
+msgid "System Calls"
+msgstr "Chamadas de sistema"
+
+#: kio_man.cpp:724
+#, kde-format
+msgid "Subroutines"
+msgstr "Sub-rotinas"
+
+#: kio_man.cpp:725
+#, kde-format
+msgid "Perl Modules"
+msgstr "Módulos Perl"
+
+#: kio_man.cpp:726
+#, kde-format
+msgid "Network Functions"
+msgstr "Funções de rede"
+
+#: kio_man.cpp:727
+#, kde-format
+msgid "Devices"
+msgstr "Dispositivos"
+
+#: kio_man.cpp:728
+#, kde-format
+msgid "File Formats"
+msgstr "Formatos de arquivo"
+
+#: kio_man.cpp:729
+#, kde-format
+msgid "Games"
+msgstr "Jogos"
+
+#: kio_man.cpp:730
+#, kde-format
+msgid "Miscellaneous"
+msgstr "Diversos"
+
+#: kio_man.cpp:731
+#, kde-format
+msgid "System Administration"
+msgstr "Administração do sistema"
+
+#: kio_man.cpp:732
+#, kde-format
+msgid "Kernel"
+msgstr "Kernel"
+
+#: kio_man.cpp:733
+#, kde-format
+msgid "Local Documentation"
+msgstr "Documentação local"
+
+#: kio_man.cpp:734
+#, kde-format
+msgid "New"
+msgstr "Novo"
+
+#: kio_man.cpp:769 kio_man.cpp:773 kio_man.cpp:1143
+#, kde-format
+msgid "UNIX Manual Index"
+msgstr "Índice do manual UNIX"
+
+#: kio_man.cpp:799
+#, kde-format
+msgid "Section %1"
+msgstr "Seção %1"
+
+#: kio_man.cpp:1152
+#, kde-format
+msgid "Index for Section %1: %2"
+msgstr "Índice da seção %1: %2"
+
+#: kio_man.cpp:1157
+#, kde-format
+msgid "Generating Index"
+msgstr "Gerando o índice"
+
+#: kio_man.cpp:1428
+#, kde-format
+msgid ""
+"Could not find the sgml2roff program on your system. Please install it, if "
+"necessary, and extend the search path by adjusting the environment variable "
+"PATH before starting KDE."
+msgstr ""
+"Não foi possível encontrar o programa sgml2roff em seu sistema. Instale-o, "
+"se for necessário e depois ajuste o caminho de busca através da variável de "
+"ambiente PATH antes de iniciar o KDE."
+
+#: kmanpart.cpp:30
+#, kde-format
+msgid "KMan"
+msgstr "KMan"

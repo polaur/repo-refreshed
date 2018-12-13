@@ -1,0 +1,197 @@
+# translation of kio_man.po to Arabic
+# translation of kio_man.po to
+# Copyright (C) 2001,2002, 2004, 2006, 2007, 2008 Free Software Foundation, Inc.
+# Mohammed Ibrahim Halabi <mih_flyer@hotmail.com>, 2001.
+# Sayed Jaffer Al-Mosawi <mosawi@arabeyes.org>, 2002.
+# Isam Bayazidi <bayazidi@arabeyes.org>, 2002.
+# Ahmad M. Zawawi <azawawi@emirates.net.ae>, 2004.
+# محمد سعد  Mohamed SAAD <metehyi@free.fr>, 2006.
+# AbdulAziz AlSharif <a.a-a.s@hotmail.com>, 2007.
+# Youssef Chahibi <chahibi@gmail.com>, 2007.
+# zayed <zayed.alsaidi@gmail.com>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_man\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2008-12-08 17:27+0400\n"
+"Last-Translator: zayed <zayed.alsaidi@gmail.com>\n"
+"Language-Team: Arabic <linuxac-kde-arabic-team@googlegroups.com>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Translate Toolkit 1.10.0\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Mohamed SAAD محمد سعد, زايد السعيدي"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "metehyi@free.fr,zayed.alsaidi@gmail.com"
+
+#: kio_man.cpp:479
+#, kde-format
+msgid ""
+"No man page matching to %1 found.<br /><br />Check that you have not "
+"mistyped the name of the page that you want.<br />Check that you have typed "
+"the name using the correct upper and lower case characters.<br />If "
+"everything looks correct, then you may need to improve the search path for "
+"man pages; either using the environment variable MANPATH or using a matching "
+"file in the /etc directory."
+msgstr ""
+"لا يوجد صفحة دليل تطابق %1 .<br /><br /> تأكد من  لم تخطأ في كتابة اسم "
+"الدليل.<br /> تأكد من أنك كتبت اسم الدليل بحالة الحروف الصحيحة.<br /> إذا "
+"بدى أن كل  سليم ، فقد تريد أن تصحح مسار  صفحات المساعدة إما بواسطة استخدام "
+"متغير البيئة MANPATH  أو باستخدام مطابقة بملف في دليل /etc ."
+
+#: kio_man.cpp:510
+#, kde-format
+msgid "Open of %1 failed."
+msgstr "فشل فتح %1."
+
+#: kio_man.cpp:604 kio_man.cpp:622
+#, kde-format
+msgid "Man output"
+msgstr "Man خَرْج"
+
+#: kio_man.cpp:608
+#, kde-format
+msgid "<h1>KDE Man Viewer Error</h1>"
+msgstr "<h1>خطأ مُظهر صفحات المساعدة للكيدي</h1>"
+
+#: kio_man.cpp:626
+#, kde-format
+msgid "There is more than one matching man page."
+msgstr "هناك أكثر من صفحة مساعدة مطابقة الوصف."
+
+#: kio_man.cpp:637
+#, kde-format
+msgid ""
+"Note: if you read a man page in your language, be aware it can contain some "
+"mistakes or be obsolete. In case of doubt, you should have a look at the "
+"English version."
+msgstr ""
+"ملاحظة: إذا كنت تريد قراءة صفحة مساعدة بلغتك ، فعليك الانتباه إلى وجود  "
+"أخطاء أو مصطلحات قديمة. في حال وجود شك ، عليك مراجعة الاصدارة الانكليزية من "
+"صفحات المساعدة."
+
+#: kio_man.cpp:719
+#, kde-format
+msgid "Header files"
+msgstr ""
+
+#: kio_man.cpp:720
+#, kde-format
+msgid "Header files (POSIX)"
+msgstr ""
+
+#: kio_man.cpp:721
+#, kde-format
+msgid "User Commands"
+msgstr "أوامر المستخدم"
+
+#: kio_man.cpp:722
+#, fuzzy, kde-format
+msgid "User Commands (POSIX)"
+msgstr "أوامر المستخدم"
+
+#: kio_man.cpp:723
+#, kde-format
+msgid "System Calls"
+msgstr "نداءات النظام"
+
+#: kio_man.cpp:724
+#, kde-format
+msgid "Subroutines"
+msgstr "الوظائف الفرعية"
+
+#: kio_man.cpp:725
+#, kde-format
+msgid "Perl Modules"
+msgstr "Perl وحدات"
+
+#: kio_man.cpp:726
+#, kde-format
+msgid "Network Functions"
+msgstr "وظائف الشبكة"
+
+#: kio_man.cpp:727
+#, kde-format
+msgid "Devices"
+msgstr "الأجهزة"
+
+#: kio_man.cpp:728
+#, kde-format
+msgid "File Formats"
+msgstr "هيئات الملفات"
+
+#: kio_man.cpp:729
+#, kde-format
+msgid "Games"
+msgstr "الألعاب"
+
+#: kio_man.cpp:730
+#, kde-format
+msgid "Miscellaneous"
+msgstr "متنوع"
+
+#: kio_man.cpp:731
+#, kde-format
+msgid "System Administration"
+msgstr "إدارة النظام"
+
+#: kio_man.cpp:732
+#, kde-format
+msgid "Kernel"
+msgstr "النواة"
+
+#: kio_man.cpp:733
+#, kde-format
+msgid "Local Documentation"
+msgstr "الوثائق المحلية"
+
+#: kio_man.cpp:734
+#, kde-format
+msgid "New"
+msgstr "جديد"
+
+#: kio_man.cpp:769 kio_man.cpp:773 kio_man.cpp:1143
+#, kde-format
+msgid "UNIX Manual Index"
+msgstr "فهرس دليل يونيكس"
+
+#: kio_man.cpp:799
+#, kde-format
+msgid "Section %1"
+msgstr "القسم  %1"
+
+#: kio_man.cpp:1152
+#, kde-format
+msgid "Index for Section %1: %2"
+msgstr "الفهرس للشعبة %1:%2"
+
+#: kio_man.cpp:1157
+#, kde-format
+msgid "Generating Index"
+msgstr "جاري توليد الفهرس"
+
+#: kio_man.cpp:1428
+#, kde-format
+msgid ""
+"Could not find the sgml2roff program on your system. Please install it, if "
+"necessary, and extend the search path by adjusting the environment variable "
+"PATH before starting KDE."
+msgstr ""
+"تعذر إيجاد برنامج sgml2roff على نظامك. من فضلك قم بتثبيته, عند الضرورة, و "
+"مدّد مسار البحث عن طريق تعديل متغير بيئة PATH قبل بدء كيدي."
+
+#: kmanpart.cpp:30
+#, kde-format
+msgid "KMan"
+msgstr "KMan"

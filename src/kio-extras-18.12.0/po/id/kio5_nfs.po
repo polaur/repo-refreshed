@@ -1,0 +1,68 @@
+# Indonesian translations for kio_nfs package.
+# Copyright (C) 2010 This_file_is_part_of_KDE
+# This file is distributed under the same license as the kio_nfs package.
+# Andhika Padmawan <andhika.padmawan@gmail.com>, 2010-2014.
+# Wantoyo <wantoyek@gmail.com>, 2017, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_nfs\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2018-04-16 08:17+0700\n"
+"Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
+"Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: kio_nfs.cpp:131
+#, kde-format
+msgid "%1: Unsupported NFS version"
+msgstr "%1: Versi NFS tak didukung"
+
+#: kio_nfs.cpp:654
+#, kde-format
+msgid "RPC error %1"
+msgstr "Galat RPC %1"
+
+#: kio_nfs.cpp:697
+#, kde-format
+msgid "No space left on device"
+msgstr "Tak ada ruang kosong tersisa di perangkat"
+
+#: kio_nfs.cpp:700
+#, kde-format
+msgid "Read only file system"
+msgstr "Sistem file hanya baca"
+
+#: kio_nfs.cpp:703
+#, kde-format
+msgid "Filename too long"
+msgstr "Nama file terlalu panjang"
+
+#: kio_nfs.cpp:710
+#, kde-format
+msgid "Disk quota exceeded"
+msgstr "Kuota cakram terlampaui"
+
+#: kio_nfs.cpp:716
+#, kde-format
+msgid "NFS error %1 - %2"
+msgstr "Galat NFS %1 - %2"
+
+#: nfsv2.cpp:260 nfsv3.cpp:275
+#, kde-format
+msgid "Failed to mount %1"
+msgstr "Gagal mengaitkan %1"
+
+#: nfsv2.cpp:431 nfsv2.cpp:492 nfsv3.cpp:447 nfsv3.cpp:612
+#, kde-format
+msgid "Unknown target"
+msgstr "Sasaran tak diketahui"
+
+#~ msgid "An RPC error occurred."
+#~ msgstr "Galat RPC terjadi."

@@ -1,0 +1,250 @@
+# Translation of kio5_activities.po to Catalan
+# Copyright (C) 2014-2016 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Josep Ma. Ferrer <txemaq@gmail.com>, 2014, 2015.
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2014, 2015, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio5_activities\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2016-09-08 20:47+0100\n"
+"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Accelerator-Marker: &\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: fileitemplugin/FileItemLinkingPlugin.cpp:102 KioActivities.cpp:306
+#, kde-format
+msgid "Activities"
+msgstr "Activitats"
+
+#: fileitemplugin/FileItemLinkingPlugin.cpp:105
+#, kde-format
+msgid "Loading..."
+msgstr "Sestà carregant..."
+
+#: fileitemplugin/FileItemLinkingPlugin.cpp:125
+#, kde-format
+msgid "The Activity Manager is not running"
+msgstr "El gestor d'activitats no s'està executant"
+
+#: fileitemplugin/FileItemLinkingPluginActionLoader.cpp:67
+#: fileitemplugin/FileItemLinkingPluginActionLoader.cpp:134
+#, kde-format
+msgid "Link to the current activity"
+msgstr "Enllaça amb l'activitat actual"
+
+#: fileitemplugin/FileItemLinkingPluginActionLoader.cpp:70
+#: fileitemplugin/FileItemLinkingPluginActionLoader.cpp:139
+#, kde-format
+msgid "Unlink from the current activity"
+msgstr "Separa de l'activitat actual"
+
+#: fileitemplugin/FileItemLinkingPluginActionLoader.cpp:73
+#: fileitemplugin/FileItemLinkingPluginActionLoader.cpp:143
+#, kde-format
+msgid "Link to:"
+msgstr "Enllaça amb:"
+
+#: fileitemplugin/FileItemLinkingPluginActionLoader.cpp:78
+#: fileitemplugin/FileItemLinkingPluginActionLoader.cpp:151
+#, kde-format
+msgid "Unlink from:"
+msgstr "Separa de:"
+
+#: KioActivities.cpp:107 KioActivities.cpp:229
+#, kde-format
+msgid "Activity"
+msgstr "Activitat"
+
+#: KioActivities.cpp:228
+#, kde-format
+msgid "Current activity"
+msgstr "Activitat actual"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Josep Ma. Ferrer"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "txemaq@gmail.com"
+
+#~ msgid "Default"
+#~ msgstr "Per defecte"
+
+#~ msgctxt "@action"
+#~ msgid "Switch to activity \"%1\""
+#~ msgstr "Canvia a l'activitat «%1»"
+
+#~ msgctxt "Header title for activity data model"
+#~ msgid "Activity"
+#~ msgstr "Activitat"
+
+#~ msgid "Delete activity"
+#~ msgstr "Suprimeix una activitat"
+
+#~ msgid "Are you sure you want to delete '%1'?"
+#~ msgstr "Esteu segur que voleu suprimir «%1»?"
+
+#~ msgid ""
+#~ "Error loading the QML files. Check your installation.\n"
+#~ "Missing %1"
+#~ msgstr ""
+#~ "Error en carregar els fitxers QML. Verifiqueu la instal·lació.\n"
+#~ "Manca %1"
+
+#~ msgid "Create a new activity"
+#~ msgstr "Crea una activitat nova"
+
+#~ msgid "Activity settings"
+#~ msgstr "Arranjament de l'activitat"
+
+#~ msgid "General"
+#~ msgstr "General"
+
+#~ msgid "Other"
+#~ msgstr "Altres"
+
+#~ msgid "Create"
+#~ msgstr "Crea"
+
+#~ msgid "Apply"
+#~ msgstr "Aplica"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancel·la"
+
+#~ msgid "Shortcut for switching to this activity:"
+#~ msgstr "Drecera per canviar a aquesta activitat:"
+
+#~ msgid "Activity information"
+#~ msgstr "Informació de l'activitat"
+
+#~ msgid "Name"
+#~ msgstr "Nom"
+
+#~ msgid "Description"
+#~ msgstr "Descripció"
+
+#~ msgid "Wallpaper"
+#~ msgstr "Fons de pantalla"
+
+#~ msgid "Change..."
+#~ msgstr "Canvia..."
+
+#~ msgid "Icon"
+#~ msgstr "Icona"
+
+#~ msgid "Switching"
+#~ msgstr "Canvi"
+
+#~ msgid "Privacy"
+#~ msgstr "Privadesa"
+
+#~ msgctxt "unlimited number of months"
+#~ msgid "forever"
+#~ msgstr "per sempre"
+
+#~ msgid "Forget the last hour"
+#~ msgstr "Oblida la darrera hora"
+
+#~ msgid "Forget the last two hours"
+#~ msgstr "Oblida les dues darreres hores"
+
+#~ msgid "Forget a day"
+#~ msgstr "Oblida un dia"
+
+#~ msgid "Forget everything"
+#~ msgstr "Oblida-ho tot"
+
+#~ msgctxt "unit of time. months to keep the history"
+#~ msgid " month"
+#~ msgid_plural " months"
+#~ msgstr[0] " mes"
+#~ msgstr[1] " mesos"
+
+#~ msgctxt "for in 'keep history for 5 months'"
+#~ msgid "for "
+#~ msgstr "durant "
+
+#~ msgid "Create activity..."
+#~ msgstr "Crea una activitat..."
+
+#~ msgid "Activity switching"
+#~ msgstr "Canvi d'activitats"
+
+#~ msgctxt "@action"
+#~ msgid "Walk through activities"
+#~ msgstr "Recorre les activitats"
+
+#~ msgctxt "@action"
+#~ msgid "Walk through activities (Reverse)"
+#~ msgstr "Recorre les activitats (invers)"
+
+#~ msgid "Form"
+#~ msgstr "Formulari"
+
+#~ msgid "Remember opened documents:"
+#~ msgstr "Recorda els documents oberts:"
+
+#~ msgid "For a&ll applications"
+#~ msgstr "Per a &totes les aplicacions"
+
+#~ msgid "&Do not remember"
+#~ msgstr "&No ho recordis"
+
+#~ msgid "O&nly for specific applications"
+#~ msgstr "No&més per aplicacions específiques"
+
+#~ msgid "Keep history"
+#~ msgstr "Mantén l'historial"
+
+#~ msgid "Clear recent history"
+#~ msgstr "Neteja l'historial recent"
+
+#~ msgid "Blacklist all applications not on this list"
+#~ msgstr "Bloqueja totes les aplicacions que no siguin en aquesta llista"
+
+#~ msgid ""
+#~ "Remember the current virtual desktop for each activity (needs restart)"
+#~ msgstr ""
+#~ "Recorda l'escriptori virtual actual per cada activitat (cal reiniciar)"
+
+#~ msgid "Shortcuts"
+#~ msgstr "Dreceres"
+
+#~ msgid "Private - do not track usage for this activity"
+#~ msgstr "Privada - No segueixis l'ús d'aquesta activitat"
+
+#~ msgid "Delete"
+#~ msgstr "Suprimeix"
+
+#~ msgid "Activity name"
+#~ msgstr "Nom de l'activitat"
+
+#~ msgid "Available Features"
+#~ msgstr "Funcionalitats disponibles"
+
+#~ msgid "Plugins"
+#~ msgstr "Connectors"
+
+#~ msgid "Enable activities management"
+#~ msgstr "Activa el gestor d'activitats"
+
+#~ msgid "Activity manager is not running properly."
+#~ msgstr "El gestor d'activitats no s'està executant adequadament."
+
+#~ msgid "Activities..."
+#~ msgstr "Activitats..."
+
+#~ msgid "(c) 2012 Ivan Cukic"
+#~ msgstr "(c) 2012 Ivan Cukic"

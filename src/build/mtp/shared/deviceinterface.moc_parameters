@@ -1,0 +1,12 @@
+-I/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build
+-I/home/pb/builds/KDE/KDE-Apps/kio-extras/src/kio-extras-18.12.0/mtp/shared
+-I/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/mtp/shared
+-D_GNU_SOURCE
+-D_LARGEFILE64_SOURCE
+-DQT_NO_URL_CAST_FROM_STRING
+-DTRANSLATION_DOMAIN="kio5_mtp"
+-DQT_NO_CAST_FROM_ASCII
+-DQT_NO_CAST_FROM_ASCII
+-o
+/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/mtp/shared/deviceinterface.moc
+/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/mtp/shared/deviceinterface.h

@@ -1,0 +1,1063 @@
+The system is: Linux - 4.19.9-1-pb - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/cc 
+Build flags: -march=native;-mtune=native;-O2;-pipe;-fstack-protector-strong;-fno-plt
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/3.13.1/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/c++ 
+Build flags: -march=native;-mtune=native;-O2;-pipe;-fstack-protector-strong;-fno-plt
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/3.13.1/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_aba10/fast"
+/usr/bin/make -f CMakeFiles/cmTC_aba10.dir/build.make CMakeFiles/cmTC_aba10.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_aba10.dir/testCCompiler.c.o
+/usr/bin/cc   -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -o CMakeFiles/cmTC_aba10.dir/testCCompiler.c.o   -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_aba10
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_aba10.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_aba10.dir/testCCompiler.c.o  -o cmTC_aba10 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_39308/fast"
+/usr/bin/make -f CMakeFiles/cmTC_39308.dir/build.make CMakeFiles/cmTC_39308.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_39308.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc   -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -o CMakeFiles/cmTC_39308.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.13/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_39308
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_39308.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -v -rdynamic CMakeFiles/cmTC_39308.dir/CMakeCCompilerABI.c.o  -o cmTC_39308 
+Using built-in specs.
+COLLECT_GCC=/usr/bin/cc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/lto-wrapper
+Target: x86_64-pc-linux-gnu
+Configured with: /build/gcc/src/gcc/configure --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.archlinux.org/ --enable-languages=c,c++,ada,fortran,go,lto,objc,obj-c++ --enable-shared --enable-threads=posix --enable-libmpx --with-system-zlib --with-isl --enable-__cxa_atexit --disable-libunwind-exceptions --enable-clocale=gnu --disable-libstdcxx-pch --disable-libssp --enable-gnu-unique-object --enable-linker-build-id --enable-lto --enable-plugin --enable-install-libiberty --with-linker-hash-style=gnu --enable-gnu-indirect-function --enable-multilib --disable-werror --enable-checking=release --enable-default-pie --enable-default-ssp --enable-cet=auto
+Thread model: posix
+gcc version 8.2.1 20181127 (GCC) 
+COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-march=native' '-mtune=native' '-O2' '-pipe' '-fstack-protector-strong' '-fno-plt' '-v' '-rdynamic' '-o' 'cmTC_39308'
+ /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cc3EDUQM.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_39308 /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../.. -O1 --sort-common --as-needed -z relro -z now CMakeFiles/cmTC_39308.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/crtn.o
+COLLECT_GCC_OPTIONS='-march=native' '-mtune=native' '-O2' '-pipe' '-fstack-protector-strong' '-fno-plt' '-v' '-rdynamic' '-o' 'cmTC_39308'
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_39308/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_39308.dir/build.make CMakeFiles/cmTC_39308.dir/build]
+  ignore line: [make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_39308.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc   -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -o CMakeFiles/cmTC_39308.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.13/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_39308]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_39308.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -v -rdynamic CMakeFiles/cmTC_39308.dir/CMakeCCompilerABI.c.o  -o cmTC_39308 ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/cc]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/lto-wrapper]
+  ignore line: [Target: x86_64-pc-linux-gnu]
+  ignore line: [Configured with: /build/gcc/src/gcc/configure --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.archlinux.org/ --enable-languages=c,c++,ada,fortran,go,lto,objc,obj-c++ --enable-shared --enable-threads=posix --enable-libmpx --with-system-zlib --with-isl --enable-__cxa_atexit --disable-libunwind-exceptions --enable-clocale=gnu --disable-libstdcxx-pch --disable-libssp --enable-gnu-unique-object --enable-linker-build-id --enable-lto --enable-plugin --enable-install-libiberty --with-linker-hash-style=gnu --enable-gnu-indirect-function --enable-multilib --disable-werror --enable-checking=release --enable-default-pie --enable-default-ssp --enable-cet=auto]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 8.2.1 20181127 (GCC) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-mtune=native' '-O2' '-pipe' '-fstack-protector-strong' '-fno-plt' '-v' '-rdynamic' '-o' 'cmTC_39308']
+  link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cc3EDUQM.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_39308 /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../.. -O1 --sort-common --as-needed -z relro -z now CMakeFiles/cmTC_39308.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/crtn.o]
+    arg [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/cc3EDUQM.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-pie] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_39308] ==> ignore
+    arg [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/Scrt1.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/crti.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/crtbeginS.o] ==> ignore
+    arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1]
+    arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../..] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../..]
+    arg [-O1] ==> ignore
+    arg [--sort-common] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-znow] ==> ignore
+    arg [CMakeFiles/cmTC_39308.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/crtendS.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/crtn.o] ==> ignore
+  collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1] ==> [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1]
+  collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib] ==> [/usr/lib]
+  collapse library dir [/lib/../lib] ==> [/lib]
+  collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../..] ==> [/usr/lib]
+  implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+  implicit dirs: [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1;/usr/lib;/lib]
+  implicit fwks: []
+
+
+
+
+Detecting C [-std=c11] compiler features compiled with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_72a7f/fast"
+/usr/bin/make -f CMakeFiles/cmTC_72a7f.dir/build.make CMakeFiles/cmTC_72a7f.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_72a7f.dir/feature_tests.c.o
+/usr/bin/cc   -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -std=c11 -o CMakeFiles/cmTC_72a7f.dir/feature_tests.c.o   -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_72a7f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_72a7f.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_72a7f.dir/feature_tests.c.o  -o cmTC_72a7f 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:1c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c99] compiler features compiled with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_4fa28/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4fa28.dir/build.make CMakeFiles/cmTC_4fa28.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4fa28.dir/feature_tests.c.o
+/usr/bin/cc   -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -std=c99 -o CMakeFiles/cmTC_4fa28.dir/feature_tests.c.o   -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_4fa28
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4fa28.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_4fa28.dir/feature_tests.c.o  -o cmTC_4fa28 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c90] compiler features compiled with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_7c294/fast"
+/usr/bin/make -f CMakeFiles/cmTC_7c294.dir/build.make CMakeFiles/cmTC_7c294.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7c294.dir/feature_tests.c.o
+/usr/bin/cc   -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -std=c90 -o CMakeFiles/cmTC_7c294.dir/feature_tests.c.o   -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_7c294
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7c294.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_7c294.dir/feature_tests.c.o  -o cmTC_7c294 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:0c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:0c_variadic_macros
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_f6eea/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f6eea.dir/build.make CMakeFiles/cmTC_f6eea.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_f6eea.dir/testCXXCompiler.cxx.o
+/usr/bin/c++    -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -o CMakeFiles/cmTC_f6eea.dir/testCXXCompiler.cxx.o -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_f6eea
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f6eea.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_f6eea.dir/testCXXCompiler.cxx.o  -o cmTC_f6eea 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_071ce/fast"
+/usr/bin/make -f CMakeFiles/cmTC_071ce.dir/build.make CMakeFiles/cmTC_071ce.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_071ce.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++    -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -o CMakeFiles/cmTC_071ce.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.13/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_071ce
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_071ce.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -v -rdynamic CMakeFiles/cmTC_071ce.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_071ce 
+Using built-in specs.
+COLLECT_GCC=/usr/bin/c++
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/lto-wrapper
+Target: x86_64-pc-linux-gnu
+Configured with: /build/gcc/src/gcc/configure --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.archlinux.org/ --enable-languages=c,c++,ada,fortran,go,lto,objc,obj-c++ --enable-shared --enable-threads=posix --enable-libmpx --with-system-zlib --with-isl --enable-__cxa_atexit --disable-libunwind-exceptions --enable-clocale=gnu --disable-libstdcxx-pch --disable-libssp --enable-gnu-unique-object --enable-linker-build-id --enable-lto --enable-plugin --enable-install-libiberty --with-linker-hash-style=gnu --enable-gnu-indirect-function --enable-multilib --disable-werror --enable-checking=release --enable-default-pie --enable-default-ssp --enable-cet=auto
+Thread model: posix
+gcc version 8.2.1 20181127 (GCC) 
+COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-march=native' '-mtune=native' '-O2' '-pipe' '-fstack-protector-strong' '-fno-plt' '-v' '-rdynamic' '-o' 'cmTC_071ce' '-shared-libgcc'
+ /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cc34ushN.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_071ce /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../.. -O1 --sort-common --as-needed -z relro -z now CMakeFiles/cmTC_071ce.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/crtn.o
+COLLECT_GCC_OPTIONS='-march=native' '-mtune=native' '-O2' '-pipe' '-fstack-protector-strong' '-fno-plt' '-v' '-rdynamic' '-o' 'cmTC_071ce' '-shared-libgcc'
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_071ce/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_071ce.dir/build.make CMakeFiles/cmTC_071ce.dir/build]
+  ignore line: [make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_071ce.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++    -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -o CMakeFiles/cmTC_071ce.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.13/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_071ce]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_071ce.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -v -rdynamic CMakeFiles/cmTC_071ce.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_071ce ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/c++]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/lto-wrapper]
+  ignore line: [Target: x86_64-pc-linux-gnu]
+  ignore line: [Configured with: /build/gcc/src/gcc/configure --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.archlinux.org/ --enable-languages=c,c++,ada,fortran,go,lto,objc,obj-c++ --enable-shared --enable-threads=posix --enable-libmpx --with-system-zlib --with-isl --enable-__cxa_atexit --disable-libunwind-exceptions --enable-clocale=gnu --disable-libstdcxx-pch --disable-libssp --enable-gnu-unique-object --enable-linker-build-id --enable-lto --enable-plugin --enable-install-libiberty --with-linker-hash-style=gnu --enable-gnu-indirect-function --enable-multilib --disable-werror --enable-checking=release --enable-default-pie --enable-default-ssp --enable-cet=auto]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 8.2.1 20181127 (GCC) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-mtune=native' '-O2' '-pipe' '-fstack-protector-strong' '-fno-plt' '-v' '-rdynamic' '-o' 'cmTC_071ce' '-shared-libgcc']
+  link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cc34ushN.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_071ce /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../.. -O1 --sort-common --as-needed -z relro -z now CMakeFiles/cmTC_071ce.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/crtn.o]
+    arg [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/cc34ushN.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-pie] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_071ce] ==> ignore
+    arg [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/Scrt1.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/crti.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/crtbeginS.o] ==> ignore
+    arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1]
+    arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../..] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../..]
+    arg [-O1] ==> ignore
+    arg [--sort-common] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-znow] ==> ignore
+    arg [CMakeFiles/cmTC_071ce.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/crtendS.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib/crtn.o] ==> ignore
+  collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1] ==> [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1]
+  collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../lib] ==> [/usr/lib]
+  collapse library dir [/lib/../lib] ==> [/lib]
+  collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse library dir [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../..] ==> [/usr/lib]
+  implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+  implicit dirs: [/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1;/usr/lib;/lib]
+  implicit fwks: []
+
+
+
+
+Detecting CXX [-std=c++2a] compiler features compiled with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_4c240/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4c240.dir/build.make CMakeFiles/cmTC_4c240.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_4c240.dir/feature_tests.cxx.o
+/usr/bin/c++    -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -std=c++2a -o CMakeFiles/cmTC_4c240.dir/feature_tests.cxx.o -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_4c240
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4c240.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_4c240.dir/feature_tests.cxx.o  -o cmTC_4c240 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++17] compiler features compiled with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_9e19b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9e19b.dir/build.make CMakeFiles/cmTC_9e19b.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_9e19b.dir/feature_tests.cxx.o
+/usr/bin/c++    -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -std=c++17 -o CMakeFiles/cmTC_9e19b.dir/feature_tests.cxx.o -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_9e19b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9e19b.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_9e19b.dir/feature_tests.cxx.o  -o cmTC_9e19b 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++14] compiler features compiled with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_5941a/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5941a.dir/build.make CMakeFiles/cmTC_5941a.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_5941a.dir/feature_tests.cxx.o
+/usr/bin/c++    -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -std=c++14 -o CMakeFiles/cmTC_5941a.dir/feature_tests.cxx.o -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_5941a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5941a.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_5941a.dir/feature_tests.cxx.o  -o cmTC_5941a 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++11] compiler features compiled with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_4e99b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4e99b.dir/build.make CMakeFiles/cmTC_4e99b.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_4e99b.dir/feature_tests.cxx.o
+/usr/bin/c++    -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -std=c++11 -o CMakeFiles/cmTC_4e99b.dir/feature_tests.cxx.o -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_4e99b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4e99b.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_4e99b.dir/feature_tests.cxx.o  -o cmTC_4e99b 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:0cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++98] compiler features compiled with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_e8bbc/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e8bbc.dir/build.make CMakeFiles/cmTC_e8bbc.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_e8bbc.dir/feature_tests.cxx.o
+/usr/bin/c++    -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -std=c++98 -o CMakeFiles/cmTC_e8bbc.dir/feature_tests.cxx.o -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_e8bbc
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e8bbc.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_e8bbc.dir/feature_tests.cxx.o  -o cmTC_e8bbc 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:0cxx_alias_templates
+    Feature record: CXX_FEATURE:0cxx_alignas
+    Feature record: CXX_FEATURE:0cxx_alignof
+    Feature record: CXX_FEATURE:0cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:0cxx_auto_type
+    Feature record: CXX_FEATURE:0cxx_binary_literals
+    Feature record: CXX_FEATURE:0cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:0cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:0cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:0cxx_default_function_template_args
+    Feature record: CXX_FEATURE:0cxx_defaulted_functions
+    Feature record: CXX_FEATURE:0cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:0cxx_delegating_constructors
+    Feature record: CXX_FEATURE:0cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:0cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:0cxx_explicit_conversions
+    Feature record: CXX_FEATURE:0cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:0cxx_extern_templates
+    Feature record: CXX_FEATURE:0cxx_final
+    Feature record: CXX_FEATURE:0cxx_func_identifier
+    Feature record: CXX_FEATURE:0cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:0cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:0cxx_inline_namespaces
+    Feature record: CXX_FEATURE:0cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:0cxx_local_type_template_args
+    Feature record: CXX_FEATURE:0cxx_long_long_type
+    Feature record: CXX_FEATURE:0cxx_noexcept
+    Feature record: CXX_FEATURE:0cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:0cxx_nullptr
+    Feature record: CXX_FEATURE:0cxx_override
+    Feature record: CXX_FEATURE:0cxx_range_for
+    Feature record: CXX_FEATURE:0cxx_raw_string_literals
+    Feature record: CXX_FEATURE:0cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:0cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:0cxx_rvalue_references
+    Feature record: CXX_FEATURE:0cxx_sizeof_member
+    Feature record: CXX_FEATURE:0cxx_static_assert
+    Feature record: CXX_FEATURE:0cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:0cxx_thread_local
+    Feature record: CXX_FEATURE:0cxx_trailing_return_types
+    Feature record: CXX_FEATURE:0cxx_unicode_literals
+    Feature record: CXX_FEATURE:0cxx_uniform_initialization
+    Feature record: CXX_FEATURE:0cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:0cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:0cxx_variadic_macros
+    Feature record: CXX_FEATURE:0cxx_variadic_templates
+Determining if the __GLIBC__ exist passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_084fd/fast"
+/usr/bin/make -f CMakeFiles/cmTC_084fd.dir/build.make CMakeFiles/cmTC_084fd.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_084fd.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt    -o CMakeFiles/cmTC_084fd.dir/CheckSymbolExists.c.o   -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_084fd
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_084fd.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_084fd.dir/CheckSymbolExists.c.o  -o cmTC_084fd 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+File /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef __GLIBC__
+  return ((int*)(&__GLIBC__))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Performing C++ SOURCE FILE Test _OFFT_IS_64BIT succeeded with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_2f774/fast"
+/usr/bin/make -f CMakeFiles/cmTC_2f774.dir/build.make CMakeFiles/cmTC_2f774.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_2f774.dir/src.cxx.o
+/usr/bin/c++  -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -D_OFFT_IS_64BIT   -o CMakeFiles/cmTC_2f774.dir/src.cxx.o -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_2f774
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2f774.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -D_OFFT_IS_64BIT  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_2f774.dir/src.cxx.o  -o cmTC_2f774 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+#include <sys/types.h>
+ /* Check that off_t can represent 2**63 - 1 correctly.
+    We can't simply define LARGE_OFF_T to be 9223372036854775807,
+    since some C++ compilers masquerading as C compilers
+    incorrectly reject 9223372036854775807.  */
+#define LARGE_OFF_T (((off_t) 1 << 62) - 1 + ((off_t) 1 << 62))
+  int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721 && LARGE_OFF_T % 2147483647 == 1) ? 1 : -1];
+  int main() { return 0; }
+
+Performing C++ SOURCE FILE Test HAVE_DATE_TIME succeeded with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_0ffe4/fast"
+/usr/bin/make -f CMakeFiles/cmTC_0ffe4.dir/build.make CMakeFiles/cmTC_0ffe4.dir/build
+make[1]: Entering directory '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_0ffe4.dir/src.cxx.o
+/usr/bin/c++    -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=c++0x -fno-operator-names -fno-exceptions -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Werror=return-type -Wvla -DHAVE_DATE_TIME   -Wdate-time -o CMakeFiles/cmTC_0ffe4.dir/src.cxx.o -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_0ffe4
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0ffe4.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=c++0x -fno-operator-names -fno-exceptions -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Werror=return-type -Wvla -DHAVE_DATE_TIME  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_0ffe4.dir/src.cxx.o  -o cmTC_0ffe4 
+make[1]: Leaving directory '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0; }
+Determining if the smbc_set_context exist passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_6e7f6/fast"
+/usr/bin/make -f CMakeFiles/cmTC_6e7f6.dir/build.make CMakeFiles/cmTC_6e7f6.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6e7f6.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE -I/usr/include/samba-4.0  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration    -o CMakeFiles/cmTC_6e7f6.dir/CheckSymbolExists.c.o   -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_6e7f6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6e7f6.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_6e7f6.dir/CheckSymbolExists.c.o  -o cmTC_6e7f6 /usr/lib/libsmbclient.so 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+File /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <libsmbclient.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef smbc_set_context
+  return ((int*)(&smbc_set_context))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the smbc_option_set exist passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_d86ab/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d86ab.dir/build.make CMakeFiles/cmTC_d86ab.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d86ab.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE -I/usr/include/samba-4.0  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration    -o CMakeFiles/cmTC_d86ab.dir/CheckSymbolExists.c.o   -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_d86ab
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d86ab.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_d86ab.dir/CheckSymbolExists.c.o  -o cmTC_d86ab /usr/lib/libsmbclient.so 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+File /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <libsmbclient.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef smbc_option_set
+  return ((int*)(&smbc_option_set))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the include file utime.h exists passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_02b62/fast"
+/usr/bin/make -f CMakeFiles/cmTC_02b62.dir/build.make CMakeFiles/cmTC_02b62.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_02b62.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration    -o CMakeFiles/cmTC_02b62.dir/CheckIncludeFile.c.o   -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_02b62
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_02b62.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_02b62.dir/CheckIncludeFile.c.o  -o cmTC_02b62 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Performing C++ SOURCE FILE Test OFFT_IS_64BIT succeeded with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_bb6ab/fast"
+/usr/bin/make -f CMakeFiles/cmTC_bb6ab.dir/build.make CMakeFiles/cmTC_bb6ab.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_bb6ab.dir/src.cxx.o
+/usr/bin/c++  -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=c++0x -fno-operator-names -fno-exceptions -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Werror=return-type -Wvla -Wdate-time -DOFFT_IS_64BIT   -o CMakeFiles/cmTC_bb6ab.dir/src.cxx.o -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_bb6ab
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bb6ab.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=c++0x -fno-operator-names -fno-exceptions -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Werror=return-type -Wvla -Wdate-time -DOFFT_IS_64BIT  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_bb6ab.dir/src.cxx.o  -o cmTC_bb6ab 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+        #include <sys/types.h>
+        /* Check that off_t can represent 2**63 - 1 correctly.
+            We can't simply define LARGE_OFF_T to be 9223372036854775807,
+            since some C++ compilers masquerading as C compilers
+            incorrectly reject 9223372036854775807.  */
+        #define LARGE_OFF_T (((off_t) 1 << 62) - 1 + ((off_t) 1 << 62))
+
+        int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721 && LARGE_OFF_T % 2147483647 == 1) ? 1 : -1];
+        int main() { return 0; }
+    
+Performing C++ SOURCE FILE Test COMPILER_HAS_HIDDEN_VISIBILITY succeeded with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_eacb5/fast"
+/usr/bin/make -f CMakeFiles/cmTC_eacb5.dir/build.make CMakeFiles/cmTC_eacb5.dir/build
+make[1]: Entering directory '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_eacb5.dir/src.cxx.o
+/usr/bin/c++    -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=c++0x -fno-operator-names -fno-exceptions -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Werror=return-type -Wvla -Wdate-time -DCOMPILER_HAS_HIDDEN_VISIBILITY   -fvisibility=hidden -o CMakeFiles/cmTC_eacb5.dir/src.cxx.o -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_eacb5
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eacb5.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=c++0x -fno-operator-names -fno-exceptions -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Werror=return-type -Wvla -Wdate-time -DCOMPILER_HAS_HIDDEN_VISIBILITY  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_eacb5.dir/src.cxx.o  -o cmTC_eacb5 
+make[1]: Leaving directory '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_HAS_HIDDEN_INLINE_VISIBILITY succeeded with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_cee07/fast"
+/usr/bin/make -f CMakeFiles/cmTC_cee07.dir/build.make CMakeFiles/cmTC_cee07.dir/build
+make[1]: Entering directory '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_cee07.dir/src.cxx.o
+/usr/bin/c++    -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=c++0x -fno-operator-names -fno-exceptions -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Werror=return-type -Wvla -Wdate-time -DCOMPILER_HAS_HIDDEN_INLINE_VISIBILITY   -fvisibility-inlines-hidden -o CMakeFiles/cmTC_cee07.dir/src.cxx.o -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_cee07
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cee07.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=c++0x -fno-operator-names -fno-exceptions -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Werror=return-type -Wvla -Wdate-time -DCOMPILER_HAS_HIDDEN_INLINE_VISIBILITY  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_cee07.dir/src.cxx.o  -o cmTC_cee07 
+make[1]: Leaving directory '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_HAS_DEPRECATED_ATTR succeeded with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_721b8/fast"
+/usr/bin/make -f CMakeFiles/cmTC_721b8.dir/build.make CMakeFiles/cmTC_721b8.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_721b8.dir/src.cxx.o
+/usr/bin/c++  -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=c++0x -fno-operator-names -fno-exceptions -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Werror=return-type -Wvla -Wdate-time -DCOMPILER_HAS_DEPRECATED_ATTR   -o CMakeFiles/cmTC_721b8.dir/src.cxx.o -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/src.cxx
+/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/src.cxx:2:34: warning: ‘int somefunc()’ is deprecated [-Wdeprecated-declarations]
+     int main() { return somefunc();}
+                                  ^
+/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/src.cxx:1:37: note: declared here
+ __attribute__((__deprecated__)) int somefunc() { return 0; }
+                                     ^~~~~~~~
+/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/src.cxx:2:34: warning: ‘int somefunc()’ is deprecated [-Wdeprecated-declarations]
+     int main() { return somefunc();}
+                                  ^
+/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp/src.cxx:1:37: note: declared here
+ __attribute__((__deprecated__)) int somefunc() { return 0; }
+                                     ^~~~~~~~
+Linking CXX executable cmTC_721b8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_721b8.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=c++0x -fno-operator-names -fno-exceptions -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Werror=return-type -Wvla -Wdate-time -DCOMPILER_HAS_DEPRECATED_ATTR  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_721b8.dir/src.cxx.o  -o cmTC_721b8 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+__attribute__((__deprecated__)) int somefunc() { return 0; }
+    int main() { return somefunc();}
+Determining if files termios.h exist passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_81fc6/fast"
+/usr/bin/make -f CMakeFiles/cmTC_81fc6.dir/build.make CMakeFiles/cmTC_81fc6.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_81fc6.dir/HAVE_TERMIOS_H.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration    -o CMakeFiles/cmTC_81fc6.dir/HAVE_TERMIOS_H.c.o   -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CheckIncludeFiles/HAVE_TERMIOS_H.c
+Linking C executable cmTC_81fc6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_81fc6.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_81fc6.dir/HAVE_TERMIOS_H.c.o  -o cmTC_81fc6 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Determining if files sys/ioctl.h exist passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_f45cb/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f45cb.dir/build.make CMakeFiles/cmTC_f45cb.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f45cb.dir/HAVE_SYS_IOCTL_H.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration    -o CMakeFiles/cmTC_f45cb.dir/HAVE_SYS_IOCTL_H.c.o   -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CheckIncludeFiles/HAVE_SYS_IOCTL_H.c
+Linking C executable cmTC_f45cb
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f45cb.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_f45cb.dir/HAVE_SYS_IOCTL_H.c.o  -o cmTC_f45cb 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Determining if files pty.h exist passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_24764/fast"
+/usr/bin/make -f CMakeFiles/cmTC_24764.dir/build.make CMakeFiles/cmTC_24764.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_24764.dir/HAVE_PTY_H.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration    -o CMakeFiles/cmTC_24764.dir/HAVE_PTY_H.c.o   -c /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CheckIncludeFiles/HAVE_PTY_H.c
+Linking C executable cmTC_24764
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_24764.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration   -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_24764.dir/HAVE_PTY_H.c.o  -o cmTC_24764 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function getpt exists passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_80aae/fast"
+/usr/bin/make -f CMakeFiles/cmTC_80aae.dir/build.make CMakeFiles/cmTC_80aae.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_80aae.dir/CheckFunctionExists.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=getpt   -o CMakeFiles/cmTC_80aae.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.13/Modules/CheckFunctionExists.c
+Linking C executable cmTC_80aae
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_80aae.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=getpt  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_80aae.dir/CheckFunctionExists.c.o  -o cmTC_80aae 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function grantpt exists passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_dfee8/fast"
+/usr/bin/make -f CMakeFiles/cmTC_dfee8.dir/build.make CMakeFiles/cmTC_dfee8.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_dfee8.dir/CheckFunctionExists.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=grantpt   -o CMakeFiles/cmTC_dfee8.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.13/Modules/CheckFunctionExists.c
+Linking C executable cmTC_dfee8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dfee8.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=grantpt  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_dfee8.dir/CheckFunctionExists.c.o  -o cmTC_dfee8 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function openpty exists in the util passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_8326c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_8326c.dir/build.make CMakeFiles/cmTC_8326c.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8326c.dir/CheckFunctionExists.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=openpty   -o CMakeFiles/cmTC_8326c.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.13/Modules/CheckFunctionExists.c
+Linking C executable cmTC_8326c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8326c.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=openpty  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_8326c.dir/CheckFunctionExists.c.o  -o cmTC_8326c -lutil 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function isastream exists in the util passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_ac650/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ac650.dir/build.make CMakeFiles/cmTC_ac650.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ac650.dir/CheckFunctionExists.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=isastream   -o CMakeFiles/cmTC_ac650.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.13/Modules/CheckFunctionExists.c
+Linking C executable cmTC_ac650
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ac650.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=isastream  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_ac650.dir/CheckFunctionExists.c.o  -o cmTC_ac650 -lutil 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function xdr_u_int64_t exists passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_858c8/fast"
+/usr/bin/make -f CMakeFiles/cmTC_858c8.dir/build.make CMakeFiles/cmTC_858c8.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_858c8.dir/CheckFunctionExists.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=xdr_u_int64_t   -o CMakeFiles/cmTC_858c8.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.13/Modules/CheckFunctionExists.c
+Linking C executable cmTC_858c8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_858c8.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=xdr_u_int64_t  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_858c8.dir/CheckFunctionExists.c.o  -o cmTC_858c8 /usr/lib/libtirpc.so 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function xdr_uint64_t exists passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_6c815/fast"
+/usr/bin/make -f CMakeFiles/cmTC_6c815.dir/build.make CMakeFiles/cmTC_6c815.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6c815.dir/CheckFunctionExists.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=xdr_uint64_t   -o CMakeFiles/cmTC_6c815.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.13/Modules/CheckFunctionExists.c
+Linking C executable cmTC_6c815
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6c815.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=xdr_uint64_t  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_6c815.dir/CheckFunctionExists.c.o  -o cmTC_6c815 /usr/lib/libtirpc.so 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function xdr_u_hyper exists passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_e960c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e960c.dir/build.make CMakeFiles/cmTC_e960c.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e960c.dir/CheckFunctionExists.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=xdr_u_hyper   -o CMakeFiles/cmTC_e960c.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.13/Modules/CheckFunctionExists.c
+Linking C executable cmTC_e960c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e960c.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=xdr_u_hyper  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_e960c.dir/CheckFunctionExists.c.o  -o cmTC_e960c /usr/lib/libtirpc.so 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function xdr_u_longlong_t exists passed with the following output:
+Change Dir: /home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_5c6a5/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5c6a5.dir/build.make CMakeFiles/cmTC_5c6a5.dir/build
+make[1]: Wejście do katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5c6a5.dir/CheckFunctionExists.c.o
+/usr/bin/cc -D_GNU_SOURCE -D_LARGEFILE64_SOURCE  -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=xdr_u_longlong_t   -o CMakeFiles/cmTC_5c6a5.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.13/Modules/CheckFunctionExists.c
+Linking C executable cmTC_5c6a5
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5c6a5.dir/link.txt --verbose=1
+/usr/bin/cc -march=native -mtune=native -O2 -pipe -fstack-protector-strong -fno-plt -std=iso9899:1990 -fno-common -Wall -Wextra -Wcast-align -Wchar-subscripts -Wformat-security -Wno-long-long -Wpointer-arith -Wundef -Wmissing-format-attribute -Wwrite-strings -Werror=implicit-function-declaration -DCHECK_FUNCTION_EXISTS=xdr_u_longlong_t  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now  -rdynamic CMakeFiles/cmTC_5c6a5.dir/CheckFunctionExists.c.o  -o cmTC_5c6a5 /usr/lib/libtirpc.so 
+make[1]: Opuszczenie katalogu '/home/pb/builds/KDE/KDE-Apps/kio-extras/src/build/CMakeFiles/CMakeTmp'
+
+

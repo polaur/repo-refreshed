@@ -1,0 +1,431 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Zlatko Popov <zlatkopopov@fsa-bg.org>, 2006, 2008.
+# Yasen Pramatarov <yasen@lindeas.com>, 2009, 2011, 2012, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_sftp\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2013-07-23 09:43+0300\n"
+"Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
+"Language-Team: Bulgarian <dict@ludost.net>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kio_sftp.cpp:194
+#, kde-format
+msgid "Incorrect or invalid passphrase"
+msgstr "Неправилна парола"
+
+#: kio_sftp.cpp:277 kio_sftp.cpp:279 kio_sftp.cpp:860 kio_sftp.cpp:1158
+#, kde-format
+msgid "SFTP Login"
+msgstr "Вход в SFTP"
+
+#: kio_sftp.cpp:294
+#, kde-format
+msgid "Use the username input field to answer this question."
+msgstr "Въведете отговоря в полето за потребителско име."
+
+#: kio_sftp.cpp:307
+#, kde-format
+msgid "Please enter your password."
+msgstr "Въведете парола."
+
+#: kio_sftp.cpp:312 kio_sftp.cpp:863 kio_sftp.cpp:1161
+#, fuzzy, kde-format
+#| msgid "site:"
+msgid "Site:"
+msgstr "страна:"
+
+#: kio_sftp.cpp:465
+#, kde-format
+msgid "Could not allocate callbacks"
+msgstr ""
+
+#: kio_sftp.cpp:479
+#, kde-format
+msgid "Could not set log verbosity."
+msgstr "Грешка при задаване ниво на подробност на журнала"
+
+#: kio_sftp.cpp:485
+#, fuzzy, kde-format
+#| msgid "Could not set log verbosity."
+msgid "Could not set log userdata."
+msgstr "Грешка при задаване ниво на подробност на журнала"
+
+#: kio_sftp.cpp:491
+#, fuzzy, kde-format
+#| msgid "Could not set log verbosity."
+msgid "Could not set log callback."
+msgstr "Грешка при задаване ниво на подробност на журнала"
+
+#: kio_sftp.cpp:529
+#, kde-format
+msgid "Could not create a new SSH session."
+msgstr "Грешка при създаване на нова сесия на SSH"
+
+#: kio_sftp.cpp:540 kio_sftp.cpp:545
+#, kde-format
+msgid "Could not set a timeout."
+msgstr "Грешка при задаване на изчакване"
+
+#: kio_sftp.cpp:554
+#, fuzzy, kde-format
+#| msgid "Could not set port."
+msgid "Could not disable Nagle's Algorithm."
+msgstr "Грешка при задаване на порт."
+
+#: kio_sftp.cpp:562 kio_sftp.cpp:568
+#, kde-format
+msgid "Could not set compression."
+msgstr "Грешка при задаване ниво на компресия."
+
+#: kio_sftp.cpp:575
+#, kde-format
+msgid "Could not set host."
+msgstr "Грешка при задаване на хост."
+
+#: kio_sftp.cpp:582
+#, kde-format
+msgid "Could not set port."
+msgstr "Грешка при задаване на порт."
+
+#: kio_sftp.cpp:591
+#, kde-format
+msgid "Could not set username."
+msgstr "Грешка при задаване на потребител."
+
+#: kio_sftp.cpp:599
+#, kde-format
+msgid "Could not parse the config file."
+msgstr "Грешка при обработка на файла с настройки"
+
+#: kio_sftp.cpp:617
+#, fuzzy, kde-kuit-format
+#| msgid "Opening SFTP connection to host %1:<numid>%2</numid>"
+msgid "Opening SFTP connection to host %1:%2"
+msgstr "Отваряне на връзка SFTP до хост %1:<numid>%2</numid>"
+
+#: kio_sftp.cpp:692
+#, fuzzy, kde-format
+#| msgid "Could not set username."
+msgid "Could not get server public key type name"
+msgstr "Грешка при задаване на потребител."
+
+#: kio_sftp.cpp:704 kio_sftp.cpp:1023
+#, kde-format
+msgid "Could not create hash from server public key"
+msgstr ""
+
+#: kio_sftp.cpp:715
+#, kde-format
+msgid "Could not create fingerprint for server public key"
+msgstr ""
+
+#: kio_sftp.cpp:728
+#, kde-format
+msgid ""
+"An %1 host key for this server was not found, but another type of key "
+"exists.\n"
+"An attacker might change the default server key to confuse your client into "
+"thinking the key does not exist.\n"
+"Please contact your system administrator.\n"
+"%2"
+msgstr ""
+
+#: kio_sftp.cpp:740
+#, kde-format
+msgid ""
+"The host key for the server %1 has changed.\n"
+"This could either mean that DNS SPOOFING is happening or the IP address for "
+"the host and its host key have changed at the same time.\n"
+"The fingerprint for the %2 key sent by the remote host is:\n"
+"  SHA256:%3\n"
+"Please contact your system administrator.\n"
+"%4"
+msgstr ""
+
+#: kio_sftp.cpp:755 kio_sftp.cpp:1061
+#, kde-format
+msgid "Warning: Cannot verify host's identity."
+msgstr "Предупреждение: Идентичността на хоста не може да бъде проверена."
+
+#: kio_sftp.cpp:756
+#, fuzzy, kde-format
+#| msgid ""
+#| "The authenticity of host %1 cannot be established.\n"
+#| "The key fingerprint is: %2\n"
+#| "Are you sure you want to continue connecting?"
+msgid ""
+"The authenticity of host %1 cannot be established.\n"
+"The %2 key fingerprint is: %3\n"
+"Are you sure you want to continue connecting?"
+msgstr ""
+"Автентичността на хост %1 не може да бъде проверена.\n"
+"Отпечатъкът на ключа е: %2\n"
+"Настина ли искате да се продължи свързването?"
+
+#: kio_sftp.cpp:795 kio_sftp.cpp:818 kio_sftp.cpp:835 kio_sftp.cpp:851
+#: kio_sftp.cpp:908 kio_sftp.cpp:919 kio_sftp.cpp:1093 kio_sftp.cpp:1116
+#: kio_sftp.cpp:1133 kio_sftp.cpp:1149 kio_sftp.cpp:1206 kio_sftp.cpp:1217
+#, kde-format
+msgid "Authentication failed."
+msgstr "Идентификацията е неуспешна."
+
+#: kio_sftp.cpp:803 kio_sftp.cpp:1101
+#, kde-format
+msgid ""
+"Authentication failed. The server didn't send any authentication methods"
+msgstr ""
+"Идентификацията е неуспешна. Сървърът не изпрати начини за идентификация"
+
+#: kio_sftp.cpp:861 kio_sftp.cpp:1159
+#, kde-format
+msgid "Please enter your username and password."
+msgstr "Въведете потребителско име и парола."
+
+#: kio_sftp.cpp:872 kio_sftp.cpp:1170
+#, kde-format
+msgid "Incorrect username or password"
+msgstr "Неправилно потребителско име или парола"
+
+#: kio_sftp.cpp:928 kio_sftp.cpp:1226
+#, kde-format
+msgid ""
+"Unable to request the SFTP subsystem. Make sure SFTP is enabled on the "
+"server."
+msgstr ""
+"Грешка при заявката към SFTP. Проверете дали SFTP е наличен на сървъра."
+
+#: kio_sftp.cpp:936 kio_sftp.cpp:1234
+#, kde-format
+msgid "Could not initialize the SFTP session."
+msgstr "Грешка при инициализиране на сесия на SFTP."
+
+#: kio_sftp.cpp:941 kio_sftp.cpp:1239
+#, kde-format
+msgid "Successfully connected to %1"
+msgstr "Установена е връзка с %1"
+
+#: kio_sftp.cpp:1037
+#, kde-format
+msgid ""
+"The host key for this server was not found, but another type of key exists.\n"
+"An attacker might change the default server key to confuse your client into "
+"thinking the key does not exist.\n"
+"Please contact your system administrator.\n"
+"%1"
+msgstr ""
+
+#: kio_sftp.cpp:1048
+#, kde-format
+msgid ""
+"The host key for the server %1 has changed.\n"
+"This could either mean that DNS SPOOFING is happening or the IP address for "
+"the host and its host key have changed at the same time.\n"
+"The fingerprint for the key sent by the remote host is:\n"
+" %2\n"
+"Please contact your system administrator.\n"
+"%3"
+msgstr ""
+
+#: kio_sftp.cpp:1062
+#, kde-format
+msgid ""
+"The authenticity of host %1 cannot be established.\n"
+"The key fingerprint is: %2\n"
+"Are you sure you want to continue connecting?"
+msgstr ""
+"Автентичността на хост %1 не може да бъде проверена.\n"
+"Отпечатъкът на ключа е: %2\n"
+"Настина ли искате да се продължи свързването?"
+
+#: kio_sftp.cpp:1282
+#, kde-format
+msgid "Invalid sftp context"
+msgstr ""
+
+#: kio_sftp.cpp:2192
+#, kde-format
+msgid "Could not read link: %1"
+msgstr "Грешка при четене на връзката: %1"
+
+#: kio_sftp.cpp:2590
+#, kde-format
+msgid ""
+"Could not change permissions for\n"
+"%1"
+msgstr ""
+"Неуспешна смяна на правата за достъп за\n"
+"%1"
+
+#~ msgid "No hostname specified."
+#~ msgstr "Няма избран хост."
+
+#~ msgid "An internal error occurred. Please retry the request again."
+#~ msgstr "Вътрешна грешка. Моля, опитайте отново."
+
+#~ msgid "Please enter your username and key passphrase."
+#~ msgstr "Моля, въведете потребителско име и ключова фраза за вход."
+
+#~ msgid "Warning: Host's identity changed."
+#~ msgstr "Предупреждение: Идентичността на хоста е променена."
+
+#~ msgid "Connection failed."
+#~ msgstr "Връзката се разпадна."
+
+#~ msgid "Connection closed by remote host."
+#~ msgstr "Връзката е прекъсната от отдалечения хост."
+
+#~ msgid "unexpected SFTP error: %1"
+#~ msgstr "Неочаквана грешка на SFTP: %1"
+
+#~ msgid "SFTP version %1"
+#~ msgstr "Версия на SFTP %1"
+
+#~ msgid "Protocol error."
+#~ msgstr "Грешка в протокола."
+
+#~ msgid "An internal error occurred. Please try again."
+#~ msgstr "Вътрешна грешка. Моля, опитайте отново."
+
+#~ msgid ""
+#~ "Unknown error was encountered while copying the file to '%1'. Please try "
+#~ "again."
+#~ msgstr ""
+#~ "Неизвестна грешка по време на копиране на файл в %1. Моля, опитайте "
+#~ "отново."
+
+#~ msgid "The remote host does not support renaming files."
+#~ msgstr "Отдалеченият хост на поддържа преименуване на файлове."
+
+#~ msgid "The remote host does not support creating symbolic links."
+#~ msgstr "Отдалеченият хост на поддържа създаването на символни връзки."
+
+#~ msgid "Connection closed"
+#~ msgstr "Връзката е затворена"
+
+#~ msgid "End of file."
+#~ msgstr "Край на файла."
+
+#~ msgid "SFTP command failed for an unknown reason."
+#~ msgstr "Команда SFTP пропадна по неизвестна причина."
+
+#~ msgid "The SFTP server received a bad message."
+#~ msgstr "Сървърът SFTP получи невалидно съобщение."
+
+#~ msgid "You attempted an operation unsupported by the SFTP server."
+#~ msgstr ""
+#~ "Вие направихте заявка за операция, която не се поддържа от сървъра SFTP."
+
+#~ msgid "Error code: %1"
+#~ msgstr "Код на грешка: %1"
+
+#~ msgid "Cannot specify a subsystem and command at the same time."
+#~ msgstr "Не може да се задава подсистема и команда едновременно."
+
+#~ msgid "No options provided for ssh execution."
+#~ msgstr "Няма предоставени опции за изпълнение на ssh."
+
+#~ msgid "Failed to execute ssh process."
+#~ msgstr "Изпълнението на ssh е неуспешно."
+
+#~ msgid "Error encountered while talking to ssh."
+#~ msgstr "Появи се грешка по време на изпълнението на ssh."
+
+#~ msgid "Please supply a password."
+#~ msgstr "Моля, въведете парола."
+
+#~ msgid "Please supply the passphrase for your SSH private key."
+#~ msgstr "Моля, въведете ключовата фраза за вашия частен ключ SSH."
+
+#~ msgid "Authentication to %1 failed"
+#~ msgstr "Идентификацията на %1 е неуспешна"
+
+#~ msgid ""
+#~ "The identity of the remote host '%1' could not be verified because the "
+#~ "host's key is not in the \"known hosts\" file."
+#~ msgstr ""
+#~ "Идентификацията на отдалечения хост \"%1\" не може да бъде проверена, "
+#~ "понеже ключът на хоста не е във файл с известни хостове."
+
+#~ msgid ""
+#~ " Manually, add the host's key to the \"known hosts\" file or contact your "
+#~ "administrator."
+#~ msgstr ""
+#~ " Ръчно добавете ключа на хоста към файла с известни хостове или се "
+#~ "обърнете към системния администратор."
+
+#~ msgid " Manually, add the host's key to %1 or contact your administrator."
+#~ msgstr ""
+#~ " Ръчно добавете ключа на хоста към %1 или се обърнете към системния "
+#~ "администратор."
+
+#~ msgid ""
+#~ "The identity of the remote host '%1' could not be verified. The host's "
+#~ "key fingerprint is:\n"
+#~ "%2\n"
+#~ "You should verify the fingerprint with the host's administrator before "
+#~ "connecting.\n"
+#~ "\n"
+#~ "Would you like to accept the host's key and connect anyway? "
+#~ msgstr ""
+#~ "Идентификацията на отдалеченият хост \"%1\" не може да бъде проверена. "
+#~ "Ключът за идентификация на сървъра е:\n"
+#~ "%2\n"
+#~ "Трябва да проверите надеждността на ключа с администратора на сървъра "
+#~ "преди да продължите.\n"
+#~ "\n"
+#~ "Искате ли ключът на сървъра да бъде приет и да се установи връзка, "
+#~ "въпреки това?"
+
+#~ msgid ""
+#~ "WARNING: The identity of the remote host '%1' has changed!\n"
+#~ "\n"
+#~ "Someone could be eavesdropping on your connection, or the administrator "
+#~ "may have just changed the host's key. Either way, you should verify the "
+#~ "host's key fingerprint with the host's administrator. The key fingerprint "
+#~ "is:\n"
+#~ "%2\n"
+#~ "Add the correct host key to \"%3\" to get rid of this message."
+#~ msgstr ""
+#~ "ПРЕДУПРЕЖДЕНИЕ: Идентификацията на отдалеченият хост \"%1\" е променена!\n"
+#~ "\n"
+#~ "Или някой се е намесил във връзката между вас и сървъра или "
+#~ "администраторът на сървъра е променил ключа на сървъра. Във всички случаи "
+#~ "проверете истинността на ключа с администратора на сървъра. Ключът за "
+#~ "идентификация на сървъра е:\n"
+#~ "%2\n"
+#~ "Добавете валиден ключ за хоста \"%3\", за да не се показва това съобщение "
+#~ "повече."
+
+#~ msgid ""
+#~ "WARNING: The identity of the remote host '%1' has changed!\n"
+#~ "\n"
+#~ "Someone could be eavesdropping on your connection, or the administrator "
+#~ "may have just changed the host's key. Either way, you should verify the "
+#~ "host's key fingerprint with the host's administrator before connecting. "
+#~ "The key fingerprint is:\n"
+#~ "%2\n"
+#~ "\n"
+#~ "Would you like to accept the host's new key and connect anyway?"
+#~ msgstr ""
+#~ "ПРЕДУПРЕЖДЕНИЕ: Идентификацията на отдалеченият хост \"%1\" е променена!\n"
+#~ "\n"
+#~ "Или някой се е намесил във връзката между вас и сървъра или "
+#~ "администратора на сървъра е променил ключа на сървъра. Във всички случаи "
+#~ "проверете истинността на ключа с администратора на сървъра. Ключът за "
+#~ "идентификация на сървъра е:\n"
+#~ "%2\n"
+#~ "Искате ли ключът на сървъра да бъде приет и да се установи връзка, "
+#~ "въпреки това?"
+
+#~ msgid "Host key was rejected."
+#~ msgstr "Ключът на хоста е отхвърлен."

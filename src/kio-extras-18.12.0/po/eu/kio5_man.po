@@ -1,0 +1,194 @@
+# Translation of kio_man.po to Euskara/Basque (eu).
+# Copyright (C) 2002-2014, Free Software Foundation, Inc.
+# This file is distributed under the same license as the kde-runtime package.
+#
+# marcos  <marcos@euskalgnu.org>, 2002, 2003, 2006, 2007, 2008.
+# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2013.
+# Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_man\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2018-11-12 06:54+0100\n"
+"PO-Revision-Date: 2013-07-23 23:30+0200\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
+"Language-Team: Basque <kde-i18n-doc@kde.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Marcos Goyenetxe,Iñigo Salvador Azurmendi"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "marcos@euskalgnu.org,xalba@euskalnet.net"
+
+#: kio_man.cpp:479
+#, kde-format
+msgid ""
+"No man page matching to %1 found.<br /><br />Check that you have not "
+"mistyped the name of the page that you want.<br />Check that you have typed "
+"the name using the correct upper and lower case characters.<br />If "
+"everything looks correct, then you may need to improve the search path for "
+"man pages; either using the environment variable MANPATH or using a matching "
+"file in the /etc directory."
+msgstr ""
+"Ez dago %1-(e)rekin bat datorren man orririk. <br /> <br />Egiaztatu izena "
+"ongi idatzi duzula.<br />Kontuan izan maisukulak eta minuskulak bereizten "
+"direla <br />Dena ongi badirudi, agian man orrien bilaketa bide-izena hobea "
+"beharko duzu, MANPATH aldagaiaren bidez edo /etc-ko dagokion fitxategiaren "
+"bidez."
+
+#: kio_man.cpp:510
+#, kde-format
+msgid "Open of %1 failed."
+msgstr "%1 irekitzeak huts egin du."
+
+#: kio_man.cpp:604 kio_man.cpp:622
+#, kde-format
+msgid "Man output"
+msgstr "Man irteera"
+
+#: kio_man.cpp:608
+#, kde-format
+msgid "<h1>KDE Man Viewer Error</h1>"
+msgstr "<h1>KDE man ikustailean errorera</h1>"
+
+#: kio_man.cpp:626
+#, kde-format
+msgid "There is more than one matching man page."
+msgstr "Man orri bat baino gehiato dator bat"
+
+#: kio_man.cpp:637
+#, kde-format
+msgid ""
+"Note: if you read a man page in your language, be aware it can contain some "
+"mistakes or be obsolete. In case of doubt, you should have a look at the "
+"English version."
+msgstr ""
+"Oharra: Man orri bat zure hizkuntzan behar baduzu, ohar zaitez zaharkitua "
+"egon daitekeela edo erroreak izan ditzakeela. Zalantzak izanez gero, "
+"ingelesezko bertsioari begiradatxoa bota beharko zenioke."
+
+#: kio_man.cpp:719
+#, kde-format
+msgid "Header files"
+msgstr "Goiburuen fitxategiak"
+
+#: kio_man.cpp:720
+#, kde-format
+msgid "Header files (POSIX)"
+msgstr "Goiburuen fitxategiak (POSIX)"
+
+#: kio_man.cpp:721
+#, kde-format
+msgid "User Commands"
+msgstr "Erabiltzailearen komandoak"
+
+#: kio_man.cpp:722
+#, kde-format
+msgid "User Commands (POSIX)"
+msgstr "Erabiltzailearen komandoak (POSIX)"
+
+#: kio_man.cpp:723
+#, kde-format
+msgid "System Calls"
+msgstr "Sistemaren deiak"
+
+#: kio_man.cpp:724
+#, kde-format
+msgid "Subroutines"
+msgstr "Azpirutinak"
+
+#: kio_man.cpp:725
+#, kde-format
+msgid "Perl Modules"
+msgstr "Perl moduluak"
+
+#: kio_man.cpp:726
+#, kde-format
+msgid "Network Functions"
+msgstr "Sareko funtzioak"
+
+#: kio_man.cpp:727
+#, kde-format
+msgid "Devices"
+msgstr "Gailuak"
+
+#: kio_man.cpp:728
+#, kde-format
+msgid "File Formats"
+msgstr "Fitxategi formatuak"
+
+#: kio_man.cpp:729
+#, kde-format
+msgid "Games"
+msgstr "Jokoak"
+
+#: kio_man.cpp:730
+#, kde-format
+msgid "Miscellaneous"
+msgstr "Bestelakoa"
+
+#: kio_man.cpp:731
+#, kde-format
+msgid "System Administration"
+msgstr "Sistemaren kudeaketa"
+
+#: kio_man.cpp:732
+#, kde-format
+msgid "Kernel"
+msgstr "Nukleoa"
+
+#: kio_man.cpp:733
+#, kde-format
+msgid "Local Documentation"
+msgstr "Dokumentazio lokala"
+
+#: kio_man.cpp:734
+#, kde-format
+msgid "New"
+msgstr "Berria"
+
+#: kio_man.cpp:769 kio_man.cpp:773 kio_man.cpp:1143
+#, kde-format
+msgid "UNIX Manual Index"
+msgstr "UNIX eskuliburuen indizea"
+
+#: kio_man.cpp:799
+#, kde-format
+msgid "Section %1"
+msgstr "%1 atala"
+
+#: kio_man.cpp:1152
+#, kde-format
+msgid "Index for Section %1: %2"
+msgstr "%1 atalaren Indizea: %2"
+
+#: kio_man.cpp:1157
+#, kde-format
+msgid "Generating Index"
+msgstr "Indizea sortzen"
+
+#: kio_man.cpp:1428
+#, kde-format
+msgid ""
+"Could not find the sgml2roff program on your system. Please install it, if "
+"necessary, and extend the search path by adjusting the environment variable "
+"PATH before starting KDE."
+msgstr ""
+"Ezin aurkitu sgml2roff programa zure sisteman. Mesedez instalatu, behar "
+"bada, eta zabaldu bilaketa bidea inguruko PATH aldagaia doituz KDE hasi "
+"baino lehen."
+
+#: kmanpart.cpp:30
+#, kde-format
+msgid "KMan"
+msgstr "KMan"
