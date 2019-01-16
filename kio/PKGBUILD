@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kio
-pkgver=5.53.0
-pkgrel=1.3
+pkgver=5.54.0
+pkgrel=1.1
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -20,25 +20,21 @@ groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-182367.patch::"https://cgit.kde.org/kio.git/patch/?id=2ae8a0c374cd175380945fc7fae1a38957272435"
 D17065.patch::"https://cgit.kde.org/kio.git/patch/?id=8fb6431784e2db2368e2f6b951084201fddafd46"
-kdebug-198772.patch::"https://cgit.kde.org/kio.git/patch/?id=518a7496c5c561464c588cb2527a8f82a0234671"
 )
-sha256sums=('7320df009b19ab9ad3acfeb0d8cf9e0824d5779930fb85f59208deb0cb4124c3'
+sha256sums=('3cf05a021e6431c2d2b16525dd130a02269cb6fc2cf99ce3b4725d33c0bf5c7d'
             'SKIP'
             '42aa13431cf736c6ec4904d873c5568cd0558b305885ce13ec5fef0969b48ab3'
-            '4f60be9c1054c5200714eb4eacf2e3b16d5016f652927d4e9f9e1f7b040350b0'
-            '41084badc8d9b32614c0216a48dd8930f6564ff52add1f6f2b5499e10a377422')
+            '4f60be9c1054c5200714eb4eacf2e3b16d5016f652927d4e9f9e1f7b040350b0')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
   mkdir -p build
 
   cd $pkgname-$pkgver
-  msg "Add kdebug 182367 patch"
+  msg "Add kdebug 182367 patch - fix for Dolphin 19.04"
   patch -p1 -i ../kdebug-182367.patch
   msg "Fix memory leak - add D17065 patch"
   patch -p1 -i ../D17065.patch
-  msg "Add kdebug 198772 patch; fix in 5.54"
-  patch -p1 -i ../kdebug-198772.patch
 }
 
 build() {
