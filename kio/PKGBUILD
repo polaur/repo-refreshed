@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kio
-pkgver=5.54.0
+pkgver=5.54.1
 pkgrel=1.1
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
@@ -21,7 +21,7 @@ source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgve
 kdebug-182367.patch::"https://cgit.kde.org/kio.git/patch/?id=2ae8a0c374cd175380945fc7fae1a38957272435"
 D17065.patch::"https://cgit.kde.org/kio.git/patch/?id=8fb6431784e2db2368e2f6b951084201fddafd46"
 )
-sha256sums=('3cf05a021e6431c2d2b16525dd130a02269cb6fc2cf99ce3b4725d33c0bf5c7d'
+sha256sums=('b70ff3c172f44e9eb3fb9aba1cdc496802061c1633de0a6a9ead057e10d68d87'
             'SKIP'
             '42aa13431cf736c6ec4904d873c5568cd0558b305885ce13ec5fef0969b48ab3'
             '4f60be9c1054c5200714eb4eacf2e3b16d5016f652927d4e9f9e1f7b040350b0')
@@ -31,7 +31,7 @@ prepare() {
   mkdir -p build
 
   cd $pkgname-$pkgver
-  msg "Add kdebug 182367 patch - fix for Dolphin 19.04"
+  msg "Add kdebug 182367 patch"
   patch -p1 -i ../kdebug-182367.patch
   msg "Fix memory leak - add D17065 patch"
   patch -p1 -i ../D17065.patch
