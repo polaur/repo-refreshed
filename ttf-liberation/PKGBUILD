@@ -1,0 +1,43 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for 2.00.4 release based on original work by:
+# Maintainer: Lukas Fleischer <lfleischer@archlinux.org>
+# Contributor: Ronald van Haren <ronald.archlinux.org>
+# Contributor: Roman Kyrylych <Roman.Kyrylych@gmail.com>
+# Contributor: Andreas Zwinkau
+# Contributor: rabyte <rabyte__gmail>
+# Contributor: Stefan Husmann < stefan-husmann@t-online.de>
+
+pkgname=ttf-liberation
+pkgver=2.00.4
+pkgrel=1
+pkgdesc='Red Hats Liberation fonts.'
+arch=('any')
+license=('custom:OFL')
+url='https://github.com/liberationfonts/'
+depends=('fontconfig' 'xorg-fonts-encodings' 'xorg-font-utils')
+provides=('ttf-font')
+source=("https://github.com/liberationfonts/liberation-fonts/files/2579281/liberation-fonts-ttf-${pkgver}.tar.gz"
+        30-0-liberation-mono.conf
+        30-0-liberation-sans.conf
+        30-0-liberation-serif.conf)
+md5sums=('3a8851642acee49127edcae219252786'
+         '23ce227d5d72c6df2c69caf367d96341'
+         '88e91e718053d46cb1215067ffb0024a'
+         '5bc229f0f7ad387f1ba311148fcbff00')
+
+package() {
+  cd "$srcdir/liberation-fonts-ttf-$pkgver"
+
+  install -d "$pkgdir/usr/share/fonts/TTF/"
+  install -m644 *.ttf "$pkgdir/usr/share/fonts/TTF/"
+
+  # install fontconfig files
+  install -Dm0644 ../30-0-liberation-mono.conf "$pkgdir/etc/fonts/conf.avail/30-$pkgname-mono.conf"
+  install -Dm0644 ../30-0-liberation-sans.conf "$pkgdir/etc/fonts/conf.avail/30-$pkgname-sans.conf"
+  install -Dm0644 ../30-0-liberation-serif.conf \
+    "$pkgdir/etc/fonts/conf.avail/30-$pkgname-serif.conf"
+
+  # install license
+  install -Dm644 "${srcdir}/liberation-fonts-ttf-${pkgver}/LICENSE" \
+    "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
