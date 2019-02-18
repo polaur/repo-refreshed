@@ -1,0 +1,50 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for version patched with bugfixes from upcomming editions
+# made upon original works of:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=plasma-framework
+pkgver=5.55.0
+pkgrel=1.2
+pkgdesc='Plasma library and runtime components based upon KF5 and Qt5'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(kactivities kdeclarative kwayland kirigami2)
+makedepends=(extra-cmake-modules qt5-tools kdoctools doxygen)
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-401142.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=7ca1f01ea91a60b5d88a8e1d8f13ec79c1d2302e"
+kdebug-391343.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=054b494bb3f2e7113d4deec6dc128a33afb12946")
+sha256sums=('04af7a01335e6e4c5ac2312f83113493eea511d4a2f9556e0871002d0aef7ddf'
+            'SKIP'
+            '2fa088ea247067c9f5aef347eebe019efabce462d0712e563ebac8fc46d55a72'
+            '330d1180311b149a49cb3fbb9524ac3bebd379e979787b3698ef79ae468c3309')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+
+  cd $pkgname-$pkgver
+  msg "Apply KDEBUG 401142 patch; fix in 5.56"
+  patch -p1 -i ../kdebug-401142.patch
+  msg "Apply KDEBUG 391343 patch; fix in 5.56"
+  patch -p1 -i ../kdebug-391343.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
