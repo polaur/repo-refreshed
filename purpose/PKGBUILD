@@ -1,0 +1,46 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for PKGBUILD with upcomming fixes
+# based on the original work of:
+# Maintainer:Antonio Rojas <arojas@archlinux.org>
+
+pkgname=purpose
+pkgver=5.55.0
+pkgrel=1.1
+pkgdesc="Framework for providing abstractions to get the developer's purposes fulfilled"
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(kaccounts-integration accounts-qml-module hicolor-icon-theme)
+makedepends=(extra-cmake-modules intltool)
+optdepends=('kdeconnect: sharing to smartphone via KDE Connect' 'telegram-desktop: sharing via Telegram'
+            'bluedevil: sharing via Bluetooth')
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-397567.patch::"https://cgit.kde.org/purpose.git/patch/?id=a6d93ff28f090dd0086301884a31e0eea0efd845")
+sha256sums=('6b84c5a639ec901ba2edd77dff00498092a7d662358fdf223f79f32c1d932fcf'
+            'SKIP'
+            'f217422d1bc34800ef52388cf02814a76e1794c36bbd216d5ea5693f82b271cf')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Add KDEBUG 397567 patch"
+  patch -p1 -i ../kdebug-397567.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
