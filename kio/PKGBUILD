@@ -7,7 +7,7 @@
 
 pkgname=kio
 pkgver=5.55.0
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -21,12 +21,14 @@ source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgve
 kdebug-182367.patch::"https://cgit.kde.org/kio.git/patch/?id=2ae8a0c374cd175380945fc7fae1a38957272435"
 D17065.patch::"https://cgit.kde.org/kio.git/patch/?id=8fb6431784e2db2368e2f6b951084201fddafd46"
 kdebug-403074.patch::"https://cgit.kde.org/kio.git/patch/?id=2bba2c0795d77e893fdbea1da9dc3d79e45594d0"
+kdebug-399380.patch::"https://cgit.kde.org/kio.git/patch/?id=c063b1ce848987c9d236d6ec3d9cf4f8c5f11627"
 )
 sha256sums=('2ac7944c97d6278e183193f61d31dd34430589093b09ad73b4e997bbe1b16ccc'
             'SKIP'
             '42aa13431cf736c6ec4904d873c5568cd0558b305885ce13ec5fef0969b48ab3'
             '064b966bd50afb460969a1c3f53195090b1e1ff7b63ceadafb87a0f26f8b984f'
-            '10b02049a8f11884af1bc8905cfb79719a415b537e71fc4deb4e32657faa9c5c')
+            '10b02049a8f11884af1bc8905cfb79719a415b537e71fc4deb4e32657faa9c5c'
+            '4ed58fede6213680bd6bef5f9fce7a7c0fea583d8534a2b85be551ee61de5c3e')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -39,6 +41,8 @@ prepare() {
   patch -p1 -i ../D17065.patch
   msg "Apply KDEBUG 403074 patch; fix in 5.56"
   patch -p1 -i ../kdebug-403074.patch
+  msg "Apply KDEBUG 399380 patch; fix in 5.56"
+  patch -p1 -i ../kdebug-399380.patch
 }
 
 build() {
@@ -49,7 +53,7 @@ build() {
     -DCMAKE_INSTALL_LIBEXECDIR=lib \
     -DBUILD_TESTING=OFF \
     -DBUILD_QCH=ON
-  make 
+  make
 }
 
 package() {
