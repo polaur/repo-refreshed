@@ -50,5 +50,5 @@ index 533a8e9..29a308b 100644
      void _k_initDeviceList();
      void _k_deviceAdded(const QString &udi);
 -- 
-cgit v0.11.2
+cgit v1.1
 
