@@ -1,0 +1,47 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# for PKGBUILD with upcomming fixes
+# based on the original work of:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kfilemetadata
+pkgver=5.56.0
+pkgrel=1.1
+pkgdesc="A library for extracting file metadata"
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(ki18n karchive exiv2 poppler-qt5 taglib ffmpeg ebook-tools)
+optdepends=('catdoc: Extract text from Office 98 files')
+makedepends=(extra-cmake-modules catdoc doxygen qt5-tools)
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-403902.patch::"https://cgit.kde.org/kfilemetadata.git/patch/?id=649555ee31820af01869c7bfe8c1e96e5a9abb37")
+sha256sums=('269db442adef2409ccf6b2078e3b644eb504b36f84c33c2809b1ff739c68f512'
+            'SKIP'
+            '854e33ede6ab49f6091371534e34ba13a53c708a21c0bc7399743d2703720c34')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir build
+
+  cd $pkgname-$pkgver
+  msg "Apply KDEBUG 403902 patch"
+  patch -p1 -i ../kdebug-403902.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
