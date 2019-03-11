@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kio
-pkgver=5.55.0
-pkgrel=1.3
+pkgver=5.56.0
+pkgrel=1.1
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -20,19 +20,13 @@ groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-182367.patch::"https://cgit.kde.org/kio.git/patch/?id=2ae8a0c374cd175380945fc7fae1a38957272435"
 D17065.patch::"https://cgit.kde.org/kio.git/patch/?id=8fb6431784e2db2368e2f6b951084201fddafd46"
-kdebug-403074.patch::"https://cgit.kde.org/kio.git/patch/?id=2bba2c0795d77e893fdbea1da9dc3d79e45594d0"
-kdebug-399380.patch::"https://cgit.kde.org/kio.git/patch/?id=c063b1ce848987c9d236d6ec3d9cf4f8c5f11627"
-kdebug-404232.patch::"https://cgit.kde.org/kio.git/patch/?id=d996ee0a4453f39726847bd60951c60a2b30194d"
-kdebug-378051.patch::"https://cgit.kde.org/kio.git/patch/?id=f56af9e2ea0aa61d3faa9c57aa477016b1223f96"
+kdebug-125102.patch::"https://cgit.kde.org/kio.git/patch/?id=f34c2cf0abf12a96806f9eaac5153dd764ea2215"
 )
-sha256sums=('2ac7944c97d6278e183193f61d31dd34430589093b09ad73b4e997bbe1b16ccc'
+sha256sums=('d6fb0bdae9454cd67de19806e338fdcb72e8678a27e95fad3626491d8b1a4cd4'
             'SKIP'
             '42aa13431cf736c6ec4904d873c5568cd0558b305885ce13ec5fef0969b48ab3'
             '064b966bd50afb460969a1c3f53195090b1e1ff7b63ceadafb87a0f26f8b984f'
-            '10b02049a8f11884af1bc8905cfb79719a415b537e71fc4deb4e32657faa9c5c'
-            '4ed58fede6213680bd6bef5f9fce7a7c0fea583d8534a2b85be551ee61de5c3e'
-            '417416e38e4403e868fea183fba22492c5ae51ce5087a650965d80124e545fcb'
-            'c76c04be3dcd8d8059ad8650ed4b0426b583168dd18d1eebd4a1e27e0b1f396c')
+            'd755bea5fe74596b91daa6a170fa42cf6488e31db63706b833c7d41f9b271167')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -43,14 +37,8 @@ prepare() {
   patch -p1 -i ../kdebug-182367.patch
   msg "Fix memory leak - add D17065 patch"
   patch -p1 -i ../D17065.patch
-  msg "Apply KDEBUG 403074 patch; fix in 5.56"
-  patch -p1 -i ../kdebug-403074.patch
-  msg "Apply KDEBUG 399380 patch; fix in 5.56"
-  patch -p1 -i ../kdebug-399380.patch
-  msg "Apply KDEBUG 404232 patch; fix in 5.56"
-  patch -p1 -i ../kdebug-404232.patch
-  msg "Apply KDEBUG 378051 patch; fix in 5.56"
-  patch -p1 -i ../kdebug-378051.patch
+  msg "Apply KDEBUG 125102 patch; fix in 5.57"
+  patch -p1 -i ../kdebug-125102.patch
 }
 
 build() {
