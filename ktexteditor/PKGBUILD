@@ -1,0 +1,47 @@
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=ktexteditor
+pkgver=5.56.0
+pkgrel=1.2
+pkgdesc='Advanced embeddable text editor'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(kparts syntax-highlighting libgit2 editorconfig-core-c)
+makedepends=(extra-cmake-modules doxygen qt5-tools)
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-398731.patch::"https://cgit.kde.org/ktexteditor.git/patch/?id=ac35dba359887e1feb881d01ec15db32116943a6"
+kdebug-296500.patch::"https://cgit.kde.org/ktexteditor.git/patch/?id=5c94789d28ea09ad1b340f3ddaba8208886b19d2")
+sha256sums=('4c88d0033775e0715ad115370a36680ede95d29c7c4b840c0e06f23ef64959a8'
+            'SKIP'
+            '43bfb734ff258b00f1f9353375335bd6b25677b9c468042317cfb7d866d9998a'
+            'a7085bbd99347b5d28eec9a6b195fc97920d4c198686c2076db1e9ec25afcaf0')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+
+  cd $pkgname-$pkgver
+	msg "Apply kdebug 398731 patch; fix in 5.57"
+  patch -p1 -i ../kdebug-398731.patch
+  msg "Apply kdebug 296500 patch; fix in 5.57"
+  patch -p1 -i ../kdebug-296500.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
