@@ -4,23 +4,25 @@
 
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
-pkgver=5.15.2
-pkgrel=1.1
+pkgver=5.15.3.2
+pkgrel=0
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
 license=(LGPL)
-source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+source=("https://download.kde.org/stable/plasma/5.15.3/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-395513.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=43804eb7f15ffc44f43f3edceb160f71b9d855cc"
-kdebug-404786.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=cc59e2075340c19165c6c0eec62926d4e55c1c07")
+kdebug-404786.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=cc59e2075340c19165c6c0eec62926d4e55c1c07"
+kdebug-387156.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=8ca7335288fa621b987ae3fec4428c6601ceef67")
 depends=(polkit-kde-agent libxkbfile kmenuedit appstream-qt systemsettings ksysguard kpeople baloo)
 makedepends=(extra-cmake-modules kdoctools boost xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
              libibus scim kdesignerplugin)
 groups=(plasma)
-sha256sums=('40576c38428c96903bf085e06729521bcce8ea0e498e40797a900df7aa9cb4ab'
+sha256sums=('21e54d489817751173049122410737db641a8e58955b84264a4ec861e302ff8a'
             'SKIP'
             '761b91845e47d7f5cae118338d94838273e56b368d5e9f275a86410385349265'
-            'dc3b611eabafaa717b8f498d1609155f3e93d09f1397c0d28501772301f0e854')
+            'dc3b611eabafaa717b8f498d1609155f3e93d09f1397c0d28501772301f0e854'
+            '37831cfb62375db69e955f9a83ce37b96a47975a8d254c25f698adf97ea9ac98')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -34,6 +36,8 @@ prepare() {
   patch -p1 -i ../kdebug-395513.patch
   msg "Apply KDEBUG 404786 patch; fixed in 5.16.0"
   patch -p1 -i ../kdebug-404786.patch
+  msg "Apply KDEBUG 387156 patch; fixed in 5.16.0"
+  patch -p1 -i ../kdebug-387156.patch
 }
 
 build() {
