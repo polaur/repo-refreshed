@@ -7,7 +7,7 @@
 
 pkgname=kio
 pkgver=5.56.0
-pkgrel=1.1
+pkgrel=1.3
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -21,12 +21,18 @@ source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgve
 kdebug-182367.patch::"https://cgit.kde.org/kio.git/patch/?id=2ae8a0c374cd175380945fc7fae1a38957272435"
 D17065.patch::"https://cgit.kde.org/kio.git/patch/?id=8fb6431784e2db2368e2f6b951084201fddafd46"
 kdebug-125102.patch::"https://cgit.kde.org/kio.git/patch/?id=f34c2cf0abf12a96806f9eaac5153dd764ea2215"
+kdebug-383534.patch::"https://cgit.kde.org/kio.git/patch/?id=51ba55f2c5cc598eea79d2e4d99c21f4baae179a"
+kdebug-405360.patch::"https://cgit.kde.org/kio.git/patch/?id=24c5695437b6608b9f01ff6d0320d76d1e47e4a9"
+kdebug-405445.patch::"https://cgit.kde.org/kio.git/patch/?id=d5a7eb2dd8de5f9f7e1a0096904553704cae03f1"
 )
 sha256sums=('d6fb0bdae9454cd67de19806e338fdcb72e8678a27e95fad3626491d8b1a4cd4'
             'SKIP'
             '42aa13431cf736c6ec4904d873c5568cd0558b305885ce13ec5fef0969b48ab3'
             '064b966bd50afb460969a1c3f53195090b1e1ff7b63ceadafb87a0f26f8b984f'
-            'd755bea5fe74596b91daa6a170fa42cf6488e31db63706b833c7d41f9b271167')
+            'd755bea5fe74596b91daa6a170fa42cf6488e31db63706b833c7d41f9b271167'
+            '4143f052132ad8621e0e9a83d97b51d8ec074bb66a0cef7d9787f00872659261'
+            'aaac34c8866ec68d468902ad001fe931ed1cfa0185f58c3e54c4ca62bf255466'
+            '74f6336c45fc6dc24aa477a05ea3486f70b909212bcef8877c887c13ba2de890')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -39,6 +45,12 @@ prepare() {
   patch -p1 -i ../D17065.patch
   msg "Apply KDEBUG 125102 patch; fix in 5.57"
   patch -p1 -i ../kdebug-125102.patch
+  msg "Apply KDEBUG 383534 patch"
+  patch -p1 -i ../kdebug-383534.patch
+  msg "Apply KDEBUG 405360 patch; fix in 5.57"
+  patch -p1 -i ../kdebug-405360.patch
+  msg "Apply KDEBUG 405445 patch; fix in 5.57"
+  patch -p1 -i ../kdebug-405445.patch
 }
 
 build() {
