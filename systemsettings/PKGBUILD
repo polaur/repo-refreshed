@@ -4,7 +4,7 @@
 
 pkgname=systemsettings
 pkgver=5.15.3.2
-pkgrel=0
+pkgrel=2
 pkgdesc='KDE system manager for hardware, software, and workspaces'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -13,9 +13,11 @@ depends=(kactivities-stats plasma-workspace)
 makedepends=(extra-cmake-modules kdoctools khtml)
 optdepends=('khtml: for the tree view')
 groups=(plasma)
-source=("https://download.kde.org/stable/plasma/5.15.3/$pkgname-$pkgver.tar.xz"{,.sig})
+source=("https://download.kde.org/stable/plasma/5.15.3/$pkgname-$pkgver.tar.xz"{,.sig}
+F6698413.patch::"https://cgit.kde.org/systemsettings.git/patch/?id=8996c9bb8b248c23b4b96c633e5baefedffb6e15")
 sha256sums=('42095b95a7866aa667e30c15a7ebc9b00225fdb4f06668510fdf63a18573102f'
-            'SKIP')
+            'SKIP'
+            'e925625ec3ea12e8a0061b28004806f24a958e1e1da9443ded5b492faa1eef27')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -23,6 +25,10 @@ validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr
 
 prepare() {
   mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Apply patch for F6698413 bug; fix in 5.15.4"
+  patch -p1 -i ../F6698413.patch
 }
 
 build() {
