@@ -1,9 +1,12 @@
+# Maintanier: pavbaranov <pavbaranov at gmail dot com>
+# for version with fixes from upcoming releases
+# made upon the original works of:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kmenuedit
-pkgver=5.15.2
+pkgver=5.15.4
 pkgrel=1.1
 pkgdesc='KDE menu editor'
 arch=(x86_64)
@@ -14,7 +17,7 @@ groups=(plasma)
 makedepends=(extra-cmake-modules kdoctools kdesignerplugin)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-57314.patch::"https://cgit.kde.org/kmenuedit.git/patch/?id=3f6c86e1f26d32c6f0452676c10debff02bffbc4")
-sha256sums=('d3ef0d95ea9863654386f6a577e7cdb8da4a2a90abd49e94f54d1b54019156f6'
+sha256sums=('da5d347de97ea50593311a318d12328b0f63805c8f1f411b4f3567826c1fc80e'
             'SKIP'
             '791de09ff20fffa6d221e2768f76aba6a894a6b85c437b1466c1fa69d34cfdd2')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
