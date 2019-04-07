@@ -1,7 +1,10 @@
+# Maintanier: pavbaranov <pavbaranov at gmail dot com>
+# for version with fixes from upcoming releases
+# made upon the original works of:
 # Maintainer:Antonio Rojas <arojas@archlinux.org>
 
 pkgname=plasma-pa
-pkgver=5.15.2
+pkgver=5.15.4
 pkgrel=1.1
 pkgdesc='Plasma applet for audio volume management using PulseAudio'
 arch=(x86_64)
@@ -13,7 +16,7 @@ groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-397954.patch::"https://cgit.kde.org/plasma-pa.git/patch/?id=00026cee9ec8c5d04067cf892b46e5a5507b7f6d"
 D19013.patch::"https://cgit.kde.org/plasma-pa.git/patch/?id=6e53d78136dff5f5bb395c2cc4ec93d2fbc0b1a0")
-sha256sums=('03871b5e54b18bfc4b2f493da690f8c0c843bb41c95670bf335ed0ab096283b3'
+sha256sums=('88239e34e50deed8830d6b0dc846590720341c2c1496c6413a7fecc2ba01af2c'
             'SKIP'
             '6bb2e01c00e9dc87681746640b55620ed8f02d20f4d9ff92b692bb063a87ff93'
             '490b96dc69d90043c62b5a8b0ddfea50efeb86c3a087519086f65825ff4460a7')
