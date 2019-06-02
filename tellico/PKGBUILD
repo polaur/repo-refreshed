@@ -1,0 +1,42 @@
+# Maintanier: pavbaranov <pavbaranov at gmail dot com>
+# only for version 3.2
+# Maintainer: Jaroslav Lichtblau <svetlemodry@archlinux.org>
+# Contributor: Ray Rashif <schiv@archlinux.org
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: Douglas Soares de Andrade <dsa@aur.archlinux.org>
+
+pkgname=tellico
+pkgver=3.2
+pkgrel=2
+pkgdesc="A collection manager for KDE"
+arch=('x86_64')
+url="http://tellico-project.org/"
+license=('GPL')
+depends=('exempi' 'libksane' 'libkcddb' 
+         'libcdio' 'kfilemetadata' 'knewstuff' 'kitemmodels'
+         'khtml' 'yaz') # 'qimageblitz-svn' 'btparse' 'libcsv') 
+# Comment for depends array - If you want to have tellico with full functionality
+# you should uncomment depends for qimageblitz-svn, btparse and libcsv
+# and bulit them before tellico
+makedepends=('cmake' 'extra-cmake-modules' 'kdoctools' 'libkcddb')
+changelog=$pkgname.changelog
+source=(http://tellico-project.org/files/$pkgname-$pkgver.tar.xz)
+sha256sums=('f20ec2bbfa9d4e0b4c0c38feb86d0cc4ae72ca6a680932cf58ed9f5b8f26114e')
+
+prepare() {
+    mkdir -p build
+    }
+
+build() {
+    cd build
+        cmake ../$pkgname-$pkgver \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DBUILD_TESTS=FALSE 
+    make 
+    }
+
+package() {
+    cd build
+    make DESTDIR="$pkgdir" install
+    }
