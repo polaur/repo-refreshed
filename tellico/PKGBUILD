@@ -7,19 +7,18 @@
 
 pkgname=tellico
 pkgver=3.2
-pkgrel=2
+pkgrel=1.1
 pkgdesc="A collection manager for KDE"
 arch=('x86_64')
 url="http://tellico-project.org/"
 license=('GPL')
 depends=('exempi' 'libksane' 'libkcddb' 
          'libcdio' 'kfilemetadata' 'knewstuff' 'kitemmodels'
-         'khtml' 'yaz') # 'qimageblitz-svn' 'btparse' 'libcsv') 
+         'khtml' 'yaz' 'qimageblitz-svn' 'btparse' 'libcsv') 
 # Comment for depends array - If you want to have tellico with full functionality
 # you should uncomment depends for qimageblitz-svn, btparse and libcsv
 # and bulit them before tellico
 makedepends=('cmake' 'extra-cmake-modules' 'kdoctools' 'libkcddb')
-changelog=$pkgname.changelog
 source=(http://tellico-project.org/files/$pkgname-$pkgver.tar.xz)
 sha256sums=('f20ec2bbfa9d4e0b4c0c38feb86d0cc4ae72ca6a680932cf58ed9f5b8f26114e')
 
@@ -33,10 +32,13 @@ build() {
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX=/usr \
             -DBUILD_TESTS=FALSE 
-    make 
+    make -j4
     }
 
 package() {
     cd build
     make DESTDIR="$pkgdir" install
+
+    # fix for python2.7 scripts
+    find "${pkgdir}" -iname "*.py" | xargs sed -i 's|#!/usr/bin/env python|#!/usr/bin/env python2|'
     }
