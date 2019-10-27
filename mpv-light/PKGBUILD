@@ -5,7 +5,7 @@
 
 pkgname=mpv-light
 pkgver=0.30.0
-pkgrel=1
+pkgrel=2
 _waf_version=2.0.9
 pkgdesc='a free, open source, and cross-platform media player (polaur)'
 conflicts=('mpv')
@@ -18,7 +18,7 @@ depends=('desktop-file-utils' 'ffmpeg' 'hicolor-icon-theme' 'jack' 'lcms2'
          'libarchive' 'libcaca' 'libgl' 'libva'
          'libxinerama' 'libxkbcommon' 'libxrandr' 'libxss' 'libxv' 'lua52'
          'rubberband' 'uchardet' 'vulkan-icd-loader' 'wayland'
-         'xdg-utils' 'shaderc' 'mujs')
+         'xdg-utils' 'shaderc' 'mujs' 'libplacebo')
 makedepends=('mesa' 'python-docutils' 'ladspa' 'wayland-protocols'
              'ffnvcodec-headers' 'vulkan-headers')
 optdepends=('youtube-dl: for video-sharing websites playback')
@@ -44,9 +44,7 @@ build() {
     --disable-dvdnav \
     --enable-libarchive \
     --enable-libmpv-shared \
-    --disable-libsmbclient \
-    --enable-tv \
-    --disable-tvos
+    --disable-libsmbclient
 
   ./waf build
 }
@@ -56,6 +54,9 @@ package() {
 
   ./waf install --destdir="$pkgdir"
 
-  install -m644 DOCS/{encoding.rst,tech-overview.txt} \
+  install -m0644 DOCS/{encoding.rst,tech-overview.txt} \
     "$pkgdir"/usr/share/doc/mpv
+
+  install -m0644 TOOLS/lua/* \
+    -D -t "$pkgdir"/usr/share/mpv/scripts
 }
