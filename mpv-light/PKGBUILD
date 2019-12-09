@@ -5,7 +5,7 @@
 
 pkgname=mpv-light
 pkgver=0.30.0
-pkgrel=2
+pkgrel=5
 _waf_version=2.0.9
 pkgdesc='a free, open source, and cross-platform media player (polaur)'
 conflicts=('mpv')
@@ -18,7 +18,7 @@ depends=('desktop-file-utils' 'ffmpeg' 'hicolor-icon-theme' 'jack' 'lcms2'
          'libarchive' 'libcaca' 'libgl' 'libva'
          'libxinerama' 'libxkbcommon' 'libxrandr' 'libxss' 'libxv' 'lua52'
          'rubberband' 'uchardet' 'vulkan-icd-loader' 'wayland'
-         'xdg-utils' 'shaderc' 'mujs' 'libplacebo')
+         'xdg-utils' 'shaderc' 'mujs' 'libplacebo' 'libplacebo.so')
 makedepends=('mesa' 'python-docutils' 'ladspa' 'wayland-protocols'
              'ffnvcodec-headers' 'vulkan-headers')
 optdepends=('youtube-dl: for video-sharing websites playback')
@@ -44,7 +44,8 @@ build() {
     --disable-dvdnav \
     --enable-libarchive \
     --enable-libmpv-shared \
-    --disable-libsmbclient
+    --disable-libsmbclient \
+	--disable-build-date
 
   ./waf build
 }
