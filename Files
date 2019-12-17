@@ -16,7 +16,9 @@
 │   └── steam-runtime.sh
 ├── tellico
 │   └── PKGBUILD
+├── user-manager
+│   └── PKGBUILD
 └── weechat-python3-light
     └── PKGBUILD
 
-7 directories, 12 files
+8 directories, 13 files
