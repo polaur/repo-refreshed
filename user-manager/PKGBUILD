@@ -1,0 +1,52 @@
+# Maintainer:  pavbaranov <pavbaranov at gmail dot com>
+# only for package with bugfixes from upcomming version
+# based on the original PKGBUILD made by:
+# Maintainer:Antonio Rojas <arojas@archlinux.org>
+
+pkgname=user-manager
+pkgver=5.17.4
+pkgrel=1.1
+pkgdesc='A simple system settings module to manage the users of your system'
+arch=(x86_64)
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=(LGPL)
+depends=(accountsservice libpwquality kio)
+makedepends=(extra-cmake-modules kcmutils)
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-384894.patch::"https://cgit.kde.org/user-manager.git/patch/?id=b279882ad9e4773a11c9b1e6673a1f3a133e3f8e"
+kdebug-392943.patch::"https://cgit.kde.org/user-manager.git/patch/?id=a2f7d308f9b5eee4efdc5c3b6dc221d98f3f373d"
+kdebug-414860.patch::"https://cgit.kde.org/user-manager.git/patch/?id=2471fa7d252de904b305dac77171fa300d66c05d")
+sha256sums=('1e8021ffeba4eb146c9bc1bf12f0d563d5c0da1bf75d0d63779b1f98b02c0be4'
+            'SKIP'
+            '5e8cf4663bca185f80fe61e12be5d5bb96d6e3727a444d0e650e6dfceccd23b0'
+            '01ef5bf000507318cc07a9fbd54834cb4c976070f731da21898561413cc8a6af'
+            'a95dfe6f29062cf598151d348378987f2621b9a00fadfb8429e44dfd2096aac3')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Apply KDEBUG 384894 patch; fix in 5.18"
+  patch -p1 -i ../kdebug-384894.patch
+  msg "Apply KDEBUG 392943 patch; fix in 5.18"
+  patch -p1 -i ../kdebug-392943.patch
+  msg "Apply KDEBUG 414860 patch; fix in 5.18"
+  patch -p1 -i ../kdebug-414860.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
