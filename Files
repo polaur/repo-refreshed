@@ -1,0 +1,22 @@
+.
+├── Files
+├── krename
+│   └── PKGBUILD
+├── libksane
+│   ├── kdebug-414601_and_414602.patch
+│   └── PKGBUILD
+├── mpv-light
+│   └── PKGBUILD
+├── otter-browser
+│   └── PKGBUILD
+├── README.md
+├── steam-noGTK2
+│   ├── alsa_sdl_audiodriver.patch
+│   ├── PKGBUILD
+│   └── steam-runtime.sh
+├── tellico
+│   └── PKGBUILD
+└── weechat-python3-light
+    └── PKGBUILD
+
+7 directories, 12 files
