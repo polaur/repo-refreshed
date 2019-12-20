@@ -1,0 +1,25 @@
+# Maintainer: Piotr Gorski <lucjan.lucjanov@gmail.com>
+# Maintainer: Lukas Fleischer <lfleischer@archlinux.org>
+# Maintainer: Jaroslav Lichtblau <svetlemodry@archlinux.org>
+# Contributor: Daniel Micay <danielmicay@gmail.com>
+
+pkgname=python-pygit2
+pkgver=1.0.0
+pkgrel=1
+pkgdesc='Python bindings for libgit2'
+arch=('x86_64')
+url="https://github.com/libgit2/pygit2"
+license=('GPL2')
+depends=('libgit2>=1:0.28.0')
+makedepends=('python-cffi' 'python-setuptools' 'git')
+source=("$pkgbase-$pkgver.tar.gz::https://github.com/libgit2/pygit2/archive/v${pkgver}.tar.gz")
+sha256sums=('a3075012f3b7dba9282512974f1f76512e60090277cd0ab2ad30946561974a46')
+
+package() {
+  depends+=('python-cffi')
+  replaces=('python-libgit2')
+  conflicts=('python-libgit2')
+
+  cd "pygit2-$pkgver"
+  LANG=en_US.UTF8 python setup.py install --root="$pkgdir" --optimize=1
+}
