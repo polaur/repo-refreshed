@@ -4,7 +4,7 @@
 # Maintainer:Antonio Rojas <arojas@archlinux.org>
 
 pkgname=user-manager
-pkgver=5.17.4
+pkgver=5.17.5
 pkgrel=1.1
 pkgdesc='A simple system settings module to manage the users of your system'
 arch=(x86_64)
@@ -17,7 +17,7 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
 kdebug-384894.patch::"https://cgit.kde.org/user-manager.git/patch/?id=b279882ad9e4773a11c9b1e6673a1f3a133e3f8e"
 kdebug-392943.patch::"https://cgit.kde.org/user-manager.git/patch/?id=a2f7d308f9b5eee4efdc5c3b6dc221d98f3f373d"
 kdebug-414860.patch::"https://cgit.kde.org/user-manager.git/patch/?id=2471fa7d252de904b305dac77171fa300d66c05d")
-sha256sums=('1e8021ffeba4eb146c9bc1bf12f0d563d5c0da1bf75d0d63779b1f98b02c0be4'
+sha256sums=('10ed3196063c7dfed3b3f25dd199a48ca39fa86db5d0126ec84a543b1c212f0d'
             'SKIP'
             '5e8cf4663bca185f80fe61e12be5d5bb96d6e3727a444d0e650e6dfceccd23b0'
             '01ef5bf000507318cc07a9fbd54834cb4c976070f731da21898561413cc8a6af'
