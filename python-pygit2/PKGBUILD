@@ -4,7 +4,7 @@
 # Contributor: Daniel Micay <danielmicay@gmail.com>
 
 pkgname=python-pygit2
-pkgver=1.0.1
+pkgver=1.0.2
 pkgrel=1
 pkgdesc='Python bindings for libgit2'
 arch=('x86_64')
@@ -13,7 +13,7 @@ license=('GPL2')
 depends=('libgit2>=1:0.28.0')
 makedepends=('python-cffi' 'python-setuptools' 'git')
 source=("$pkgbase-$pkgver.tar.gz::https://github.com/libgit2/pygit2/archive/v${pkgver}.tar.gz")
-sha256sums=('759e16f85a19ca75c9c2169c3b3cceac9250f1793bc4a3bc8dd96d84b15d73bb')
+sha256sums=('4e2f99b4def1475223e7e19b5460b2fab021b4a6fd9963fbf0c16451e77c6a4e')
 
 package() {
   depends+=('python-cffi')
