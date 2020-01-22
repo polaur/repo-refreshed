@@ -5,7 +5,7 @@
 
 pkgname=python-pygit2
 pkgver=1.0.2
-pkgrel=1
+pkgrel=2
 pkgdesc='Python bindings for libgit2'
 arch=('x86_64')
 url="https://github.com/libgit2/pygit2"
@@ -15,11 +15,17 @@ makedepends=('python-cffi' 'python-setuptools' 'git')
 source=("$pkgbase-$pkgver.tar.gz::https://github.com/libgit2/pygit2/archive/v${pkgver}.tar.gz")
 sha256sums=('4e2f99b4def1475223e7e19b5460b2fab021b4a6fd9963fbf0c16451e77c6a4e')
 
+build() {
+  
+  cd "pygit2-$pkgver"
+  LANG=en_US.UTF8 python setup.py build
+}
+
 package() {
   depends+=('python-cffi')
   replaces=('python-libgit2')
   conflicts=('python-libgit2')
 
   cd "pygit2-$pkgver"
-  LANG=en_US.UTF8 python setup.py install --root="$pkgdir" --optimize=1
+  LANG=en_US.UTF8 python setup.py install --root="$pkgdir" --optimize=1 --skip-build
 }
