@@ -4,8 +4,8 @@
 # Contributor: Eivind Uggedal <eivind@uggedal.com>
 
 pkgname=mpv-light
-pkgver=0.31.0
-pkgrel=2
+pkgver=0.32.0
+pkgrel=1
 pkgdesc='a free, open source, and cross-platform media player (polaur)'
 conflicts=('mpv')
 arch=('x86_64')
