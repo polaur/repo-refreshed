@@ -7,7 +7,7 @@
 # Contributor: Tobias Powalowski <tpowa@archlinux.org>
 
 pkgname=digikam
-_pkgver=7.0.0-beta1
+_pkgver=7.0.0-beta2
 pkgver=${_pkgver//-/_} # for beta versions
 pkgrel=4
 pkgdesc="An advanced digital photo management application"
@@ -21,32 +21,14 @@ optdepends=('hugin: panorama tool' 'qt5-imageformats: support for additional ima
             'libkvkontakte: VKontakte plugin'
             'rawtherapee: RAW import' 'darktable: RAW import')
 source=("https://download.kde.org/unstable/$pkgname/$pkgname-$_pkgver.tar.xz"{,.sig}
-fix_build_with_opencv4.2.patch::"https://cgit.kde.org/digikam.git/patch/?id=cff33fbc9c7c69f92be990cef0f19e63ac1f7654"
-fix_build_with_Qt5.14.patch::"https://cgit.kde.org/digikam.git/patch/?id=72651c36d900b5538226578666820c8e75c11d44"
-ccbug-415489.patch::"https://cgit.kde.org/digikam.git/patch/?id=7fffd49c5fc9080e96af2f0bf9ce642c6c5e349a"
-kdebug-415560.patch::"https://cgit.kde.org/digikam.git/patch/?id=a6103e38cb49f4792f984e3e376a8c6afa760a2c"
 )
 
-sha256sums=('a9ed37120a330b6a2cff60f0e6f81c968e5fd3aee35922b2416d151ccd39fbfd'
-            'SKIP'
-            '432c7d5960b4f1c1775d1679daef2fc52bde89cfbe686aaaee470c4ba602dd43'
-            '3c0f0c847dc66043dbae97fd3eb6aef219683a22bab790f2a078e7896e5abb36'
-            'c17790bc4591a00edb4dd8c5dfc513a636cbbaeb9630bedf44a56bd624ee8e35'
-            '87a36331ab220fbfcd08cf9e11f14d17aa73a897ecc141c30e80a6cf84fa6937')
+sha256sums=('62420d3ef7cd5af0075c8f69f2d078927952c2e279b0aa642025389d13aeb59d'
+            'SKIP')
 validpgpkeys=(D1CF2444A7858C5F2FB095B74A77747BC2386E50) # digiKam.org (digiKam project) <digikamdeveloper@gmail.com>
 
 prepare() {
   mkdir -p build
-
-  cd $pkgname-$_pkgver
-  msg "1"
-  patch -p1 -i ../fix_build_with_opencv4.2.patch
-  msg "2"
-  patch -p1 -i ../fix_build_with_Qt5.14.patch
-  msg "3"
-  patch -p1 -i ../ccbug-415489.patch
-  msg "6"
-  patch -p1 -i ../kdebug-415560.patch
   }
 
 build() {
@@ -61,8 +43,8 @@ build() {
     -DENABLE_APPSTYLES=ON \
     -DENABLE_QWEBENGINE=ON \
     -DOpenGL_GL_PREFERENCE=GLVND
-  make -j2
-}
+  make
+  }
 
 package() {
   cd build
