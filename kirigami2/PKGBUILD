@@ -1,0 +1,39 @@
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=kirigami2
+pkgver=5.67.1
+pkgrel=1.1
+pkgdesc='A QtQuick based components set'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+groups=(kf5)
+depends=(qt5-quickcontrols qt5-quickcontrols2 qt5-graphicaleffects)
+makedepends=(extra-cmake-modules qt5-tools qt5-doc qt5-svg kpackage doxygen)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-417351.patch::"https://cgit.kde.org/kirigami.git/patch/?id=86f988434cd657e77cc9429e78f7290ce6b5713d")
+sha256sums=('0311ba00b213a26acddd9fe4ce0642ed2500a076429ea5fe4424fdf634f12e68'
+            'SKIP'
+            '39d08d7e6b4623644dff6ba5ac295ad385671a47eac8d694a6133764a213e8af')
+validpgpkeys=('53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB') # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  patch -p1 -i ../kdebug-417351.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
+
