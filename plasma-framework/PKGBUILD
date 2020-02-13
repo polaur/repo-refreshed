@@ -1,0 +1,43 @@
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=plasma-framework
+pkgver=5.67.0
+pkgrel=1.1
+pkgdesc='Plasma library and runtime components based upon KF5 and Qt5'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(kactivities kdeclarative kwayland kirigami2)
+makedepends=(extra-cmake-modules qt5-tools qt5-doc kdoctools doxygen)
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-417511.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=1ed47e7c4188ed0f047dda40093ea0213ae4a433"
+kdebug-417548.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=1dc36bc2cee489e621a52fb4456ff28cf6a64685")
+sha256sums=('6baa5fc124b8147bbc1e2bf0a7cf136ad8bbf6ac34920cd153ac646907baeb84'
+            'SKIP'
+            '4457eaeee4023a44ca18c122c59f13b779259580d46759e1a918d6387928de3a'
+            '7ced972b51188a312fef69dfe29716ffed45bc278b37879dc0276c19aeae186a')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  patch -p1 -i ../kdebug-417511.patch
+  patch -p1 -i ../kdebug-417548.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
