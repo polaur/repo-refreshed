@@ -1,28 +1,33 @@
-# $Id$
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with upcomming bugfixes 
+# made upon the original work by:
 # Maintainer: Eric Bélanger <eric@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 
 pkgname=krename
 pkgver=5.0.0
-pkgrel=2.1
+pkgrel=4.1
 pkgdesc="A very powerful batch file renamer"
 arch=(x86_64)
-url="http://www.krename.net"
+url="https://www.krename.net"
 license=(GPL)
 depends=(kio kjs exiv2 podofo taglib hicolor-icon-theme)
 makedepends=(extra-cmake-modules)
 source=(https://download.kde.org/stable/$pkgname/$pkgver/src/$pkgname-$pkgver.tar.xz{,.sig}
-kdebug-391291.patch::"https://cgit.kde.org/krename.git/patch/?id=d9f23bd5dc9e87c9613136708dd93ff92ba9bc23")
+        krename-exiv2-0.27.patch
+        kdebug-391291.patch::"https://cgit.kde.org/krename.git/patch/?id=d9f23bd5dc9e87c9613136708dd93ff92ba9bc23")
 sha256sums=('0a61761853787fd46b35f3a733cf87cde00de5df631728332a64c38c670bd28c'
             'SKIP'
+            'c7e1663ef8dfb0c9a00db7c0e9815cc8fbdffbf1129236c1ce659c37d6c38089'
             'd752b931dbd1118f06d05ed2ef8c4e14f10c239690bb8e39030a36bbbc2e9a81')
 validpgpkeys=(D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker <heirecka@exherbo.org>
 
 prepare() {
   mkdir -p build
-  
+
   cd $pkgname-$pkgver
-  msg "Add KDEBUG 391291 patch"
+  patch -p1 -i ../krename-exiv2-0.27.patch # Fix build with exiv2 0.27
+  msg "Applying kdebug 391291 patch"
   patch -p1 -i ../kdebug-391291.patch
 }
 
