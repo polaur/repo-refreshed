@@ -6,7 +6,7 @@
 pkgname=weechat-python3-light
 _pkgname=weechat
 pkgver=2.7
-pkgrel=1
+pkgrel=2
 pkgdesc="Fast, light and extensible IRC client (curses UI) (polaur)"
 conflicts=('weechat')
 arch=('x86_64')
