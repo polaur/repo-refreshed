@@ -1,12 +1,14 @@
 # Maintainer : Damian N. <nycko123 at gmail>
+# Maintainer : Jacek Bienias <sp7ezd at gmail.com>
 # Contributor : Christian Rebischke <Chris.Rebischke@archlinux.org>
 # Contributor: Giovanni Scafora <giovanni@archlinux.org>
 # Contributor: lucke <lucke at o2 dot pl>
 
-pkgname=weechat-python3-light
+pkgname=weechat-light
+replaces=('weechat-python3-light')
 _pkgname=weechat
-pkgver=2.7
-pkgrel=2
+pkgver=2.7.1
+pkgrel=1
 pkgdesc="Fast, light and extensible IRC client (curses UI) (polaur)"
 conflicts=('weechat')
 arch=('x86_64')
@@ -22,7 +24,7 @@ optdepends=('lua: support for lua scripts'
 source=("${pkgname}-${pkgver}.tar.xz::https://www.weechat.org/files/src/${_pkgname}-${pkgver}.tar.xz"
         "${pkgname}-${pkgver}.tar.xz.asc::https://www.weechat.org/files/src/${_pkgname}-${pkgver}.tar.xz.asc")
 
-sha512sums=('5377cf9c37520cb2b7d1ba43251df3f33d814783ea4bd20d28cb08a2106c8db0e44a392a61929987b807a7d5e69a3c0ed1f3fec122a014b7ea7068e159341075'
+sha512sums=('eb0cc4c7e0f2cf18d522b49429fe2d77b1cee3225686d0bc09f80a69b17362af0923df4cd5f4859207d84acb762d4042cd5b57799705d0b7e4759eade6c660e0'
             'SKIP')
 validpgpkeys=('A9AB5AB778FA5C3522FD0378F82F4B16DEC408F8') # WeeChat (signing key) <webmaster@weechat.org>
 
