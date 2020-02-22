@@ -1,0 +1,43 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# made upon the original work by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=breeze-gtk
+pkgver=5.18.1
+pkgrel=1.1
+pkgdesc="Breeze widget theme for GTK 2 and 3"
+arch=(x86_64)
+url='https://quickgit.kde.org/?p=breeze-gtk.git'
+license=(LGPL)
+depends=(qt5-base)
+makedepends=(extra-cmake-modules sassc python-cairo breeze)
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-417461.patch::"https://cgit.kde.org/breeze-gtk.git/patch/?id=dca25cb44b37458506f7455469829f8da115ee69")
+sha256sums=('9735d4b2ebd27e760455138455f947619fbc5947760069c7919d596754cf92a5'
+            'SKIP'
+            '31074e7c232d3e7dc873fda28165011cd80d9a952d3bd75357a71e154dabd768')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare(){
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Raname colour definitions for better Gtk3 look (aka kdebug 417461) patch. Fix in 5.19.0"
+  patch -p1 -i ../kdebug-417461.patch
+}
+
+build(){
+  cd build
+  cmake ../$pkgname-$pkgver
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
