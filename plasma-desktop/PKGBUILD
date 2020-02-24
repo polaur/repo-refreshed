@@ -30,8 +30,7 @@ sha256sums=('588b228dab889b13f2942f8682fdab1765bae97f2c057fec4277be21c37aa912'
             '2d83b72c1fa5e44a68140ec981eb2d9ea2e39270fc7246910e12341df31b3a92'
             'ed62ef6bae189b063a5ecd8b19069ae1c4f9d43689653b199ae919bc8e94bd43'
             '92a91fc8407668192bcfa3024a3ab51cc9a1277f3843c704480acbfb15c79892'
-            '9dc1158dadf84731d298e1d3f3fbb64f3b02df95e04f584f88093aebe43e7a4f'
-            'c3cfe594e7398cc2d8b58a0b98eea849b5231d539cf5aa98b8f2ca0ccae90081')
+            '9dc1158dadf84731d298e1d3f3fbb64f3b02df95e04f584f88093aebe43e7a4f')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
