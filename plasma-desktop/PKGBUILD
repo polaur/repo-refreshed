@@ -8,7 +8,7 @@
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
 pkgver=5.18.1
-pkgrel=1.5
+pkgrel=1.4
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -19,7 +19,7 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
         kdebug-414109.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=ca9f0eeb9b5377a598c6ec58aa1a2beaa08d69c0"
         kdebug-397595.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=6d3d3ffa76a5125da843fe6f58a684bdba6e6d26"
         kdebug-417461.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=fffb352cfa1eb5e18f038d5b423d2dce0dca8727"
-        kdebug-417276.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=8f1043c641a2edd86fb6139e0a5cfe108d64a69d")
+        )
 depends=(polkit-kde-agent libxkbfile kmenuedit systemsettings ksysguard baloo)
 makedepends=(extra-cmake-modules kdoctools xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
              libibus scim kdesignerplugin)
@@ -51,8 +51,6 @@ prepare() {
   patch -p1 -i ../kdebug-397595.patch
   msg "Applying kdebug 417461 patch; fix in 5.19.0"
   patch -p1 -i ../kdebug-417461.patch
-  msg "Applying kdebug 417276 patch; fix probably in 5.19.0"
-  patch -p1 -i ../kdebug-417276.patch
 }
 
 build() {
