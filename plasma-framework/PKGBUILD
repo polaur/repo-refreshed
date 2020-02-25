@@ -7,7 +7,7 @@
 
 pkgname=plasma-framework
 pkgver=5.67.0
-pkgrel=2.1
+pkgrel=2.2
 pkgdesc='Plasma library and runtime components based upon KF5 and Qt5'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -17,11 +17,13 @@ makedepends=(extra-cmake-modules qt5-tools qt5-doc kdoctools doxygen)
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-417511.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=1ed47e7c4188ed0f047dda40093ea0213ae4a433"
-kdebug-417548.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=1dc36bc2cee489e621a52fb4456ff28cf6a64685")
+kdebug-417548.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=1dc36bc2cee489e621a52fb4456ff28cf6a64685"
+D23339.patch::"https://cgit.kde.org/plasma-framework.git/patch/?id=4b93b71a492421a40b2a183f6252aee1576a015e")
 sha256sums=('6baa5fc124b8147bbc1e2bf0a7cf136ad8bbf6ac34920cd153ac646907baeb84'
             'SKIP'
             '4457eaeee4023a44ca18c122c59f13b779259580d46759e1a918d6387928de3a'
-            '7ced972b51188a312fef69dfe29716ffed45bc278b37879dc0276c19aeae186a')
+            '7ced972b51188a312fef69dfe29716ffed45bc278b37879dc0276c19aeae186a'
+            '05532a01468f06f97d527077e34f4f8606f5abf4e94edda9ee0770f059eef451')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -32,6 +34,8 @@ prepare() {
   patch -p1 -i ../kdebug-417548.patch
   msg "Applying kdebug 417511.patch; fix in 5.68"
   patch -p1 -i ../kdebug-417511.patch
+  msg "Fix memory leak in ConfigView and Dialog aka D23339 patch"
+  patch -p1 -i ../D23339.patch
 }
 
 build() {
