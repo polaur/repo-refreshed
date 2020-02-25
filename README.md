@@ -17,6 +17,13 @@ git clone https://github.com/polaur/repo-refreshed.git
 
 ```
 
+or
+
+```
+git clone https://gitlab.com/polaur/repo-refreshed.git
+
+```
+
 # Install:
 
 
