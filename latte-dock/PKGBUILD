@@ -16,13 +16,13 @@ makedepends=(extra-cmake-modules)
 source=("https://download.kde.org/stable/$pkgname/$pkgname-$pkgver.tar.xz"{,.sig}
     kdebug-417886_1.patch::"https://cgit.kde.org/latte-dock.git/patch/?id=e5111b4716814e8b3c0e94ad3512fbb587464000"
     kdebug-417886_2.patch::"https://cgit.kde.org/latte-dock.git/patch/?id=3e3f39cfcd78789ab9b46f485ebb97c8599ebb99"
-    kdebug-391073.patch::"https://cgit.kde.org/latte-dock.git/patch/?id=d071e3be33480e5c82f367b18ca37f2d2144798d"
-    kdebug-417546.patch::"https://cgit.kde.org/latte-dock.git/patch/?id=0406a9a411bdddaac7dfcf1a2fac9d8c74f66d9e")
+    #kdebug-391073.patch::"https://cgit.kde.org/latte-dock.git/patch/?id=d071e3be33480e5c82f367b18ca37f2d2144798d"
+    kdebug-417546.patch::"https://cgit.kde.org/latte-dock.git/patch/?id=0406a9a411bdddaac7dfcf1a2fac9d8c74f66d9e"
+    )
 sha256sums=('3542431a96a8dff9b101578346ea80ce9d73e29712f2910ee0227a39e955a583'
             'SKIP'
             '0bccaca77c9e50730c4cf7e736588aff8fbacf3e06fd550da4143b85a3793089'
             'bb52524b4ac47d0103dee97bedea1a157177a6cb56e32b8979eefd541d4b37c0'
-            'be9fb9b838a27efb1c600b2e2fa47aee456d900645170a75df21f2c27e1ad2af'
             '65678d03290bd4658cc5fa2de3079b6bbead8a880c7d5287b75e1f805ff14bb5')
 validpgpkeys=(325E97C32E601F5D4EADCF3A55999050A2D9110E) # Michail Vourlakos (mvourlakos) <mvourlakos@gmail.com>
 
@@ -30,8 +30,8 @@ prepare() {
   mkdir -p build
   
   cd $pkgname-$pkgver
-  msg "Apply kdebug 391073 patch"
-  patch -p1 -i ../kdebug-391073.patch
+#  msg "Apply kdebug 391073 patch"
+#  patch -p1 -i ../kdebug-391073.patch
   msg "Apply kdebug 417546 patch; fix in 0.9.9"
   patch -p1 -i ../kdebug-417546.patch
   msg "Apply kdebug 417886 patch; fix in 0.9.9"
