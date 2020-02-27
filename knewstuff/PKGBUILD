@@ -1,13 +1,10 @@
-# Maintainer: pavbaranov <pavbaranov at gmail dot com>
-# only for version with bugfixes from upcomming version
-# made upon the original work by:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=knewstuff
 pkgver=5.67.0
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='Support for downloading application assets from the network'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -17,10 +14,12 @@ makedepends=(extra-cmake-modules doxygen qt5-tools qt5-doc qt5-declarative)
 optdepends=('kirigami2: QML components')
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-417802.patch::"https://cgit.kde.org/knewstuff.git/patch/?id=5c7ee50bf900666efa44439a4f4a12ec5df986f9")
+kdebug-417802.patch::"https://cgit.kde.org/knewstuff.git/patch/?id=5c7ee50bf900666efa44439a4f4a12ec5df986f9"
+kdebug-418191.patch::"https://cgit.kde.org/knewstuff.git/patch/?id=94015abda31bb8c9ed8b87c46f4a685f2ccb5a15")
 sha256sums=('2fadaf5bba791d8b009ab187349175cc6a2e37b968167a3a43f2174cd5e8d10c'
             'SKIP'
-            'fee6f33b1125bc62f6c0d9208e5c4aa3f977d60de4ff287afc4e846597f051b6')
+            'fee6f33b1125bc62f6c0d9208e5c4aa3f977d60de4ff287afc4e846597f051b6'
+            '5f6ea7fa6d29195a93d7757450bbf2b8f2c95677fd20607000e5a4ccf728d928')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -29,6 +28,8 @@ prepare() {
   cd $pkgname-$pkgver
   msg "Applying kdebug 417802 patch"
   patch -p1 -i ../kdebug-417802.patch
+  msg "Applying kdebug 418191 patch"
+  patch -p1 -i ../kdebug-418191.patch
 }
 
 build() {
