@@ -3,7 +3,7 @@
 
 pkgname=otter-browser-polaur
 pkgver=1.0.01
-pkgrel=1
+pkgrel=2
 pkgdesc="Web browser controlled by the user, not vice-versa; version with qt5-webengine enabled, also."
 arch=('x86_64')
 url="https://${pkgname%-*}.org"
