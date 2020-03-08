@@ -5,12 +5,12 @@
 
 pkgname=xdg-desktop-portal-kde
 pkgver=5.18.2
-pkgrel=2.1
+pkgrel=3.1
 pkgdesc='A backend implementation for xdg-desktop-portal using Qt/KF5'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
 license=(LGPL)
-depends=(libpipewire02 kirigami2 plasma-framework)
+depends=(pipewire kirigami2 plasma-framework)
 makedepends=(extra-cmake-modules)
 provides=(xdg-desktop-portal-impl)
 groups=(plasma)
@@ -25,19 +25,21 @@ validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr
               '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
 
 prepare() {
-  cd $pkgname-$pkgver
+  mkdir -p build
   
+  cd $pkgname-$pkgver  
   msg "Applying kdebug 418155 patch"
   patch -p1 -i ../kdebug-418155.patch
 }
 
 build() {
-  cmake -H$pkgname-$pkgver -Bbuild \
+  cd build
+  cmake ../$pkgname-$pkgver \
     -DCMAKE_INSTALL_LIBEXECDIR=lib \
     -DBUILD_TESTING=OFF
-  cmake --build build
+  make 
 }
 
 package() {
-  DESTDIR="$pkgdir" cmake --build build --target install
+  make DESTDIR="$pkgdir" install
 }
