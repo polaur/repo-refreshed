@@ -1,0 +1,41 @@
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=spectacle
+pkgver=19.12.3
+pkgrel=1.1
+pkgdesc="KDE screenshot capture utility"
+arch=(x86_64)
+url='https://kde.org/applications/utilities/org.kde.spectacle'
+license=(GPL)
+depends=(xcb-util-cursor libkipi purpose knewstuff kwayland qt5-tools)
+makedepends=(extra-cmake-modules kdoctools)
+optdepends=('kipi-plugins: export to various online services')
+groups=(kde-applications kdegraphics)
+source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-418638.patch::"https://cgit.kde.org/spectacle.git/patch/?id=017cf99c7a5bdf30c4510af1533b04c73d760cc6")
+sha256sums=('443f114dab1fb50e7e12a046fdf06c0456bf99a3abdf09dce05605fdf7d3de81'
+            'SKIP'
+            'b9e48f32211e767f12f83d169b4cbfe48dc52f97793678411dbde9194563a720')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "kdebug 418638 patch; fix probably in 20.04.0"
+  patch -p1 -i ../kdebug-418638.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+   -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
+
