@@ -3,7 +3,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=plasma-nm
-pkgver=5.18.2
+pkgver=5.18.3
 pkgrel=1.1
 pkgdesc='Plasma applet written in QML for managing network connections'
 arch=(x86_64)
@@ -14,12 +14,10 @@ makedepends=(extra-cmake-modules openconnect)
 optdepends=('openconnect: Cisco AnyConnect VPN plugin')
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-418625.patch::"https://cgit.kde.org/plasma-nm.git/patch/?id=afc230d55362d3be52ac2d96701dfda3f604a635"
 kdebug-418416_2.patch::"https://cgit.kde.org/plasma-nm.git/patch/?id=7de9e9cdbd57b991226fe7467fbca4841e73e9e0"
 kdebug-418416_1.patch::"https://cgit.kde.org/plasma-nm.git/patch/?id=c9b2684a49d369dcfef95e0c26a64664138fc434")
-sha256sums=('e49b39d9c62a1e245bf452e3cba0092768ffe6934a6057bfb184c80fa859c4af'
+sha256sums=('0d4ead3648169e53ef3e08ec1fc3d67a3ef54a3a51bd246d64bd93473aeb8762'
             'SKIP'
-            '4dd0096a8d9a56acb132c43f39f5ca930e68d3b19a908ad9f8c5556c4337fe3a'
             '066b46915c50e0ec7f2b31f24557af180741b0985afc50b68920fb1e29445c58'
             '5e53388d250d27301b0e1d162580780f9fda1e239d60beb4b60f20ffdafb440c')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
@@ -31,8 +29,6 @@ prepare() {
   mkdir -p build
   
   cd $pkgname-$pkgver
-  msg "KDEBUG 418625 patch"
-  patch -p1 -i ../kdebug-418625.patch
   msg "KDEBUG 418416 patch; fix in 5.19"
   patch -p1 -i ../kdebug-418416_1.patch
   patch -p1 -i ../kdebug-418416_2.patch
