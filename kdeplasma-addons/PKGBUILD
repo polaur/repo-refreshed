@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kdeplasma-addons
-pkgver=5.18.2
-pkgrel=1.2
+pkgver=5.18.3
+pkgrel=1.1
 pkgdesc='All kind of addons to improve your Plasma experience'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -21,11 +21,13 @@ optdepends=('kross: comic applet'
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
         "kdebug-417608.patch::https://cgit.kde.org/kdeplasma-addons.git/patch/?id=9abedfec9d23106cfd8e66c3241155d31e29b896"
-        "kdebug-417953.patch::https://cgit.kde.org/kdeplasma-addons.git/patch/?id=b03539a0d8d3b9e5a7c580c926c618bde0dbe374")
-sha256sums=('634b346a6d5f9352477a7edc27350ef0c229b64eaf2da08e05ea2bf9c262c4e8'
+        "kdebug-417953.patch::https://cgit.kde.org/kdeplasma-addons.git/patch/?id=b03539a0d8d3b9e5a7c580c926c618bde0dbe374"
+        "qt5.15-build-fix.patch::https://cgit.kde.org/kdeplasma-addons.git/patch/?id=47381a65debe01a0a015e1aa423cbb78af649648")
+sha256sums=('e5ae323671816b40df40957e1d64f1a2ebc316145bc861087e18a02b8906d301'
             'SKIP'
             'a0b449f2a777fbbf2361228de43b65ae06f8c39855fd8137dc411da7fe01e1ee'
-            '26909903edd915b6945c0069c8786a95b9def1b59465d8d711f060ed0ac5b4ee')
+            '26909903edd915b6945c0069c8786a95b9def1b59465d8d711f060ed0ac5b4ee'
+            '1df363caf7745063f6e227d61e54868af3498e9130cfad7237afe5f97178020a')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -35,11 +37,10 @@ prepare() {
   mkdir -p build
   
   cd $pkgname-$pkgver
+  patch -p1 -i ../qt5.15-build-fix.patch
   msg "Apply kdebug 417608 patch; fix in 5.19"
   patch -p1 -i ../kdebug-417608.patch
-  msg "Apply kdebug 417953 patch; fix in 5.18.3"
-  patch -p1 -i ../kdebug-417953.patch
-}
+  }
 
 build() {
   cd build
