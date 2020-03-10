@@ -1,7 +1,8 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
 # Maintainer:Antonio Rojas <arojas@archlinux.org>
 
 pkgname=plasma-pa
-pkgver=5.18.2
+pkgver=5.18.3
 pkgrel=1.1
 pkgdesc='Plasma applet for audio volume management using PulseAudio'
 arch=(x86_64)
@@ -11,12 +12,10 @@ depends=(plasma-workspace libcanberra-pulse pulseaudio perl)
 makedepends=(extra-cmake-modules kdoctools)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-417607.patch::"https://cgit.kde.org/plasma-pa.git/patch/?id=606c6499750a1d776d73b052eab828dc5eedca07"
-kdebug-416331.patch::"https://cgit.kde.org/plasma-pa.git/patch/?id=552b0384ffd205a148df62239058cee9a4a6702e")
-sha256sums=('350531cb0e37cdcf024632edeb2b973c206d880c062f33524b367eb550736418'
+kdebug-417607.patch::"https://cgit.kde.org/plasma-pa.git/patch/?id=606c6499750a1d776d73b052eab828dc5eedca07")
+sha256sums=('5f4e25f75706af1c2693b2b8afa17d0138c495ec42a6aa8ac10ec04c19280577'
             'SKIP'
-            '36e2d6ec93b9ea6e7cb609cddef6bd829f77f1ce60b1f14542d7e7cc48789b08'
-            'c227e8e2f9402f67b37b7a08040e68407078cf81bb243699339255a5b805b36d')
+            '36e2d6ec93b9ea6e7cb609cddef6bd829f77f1ce60b1f14542d7e7cc48789b08')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -26,8 +25,6 @@ prepare() {
   mkdir -p build
   
   cd $pkgname-$pkgver
-  msg "Applying kdebug 416331 patch"
-  patch -p1 -i ../kdebug-416331.patch
   msg "Applying kdebug 417607 patch; fix in 5.19.0"
   patch -p1 -i ../kdebug-417607.patch
 }
