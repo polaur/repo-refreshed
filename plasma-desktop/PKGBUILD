@@ -8,7 +8,7 @@
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
 pkgver=5.18.3
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 
@@ -18,6 +18,7 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
         kdebug-416553.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=a35d2b9adf40072e242b8820dcb07cf0a7ed037b"
         kdebug-415649.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=c32b5a85cae6f99bb5097b16a25983fc611aecc6"
         kdebug-417461.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=fffb352cfa1eb5e18f038d5b423d2dce0dca8727"
+        kdebug-413736.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=9768200d9a27e4e391ce9aa3cf261db95d99b0c8"
  #       kdebug-417276.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=8f1043c641a2edd86fb6139e0a5cfe108d64a69d"
  )
 depends=(polkit-kde-agent libxkbfile kmenuedit systemsettings ksysguard baloo)
@@ -28,7 +29,8 @@ sha256sums=('340cc1854d2a3b267d95c8c60ec4ab7925932cb7128e9b6f4db897992dcc0c94'
             'SKIP'
             '674976dfb7b78c66f489d4f04bafcad395c0dddff439fb7bef386cb7cd3a86ee'
             '2d83b72c1fa5e44a68140ec981eb2d9ea2e39270fc7246910e12341df31b3a92'
-            '9dc1158dadf84731d298e1d3f3fbb64f3b02df95e04f584f88093aebe43e7a4f')
+            '9dc1158dadf84731d298e1d3f3fbb64f3b02df95e04f584f88093aebe43e7a4f'
+            '52555316c448d2e7f0942d096b8cbac2ebe2e2e1f6e430ee552f6d7e1cedae45')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -44,6 +46,8 @@ prepare() {
   patch -p1 -i ../kdebug-415649.patch
   msg "Applying kdebug 397595 patch; fix in 5.19.0"
   patch -p1 -i ../kdebug-417461.patch
+  msg "Applying kdebug 413736 patch; fix in 5.18.4"
+  patch -p1 -i ../kdebug-413736.patch
 #  msg "Applying kdebug 417276 patch; fix probably in 5.19.0"
 #  patch -p1 -i ../kdebug-417276.patch
 }
