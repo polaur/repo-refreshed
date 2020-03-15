@@ -5,33 +5,36 @@
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=ktexteditor
+pkgname=kcrash
 pkgver=5.68.0
 pkgrel=1.1
-pkgdesc='Advanced embeddable text editor'
+pkgdesc='Support for application crash analysis and bug report from apps'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
 license=(LGPL)
-depends=(kparts syntax-highlighting libgit2 editorconfig-core-c)
+depends=(kcoreaddons kwindowsystem)
 makedepends=(extra-cmake-modules doxygen qt5-tools qt5-doc)
+optdepends=('drkonqi: KDE crash handler application')
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-417890.patch::"https://cgit.kde.org/ktexteditor.git/patch/?id=1527af3b5435c4592f8b8daf9ffc7304ec69b77b")
-sha256sums=('dad373d4c136d113cca1ee6d700753563b7348813ff3229db670eedc63980cd6'
+kdebug-375913.patch::"https://cgit.kde.org/kcrash.git/patch/?id=6177c81d04a7490de558ab5f266d4a81f2fb8f20")
+sha256sums=('60daf2cee87c652619b098b688edce6f993c7960783159cd8be9d9145df29f7f'
             'SKIP'
-            '6237b970de5edd0ad64979f6b11393c770a9fe7af65348d0140a2d1d62c2d438')
+            'ef051224e901aac5f0e1faca1281e56990a48e5cdb9d0fc889e30c27322bd112')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
-  mkdir -p build
-
+  mkdir build
+  
   cd $pkgname-$pkgver
-  patch -p1 -i ../kdebug-417890.patch
+  msg "Apply KDEBUG 375913 patch"
+  patch -p1 -i ../kdebug-375913.patch
 }
 
 build() {
   cd build
   cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
     -DBUILD_TESTING=OFF \
     -DBUILD_QCH=ON
   make
