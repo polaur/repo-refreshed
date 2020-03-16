@@ -8,7 +8,7 @@
 
 pkgname=dolphin
 pkgver=19.12.3
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="KDE File Manager"
 arch=(x86_64)
 url="https://kde.org/applications/system/dolphin/"
@@ -22,12 +22,14 @@ source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$p
 kdebug-415698.patch::"https://cgit.kde.org/dolphin.git/patch/?id=d0cbcf9718bb5192738ea9f5a5a3d6c4f9f7dcef"
 kdebug-417640.patch::"https://cgit.kde.org/dolphin.git/patch/?id=4c923a531f77bc4c44b5c8687fe18dd6438eb9c5"
 port-deprecated-signal.patch::"https://cgit.kde.org/dolphin.git/patch/?id=e545efee73a869aef4276baef0535169f03933de"
+kdebug-408244.patch::"https://cgit.kde.org/dolphin.git/patch/?id=fa806d48dafec0c47141381740a5d7604293d32d"
 )
 sha256sums=('ba16f4d5be5ccc3c135a913f2e3c7dd3b7a492cfc9ec9ae518f714fcd7c2ab47'
             'SKIP'
             'd8b6faaa50c7565e119ead866941f2a87704e28291d7bcd32c2f3f5fd79f81a9'
             'ae1895baecce08de057bf70d9593ae264ccc779ddf8ca1aa7bc4415c21570086'
-            'fc0f361efac9b9d0dd9bfd93a3819115b5fe21c654093571636e0b2f450faacb')
+            'fc0f361efac9b9d0dd9bfd93a3819115b5fe21c654093571636e0b2f450faacb'
+            'fa9491fdf8b618b9ac015b6e8d0a3ea41dfb0ebfe4f1a782b9edb9a9059a9512')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
@@ -41,6 +43,8 @@ prepare() {
   patch -p1 -i ../kdebug-417640.patch
   msg "Apply patch for qt5.15"
   patch -p1 -i ../port-deprecated-signal.patch
+  msg "Apply kdebug 408244 patch"
+  patch -p1 -i ../kdebug-408244.patch
 }
 
 build() {
