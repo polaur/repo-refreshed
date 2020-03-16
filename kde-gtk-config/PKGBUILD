@@ -5,7 +5,7 @@
 
 pkgname=kde-gtk-config
 pkgver=5.18.3
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='GTK2 and GTK3 Configurator for KDE'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -15,10 +15,12 @@ makedepends=(extra-cmake-modules gtk2 gtk3)
 optdepends=('gtk2: GTK2 apps support' 'gtk3: GTK3 apps support' 'xsettingsd: apply settings to GTK applications on the fly')
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-418263.patch::"https://cgit.kde.org/kde-gtk-config.git/patch/?id=b6e7c6f056740e936adc94b7a843f6448f6830ab")
+kdebug-418263.patch::"https://cgit.kde.org/kde-gtk-config.git/patch/?id=b6e7c6f056740e936adc94b7a843f6448f6830ab"
+kdebug-333146.patch::"https://cgit.kde.org/kde-gtk-config.git/patch/?id=a581035b3f4793d96e9b5d2cf6b55191cbb4be91")
 sha256sums=('cd47092634387fdc63712846fecdee2385f98947910051c6ded95c7d741752c8'
             'SKIP'
-            '1f2ca61fafdcea7912a37c950bca0e41503cf3c5a8be866f6321a74f5b01d172')
+            '1f2ca61fafdcea7912a37c950bca0e41503cf3c5a8be866f6321a74f5b01d172'
+            '300851056be72198091fb1fc5e2bd7c190aaad18d024345e69aa6d8420cec04a')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -30,6 +32,8 @@ prepare() {
   cd $pkgname-$pkgver
   msg "Apply kdebug 418263 patch; fix in 5.19"
   patch -p1 -i ../kdebug-418263.patch
+  msg "Apply kdebug 333146 patch; fix in 5.18.4"
+  patch -p1 -i ../kdebug-333146.patch
 }
 
 build() {
