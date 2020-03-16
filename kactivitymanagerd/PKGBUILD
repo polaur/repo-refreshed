@@ -1,0 +1,46 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# made upon the original work by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+
+pkgname=kactivitymanagerd
+pkgver=5.18.3
+pkgrel=1.1
+pkgdesc="System service to manage user's activities and track the usage patterns"
+arch=(x86_64)
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=(LGPL)
+depends=(kio)
+makedepends=(extra-cmake-modules boost)
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-418839.patch::"https://cgit.kde.org/kactivitymanagerd.git/patch/?id=a28972ffe1e7b602ce9539e37006e1d9f8be96bd")
+sha256sums=('4e76d8885899d62b6d58a1d90dc78489084dff89799d3b3f168237938a34ad9b'
+            'SKIP'
+            '3c2d16e29b95bc26df8199191d0e0b55354693fa55895fd669e1a6280f35761c')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Apply kdebug 418839 patch"
+  patch -p1 -i ../kdebug-418839.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
