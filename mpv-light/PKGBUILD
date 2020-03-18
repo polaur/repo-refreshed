@@ -5,7 +5,7 @@
 
 pkgname=mpv-light
 pkgver=0.32.0
-pkgrel=1
+pkgrel=2
 pkgdesc='a free, open source, and cross-platform media player (polaur)'
 conflicts=('mpv')
 arch=('x86_64')
@@ -17,7 +17,7 @@ depends=('desktop-file-utils' 'ffmpeg' 'hicolor-icon-theme' 'libjack.so' 'lcms2'
          'libarchive' 'libcaca' 'libgl' 'libva'
          'libxinerama' 'libxkbcommon' 'libxrandr' 'libxss' 'libxv' 'lua52'
          'librubberband.so' 'uchardet' 'vulkan-icd-loader' 'wayland'
-         'xdg-utils' 'shaderc' 'mujs' 'libplacebo' 'libplacebo.so')
+         'xdg-utils' 'shaderc' 'mujs' 'libplacebo' 'libplacebo.so' 'sndio')
 makedepends=('mesa' 'python-docutils' 'ladspa' 'wayland-protocols'
              'ffnvcodec-headers' 'vulkan-headers' 'waf')
 optdepends=('youtube-dl: for video-sharing websites playback')
@@ -32,12 +32,13 @@ build() {
   waf configure --prefix=/usr \
     --confdir=/etc/mpv \
     --disable-cdda \
-    --enable-dvb \
+    --disable-dvb \
     --disable-dvdnav \
     --enable-libarchive \
     --enable-libmpv-shared \
     --disable-libsmbclient \
-	--disable-build-date
+    --enable-sndio \
+    --disable-build-date
 
   waf build
 }
