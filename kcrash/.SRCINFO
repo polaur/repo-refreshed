@@ -1,0 +1,25 @@
+pkgbase = kcrash
+	pkgdesc = Support for application crash analysis and bug report from apps
+	pkgver = 5.68.0
+	pkgrel = 1.1
+	url = https://community.kde.org/Frameworks
+	arch = x86_64
+	groups = kf5
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = doxygen
+	makedepends = qt5-tools
+	makedepends = qt5-doc
+	depends = kcoreaddons
+	depends = kwindowsystem
+	optdepends = drkonqi: KDE crash handler application
+	source = https://download.kde.org/stable/frameworks/5.68/kcrash-5.68.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.68/kcrash-5.68.0.tar.xz.sig
+	source = kdebug-375913.patch::https://cgit.kde.org/kcrash.git/patch/?id=6177c81d04a7490de558ab5f266d4a81f2fb8f20
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = 60daf2cee87c652619b098b688edce6f993c7960783159cd8be9d9145df29f7f
+	sha256sums = SKIP
+	sha256sums = ef051224e901aac5f0e1faca1281e56990a48e5cdb9d0fc889e30c27322bd112
+
+pkgname = kcrash
+

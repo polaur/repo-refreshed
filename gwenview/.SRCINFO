@@ -1,0 +1,41 @@
+pkgbase = gwenview
+	pkgdesc = A fast and easy to use image viewer
+	pkgver = 19.12.3
+	pkgrel = 1.2
+	url = https://kde.org/applications/graphics/gwenview/
+	arch = x86_64
+	groups = kde-applications
+	groups = kdegraphics
+	license = GPL
+	license = LGPL
+	license = FDL
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	depends = kactivities
+	depends = baloo
+	depends = libkipi
+	depends = libkdcraw
+	depends = kparts
+	depends = kitemmodels
+	depends = cfitsio
+	depends = phonon-qt5
+	depends = purpose
+	optdepends = qt5-imageformats: support for tiff, webp, and more image formats
+	optdepends = kimageformats: support for dds, xcf, exr, psd, and more image formats
+	optdepends = kipi-plugins: export to various online services
+	optdepends = kamera: import pictures from gphoto2 cameras
+	source = https://download.kde.org/stable/release-service/19.12.3/src/gwenview-19.12.3.tar.xz
+	source = https://download.kde.org/stable/release-service/19.12.3/src/gwenview-19.12.3.tar.xz.sig
+	source = kdebug-414694.patch::https://cgit.kde.org/gwenview.git/patch/?id=db6ca614a41eb880c2eee9d34101b17400dd5ca1
+	source = port-deprected-signal.patch::https://cgit.kde.org/gwenview.git/patch/?id=b1ae993cac2d5b3607a8752305aa590d701ed9cb
+	source = kdebug-411196.patch::https://cgit.kde.org/gwenview.git/patch/?id=cf4ce0083b50e6ec4b0a60e3a8f2ec9f1b5ce01c
+	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
+	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
+	sha256sums = b453cd55b7409bf8e4446a1b714dc66e73a0376d2da65b184b82f786767164e7
+	sha256sums = SKIP
+	sha256sums = 866f4b79891e7f6c79eea8759073da9ce8d21779cdd7e6a9ab8092174865b5bd
+	sha256sums = 52c98701193fa57660b0bdd3304f76b265039a33d600e54848fa44daa15ef610
+	sha256sums = 26c12cac584d160e94cd4284dde12243f5b2da92dd3b7da0bed8d5fa7c4a293c
+
+pkgname = gwenview
+

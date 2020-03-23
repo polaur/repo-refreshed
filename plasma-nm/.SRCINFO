@@ -1,0 +1,31 @@
+pkgbase = plasma-nm
+	pkgdesc = Plasma applet written in QML for managing network connections
+	pkgver = 5.18.3
+	pkgrel = 1.1
+	url = https://www.kde.org/workspaces/plasmadesktop/
+	arch = x86_64
+	groups = plasma
+	license = GPL2
+	makedepends = extra-cmake-modules
+	makedepends = openconnect
+	depends = plasma-workspace
+	depends = modemmanager-qt
+	depends = networkmanager-qt
+	depends = qca
+	depends = mobile-broadband-provider-info
+	optdepends = openconnect: Cisco AnyConnect VPN plugin
+	source = https://download.kde.org/stable/plasma/5.18.3/plasma-nm-5.18.3.tar.xz
+	source = https://download.kde.org/stable/plasma/5.18.3/plasma-nm-5.18.3.tar.xz.sig
+	source = kdebug-418416_2.patch::https://cgit.kde.org/plasma-nm.git/patch/?id=7de9e9cdbd57b991226fe7467fbca4841e73e9e0
+	source = kdebug-418416_1.patch::https://cgit.kde.org/plasma-nm.git/patch/?id=c9b2684a49d369dcfef95e0c26a64664138fc434
+	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
+	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
+	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
+	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
+	sha256sums = 0d4ead3648169e53ef3e08ec1fc3d67a3ef54a3a51bd246d64bd93473aeb8762
+	sha256sums = SKIP
+	sha256sums = 066b46915c50e0ec7f2b31f24557af180741b0985afc50b68920fb1e29445c58
+	sha256sums = 5e53388d250d27301b0e1d162580780f9fda1e239d60beb4b60f20ffdafb440c
+
+pkgname = plasma-nm
+

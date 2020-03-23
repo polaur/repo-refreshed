@@ -1,0 +1,24 @@
+pkgbase = kactivitymanagerd
+	pkgdesc = System service to manage user's activities and track the usage patterns
+	pkgver = 5.18.3
+	pkgrel = 1.1
+	url = https://www.kde.org/workspaces/plasmadesktop/
+	arch = x86_64
+	groups = plasma
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = boost
+	depends = kio
+	source = https://download.kde.org/stable/plasma/5.18.3/kactivitymanagerd-5.18.3.tar.xz
+	source = https://download.kde.org/stable/plasma/5.18.3/kactivitymanagerd-5.18.3.tar.xz.sig
+	source = kdebug-418839.patch::https://cgit.kde.org/kactivitymanagerd.git/patch/?id=a28972ffe1e7b602ce9539e37006e1d9f8be96bd
+	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
+	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
+	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
+	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
+	sha256sums = 4e76d8885899d62b6d58a1d90dc78489084dff89799d3b3f168237938a34ad9b
+	sha256sums = SKIP
+	sha256sums = 3c2d16e29b95bc26df8199191d0e0b55354693fa55895fd669e1a6280f35761c
+
+pkgname = kactivitymanagerd
+

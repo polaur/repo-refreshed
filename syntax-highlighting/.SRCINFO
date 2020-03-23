@@ -1,0 +1,24 @@
+pkgbase = syntax-highlighting
+	pkgdesc = Syntax highlighting engine for structured text and code
+	pkgver = 5.68.0
+	pkgrel = 1.1
+	url = https://community.kde.org/Frameworks
+	arch = x86_64
+	groups = kf5
+	license = GPL2
+	makedepends = extra-cmake-modules
+	makedepends = qt5-xmlpatterns
+	makedepends = qt5-tools
+	makedepends = qt5-doc
+	makedepends = doxygen
+	depends = qt5-base
+	source = https://download.kde.org/stable/frameworks/5.68/syntax-highlighting-5.68.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.68/syntax-highlighting-5.68.0.tar.xz.sig
+	source = kdebug-418778.patch::https://cgit.kde.org/syntax-highlighting.git/patch/?id=764957b1d23c48a160f0faca623843f678eb2a52
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = a857c743aa60b21eea7e4b986e8b195882aa2c18358412e767e68d93ce35e134
+	sha256sums = SKIP
+	sha256sums = 236265d576f1477981ed535a6dcd5782bfca9daca0c45bb30b1dea2eff1aa319
+
+pkgname = syntax-highlighting
+

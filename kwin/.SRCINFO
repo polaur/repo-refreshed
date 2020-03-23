@@ -1,0 +1,34 @@
+pkgbase = kwin
+	pkgdesc = An easy to use, but flexible, composited Window Manager
+	pkgver = 5.18.3
+	pkgrel = 1.1
+	url = https://www.kde.org/workspaces/plasmadesktop/
+	install = kwin.install
+	arch = x86_64
+	groups = plasma
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = qt5-tools
+	makedepends = kdoctools
+	depends = kscreenlocker
+	depends = xcb-util-cursor
+	depends = plasma-framework
+	depends = kcmutils
+	depends = breeze
+	depends = kinit
+	depends = qt5-sensors
+	depends = qt5-script
+	optdepends = qt5-virtualkeyboard: virtual keyboard support for kwin-wayland
+	source = https://download.kde.org/stable/plasma/5.18.3/kwin-5.18.3.tar.xz
+	source = https://download.kde.org/stable/plasma/5.18.3/kwin-5.18.3.tar.xz.sig
+	source = kdebug-418951.patch::https://cgit.kde.org/kwin.git/patch/?id=348e72c56ec7e157cec15d8e27065e4194490d89
+	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
+	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
+	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
+	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
+	sha256sums = e2dceee95fdb74ab1cfca4912731c20c9ff363d20b8f1872185eefa4a4ee69a4
+	sha256sums = SKIP
+	sha256sums = fee4827a9f2103f0608a93d25bd68f4ed7bdfcabf01e0aa1913313f13a66661f
+
+pkgname = kwin
+

@@ -1,0 +1,28 @@
+pkgbase = tellico
+	pkgdesc = A collection manager for KDE
+	pkgver = 3.2.3
+	pkgrel = 1.1
+	url = http://tellico-project.org/
+	arch = x86_64
+	license = GPL
+	makedepends = cmake
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	makedepends = libkcddb
+	depends = exempi
+	depends = libksane
+	depends = libkcddb
+	depends = libcdio
+	depends = kfilemetadata
+	depends = knewstuff
+	depends = kitemmodels
+	depends = khtml
+	depends = yaz
+	depends = qimageblitz-svn
+	depends = btparse
+	depends = libcsv
+	source = http://tellico-project.org/files/tellico-3.2.3.tar.xz
+	sha256sums = f4456eb31f71151b9786fa171531265b421b2de8140e9adbf6bb584862c42952
+
+pkgname = tellico
+

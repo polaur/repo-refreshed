@@ -1,0 +1,29 @@
+pkgbase = print-manager
+	pkgdesc = A tool for managing print jobs and printers
+	pkgver = 19.12.3
+	pkgrel = 1.2
+	url = https://www.kde.org/applications/utilities/
+	arch = x86_64
+	groups = kde-applications
+	groups = kdeutils
+	license = GPL
+	license = LGPL
+	license = FDL
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	makedepends = plasma-framework
+	depends = kcmutils
+	optdepends = system-config-printer: auto-detect the printer driver
+	source = https://download.kde.org/stable/release-service/19.12.3/src/print-manager-19.12.3.tar.xz
+	source = https://download.kde.org/stable/release-service/19.12.3/src/print-manager-19.12.3.tar.xz.sig
+	source = kdebug-408512.patch::https://cgit.kde.org/print-manager.git/patch/?id=9a11a1f4de8a26999485148c5a78e160e8880f17
+	source = kdebug-360199.patch::https://cgit.kde.org/print-manager.git/patch/?id=faea0b125911820c2c574cf17457f2d15c6100ba
+	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
+	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
+	sha256sums = 74c13802a65136539b4542fec10fb248149a3324e8060e947a8f305ce665269a
+	sha256sums = SKIP
+	sha256sums = 885fc30e3301541eb58e86fa6ac90109dec2db820cb325d6bf7590fbab7d7355
+	sha256sums = df781d3ff23d387882b433de3a9de478c2f45c74d1f52f6d193593c18a0f2648
+
+pkgname = print-manager
+

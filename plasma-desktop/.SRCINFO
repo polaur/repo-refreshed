@@ -1,0 +1,60 @@
+pkgbase = plasma-desktop
+	pkgdesc = KDE Plasma Desktop
+	pkgver = 5.18.3
+	pkgrel = 1.3
+	url = https://www.kde.org/workspaces/plasmadesktop/
+	arch = x86_64
+	groups = plasma
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	makedepends = xf86-input-evdev
+	makedepends = xf86-input-synaptics
+	makedepends = xf86-input-libinput
+	makedepends = xorg-server-devel
+	makedepends = libibus
+	makedepends = scim
+	makedepends = kdesignerplugin
+	depends = polkit-kde-agent
+	depends = libxkbfile
+	depends = kmenuedit
+	depends = systemsettings
+	depends = ksysguard
+	depends = baloo
+	source = https://download.kde.org/stable/plasma/5.18.3/plasma-desktop-5.18.3.tar.xz
+	source = https://download.kde.org/stable/plasma/5.18.3/plasma-desktop-5.18.3.tar.xz.sig
+	source = kdebug-416553.patch::https://cgit.kde.org/plasma-desktop.git/patch/?id=a35d2b9adf40072e242b8820dcb07cf0a7ed037b
+	source = kdebug-415649.patch::https://cgit.kde.org/plasma-desktop.git/patch/?id=c32b5a85cae6f99bb5097b16a25983fc611aecc6
+	source = kdebug-417461.patch::https://cgit.kde.org/plasma-desktop.git/patch/?id=fffb352cfa1eb5e18f038d5b423d2dce0dca8727
+	source = kdebug-413736.patch::https://cgit.kde.org/plasma-desktop.git/patch/?id=9768200d9a27e4e391ce9aa3cf261db95d99b0c8
+	source = kdebug-418604.patch::https://cgit.kde.org/plasma-desktop.git/patch/?id=4d33b8276e00471f6bfc14a174b3a33fe17627b3
+	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
+	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
+	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
+	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
+	sha256sums = 340cc1854d2a3b267d95c8c60ec4ab7925932cb7128e9b6f4db897992dcc0c94
+	sha256sums = SKIP
+	sha256sums = 674976dfb7b78c66f489d4f04bafcad395c0dddff439fb7bef386cb7cd3a86ee
+	sha256sums = 2d83b72c1fa5e44a68140ec981eb2d9ea2e39270fc7246910e12341df31b3a92
+	sha256sums = 9dc1158dadf84731d298e1d3f3fbb64f3b02df95e04f584f88093aebe43e7a4f
+	sha256sums = 52555316c448d2e7f0942d096b8cbac2ebe2e2e1f6e430ee552f6d7e1cedae45
+	sha256sums = 8a909d705910675d0b966c9b17e8b0784d8a5714c17306800e2dfae2d18a1a90
+
+pkgname = plasma-desktop
+	depends = polkit-kde-agent
+	depends = libxkbfile
+	depends = kmenuedit
+	depends = systemsettings
+	depends = ksysguard
+	depends = baloo
+	depends = knetattach
+	optdepends = plasma-nm: Network manager applet
+	optdepends = powerdevil: power management, suspend and hibernate support
+	optdepends = kscreen: screen management
+	optdepends = ibus: kimpanel IBUS support
+	optdepends = scim: kimpanel SCIM support
+
+pkgname = knetattach
+	pkgdesc = Wizard which makes it easier to integrate network resources with the Plasma Desktop
+	depends = kdelibs4support
+

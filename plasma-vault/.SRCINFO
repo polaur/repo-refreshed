@@ -1,0 +1,28 @@
+pkgbase = plasma-vault
+	pkgdesc = Plasma applet and services for creating encrypted vaults
+	pkgver = 5.18.3
+	pkgrel = 1.1
+	url = https://www.kde.org/
+	arch = x86_64
+	groups = plasma
+	license = LGPL
+	makedepends = extra-cmake-modules
+	depends = plasma-workspace
+	depends = networkmanager-qt
+	optdepends = encfs: to use encFS for encryption
+	optdepends = cryfs: to use cryFS for encryption
+	source = https://download.kde.org/stable/plasma/5.18.3/plasma-vault-5.18.3.tar.xz
+	source = https://download.kde.org/stable/plasma/5.18.3/plasma-vault-5.18.3.tar.xz.sig
+	source = kdebug-418262.patch::https://cgit.kde.org/plasma-vault.git/patch/?id=f6a924b37880b7340e796846a6e5474413ca6533
+	source = kdebug-412779.patch::https://cgit.kde.org/plasma-vault.git/patch/?id=1e2988d7d3ca68f9ff00e576c634aff4fe5b8b32
+	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
+	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
+	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
+	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
+	sha256sums = c25591adf9d116d42a6f494362e8f9fd77796d1c62bdd7d9a271cc5cb1135e57
+	sha256sums = SKIP
+	sha256sums = e099d7bd060a06a14e5a310ca0a76eb78021c8d2c2e3a3801376046fbbb65f0b
+	sha256sums = 8f03ccaac34b1fe2a3f63453db41bfadd06df8b1389a577181e2649fa6d3c156
+
+pkgname = plasma-vault
+
