@@ -1,7 +1,7 @@
 pkgbase = kirigami2
 	pkgdesc = A QtQuick based components set
 	pkgver = 5.68.0
-	pkgrel = 1.2
+	pkgrel = 2.1
 	url = https://community.kde.org/Frameworks
 	arch = x86_64
 	groups = kf5
@@ -17,11 +17,13 @@ pkgbase = kirigami2
 	depends = qt5-graphicaleffects
 	source = https://download.kde.org/stable/frameworks/5.68/kirigami2-5.68.0.tar.xz
 	source = https://download.kde.org/stable/frameworks/5.68/kirigami2-5.68.0.tar.xz.sig
+	source = kirigami-qt5.15.patch::https://cgit.kde.org/kirigami.git/patch/?id=6223aa66
 	source = kdebug-417956.patch::https://cgit.kde.org/kirigami.git/patch/?id=4d84d3f1d93fe7cc7db7530d13094a48745ef59c
 	source = kdebug-419124.patch::https://cgit.kde.org/kirigami.git/patch/?id=2e9355a6e584f392d19ba870054c5fc590782921
 	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
 	sha256sums = ad5f78afc916e9cb26f23918a6eb1983d4a57aa7e4f7314a8c23fb81e0fcaf4b
 	sha256sums = SKIP
+	sha256sums = 92bc34d9602ab911d15ca39721a0030c7b2d8d3a844daad0be4128b755223d89
 	sha256sums = f20a374eca54079aabd109e5638fe2ca2211e0049061f5a42663c54cd12ead9b
 	sha256sums = a11751ae80f7458faf9b2e5b55681ba41e88915d6fbac8a2500d0814a93c6fb5
 
