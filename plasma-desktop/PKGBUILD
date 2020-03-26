@@ -8,7 +8,7 @@
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
 pkgver=5.18.3
-pkgrel=1.3
+pkgrel=1.4
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 
@@ -20,7 +20,9 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
         kdebug-417461.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=fffb352cfa1eb5e18f038d5b423d2dce0dca8727"
         kdebug-413736.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=9768200d9a27e4e391ce9aa3cf261db95d99b0c8"
         kdebug-418604.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=4d33b8276e00471f6bfc14a174b3a33fe17627b3"
- #       kdebug-417276.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=8f1043c641a2edd86fb6139e0a5cfe108d64a69d"
+        # kdebug-366521.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=7498b41a1979b084d05b99a51d3561eeef68e974"
+        kdebug-419168.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=d0f673d0e92b297afb6cd0efa7547d256d3a6252"
+        # kdebug-417276.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=8f1043c641a2edd86fb6139e0a5cfe108d64a69d"
  )
 depends=(polkit-kde-agent libxkbfile kmenuedit systemsettings ksysguard baloo)
 makedepends=(extra-cmake-modules kdoctools xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
@@ -32,7 +34,8 @@ sha256sums=('340cc1854d2a3b267d95c8c60ec4ab7925932cb7128e9b6f4db897992dcc0c94'
             '2d83b72c1fa5e44a68140ec981eb2d9ea2e39270fc7246910e12341df31b3a92'
             '9dc1158dadf84731d298e1d3f3fbb64f3b02df95e04f584f88093aebe43e7a4f'
             '52555316c448d2e7f0942d096b8cbac2ebe2e2e1f6e430ee552f6d7e1cedae45'
-            '8a909d705910675d0b966c9b17e8b0784d8a5714c17306800e2dfae2d18a1a90')
+            '8a909d705910675d0b966c9b17e8b0784d8a5714c17306800e2dfae2d18a1a90'
+            '38b82464ffe21155a2f85bb3102352d313b393b2e0e6eeae7e477eae237aef53')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -52,8 +55,12 @@ prepare() {
   patch -p1 -i ../kdebug-413736.patch
   msg "Applying kdebug 418604 patch"
   patch -p1 -i ../kdebug-418604.patch
-#  msg "Applying kdebug 417276 patch; fix probably in 5.19.0"
-#  patch -p1 -i ../kdebug-417276.patch
+  # msg "Applying kdebug 366521, 417170, 417762 and 417762 patch"
+  # patch -p1 -i ../kdebug-366521.patch
+  msg "Applying kdebug 419168 patch"
+  patch -p1 -i ../kdebug-419168.patch
+  # msg "Applying kdebug 417276 patch; fix probably in 5.19.0"
+  # patch -p1 -i ../kdebug-417276.patch
 }
 
 build() {
@@ -61,7 +68,7 @@ build() {
   cmake ../$pkgname-$pkgver \
     -DCMAKE_INSTALL_LIBEXECDIR=lib \
     -DBUILD_TESTING=OFF
-  make -j3
+  make 
 }
 
 package_plasma-desktop() {
