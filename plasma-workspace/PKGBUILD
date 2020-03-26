@@ -9,7 +9,7 @@
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
 pkgver=5.18.3
-pkgrel=1.3
+pkgrel=1.4
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -24,7 +24,8 @@ kdebug-414885.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=c7c190
 kdebug-386114.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=731a190810440726f2db252b3a935648346f4a12"
 kdebug-411973.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=db2518b063e493da5bf5f5a48c931ff51bd22924"
 kdebug-417852.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=01691632b5238ac993b59eebe693fefc88130b8f"
-kdebug-408783.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=bf28d5d2b4f45108db65fe72d7efbdbdc23a5dc6")
+kdebug-408783.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=bf28d5d2b4f45108db65fe72d7efbdbdc23a5dc6"
+kdebug-419197.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=fede85a3d0ea5a30755582e947cabd6bc7d1e4b8")
 sha256sums=('ba3784de8aabe863bfdaabe69cd04f2b333a5572760b21d49d107c71362e639b'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
@@ -32,7 +33,8 @@ sha256sums=('ba3784de8aabe863bfdaabe69cd04f2b333a5572760b21d49d107c71362e639b'
             'fb10cdbad03283e3b3b80b4d65747b19c75f43f62900c916991648b567b74cd1'
             '83a650587a28a85abdd79b843d3711e6982078120ce7d005e6bc63171821f416'
             'ae7c94c67df423c568c0beee2367f975407dfd27a58c35629c0b41980e39309f'
-            'e02e5dc06a5be580353c90be7837d3941ed75b74a83e6dda3b3fed02c7988895')
+            'e02e5dc06a5be580353c90be7837d3941ed75b74a83e6dda3b3fed02c7988895'
+            'ff4a8622289ef57db304e49b3d2679e5277aa7c86013851a6f21af145b14409b')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -52,6 +54,8 @@ prepare() {
   patch -p1 -i ../kdebug-417852.patch
   msg "Applying kdebug 408783 patch; fix in 5.18.4"
   patch -p1 -i ../kdebug-408783.patch
+  msg "Applying kdebug 419197 patch"
+  patch -p1 -i ../kdebug-419197.patch
 }
 
 build() {
