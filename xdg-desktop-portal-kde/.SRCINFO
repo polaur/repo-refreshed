@@ -1,0 +1,26 @@
+pkgbase = xdg-desktop-portal-kde
+	pkgdesc = A backend implementation for xdg-desktop-portal using Qt/KF5
+	pkgver = 5.18.3
+	pkgrel = 1.1
+	url = https://www.kde.org/workspaces/plasmadesktop/
+	arch = x86_64
+	groups = plasma
+	license = LGPL
+	makedepends = extra-cmake-modules
+	depends = pipewire
+	depends = kirigami2
+	depends = plasma-framework
+	provides = xdg-desktop-portal-impl
+	source = https://download.kde.org/stable/plasma/5.18.3/xdg-desktop-portal-kde-5.18.3.tar.xz
+	source = https://download.kde.org/stable/plasma/5.18.3/xdg-desktop-portal-kde-5.18.3.tar.xz.sig
+	source = kdebug-419209.patch::https://cgit.kde.org/xdg-desktop-portal-kde.git/patch/?id=45092f756316a6b6718a2da5d319355d94abca45
+	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
+	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
+	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
+	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
+	sha256sums = 5259e3e59a244aee08c71e6d09804ac97185173718b9e98729b286898eda1de3
+	sha256sums = SKIP
+	sha256sums = eab6d2c699388c3992301be5be2d0e83519afa76fb03a2fbed7d63287a5f1198
+
+pkgname = xdg-desktop-portal-kde
+
