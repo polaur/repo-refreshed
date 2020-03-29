@@ -24,7 +24,7 @@ optdepends=('lua: support for lua scripts'
 source=("${pkgname}-${pkgver}.tar.xz::https://www.weechat.org/files/src/${_pkgname}-${pkgver}.tar.xz"
         "${pkgname}-${pkgver}.tar.xz.asc::https://www.weechat.org/files/src/${_pkgname}-${pkgver}.tar.xz.asc")
 
-sha512sums=('eb0cc4c7e0f2cf18d522b49429fe2d77b1cee3225686d0bc09f80a69b17362af0923df4cd5f4859207d84acb762d4042cd5b57799705d0b7e4759eade6c660e0'
+sha512sums=('3bebb42118fca6b601f1de8f4d52378619a10e5c490f5b46f86d27a9680f00a56d48a1ade729e78d965cae589e6c80647c22414393000c7d3cfcc94a1e41c4df'
             'SKIP')
 validpgpkeys=('A9AB5AB778FA5C3522FD0378F82F4B16DEC408F8') # WeeChat (signing key) <webmaster@weechat.org>
 
