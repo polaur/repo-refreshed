@@ -1,6 +1,6 @@
 pkgbase = breeze-gtk
 	pkgdesc = Breeze widget theme for GTK 2 and 3
-	pkgver = 5.18.4
+	pkgver = 5.18.4.1
 	pkgrel = 1.1
 	url = https://quickgit.kde.org/?p=breeze-gtk.git
 	arch = x86_64
@@ -11,14 +11,14 @@ pkgbase = breeze-gtk
 	makedepends = python-cairo
 	makedepends = breeze
 	depends = qt5-base
-	source = https://download.kde.org/stable/plasma/5.18.4/breeze-gtk-5.18.4.tar.xz
-	source = https://download.kde.org/stable/plasma/5.18.4/breeze-gtk-5.18.4.tar.xz.sig
+	source = https://download.kde.org/stable/plasma/5.18.4/breeze-gtk-5.18.4.1.tar.xz
+	source = https://download.kde.org/stable/plasma/5.18.4/breeze-gtk-5.18.4.1.tar.xz.sig
 	source = kdebug-417461.patch::https://cgit.kde.org/breeze-gtk.git/patch/?id=dca25cb44b37458506f7455469829f8da115ee69
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
 	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
-	sha256sums = ead3f9abddfe2820e4e7eb3eecd3810fc5a27570ec4d6563191ab18fa343ce04
+	sha256sums = 078e0a6fe78e778f4bf34254b65a9b4cadd27ae258911f3cccde3b0498fada7f
 	sha256sums = SKIP
 	sha256sums = 31074e7c232d3e7dc873fda28165011cd80d9a952d3bd75357a71e154dabd768
 
