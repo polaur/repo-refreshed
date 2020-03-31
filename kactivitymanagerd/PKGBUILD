@@ -5,7 +5,7 @@
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 
 pkgname=kactivitymanagerd
-pkgver=5.18.3
+pkgver=5.18.4
 pkgrel=1.1
 pkgdesc="System service to manage user's activities and track the usage patterns"
 arch=(x86_64)
@@ -16,7 +16,7 @@ makedepends=(extra-cmake-modules boost)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-418839.patch::"https://cgit.kde.org/kactivitymanagerd.git/patch/?id=a28972ffe1e7b602ce9539e37006e1d9f8be96bd")
-sha256sums=('4e76d8885899d62b6d58a1d90dc78489084dff89799d3b3f168237938a34ad9b'
+sha256sums=('047a96a65c1c51e026efc54890a1e275fc2b621e5dae28bb081050f069a02f42'
             'SKIP'
             '3c2d16e29b95bc26df8199191d0e0b55354693fa55895fd669e1a6280f35761c')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
