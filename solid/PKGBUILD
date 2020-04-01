@@ -1,0 +1,47 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=solid
+pkgver=5.68.0
+pkgrel=1.1
+pkgdesc='Hardware integration and detection'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(qt5-base media-player-info upower udisks2)
+makedepends=(extra-cmake-modules qt5-tools qt5-doc doxygen qt5-declarative)
+optdepends=('qt5-declarative: QML bindings')
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-418906.patch::"https://cgit.kde.org/solid.git/patch/?id=a99c6136da2d232dd699a8accd58deae1db3be41")
+sha256sums=('472c1934b3c9cf917f28ac0e5b0864de442b96852744c301d88d8ab7269d74c3'
+            'SKIP'
+            'e79333d483794d4770f5378193401bd2acc9a226a9868e96bc753e28b88af96c')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  msg "Apply kdebug 418906 patch; fix in 5.69"
+  patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-418906.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON \
+    -DWITH_NEW_POWER_ASYNC_API=ON \
+    -DWITH_NEW_POWER_ASYNC_FREEDESKTOP=ON \
+    -DWITH_NEW_SOLID_JOB=ON # https://bugs.archlinux.org/task/64093
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
