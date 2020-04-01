@@ -7,7 +7,7 @@
 
 pkgname=kwin
 pkgver=5.18.4.1
-pkgrel=2.1
+pkgrel=2.2
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -18,12 +18,14 @@ optdepends=('qt5-virtualkeyboard: virtual keyboard support for kwin-wayland')
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-419178.patch::"https://cgit.kde.org/kwin.git/patch/?id=754b90c72f8c73d8dcf7091fba82309d21aebbb5"
-kdebug-419118.patch::"https://cgit.kde.org/kwin.git/patch/?id=0a65681596c3289df607619adb6971e8d48259d0")
+kdebug-419118.patch::"https://cgit.kde.org/kwin.git/patch/?id=0a65681596c3289df607619adb6971e8d48259d0"
+kdebug-387567.patch::"https://cgit.kde.org/kwin.git/patch/?id=51a1e06dfc1fb8832c89d5f8a4abf24ff56bb32c")
 install=$pkgname.install
 sha256sums=('693a740976b46aa9fbdb68283b5c887aca70f9f96a357a766fab7a942b5a0d2f'
             'SKIP'
             '848e1ffe4988445d1594ca96803eaeada2acd2ac4c7de5c3426e59c6edfcf5bd'
-            'ba567a2290cf82dd29b959d87f998a749f684a7291fc6e178fe4370cbe366838')
+            'ba567a2290cf82dd29b959d87f998a749f684a7291fc6e178fe4370cbe366838'
+            'ef3eb9302fc0ec1ed0afc5b8e2267c5864e77945f96ead3a3683fba7e1d04ef1')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -33,10 +35,11 @@ prepare() {
   mkdir -p build
   
   cd $pkgname-$pkgver
-  msg "Applying kdebug 419178 patch"
+  msg "Applying kdebug 419178 patch; fix in 5.19"
   patch -p1 -i ../kdebug-419178.patch
-  msg "Applying kdebug 419118 patch"
+  msg "Applying kdebug 419118 patch; fix in 5.19"
   patch -p1 -i ../kdebug-419118.patch
+  msg "Applying kdebug 387567 and 414567 patch; fix in 5.19"
 }
 
 build() {
@@ -44,7 +47,7 @@ build() {
   cmake ../$pkgname-$pkgver \
     -DCMAKE_INSTALL_LIBEXECDIR=lib \
     -DBUILD_TESTING=OFF
-  make -j2
+  make
 }
 
 package() {
