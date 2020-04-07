@@ -1,7 +1,7 @@
 pkgbase = plasma-workspace
 	pkgdesc = KDE Plasma Workspace
 	pkgver = 5.18.4.1
-	pkgrel = 1.2
+	pkgrel = 1.3
 	url = https://www.kde.org/workspaces/plasmadesktop/
 	arch = x86_64
 	groups = plasma
@@ -40,6 +40,7 @@ pkgbase = plasma-workspace
 	source = kdebug-386114.patch::https://cgit.kde.org/plasma-workspace.git/patch/?id=731a190810440726f2db252b3a935648346f4a12
 	source = kdebug-411973.patch::https://cgit.kde.org/plasma-workspace.git/patch/?id=db2518b063e493da5bf5f5a48c931ff51bd22924
 	source = kdebug-416510.patch::https://cgit.kde.org/plasma-workspace.git/patch/?id=175424169d18766565a9b105b76136c4113515e1
+	source = kdebug-418483.patch::https://cgit.kde.org/plasma-workspace.git/patch/?id=ac0124c48ce685db42ef0a99ce48e4b86621ed12
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
@@ -51,6 +52,7 @@ pkgbase = plasma-workspace
 	sha256sums = fb10cdbad03283e3b3b80b4d65747b19c75f43f62900c916991648b567b74cd1
 	sha256sums = 83a650587a28a85abdd79b843d3711e6982078120ce7d005e6bc63171821f416
 	sha256sums = 96999d6b97751da41f6b0bd309a9f4b1c99ea9d737a111898b53a50bea483277
+	sha256sums = c3e51b10f7086ae615e8e504535b700be6fb3ee334846b76ebee2083ceac1f45
 
 pkgname = plasma-workspace
 	optdepends = plasma-workspace-wallpapers: additional wallpapers
