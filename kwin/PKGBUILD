@@ -7,7 +7,7 @@
 
 pkgname=kwin
 pkgver=5.18.4.1
-pkgrel=4.1
+pkgrel=4.2
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -40,6 +40,7 @@ prepare() {
   msg "Applying kdebug 419118 patch; fix in 5.19"
   patch -p1 -i ../kdebug-419118.patch
   msg "Applying kdebug 387567 and 414567 patch; fix in 5.19"
+  patch -p1 -i ../kdebug-387567.patch
 }
 
 build() {
