@@ -1,0 +1,422 @@
+From 2b9c468816459a318dd2c8fe96e5e5acf1cedfd1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Stefan=20Br=C3=BCns?= <stefan.bruens@rwth-aachen.de>
+Date: Sun, 29 Mar 2020 11:16:03 +0200
+Subject: [PATCH 4/9] [AdvancedQueryParser] Move semantic handling of tokens to
+ SearchStore
+
+Summary:
+The AdvancedQueryParser has no knowledge about the semantics of a
+value, while the searchstore can use KFM::PropertyInfo to determine
+if the value should be converted to e.g. an integer or a QDateTime.
+
+This allows to e.g. use CreationTime in queries.
+
+Test Plan:
+baloosearch 'creationtime>=2010-01-20'
+baloosearch 'creationDate>="1997-01-01 10:00:00"' \
+  AND 'creationDate<=2000-01-01'
+
+Reviewers: #baloo, ngraham
+
+Reviewed By: #baloo, ngraham
+
+Subscribers: kde-frameworks-devel
+
+Tags: #frameworks, #baloo
+
+Differential Revision: https://phabricator.kde.org/D28400
+---
+ .../unit/lib/advancedqueryparsertest.cpp      |  17 ++-
+ src/engine/postingdb.cpp                      |  11 ++
+ src/engine/postingdb.h                        |   1 +
+ src/engine/transaction.cpp                    |   6 +
+ src/engine/transaction.h                      |   1 +
+ src/lib/advancedqueryparser.cpp               |  29 +----
+ src/lib/searchstore.cpp                       | 105 ++++++++++--------
+ src/lib/searchstore.h                         |   4 -
+ 8 files changed, 88 insertions(+), 86 deletions(-)
+
+diff --git a/autotests/unit/lib/advancedqueryparsertest.cpp b/autotests/unit/lib/advancedqueryparsertest.cpp
+index 4b48eea9..39502d6c 100644
+--- a/autotests/unit/lib/advancedqueryparsertest.cpp
++++ b/autotests/unit/lib/advancedqueryparsertest.cpp
+@@ -160,12 +160,11 @@ void AdvancedQueryParserTest::testDateTime()
+     Term expectedTerm;
+ 
+     term = parser.parse(QStringLiteral("modified:2014-12-02"));
+-    expectedTerm = Term(QStringLiteral("modified"), QDate(2014, 12, 02));
++    expectedTerm = Term(QStringLiteral("modified"), "2014-12-02");
+     QCOMPARE(term, expectedTerm);
+ 
+     term = parser.parse(QStringLiteral("modified:\"2014-12-02T23:22:1\""));
+-    expectedTerm = Term(QStringLiteral("modified"), QDateTime(QDate(2014, 12, 02), QTime(23, 22, 1)));
+-    QEXPECT_FAIL("", "AQP cannot handle datetime", Abort);
++    expectedTerm = Term(QStringLiteral("modified"), "2014-12-02T23:22:1");
+     QCOMPARE(term, expectedTerm);
+ }
+ 
+@@ -176,27 +175,27 @@ void AdvancedQueryParserTest::testOperators()
+     Term expectedTerm;
+ 
+     term = parser.parse(QStringLiteral("width:500"));
+-    expectedTerm = Term(QStringLiteral("width"), 500, Term::Equal);
++    expectedTerm = Term(QStringLiteral("width"), "500", Term::Contains);
+     QCOMPARE(term, expectedTerm);
+ 
+     term = parser.parse(QStringLiteral("width=500"));
+-    expectedTerm = Term(QStringLiteral("width"), 500, Term::Equal);
++    expectedTerm = Term(QStringLiteral("width"), "500", Term::Equal);
+     QCOMPARE(term, expectedTerm);
+ 
+     term = parser.parse(QStringLiteral("width<500"));
+-    expectedTerm = Term(QStringLiteral("width"), 500, Term::Less);
++    expectedTerm = Term(QStringLiteral("width"), "500", Term::Less);
+     QCOMPARE(term, expectedTerm);
+ 
+     term = parser.parse(QStringLiteral("width<=500"));
+-    expectedTerm = Term(QStringLiteral("width"), 500, Term::LessEqual);
++    expectedTerm = Term(QStringLiteral("width"), "500", Term::LessEqual);
+     QCOMPARE(term, expectedTerm);
+ 
+     term = parser.parse(QStringLiteral("width>500"));
+-    expectedTerm = Term(QStringLiteral("width"), 500, Term::Greater);
++    expectedTerm = Term(QStringLiteral("width"), "500", Term::Greater);
+     QCOMPARE(term, expectedTerm);
+ 
+     term = parser.parse(QStringLiteral("width>=500"));
+-    expectedTerm = Term(QStringLiteral("width"), 500, Term::GreaterEqual);
++    expectedTerm = Term(QStringLiteral("width"), "500", Term::GreaterEqual);
+     QCOMPARE(term, expectedTerm);
+ }
+ 
+diff --git a/src/engine/postingdb.cpp b/src/engine/postingdb.cpp
+index ee7c39f7..a687f50b 100644
+--- a/src/engine/postingdb.cpp
++++ b/src/engine/postingdb.cpp
+@@ -281,6 +281,17 @@ PostingIterator* PostingDB::compIter(const QByteArray& prefix, qlonglong comVal,
+     return iter(prefix, validate);
+ }
+ 
++PostingIterator* PostingDB::compIter(const QByteArray& prefix, const QByteArray& comVal, PostingDB::Comparator com)
++{
++    int prefixLen = prefix.length();
++    auto validate = [prefixLen, comVal, com] (const QByteArray& arr) {
++        auto val = QByteArray::fromRawData(arr.constData() + prefixLen, arr.length() - prefixLen);
++        return ((com == LessEqual && val <= comVal) ||
++                (com == GreaterEqual && val >= comVal));
++    };
++    return iter(prefix, validate);
++}
++
+ QMap<QByteArray, PostingList> PostingDB::toTestMap() const
+ {
+     MDB_cursor* cursor;
+diff --git a/src/engine/postingdb.h b/src/engine/postingdb.h
+index c9ae3d80..41b96f2c 100644
+--- a/src/engine/postingdb.h
++++ b/src/engine/postingdb.h
+@@ -59,6 +59,7 @@ public:
+         GreaterEqual
+     };
+     PostingIterator* compIter(const QByteArray& prefix, qlonglong val, Comparator com);
++    PostingIterator* compIter(const QByteArray& prefix, const QByteArray& val, Comparator com);
+ 
+     QVector<QByteArray> fetchTermsStartingWith(const QByteArray& term);
+ 
+diff --git a/src/engine/transaction.cpp b/src/engine/transaction.cpp
+index 52355749..2986db91 100644
+--- a/src/engine/transaction.cpp
++++ b/src/engine/transaction.cpp
+@@ -401,6 +401,12 @@ PostingIterator* Transaction::postingCompIterator(const QByteArray& prefix, qlon
+     return postingDb.compIter(prefix, value, com);
+ }
+ 
++PostingIterator* Transaction::postingCompIterator(const QByteArray& prefix, const QByteArray& value, PostingDB::Comparator com) const
++{
++    PostingDB postingDb(m_dbis.postingDbi, m_txn);
++    return postingDb.compIter(prefix, value, com);
++}
++
+ PostingIterator* Transaction::mTimeRangeIter(quint32 beginTime, quint32 endTime) const
+ {
+     MTimeDB mTimeDb(m_dbis.mtimeDbi, m_txn);
+diff --git a/src/engine/transaction.h b/src/engine/transaction.h
+index d25f4618..7c15b740 100644
+--- a/src/engine/transaction.h
++++ b/src/engine/transaction.h
+@@ -73,6 +73,7 @@ public:
+ 
+     PostingIterator* postingIterator(const EngineQuery& query) const;
+     PostingIterator* postingCompIterator(const QByteArray& prefix, qlonglong value, PostingDB::Comparator com) const;
++    PostingIterator* postingCompIterator(const QByteArray& prefix, const QByteArray& value, PostingDB::Comparator com) const;
+     PostingIterator* mTimeRangeIter(quint32 beginTime, quint32 endTime) const;
+     PostingIterator* docUrlIter(quint64 id) const;
+ 
+diff --git a/src/lib/advancedqueryparser.cpp b/src/lib/advancedqueryparser.cpp
+index f8250849..6572845a 100644
+--- a/src/lib/advancedqueryparser.cpp
++++ b/src/lib/advancedqueryparser.cpp
+@@ -97,26 +97,6 @@ static void addTermToStack(QStack<Term>& stack, const Term& termInConstruction,
+     tos = Term(tos, op, termInConstruction);
+ }
+ 
+-static QVariant tokenToVariant(const QString& token)
+-{
+-    bool okay = false;
+-    int intValue = token.toInt(&okay);
+-    if (okay) {
+-        return QVariant(intValue);
+-    }
+-
+-    QDate date = QDate::fromString(token, Qt::ISODate);
+-    if (date.isValid() && !date.isNull()) {
+-        QDateTime dateTime = QDateTime::fromString(token, Qt::ISODate);
+-        if (dateTime.isValid() && !dateTime.isNull()) {
+-            return dateTime;
+-        }
+-        return date;
+-    }
+-
+-    return token;
+-}
+-
+ Term AdvancedQueryParser::parse(const QString& text)
+ {
+     // The parser does not do any look-ahead but has to store some state
+@@ -142,14 +122,7 @@ Term AdvancedQueryParser::parse(const QString& text)
+             }
+             termInConstruction.setProperty(property);
+ 
+-            QVariant value = tokenToVariant(token);
+-            if (value.type() != QVariant::String) {
+-                if (termInConstruction.comparator() == Term::Contains) {
+-                    termInConstruction.setComparator(Term::Equal);
+-                }
+-            }
+-
+-            termInConstruction.setValue(value);
++            termInConstruction.setValue(token);
+             valueExpected = false;
+             continue;
+         }
+diff --git a/src/lib/searchstore.cpp b/src/lib/searchstore.cpp
+index f5c258ac..9b77667b 100644
+--- a/src/lib/searchstore.cpp
++++ b/src/lib/searchstore.cpp
+@@ -24,6 +24,7 @@
+ #include "searchstore.h"
+ #include "term.h"
+ #include "global.h"
++#include "baloodebug.h"
+ 
+ #include "database.h"
+ #include "transaction.h"
+@@ -34,7 +35,6 @@
+ #include "orpostingiterator.h"
+ #include "idutils.h"
+ 
+-#include <QStandardPaths>
+ #include <QFile>
+ #include <QFileInfo>
+ 
+@@ -45,7 +45,7 @@
+ #include <algorithm>
+ #include <tuple>
+ 
+-using namespace Baloo;
++namespace Baloo {
+ 
+ namespace {
+ QPair<quint32, quint32> calculateTimeRange(const QDateTime& dt, Term::Comparator com)
+@@ -73,6 +73,36 @@ QPair<quint32, quint32> calculateTimeRange(const QDateTime& dt, Term::Comparator
+     Q_ASSERT_X(0, __func__, "mtime query must contain a valid comparator");
+     return {0, 0};
+ }
++
++struct InternalProperty {
++    const char* propertyName;
++    const char* prefix;
++    QVariant::Type valueType;
++};
++constexpr std::array<InternalProperty, 6> internalProperties {{
++    { "filename",    "F",    QVariant::String },
++    { "mimetype",    "M",    QVariant::String },
++    { "rating",      "R",    QVariant::Int    },
++    { "tag",         "TAG-", QVariant::String },
++    { "tags",        "TA",   QVariant::String },
++    { "usercomment", "C",    QVariant::String }
++}};
++
++std::pair<QByteArray, QVariant::Type> propertyInfo(const QByteArray& property)
++{
++    auto it = std::find_if(std::begin(internalProperties), std::end(internalProperties),
++        [&property] (const InternalProperty& entry) { return property == entry.propertyName; });
++    if (it != std::end(internalProperties)) {
++        return { (*it).prefix, (*it).valueType };
++    } else {
++        KFileMetaData::PropertyInfo pi = KFileMetaData::PropertyInfo::fromName(property);
++        if (pi.property() == KFileMetaData::Property::Empty) {
++            return { QByteArray(), QVariant::Invalid };
++        }
++        int propPrefix = static_cast<int>(pi.property());
++        return { 'X' + QByteArray::number(propPrefix) + '-', pi.valueType() };
++    }
++}
+ }
+ 
+ SearchStore::SearchStore()
+@@ -82,13 +112,6 @@ SearchStore::SearchStore()
+     if (!m_db->open(Database::ReadOnlyDatabase)) {
+         m_db = nullptr;
+     }
+-
+-    m_prefixes.insert(QByteArray("filename"), QByteArray("F"));
+-    m_prefixes.insert(QByteArray("mimetype"), QByteArray("M"));
+-    m_prefixes.insert(QByteArray("rating"), QByteArray("R"));
+-    m_prefixes.insert(QByteArray("tag"), QByteArray("TAG-"));
+-    m_prefixes.insert(QByteArray("tags"), QByteArray("TA"));
+-    m_prefixes.insert(QByteArray("usercomment"), QByteArray("C"));
+ }
+ 
+ SearchStore::~SearchStore()
+@@ -167,23 +190,6 @@ QStringList SearchStore::exec(const Term& term, uint offset, int limit, bool sor
+     }
+ }
+ 
+-QByteArray SearchStore::fetchPrefix(const QByteArray& property) const
+-{
+-    auto it = m_prefixes.constFind(property.toLower());
+-    if (it != m_prefixes.constEnd()) {
+-        return it.value();
+-    }
+-    else {
+-        KFileMetaData::PropertyInfo pi = KFileMetaData::PropertyInfo::fromName(property);
+-        if (pi.property() == KFileMetaData::Property::Empty) {
+-            qDebug() << "Property" << property << "not found";
+-            return QByteArray();
+-        }
+-        int propPrefix = static_cast<int>(pi.property());
+-        return 'X' + QByteArray::number(propPrefix) + '-';
+-    }
+-}
+-
+ PostingIterator* SearchStore::constructQuery(Transaction* tr, const Term& term)
+ {
+     Q_ASSERT(tr);
+@@ -251,6 +257,7 @@ PostingIterator* SearchStore::constructQuery(Transaction* tr, const Term& term)
+     }
+     else if (property == "modified" || property == "mtime") {
+         if (value.type() == QVariant::ByteArray) {
++            // Used by Baloo::Query
+             QByteArray ba = value.toByteArray();
+             Q_ASSERT(ba.size() >= 4);
+ 
+@@ -275,7 +282,7 @@ PostingIterator* SearchStore::constructQuery(Transaction* tr, const Term& term)
+ 
+             return tr->mTimeRangeIter(QDateTime(startDate).toSecsSinceEpoch(), QDateTime(endDate, QTime(23, 59, 59)).toSecsSinceEpoch());
+         }
+-        else if (value.type() == QVariant::Date || value.type() == QVariant::DateTime) {
++        else if (value.type() == QVariant::String) {
+             const QDateTime dt = value.toDateTime();
+             QPair<quint32, quint32> timerange = calculateTimeRange(dt, term.comparator());
+             if ((timerange.first == 0) && (timerange.second == 0)) {
+@@ -303,14 +310,18 @@ PostingIterator* SearchStore::constructQuery(Transaction* tr, const Term& term)
+     }
+ 
+     QByteArray prefix;
++    QVariant::Type valueType = QVariant::String;
+     if (!property.isEmpty()) {
+-        prefix = fetchPrefix(property);
++        std::tie(prefix, valueType) = propertyInfo(property);
+         if (prefix.isEmpty()) {
+             return nullptr;
+         }
+     }
+ 
+     auto com = term.comparator();
++    if (com == Term::Contains && valueType == QVariant::Int) {
++        com = Term::Equal;
++    }
+     if (com == Term::Contains) {
+         EngineQuery q = constructContainsQuery(prefix, value.toString());
+         return tr->postingIterator(q);
+@@ -321,27 +332,31 @@ PostingIterator* SearchStore::constructQuery(Transaction* tr, const Term& term)
+         return tr->postingIterator(q);
+     }
+ 
+-    QVariant val = term.value();
+-    if (val.type() == QVariant::Int) {
++    PostingDB::Comparator pcom;
++    if (com == Term::Greater || com == Term::GreaterEqual) {
++        pcom = PostingDB::GreaterEqual;
++    } else if (com == Term::Less || com == Term::LessEqual) {
++        pcom = PostingDB::LessEqual;
++    }
++
++    // FIXME -- has to be kept in sync with the code from
++    // Baloo::Result::add
++    if (valueType == QVariant::Int) {
+         qlonglong intVal = value.toLongLong();
+ 
+-        PostingDB::Comparator pcom;
+-        if (term.comparator() == Term::Greater || term.comparator() == Term::GreaterEqual) {
+-            pcom = PostingDB::GreaterEqual;
+-            if (term.comparator() == Term::Greater && intVal)
+-                intVal++;
+-        }
+-        else if (term.comparator() == Term::Less || term.comparator() == Term::LessEqual) {
+-            pcom = PostingDB::LessEqual;
+-            if (term.comparator() == Term::Less)
+-                intVal--;
+-        }
+-        else {
+-            Q_ASSERT(0);
+-            return nullptr;
++        if (term.comparator() == Term::Greater) {
++            intVal++;
++        } else if (term.comparator() == Term::Less) {
++            intVal--;
+         }
+ 
+         return tr->postingCompIterator(prefix, intVal, pcom);
++
++    } else if (valueType == QVariant::DateTime) {
++        QDateTime dt = value.toDateTime();
++        const QByteArray ba = dt.toString(Qt::ISODate).toUtf8();
++        return tr->postingCompIterator(prefix, ba, pcom);
++
+     } else {
+         qCDebug(BALOO) << "Comparison must be with an integer";
+     }
+@@ -396,4 +411,4 @@ EngineQuery SearchStore::constructTypeQuery(const QString& value)
+ 
+     return EngineQuery('T' + QByteArray::number(num));
+ }
+-
++} // namespace Baloo
+diff --git a/src/lib/searchstore.h b/src/lib/searchstore.h
+index 744ebea8..d3f0e413 100644
+--- a/src/lib/searchstore.h
++++ b/src/lib/searchstore.h
+@@ -25,7 +25,6 @@
+ 
+ #include <QString>
+ #include <QDateTime>
+-#include <QHash>
+ #include "term.h"
+ 
+ namespace Baloo {
+@@ -45,10 +44,7 @@ public:
+     QStringList exec(const Term& term, uint offset, int limit, bool sortResults);
+ 
+ private:
+-    QByteArray fetchPrefix(const QByteArray& property) const;
+-
+     Database* m_db;
+-    QHash<QByteArray, QByteArray> m_prefixes;
+ 
+     PostingIterator* constructQuery(Transaction* tr, const Term& term);
+ 
+-- 
+2.26.0.106.g9fadedd637
+
