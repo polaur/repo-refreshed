@@ -1,0 +1,122 @@
+From 2fa16a2865dc385f1106c3eadb363bbe9d1244b1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Stefan=20Br=C3=BCns?= <stefan.bruens@rwth-aachen.de>
+Date: Sun, 29 Mar 2020 13:09:36 +0200
+Subject: [PATCH 5/9] [SearchStore] Handle double values in property queries
+
+Summary:
+Allows to e.g. query Photo exposure times, aperture etc.
+
+Depends on D28400
+
+Test Plan:
+baloosearch 'photoExposureTime>0.5'
+baloosearch 'photoDateTimeOriginal>="2019-12-21 10:00:00"' \
+  AND 'photoApertureValue>4.0'
+
+Reviewers: #baloo, ngraham
+
+Reviewed By: #baloo, ngraham
+
+Subscribers: kde-frameworks-devel
+
+Tags: #frameworks, #baloo
+
+Differential Revision: https://phabricator.kde.org/D28401
+---
+ src/engine/postingdb.cpp   | 12 ++++++++++++
+ src/engine/postingdb.h     |  8 ++++++++
+ src/engine/transaction.cpp |  6 ++++++
+ src/engine/transaction.h   |  1 +
+ src/lib/searchstore.cpp    |  4 ++++
+ 5 files changed, 31 insertions(+)
+
+diff --git a/src/engine/postingdb.cpp b/src/engine/postingdb.cpp
+index a687f50b..55fa10ae 100644
+--- a/src/engine/postingdb.cpp
++++ b/src/engine/postingdb.cpp
+@@ -281,6 +281,18 @@ PostingIterator* PostingDB::compIter(const QByteArray& prefix, qlonglong comVal,
+     return iter(prefix, validate);
+ }
+ 
++PostingIterator* PostingDB::compIter(const QByteArray& prefix, double comVal, PostingDB::Comparator com)
++{
++    int prefixLen = prefix.length();
++    auto validate = [prefixLen, comVal, com] (const QByteArray& arr) {
++        bool ok = false;
++        auto val = QByteArray::fromRawData(arr.constData() + prefixLen, arr.length() - prefixLen).toDouble(&ok);
++        return ok && ((com == LessEqual && val <= comVal) ||
++                      (com == GreaterEqual && val >= comVal));
++    };
++    return iter(prefix, validate);
++}
++
+ PostingIterator* PostingDB::compIter(const QByteArray& prefix, const QByteArray& comVal, PostingDB::Comparator com)
+ {
+     int prefixLen = prefix.length();
+diff --git a/src/engine/postingdb.h b/src/engine/postingdb.h
+index 41b96f2c..6aa982b8 100644
+--- a/src/engine/postingdb.h
++++ b/src/engine/postingdb.h
+@@ -58,7 +58,15 @@ public:
+         LessEqual,
+         GreaterEqual
+     };
++    // For integral types only:
++    template<typename T>
++    typename std::enable_if<std::is_integral<T>::value, PostingIterator*>::type
++    compIter(const QByteArray& prefix, T val, Comparator com) {
++        qlonglong l = val;
++        return compIter(prefix, l, com);
++    }
+     PostingIterator* compIter(const QByteArray& prefix, qlonglong val, Comparator com);
++    PostingIterator* compIter(const QByteArray& prefix, double val, Comparator com);
+     PostingIterator* compIter(const QByteArray& prefix, const QByteArray& val, Comparator com);
+ 
+     QVector<QByteArray> fetchTermsStartingWith(const QByteArray& term);
+diff --git a/src/engine/transaction.cpp b/src/engine/transaction.cpp
+index 2986db91..b8512e8a 100644
+--- a/src/engine/transaction.cpp
++++ b/src/engine/transaction.cpp
+@@ -401,6 +401,12 @@ PostingIterator* Transaction::postingCompIterator(const QByteArray& prefix, qlon
+     return postingDb.compIter(prefix, value, com);
+ }
+ 
++PostingIterator* Transaction::postingCompIterator(const QByteArray& prefix, double value, PostingDB::Comparator com) const
++{
++    PostingDB postingDb(m_dbis.postingDbi, m_txn);
++    return postingDb.compIter(prefix, value, com);
++}
++
+ PostingIterator* Transaction::postingCompIterator(const QByteArray& prefix, const QByteArray& value, PostingDB::Comparator com) const
+ {
+     PostingDB postingDb(m_dbis.postingDbi, m_txn);
+diff --git a/src/engine/transaction.h b/src/engine/transaction.h
+index 7c15b740..6c5a8e38 100644
+--- a/src/engine/transaction.h
++++ b/src/engine/transaction.h
+@@ -73,6 +73,7 @@ public:
+ 
+     PostingIterator* postingIterator(const EngineQuery& query) const;
+     PostingIterator* postingCompIterator(const QByteArray& prefix, qlonglong value, PostingDB::Comparator com) const;
++    PostingIterator* postingCompIterator(const QByteArray& prefix, double value, PostingDB::Comparator com) const;
+     PostingIterator* postingCompIterator(const QByteArray& prefix, const QByteArray& value, PostingDB::Comparator com) const;
+     PostingIterator* mTimeRangeIter(quint32 beginTime, quint32 endTime) const;
+     PostingIterator* docUrlIter(quint64 id) const;
+diff --git a/src/lib/searchstore.cpp b/src/lib/searchstore.cpp
+index 9b77667b..20b0e9eb 100644
+--- a/src/lib/searchstore.cpp
++++ b/src/lib/searchstore.cpp
+@@ -352,6 +352,10 @@ PostingIterator* SearchStore::constructQuery(Transaction* tr, const Term& term)
+ 
+         return tr->postingCompIterator(prefix, intVal, pcom);
+ 
++    } else if (valueType == QVariant::Double) {
++        double dVal = value.toDouble();
++        return tr->postingCompIterator(prefix, dVal, pcom);
++
+     } else if (valueType == QVariant::DateTime) {
+         QDateTime dt = value.toDateTime();
+         const QByteArray ba = dt.toString(Qt::ISODate).toUtf8();
+-- 
+2.26.0.106.g9fadedd637
+
