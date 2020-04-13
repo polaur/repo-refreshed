@@ -8,7 +8,7 @@
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
 pkgver=5.18.4.1
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 
@@ -19,8 +19,8 @@ source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgname-$pkgver.ta
         kdebug-415649.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=c32b5a85cae6f99bb5097b16a25983fc611aecc6"
         kdebug-417461.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=fffb352cfa1eb5e18f038d5b423d2dce0dca8727"
         kdebug-418604.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=4d33b8276e00471f6bfc14a174b3a33fe17627b3"
- #       kdebug-366521.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=7498b41a1979b084d05b99a51d3561eeef68e974"
-#        kdebug-417276.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=8f1043c641a2edd86fb6139e0a5cfe108d64a69d"
+        kdebug-406932.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=3e8c7dada73ed838a93b0b0ffcd5c679627ffa54"
+        kdebug-403842.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=0cf73170479bb271fb7498e67d38d3c6255594a4"
  )
 depends=(polkit-kde-agent libxkbfile kmenuedit systemsettings ksysguard baloo)
 makedepends=(extra-cmake-modules kdoctools xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
@@ -31,7 +31,9 @@ sha256sums=('19c50781ced6608b8efb3d94e94575a397f58a159d63bba64c27a6c6d72e0af3'
             '674976dfb7b78c66f489d4f04bafcad395c0dddff439fb7bef386cb7cd3a86ee'
             '2d83b72c1fa5e44a68140ec981eb2d9ea2e39270fc7246910e12341df31b3a92'
             '9dc1158dadf84731d298e1d3f3fbb64f3b02df95e04f584f88093aebe43e7a4f'
-            '8a909d705910675d0b966c9b17e8b0784d8a5714c17306800e2dfae2d18a1a90')
+            '8a909d705910675d0b966c9b17e8b0784d8a5714c17306800e2dfae2d18a1a90'
+            '5d688a9f644be7c57469b84211b565fd4b4242b6a812bd1df289aeb4805979ee'
+            '8315a85a5e5ef3fac6e07755c2b3abec7326de2225c82871f3198c006d3919c5')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -49,10 +51,10 @@ prepare() {
   patch -p1 -i ../kdebug-417461.patch
   msg "Applying kdebug 418604 patch"
   patch -p1 -i ../kdebug-418604.patch
-#  msg "Applying kdebug 366521, 417170, 417762 and 417762 patch"
-#  patch -p1 -i ../kdebug-366521.patch
-#  msg "Applying kdebug 417276 patch; fix probably in 5.19.0"
-#  patch -p1 -i ../kdebug-417276.patch
+  msg "Applying kdebug 406932 patch; fix in 5.19.0"
+  patch -p1 -i ../kdebug-406932.patch
+  msg "Applying kdebug 403842 patch; fix in 5.19.0"
+  patch -p1 -i ../kdebug-403842.patch
 }
 
 build() {
