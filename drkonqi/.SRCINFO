@@ -1,0 +1,25 @@
+pkgbase = drkonqi
+	pkgdesc = The KDE crash handler
+	pkgver = 5.18.4.1
+	pkgrel = 1.1
+	url = https://www.kde.org/workspaces/plasmadesktop/
+	arch = x86_64
+	groups = plasma
+	license = GPL2
+	makedepends = extra-cmake-modules
+	depends = kidletime
+	depends = kio
+	depends = gdb
+	source = https://download.kde.org/stable/plasma/5.18.4/drkonqi-5.18.4.1.tar.xz
+	source = https://download.kde.org/stable/plasma/5.18.4/drkonqi-5.18.4.1.tar.xz.sig
+	source = D28692.patch::https://cgit.kde.org/drkonqi.git/patch/?id=b2ebd8f2ca332473f09e589d9e7ee0af0e1c7d98
+	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
+	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
+	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
+	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
+	sha256sums = 4b3072c4ef571764897a9aa1c26e63d57f9d2fd55c6f932f489f2e30f8afb6d2
+	sha256sums = SKIP
+	sha256sums = d9f95b4d9da72365a8ff82b4155d1b5e5cb0ea649c88cb7dcc9d51d4d98377f9
+
+pkgname = drkonqi
+
