@@ -1,0 +1,26 @@
+pkgbase = ktextwidgets
+	pkgdesc = Advanced text editing widgets
+	pkgver = 5.69.0
+	pkgrel = 1.1
+	url = https://community.kde.org/Frameworks
+	arch = x86_64
+	groups = kf5
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = doxygen
+	makedepends = qt5-tools
+	makedepends = qt5-doc
+	depends = kcompletion
+	depends = kconfigwidgets
+	depends = sonnet
+	depends = qt5-speech
+	source = https://download.kde.org/stable/frameworks/5.69/ktextwidgets-5.69.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.69/ktextwidgets-5.69.0.tar.xz.sig
+	source = kdebug-256001.patch::https://cgit.kde.org/ktextwidgets.git/patch/?id=1d1eb6feb7f85d5e09e00f75114f671eceff1598
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = 182661253bf2ed940ab52edfeb2d8cadf1abbde76cade2ba50ef490311002ec9
+	sha256sums = SKIP
+	sha256sums = 0b1f281db667b88d0c8d0e62d05a1fcb99ea8bc3c206d4e128f66bf88df3c927
+
+pkgname = ktextwidgets
+
