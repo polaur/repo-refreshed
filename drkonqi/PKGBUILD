@@ -5,7 +5,7 @@
 
 pkgname=drkonqi
 pkgver=5.18.4.1
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='The KDE crash handler'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -14,10 +14,12 @@ depends=(kidletime kio gdb)
 makedepends=(extra-cmake-modules)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-D28692.patch::"https://cgit.kde.org/drkonqi.git/patch/?id=b2ebd8f2ca332473f09e589d9e7ee0af0e1c7d98")
+D28692.patch::"https://cgit.kde.org/drkonqi.git/patch/?id=b2ebd8f2ca332473f09e589d9e7ee0af0e1c7d98"
+kdebug-418755.patch::"https://cgit.kde.org/drkonqi.git/patch/?id=262389b1e49ba12f6d8df8db71e350fb62698c3e")
 sha256sums=('4b3072c4ef571764897a9aa1c26e63d57f9d2fd55c6f932f489f2e30f8afb6d2'
             'SKIP'
-            'd9f95b4d9da72365a8ff82b4155d1b5e5cb0ea649c88cb7dcc9d51d4d98377f9')
+            'd9f95b4d9da72365a8ff82b4155d1b5e5cb0ea649c88cb7dcc9d51d4d98377f9'
+            '2a75acdca60de24c59b7dadbf3d79c8ab32a2d3054a143cc189dfcebb7b77092')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -28,6 +30,8 @@ prepare() {
   
   msg "Fix memory leak on Wayland; fix in 5.19.0"
   patch -d $pkgname-$pkgver -p1 -i $srcdir/D28692.patch
+  msg "Add kdebug 418755 and 420035 patch"
+  patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-418755.patch
 }
 
 build() {
