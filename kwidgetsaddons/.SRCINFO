@@ -1,7 +1,7 @@
 pkgbase = kwidgetsaddons
 	pkgdesc = Addons to QtWidgets
 	pkgver = 5.69.0
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://community.kde.org/Frameworks
 	arch = x86_64
 	groups = kf5
@@ -18,10 +18,12 @@ pkgbase = kwidgetsaddons
 	source = https://download.kde.org/stable/frameworks/5.69/kwidgetsaddons-5.69.0.tar.xz
 	source = https://download.kde.org/stable/frameworks/5.69/kwidgetsaddons-5.69.0.tar.xz.sig
 	source = kdebug-245637.patch::https://cgit.kde.org/kwidgetsaddons.git/patch/?id=75298895a5e3ceb1e6fc3d4e5ebc9dcbb039576f
+	source = kdebug-420287.patch::https://cgit.kde.org/kwidgetsaddons.git/patch/?id=b52622993b45a61c4060d19517a5c3b833b3b854
 	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
 	sha256sums = 5fcc39eb17d832a14e8c2fe98ff26a300aa5c88013c63bcf8eef0017ca4eaf37
 	sha256sums = SKIP
 	sha256sums = 32dc398363a07ec9a7217a4785c5a1d00fe06b4f2a86446c91a5cb416357cd83
+	sha256sums = 3cce5812abe23a6b3115fbd5998174e9c30e681043be5486cc3018ad653bb2c1
 
 pkgname = kwidgetsaddons
 
