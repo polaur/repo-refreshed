@@ -1,7 +1,7 @@
 pkgbase = plasma-desktop
 	pkgdesc = KDE Plasma Desktop
 	pkgver = 5.18.4.1
-	pkgrel = 1.3
+	pkgrel = 1.5
 	url = https://www.kde.org/workspaces/plasmadesktop/
 	arch = x86_64
 	groups = plasma
@@ -30,6 +30,8 @@ pkgbase = plasma-desktop
 	source = kdebug-406932.patch::https://cgit.kde.org/plasma-desktop.git/patch/?id=3e8c7dada73ed838a93b0b0ffcd5c679627ffa54
 	source = kdebug-403842.patch::https://cgit.kde.org/plasma-desktop.git/patch/?id=0cf73170479bb271fb7498e67d38d3c6255594a4
 	source = kdebug-419853.patch::https://cgit.kde.org/plasma-desktop.git/patch/?id=ba66d2eabe38bc357d799bff391cf5edbce139c0
+	source = kdebug-420079.patch::https://cgit.kde.org/plasma-desktop.git/patch/?id=fe4d395d792d50174fd4529cd259fcf933b7af09
+	source = kdebug-413954.patch::https://cgit.kde.org/plasma-desktop.git/patch/?id=35e18420a76ab4f738a813e67c2e304834b60bf7
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
@@ -43,6 +45,8 @@ pkgbase = plasma-desktop
 	sha256sums = 5d688a9f644be7c57469b84211b565fd4b4242b6a812bd1df289aeb4805979ee
 	sha256sums = 8315a85a5e5ef3fac6e07755c2b3abec7326de2225c82871f3198c006d3919c5
 	sha256sums = 786f1609c31e9413ec66a81eb8aae09b9ea3a552e8c1c5645c05b332b4735fbe
+	sha256sums = 3373e4f8122e52c204b623c43df3d1e2de8ae3aaf228acc88b2189b1e6375b64
+	sha256sums = 814602b30a7160fe550e1deec64f270f0c7d56e0ebb90e260ebfb0795d592b5a
 
 pkgname = plasma-desktop
 	depends = polkit-kde-agent
