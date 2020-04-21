@@ -8,7 +8,7 @@
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
 pkgver=5.18.4.1
-pkgrel=1.6
+pkgrel=1.7
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 
@@ -25,6 +25,7 @@ source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgname-$pkgver.ta
         kdebug-420079.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=fe4d395d792d50174fd4529cd259fcf933b7af09"
         kdebug-413954.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=35e18420a76ab4f738a813e67c2e304834b60bf7"
         kdebug-412331.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=2fb0bf85fe63fa7ba7fc0af4e0bf7db6da8d5d40"
+        kdebug-401861.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=020c67fc8ba30240215f498eb8106635b05ecd04"
         )
 depends=(polkit-kde-agent libxkbfile kmenuedit systemsettings ksysguard baloo)
 makedepends=(extra-cmake-modules kdoctools xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
@@ -41,7 +42,8 @@ sha256sums=('19c50781ced6608b8efb3d94e94575a397f58a159d63bba64c27a6c6d72e0af3'
             '786f1609c31e9413ec66a81eb8aae09b9ea3a552e8c1c5645c05b332b4735fbe'
             '3373e4f8122e52c204b623c43df3d1e2de8ae3aaf228acc88b2189b1e6375b64'
             '814602b30a7160fe550e1deec64f270f0c7d56e0ebb90e260ebfb0795d592b5a'
-            '5bf2500d77e66a4e4ff9dcdf4d25dbab9e6119c319625282cfc7f7f3a6f58778')
+            '5bf2500d77e66a4e4ff9dcdf4d25dbab9e6119c319625282cfc7f7f3a6f58778'
+            'cf98f9e917e3c557cf73f5deac177eef68961f4e3cb941c58bf7de40c20e6515')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -71,6 +73,8 @@ prepare() {
   patch -p1 -i ../kdebug-413954.patch
   msg "Applying kdebug 412331 patch; fix in 5.19.0 or even in 5.18.5"
   patch -p1 -i ../kdebug-412331.patch
+  msg "Applying kdebug 401861 patch; fix in 5.18.5"
+  patch -p1 -i ../kdebug-401861.patch
 }
 
 build() {
