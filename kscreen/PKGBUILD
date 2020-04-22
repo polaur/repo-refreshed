@@ -1,10 +1,13 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kscreen
 pkgver=5.18.4.1
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="KDE's screen management software"
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -13,10 +16,12 @@ depends=(libkscreen kdeclarative qt5-graphicaleffects qt5-sensors)
 makedepends=(extra-cmake-modules plasma-framework kcmutils)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-385672.patch::"https://cgit.kde.org/kscreen.git/patch/?id=538116fd109613284889134ae7ecbc2ba7bfc281")
+kdebug-385672.patch::"https://cgit.kde.org/kscreen.git/patch/?id=538116fd109613284889134ae7ecbc2ba7bfc281"
+kdebug-397586.patch::"https://cgit.kde.org/kscreen.git/patch/?id=b3b45721ee17828d5711ff88d5f1777b65c2834a")
 sha256sums=('dc0d61e46189d0f76d33a92c1253d7d2f7d7f2d0043d5e411a5a067915d0f5e4'
             'SKIP'
-            'c1172cbb2cf943d446c0cccb0b468dbab099237796d63ba8ae537c67577c43bb')
+            'c1172cbb2cf943d446c0cccb0b468dbab099237796d63ba8ae537c67577c43bb'
+            '6512376ed1eb03741442ec443f420fc69fa5e90cfaea1274ab627dca7f72d90f')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -27,6 +32,8 @@ prepare() {
   
   msg "Add kdebug 385672 patch; fix in 5.19.0"
   patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-385672.patch
+  msg "Add kdebug 397586 patch; fix in 5.18.5"
+  patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-397586.patch
 }
 
 build() {
