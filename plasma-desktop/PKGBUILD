@@ -8,7 +8,7 @@
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
 pkgver=5.18.4.1
-pkgrel=1.8
+pkgrel=1.9
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 
@@ -27,6 +27,8 @@ source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgname-$pkgver.ta
         kdebug-412331.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=2fb0bf85fe63fa7ba7fc0af4e0bf7db6da8d5d40"
         kdebug-401861.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=020c67fc8ba30240215f498eb8106635b05ecd04"
         kdebug-420385.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=080e9dd6a4dc5e1985b11a91b4cebd945c6adfe8"
+        kdebug-414417.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=dacb3a8bdd206ec14a588bb25b37caa48c3b36aa"
+        kdebug-419552.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=17ef374a8cc469a9eefc516fc4885cbbce0c0afc"
         )
 depends=(polkit-kde-agent libxkbfile kmenuedit systemsettings ksysguard baloo)
 makedepends=(extra-cmake-modules kdoctools xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
@@ -45,7 +47,9 @@ sha256sums=('19c50781ced6608b8efb3d94e94575a397f58a159d63bba64c27a6c6d72e0af3'
             '814602b30a7160fe550e1deec64f270f0c7d56e0ebb90e260ebfb0795d592b5a'
             '5bf2500d77e66a4e4ff9dcdf4d25dbab9e6119c319625282cfc7f7f3a6f58778'
             'cf98f9e917e3c557cf73f5deac177eef68961f4e3cb941c58bf7de40c20e6515'
-            '2fad752f50a59c86b4a8ff150d366ae070dee94caa9e709a32f79a5c1794d17c')
+            '2fad752f50a59c86b4a8ff150d366ae070dee94caa9e709a32f79a5c1794d17c'
+            '272a8f19f15d178fce410a90c7456db411873c1aeadee83157b094d37f8d5db4'
+            'e9f2143d8eb9f645ed94aaf761fe3c9affec5f5f7a020aa895256a0c895c6d4b')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -79,6 +83,10 @@ prepare() {
   patch -p1 -i ../kdebug-401861.patch
   msg "Applying kdebug 420385 patch; fix in 5.18.5"
   patch -p1 -i ../kdebug-420385.patch
+  msg "Applying kdebug 414417 patch; fix in 5.18.5"
+  patch -p1 -i ../kdebug-414417.patch
+  msg "Applying kdebug 419552 and 418698 patch; fix in 5.18.5"
+  patch -p1 -i ../kdebug-419552.patch
 }
 
 build() {
