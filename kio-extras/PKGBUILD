@@ -7,7 +7,7 @@
 
 pkgname=kio-extras
 pkgver=20.04.0
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="Additional components to increase the functionality of KIO"
 arch=(x86_64)
 url='https://www.kde.org/applications/internet/'
@@ -16,17 +16,15 @@ depends=(kio kdnssd libssh smbclient exiv2 openexr libmtp kpty kactivities-stats
 makedepends=(extra-cmake-modules kdoctools gperf taglib libappimage)
 optdepends=('qt5-imageformats: thumbnails for additional image formats' 'perl: info kioslave'
             'kimageformats: thumbnails for additional image formats' 'taglib: audio file thumbnails'
-            'phonon-qt5: audio file previews' 'libappimage: AppImage thumbnails')
+            'phonon-qt5: audio file previews' 'libappimage: AppImage thumbnails' 'icoutils: Windows executable thumbnails')
 groups=(kde-applications kdenetwork)
 source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
-         kio-extras-kdsoap.patch
          kdebug-291835.patch::"https://cgit.kde.org/kio-extras.git/patch/?id=46b5fb425c148b9a6b02eed3ef25f14feb5996ba"
          kdebug-405838.patch::"https://cgit.kde.org/kio-extras.git/patch/?id=94e7b64325f9e71196a19fb5bc396b9e82f88fc7"
          D28739.patch::"https://cgit.kde.org/kio-extras.git/patch/?id=8c3c27daa03b32da31a0e2e9a23f0fdd976dfe09"
          )
 sha256sums=('a70f6079a8d2acb8c64bf0d08f7f7e5685f2e9c4e49548c138609437fdc6cd4d'
             'SKIP'
-            '4e3504556cdd01cf638d2957e55a7c09a304a64eee59a542165204181bb04492'
             'a8cfe7289f2ccdf8895d9423e14fd1053f4819e347a4698316c06da61528c5fe'
             '8192f93d26a353185746ff7aa09e7070691b766354dbe656bd1396e08705b817'
             'ed99cb00df892fd43165081e09d5292f96717013a903fb6971f300b6658f501f')
@@ -37,7 +35,6 @@ prepare() {
   mkdir -p build
 
   cd $pkgname-$pkgver
-  patch -p1 -i ../kio-extras-kdsoap.patch # Fix build with external kdsoap-ws-discovery-client
   msg "Applying kdebug 291835 patch; fix in 20.08"
   patch -p1 -i ../kdebug-291835.patch
   msg "Applying kdebug 405838 patch"

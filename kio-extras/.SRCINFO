@@ -1,7 +1,7 @@
 pkgbase = kio-extras
 	pkgdesc = Additional components to increase the functionality of KIO
 	pkgver = 20.04.0
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://www.kde.org/applications/internet/
 	arch = x86_64
 	groups = kde-applications
@@ -31,9 +31,9 @@ pkgbase = kio-extras
 	optdepends = taglib: audio file thumbnails
 	optdepends = phonon-qt5: audio file previews
 	optdepends = libappimage: AppImage thumbnails
+	optdepends = icoutils: Windows executable thumbnails
 	source = https://download.kde.org/stable/release-service/20.04.0/src/kio-extras-20.04.0.tar.xz
 	source = https://download.kde.org/stable/release-service/20.04.0/src/kio-extras-20.04.0.tar.xz.sig
-	source = kio-extras-kdsoap.patch
 	source = kdebug-291835.patch::https://cgit.kde.org/kio-extras.git/patch/?id=46b5fb425c148b9a6b02eed3ef25f14feb5996ba
 	source = kdebug-405838.patch::https://cgit.kde.org/kio-extras.git/patch/?id=94e7b64325f9e71196a19fb5bc396b9e82f88fc7
 	source = D28739.patch::https://cgit.kde.org/kio-extras.git/patch/?id=8c3c27daa03b32da31a0e2e9a23f0fdd976dfe09
@@ -41,7 +41,6 @@ pkgbase = kio-extras
 	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
 	sha256sums = a70f6079a8d2acb8c64bf0d08f7f7e5685f2e9c4e49548c138609437fdc6cd4d
 	sha256sums = SKIP
-	sha256sums = 4e3504556cdd01cf638d2957e55a7c09a304a64eee59a542165204181bb04492
 	sha256sums = a8cfe7289f2ccdf8895d9423e14fd1053f4819e347a4698316c06da61528c5fe
 	sha256sums = 8192f93d26a353185746ff7aa09e7070691b766354dbe656bd1396e08705b817
 	sha256sums = ed99cb00df892fd43165081e09d5292f96717013a903fb6971f300b6658f501f
