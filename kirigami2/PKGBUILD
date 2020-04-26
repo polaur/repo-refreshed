@@ -1,0 +1,63 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=kirigami2
+pkgver=5.69.0
+pkgrel=1.4
+pkgdesc='A QtQuick based components set'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+groups=(kf5)
+depends=(qt5-quickcontrols qt5-quickcontrols2 qt5-graphicaleffects)
+makedepends=(extra-cmake-modules qt5-tools qt5-doc qt5-svg kpackage doxygen)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-419691.patch::"https://cgit.kde.org/kirigami.git/patch/?id=e7204d54ff3fd82bf7852d7af5040151faede78c"
+kdebug-419930.patch::"https://cgit.kde.org/kirigami.git/patch/?id=3754a384c0f13b858bb1a191f4b212c1e3fc6e64"
+kdebug-415526.patch::"https://cgit.kde.org/kirigami.git/patch/?id=e770b0ddd2af7fc861be45044476b4fa062ccc1d"
+kdebug-419804.patch::"https://cgit.kde.org/kirigami.git/patch/?id=812238afdcb77c754dc0f7dc672c5b871f822f58"
+#kdebug-420406.patch::"https://cgit.kde.org/kirigami.git/patch/?#id=5dfa3e9e983bdd29cbb9f34d31b7bab50089430b"
+D29022.patch::"https://cgit.kde.org/kirigami.git/patch/?id=f9d31febf87e2ae0050503f302527419a15cb29c"
+)
+sha256sums=('8cf742d8f695c5ff6c7bcb5da1baddb50f5f5a0e96e879d8243704c847cd1443'
+            'SKIP'
+            '919bcdd99cbd8fe88ce6193df3f2cf4c773864b1b40a9a28f95f29cd153f4782'
+            'd53bc2099c898ff680abe6e0c2e628a0460d0f743628ae9c92ac46502c80dfc8'
+            '38b0ffb6142d7a061d7ece4c4498354c33e4ce4de0231822b362c6b956a1bf8d'
+            '863632a1d27bab05518f63a0446f03f5aa090078b26c1c9d825ec886360d712e'
+            '2b395c4dcc0f7ae1a69bf6d1415b377622832f88b1e85c0c2f66f0263ac4d51b')
+validpgpkeys=('53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB') # David Faure <faure@kde.org>
+
+prepare() {
+  mkdir -p build
+
+  cd $pkgname-$pkgver
+  msg "Applying kdebug 419691 patch"
+  patch -p1 -i ../kdebug-419691.patch
+  msg "Applying kdebug 419930 patch"
+  patch -p1 -i ../kdebug-419930.patch
+#  msg "Applying kdebug 415526 patch"
+#  patch -p1 -i ../kdebug-415526.patch
+  msg "Applying kdebug 419804 patch"
+  patch -p1 -i ../kdebug-419804.patch
+ # msg "Applying kdebug 420406 patch"
+ # patch -p1 -i ../kdebug-420406.patch
+ msg "Applying D29022 patch"
+ patch -p1 -i ../D29022.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
+

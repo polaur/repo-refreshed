@@ -1,0 +1,35 @@
+pkgbase = kirigami2
+	pkgdesc = A QtQuick based components set
+	pkgver = 5.69.0
+	pkgrel = 1.4
+	url = https://community.kde.org/Frameworks
+	arch = x86_64
+	groups = kf5
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = qt5-tools
+	makedepends = qt5-doc
+	makedepends = qt5-svg
+	makedepends = kpackage
+	makedepends = doxygen
+	depends = qt5-quickcontrols
+	depends = qt5-quickcontrols2
+	depends = qt5-graphicaleffects
+	source = https://download.kde.org/stable/frameworks/5.69/kirigami2-5.69.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.69/kirigami2-5.69.0.tar.xz.sig
+	source = kdebug-419691.patch::https://cgit.kde.org/kirigami.git/patch/?id=e7204d54ff3fd82bf7852d7af5040151faede78c
+	source = kdebug-419930.patch::https://cgit.kde.org/kirigami.git/patch/?id=3754a384c0f13b858bb1a191f4b212c1e3fc6e64
+	source = kdebug-415526.patch::https://cgit.kde.org/kirigami.git/patch/?id=e770b0ddd2af7fc861be45044476b4fa062ccc1d
+	source = kdebug-419804.patch::https://cgit.kde.org/kirigami.git/patch/?id=812238afdcb77c754dc0f7dc672c5b871f822f58
+	source = D29022.patch::https://cgit.kde.org/kirigami.git/patch/?id=f9d31febf87e2ae0050503f302527419a15cb29c
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = 8cf742d8f695c5ff6c7bcb5da1baddb50f5f5a0e96e879d8243704c847cd1443
+	sha256sums = SKIP
+	sha256sums = 919bcdd99cbd8fe88ce6193df3f2cf4c773864b1b40a9a28f95f29cd153f4782
+	sha256sums = d53bc2099c898ff680abe6e0c2e628a0460d0f743628ae9c92ac46502c80dfc8
+	sha256sums = 38b0ffb6142d7a061d7ece4c4498354c33e4ce4de0231822b362c6b956a1bf8d
+	sha256sums = 863632a1d27bab05518f63a0446f03f5aa090078b26c1c9d825ec886360d712e
+	sha256sums = 2b395c4dcc0f7ae1a69bf6d1415b377622832f88b1e85c0c2f66f0263ac4d51b
+
+pkgname = kirigami2
+
