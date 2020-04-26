@@ -2,7 +2,7 @@
 
 pkgname=plasma-vault
 pkgver=5.18.4.1
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="Plasma applet and services for creating encrypted vaults"
 arch=(x86_64)
 url="https://www.kde.org/"
@@ -13,11 +13,13 @@ makedepends=(extra-cmake-modules)
 optdepends=('encfs: to use encFS for encryption' 'cryfs: to use cryFS for encryption')
 source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-418262.patch::"https://cgit.kde.org/plasma-vault.git/patch/?id=f6a924b37880b7340e796846a6e5474413ca6533"
-kdebug-412779.patch::"https://cgit.kde.org/plasma-vault.git/patch/?id=1e2988d7d3ca68f9ff00e576c634aff4fe5b8b32")
+kdebug-412779.patch::"https://cgit.kde.org/plasma-vault.git/patch/?id=1e2988d7d3ca68f9ff00e576c634aff4fe5b8b32"
+D28914.patch::"https://cgit.kde.org/plasma-vault.git/patch/?id=6944aab19e86e153c89bceb6828cb0f6fea42a8c")
 sha256sums=('09e2536a437f15eaed7c550cfd5ceb0fb7555cf0de8e6b7d6f728f5e2ed40c2b'
             'SKIP'
             'e099d7bd060a06a14e5a310ca0a76eb78021c8d2c2e3a3801376046fbbb65f0b'
-            '8f03ccaac34b1fe2a3f63453db41bfadd06df8b1389a577181e2649fa6d3c156')
+            '8f03ccaac34b1fe2a3f63453db41bfadd06df8b1389a577181e2649fa6d3c156'
+            '2a93ecdf5c551d67b64344b11644bf488314d8a2dc1380cb393a9b2891770412')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -29,6 +31,7 @@ prepare() {
   cd $pkgname-$pkgver
   patch -p1 -i ../kdebug-418262.patch
   patch -p1 -i ../kdebug-412779.patch
+  patch -p1 -i ../D28914.patch
 }
 
 build() {
