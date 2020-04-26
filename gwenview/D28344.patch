@@ -1,0 +1,35 @@
+From e2e905973c47fd680a523209382f66c3f30dd867 Mon Sep 17 00:00:00 2001
+From: "Martin T. H. Sandsmark" <martin.sandsmark@kde.org>
+Date: Fri, 27 Mar 2020 14:41:02 +0100
+Subject: Fix memory leak in CMS
+
+Quoting iccjpeg.h:
+  * IMPORTANT: the data at **icc_data_ptr has been allocated with malloc()
+  * and must be freed by the caller with free() when the caller no longer
+  * needs it.  (Alternatively, we could write this routine to use the
+  * IJG library's memory allocator, so that the data would be freed implicitly
+  * at jpeg_finish_decompress() time.  But it seems likely that many apps
+  * will prefer to have the data stick around after decompression finishes.)
+
+Reviewed By: ngraham
+
+Differential Revision: https://phabricator.kde.org/D28344
+---
+ lib/cms/cmsprofile.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/lib/cms/cmsprofile.cpp b/lib/cms/cmsprofile.cpp
+index 99ef6e2..e8503cd 100644
+--- a/lib/cms/cmsprofile.cpp
++++ b/lib/cms/cmsprofile.cpp
+@@ -98,6 +98,7 @@ static cmsHPROFILE loadFromJpegData(const QByteArray& data)
+     }
+ 
+     jpeg_destroy_decompress(&srcinfo);
++    free(profile_data);
+ 
+     return profile;
+ }
+-- 
+cgit v1.1
+

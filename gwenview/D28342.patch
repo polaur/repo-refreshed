@@ -1,0 +1,45 @@
+From 2f48c62670954b7e743f1fa264f32124775256c3 Mon Sep 17 00:00:00 2001
+From: "Martin T. H. Sandsmark" <martin.sandsmark@kde.org>
+Date: Fri, 27 Mar 2020 14:38:55 +0100
+Subject: Fix undefined behavior by calling on almost destroyed object
+
+Because mView is in the process of being destroyed we shouldn't try to touch it too much.
+
+Warning from ubsan:
+    runtime error: member call on address 0x606000118e80 which does not
+    point to an object of type 'QAbstractScrollArea'
+
+Reviewed By: ngraham
+
+Differential Revision: https://phabricator.kde.org/D28342
+---
+ lib/thumbnailview/previewitemdelegate.cpp | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/lib/thumbnailview/previewitemdelegate.cpp b/lib/thumbnailview/previewitemdelegate.cpp
+index 48dcbf2..56ff0ba 100644
+--- a/lib/thumbnailview/previewitemdelegate.cpp
++++ b/lib/thumbnailview/previewitemdelegate.cpp
+@@ -119,7 +119,7 @@ struct PreviewItemDelegatePrivate
+     mutable ShadowCache mShadowCache;
+ 
+     PreviewItemDelegate* q;
+-    ThumbnailView* mView;
++    QPointer<ThumbnailView> mView;
+     QWidget* mContextBar;
+     QToolButton* mSaveButton;
+     QPixmap mSaveButtonPixmap;
+@@ -663,6 +663,10 @@ QSize PreviewItemDelegate::sizeHint(const QStyleOptionViewItem & /*option*/, con
+ 
+ bool PreviewItemDelegate::eventFilter(QObject* object, QEvent* event)
+ {
++    if (event->type() == QEvent::Destroy || event->type() == QEvent::ChildRemoved || !d->mView) {
++        return QItemDelegate::eventFilter(object, event);
++    }
++
+     if (object == d->mView->viewport()) {
+         switch (event->type()) {
+         case QEvent::ToolTip:
+-- 
+cgit v1.1
+

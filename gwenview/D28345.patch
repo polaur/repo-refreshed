@@ -1,0 +1,64 @@
+From 6cc5a511e1bf62d1771bd691d24393c94161ab01 Mon Sep 17 00:00:00 2001
+From: "Martin T. H. Sandsmark" <martin.sandsmark@kde.org>
+Date: Fri, 27 Mar 2020 14:41:35 +0100
+Subject: Fix segfault/call on invalid pointer
+
+We didn't set the AbstractImageView in AbstractImageViewPrivate early
+enough, and createAlphaBackgroundTexture() tried to call stuff on q.
+
+Quote from asan:
+
+==161679==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fa8cdcc193a bp 0x7ffe601e4a00 sp 0x7ffe601e48f0 T0)
+==161679==The signal is caused by a READ memory access.
+==161679==Hint: address points to the zero page.
+    #0 0x7fa8cdcc1939 in Gwenview::AbstractImageViewPrivate::createAlphaBackgroundTexture() (gwenview/build/bin/libgwenviewlib.so.5+0x108a939)
+    #1 0x7fa8cdcc28b8 in Gwenview::AbstractImageViewPrivate::AbstractImageViewPrivate() (gwenview/build/bin/libgwenviewlib.so.5+0x108b8b8)
+    #2 0x7fa8cdca46a2 in Gwenview::AbstractImageView::AbstractImageView(QGraphicsItem*) ../lib/documentview/abstractimageview.cpp:145
+    #3 0x7fa8cdd500a5 in Gwenview::RasterImageView::RasterImageView(QGraphicsItem*) ../lib/documentview/rasterimageview.cpp:194
+
+Reviewed By: ngraham
+
+Differential Revision: https://phabricator.kde.org/D28345
+---
+ lib/documentview/abstractimageview.cpp | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/lib/documentview/abstractimageview.cpp b/lib/documentview/abstractimageview.cpp
+index 2f92fab..b71df5f 100644
+--- a/lib/documentview/abstractimageview.cpp
++++ b/lib/documentview/abstractimageview.cpp
+@@ -60,7 +60,7 @@ struct AbstractImageViewPrivate
+     QPointF mLastDragPos;
+     QSizeF mDocumentSize;
+ 
+-    const QPixmap mAlphaBackgroundTexture = createAlphaBackgroundTexture();
++    const QPixmap mAlphaBackgroundTexture;
+ 
+     void adjustImageOffset(Verbosity verbosity = Notify)
+     {
+@@ -128,6 +128,11 @@ struct AbstractImageViewPrivate
+         return pix;
+     }
+ 
++    AbstractImageViewPrivate(AbstractImageView *parent) :
++        q(parent),
++        mAlphaBackgroundTexture(createAlphaBackgroundTexture())
++    { }
++
+     void checkAndRequestZoomAction(const QGraphicsSceneMouseEvent* event)
+     {
+         if (event->modifiers() & Qt::ControlModifier) {
+@@ -142,9 +147,8 @@ struct AbstractImageViewPrivate
+ 
+ AbstractImageView::AbstractImageView(QGraphicsItem* parent)
+ : QGraphicsWidget(parent)
+-, d(new AbstractImageViewPrivate)
++, d(new AbstractImageViewPrivate(this))
+ {
+-    d->q = this;
+     d->mControlKeyIsDown = false;
+     d->mEnlargeSmallerImages = false;
+     d->mZoom = 1;
+-- 
+cgit v1.1
+

@@ -1,0 +1,48 @@
+pkgbase = gwenview
+	pkgdesc = A fast and easy to use image viewer
+	pkgver = 20.04.0
+	pkgrel = 1
+	url = https://kde.org/applications/graphics/gwenview/
+	arch = x86_64
+	groups = kde-applications
+	groups = kdegraphics
+	license = GPL
+	license = LGPL
+	license = FDL
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	depends = kactivities
+	depends = baloo
+	depends = libkipi
+	depends = libkdcraw
+	depends = kparts
+	depends = kitemmodels
+	depends = cfitsio
+	depends = phonon-qt5
+	depends = purpose
+	depends = perl
+	optdepends = qt5-imageformats: support for tiff, webp, and more image formats
+	optdepends = kimageformats: support for dds, xcf, exr, psd, and more image formats
+	optdepends = kipi-plugins: export to various online services
+	optdepends = kamera: import pictures from gphoto2 cameras
+	source = https://download.kde.org/stable/release-service/20.04.0/src/gwenview-20.04.0.tar.xz
+	source = https://download.kde.org/stable/release-service/20.04.0/src/gwenview-20.04.0.tar.xz.sig
+	source = D28345.patch::https://cgit.kde.org/gwenview.git/patch/?id=6cc5a511e1bf62d1771bd691d24393c94161ab01
+	source = D28344.patch::https://cgit.kde.org/gwenview.git/patch/?id=e2e905973c47fd680a523209382f66c3f30dd867
+	source = D28343.patch::https://cgit.kde.org/gwenview.git/patch/?id=24e881134a943fa2f840fa1b32b5f3ef63511266
+	source = D28342.patch::https://cgit.kde.org/gwenview.git/patch/?id=2f48c62670954b7e743f1fa264f32124775256c3
+	source = D28346.patch::https://cgit.kde.org/gwenview.git/patch/?id=4f7d35d1753262a9e6497c3b13ca74ff254d2ea3
+	source = D28480.patch::https://cgit.kde.org/gwenview.git/patch/?id=3da2a23822860cc4cfe310ff223db56986712d6c
+	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
+	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
+	sha256sums = 420671703565f5d2824d430589cd104e6030fd2ffd13ba6453af92d897c9a574
+	sha256sums = SKIP
+	sha256sums = c1ad370ee1618d2293b68d9b1a827063b5f9f176d5155743a0a07a38e47f8225
+	sha256sums = 7fce651f37bc72e5750bf49443752fa866ef8cab4418bc64bed97d021d454ae3
+	sha256sums = 862dabeb736a9b710e232691910311beeadd84cd5769beee9cef04a5f2f6bdab
+	sha256sums = 9c01c9d42c0f8054633a765c1b3c17951949aa0e0ba994be47fd521465251d21
+	sha256sums = fe09a0ab1c7a93a1f2a36bf79cb96c1d5f385bda9de9e188ad84b9a84e8209cf
+	sha256sums = 0b9e0e86924d561eccfbb5448049b656e0c89f734a356def779b5355eb113e4d
+
+pkgname = gwenview
+

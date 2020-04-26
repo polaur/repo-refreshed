@@ -1,0 +1,33 @@
+From 24e881134a943fa2f840fa1b32b5f3ef63511266 Mon Sep 17 00:00:00 2001
+From: "Martin T. H. Sandsmark" <martin.sandsmark@kde.org>
+Date: Fri, 27 Mar 2020 14:40:52 +0100
+Subject: Fix leak of Rows in infocontextmanageritem
+
+Pretty straightforward, KeyValueWidget didn't delete its rows.
+
+Reviewed By: ngraham
+
+Differential Revision: https://phabricator.kde.org/D28343
+---
+ app/infocontextmanageritem.cpp | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/app/infocontextmanageritem.cpp b/app/infocontextmanageritem.cpp
+index 113ed5d..ad720db 100644
+--- a/app/infocontextmanageritem.cpp
++++ b/app/infocontextmanageritem.cpp
+@@ -117,6 +117,11 @@ public:
+         policy.setHeightForWidth(true);
+         setSizePolicy(policy);
+     }
++    ~KeyValueWidget()
++    {
++        qDeleteAll(mRows);
++        mRows.clear();
++    }
+ 
+     QSize sizeHint() const override
+     {
+-- 
+cgit v1.1
+
