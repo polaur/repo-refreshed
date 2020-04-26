@@ -1,0 +1,57 @@
+From b0ad83eeeed9f484bc034103d6e3df1893b034dd Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?M=C3=A9ven=20Car?= <meven29@gmail.com>
+Date: Sat, 25 Apr 2020 08:04:21 +0200
+Subject: Information Panel: hide phonon widget when starting a search
+
+Summary: BUG: 420512
+
+Test Plan:
+Select on hove over a video file
+Type Ctrl + F
+Type some test + enter
+
+Reviewers: ngraham, #dolphin, elvisangelaccio
+
+Reviewed By: ngraham, #dolphin
+
+Subscribers: kfm-devel
+
+Tags: #dolphin
+
+Differential Revision: https://phabricator.kde.org/D29158
+---
+ src/panels/information/informationpanelcontent.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/panels/information/informationpanelcontent.cpp b/src/panels/information/informationpanelcontent.cpp
+index fe964f3..1161ea6 100644
+--- a/src/panels/information/informationpanelcontent.cpp
++++ b/src/panels/information/informationpanelcontent.cpp
+@@ -221,7 +221,6 @@ void InformationPanelContent::refreshPreview()
+     }
+ 
+     m_preview->setCursor(Qt::ArrowCursor);
+-    bool usePhonon = false;
+     setNameLabelText(m_item.text());
+     if (InformationPanelSettings::previewsShown()) {
+ 
+@@ -229,6 +228,7 @@ void InformationPanelContent::refreshPreview()
+         const bool isSearchUrl = itemUrl.scheme().contains(QLatin1String("search")) && m_item.localPath().isEmpty();
+         if (isSearchUrl) {
+             m_preview->show();
++            m_phononWidget->hide();
+ 
+             // in the case of a search-URL the URL is not readable for humans
+             // (at least not useful to show in the Information Panel)
+@@ -242,7 +242,7 @@ void InformationPanelContent::refreshPreview()
+             const QString mimeType = m_item.mimetype();
+             const bool isAnimatedImage = m_preview->isAnimatedImage(itemUrl.toLocalFile());
+             m_isVideo = !isAnimatedImage && mimeType.startsWith(QLatin1String("video/"));
+-            usePhonon = m_isVideo || mimeType.startsWith(QLatin1String("audio/"));
++            bool usePhonon = m_isVideo || mimeType.startsWith(QLatin1String("audio/"));
+ 
+             if (usePhonon) {
+                 // change the cursor of the preview
+-- 
+cgit v1.1
+
