@@ -1,0 +1,36 @@
+From 8fdfeeb6c7fe178f69de07f6fd9073e3e27604f2 Mon Sep 17 00:00:00 2001
+From: David Hurka <david.hurka@mailbox.org>
+Date: Sat, 25 Apr 2020 12:06:27 +0200
+Subject: Fix action collection names of Facing Pages [Center Fist Page] and
+ Overview
+
+---
+ ui/pageview.cpp | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/ui/pageview.cpp b/ui/pageview.cpp
+index fcded43..eff6b81 100644
+--- a/ui/pageview.cpp
++++ b/ui/pageview.cpp
+@@ -629,15 +629,15 @@ void PageView::setupViewerActions( KActionCollection * ac )
+                  Okular::Settings::EnumViewMode::Single );
+     addViewMode( new QAction( QIcon::fromTheme(QStringLiteral("view-pages-facing")),
+                               i18nc( "@item:inmenu", "&Facing Pages" ), this ),
+-                 QStringLiteral("view_render_mode_single"),
++                 QStringLiteral("view_render_mode_facing"),
+                  Okular::Settings::EnumViewMode::Facing );
+     addViewMode( new QAction( QIcon::fromTheme(QStringLiteral("view-pages-facing-first-centered")),
+                               i18nc( "@item:inmenu", "Facing Pages (&Center First Page)" ), this ),
+-                 QStringLiteral("view_render_mode_single"),
++                 QStringLiteral("view_render_mode_facing_center_first"),
+                  Okular::Settings::EnumViewMode::FacingFirstCentered );
+     addViewMode( new QAction( QIcon::fromTheme(QStringLiteral("view-pages-overview")),
+                               i18nc( "@item:inmenu", "&Overview" ), this ),
+-                 QStringLiteral("view_render_mode_single"),
++                 QStringLiteral("view_render_mode_overview"),
+                  Okular::Settings::EnumViewMode::Summary );
+     const QList< QAction* > viewModeActions = d->viewModeActionGroup->actions();
+     for ( QAction * viewModeAction : viewModeActions )
+-- 
+cgit v1.1
+
