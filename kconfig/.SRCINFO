@@ -1,0 +1,27 @@
+pkgbase = kconfig
+	pkgdesc = Configuration system
+	pkgver = 5.69.0
+	pkgrel = 1.1
+	url = https://community.kde.org/Frameworks
+	arch = x86_64
+	groups = kf5
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = qt5-tools
+	makedepends = qt5-doc
+	makedepends = clang
+	makedepends = python-pyqt5
+	makedepends = doxygen
+	makedepends = sip
+	depends = qt5-base
+	optdepends = python-pyqt5: for the Python bindings
+	source = https://download.kde.org/stable/frameworks/5.69/kconfig-5.69.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.69/kconfig-5.69.0.tar.xz.sig
+	source = kdebug-262551.patch::https://cgit.kde.org/kconfig.git/patch/?id=65cc12ab3ec8ca313d0e9d9b6d506e9fa9042bc1
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = 18fd38af0fd49fa52cbef2f5c2fc060dec75876b02ff8b9e8cf55a2de0131e28
+	sha256sums = SKIP
+	sha256sums = 2df6b3b2f3be646f1214fb981e4933df489f1091f78a92348cc5e6d430b515c6
+
+pkgname = kconfig
+
