@@ -1,7 +1,7 @@
 pkgbase = kio-extras
 	pkgdesc = Additional components to increase the functionality of KIO
 	pkgver = 20.04.0
-	pkgrel = 1.2
+	pkgrel = 1.3
 	url = https://www.kde.org/applications/internet/
 	arch = x86_64
 	groups = kde-applications
@@ -37,6 +37,7 @@ pkgbase = kio-extras
 	source = kdebug-291835.patch::https://cgit.kde.org/kio-extras.git/patch/?id=46b5fb425c148b9a6b02eed3ef25f14feb5996ba
 	source = kdebug-405838.patch::https://cgit.kde.org/kio-extras.git/patch/?id=94e7b64325f9e71196a19fb5bc396b9e82f88fc7
 	source = D28739.patch::https://cgit.kde.org/kio-extras.git/patch/?id=8c3c27daa03b32da31a0e2e9a23f0fdd976dfe09
+	source = kdebug-420578.patch::https://cgit.kde.org/kio-extras.git/patch/?id=a4aefbbd35345ba6da80c65723161b7d16d3c431
 	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
 	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
 	sha256sums = a70f6079a8d2acb8c64bf0d08f7f7e5685f2e9c4e49548c138609437fdc6cd4d
@@ -44,6 +45,7 @@ pkgbase = kio-extras
 	sha256sums = a8cfe7289f2ccdf8895d9423e14fd1053f4819e347a4698316c06da61528c5fe
 	sha256sums = 8192f93d26a353185746ff7aa09e7070691b766354dbe656bd1396e08705b817
 	sha256sums = ed99cb00df892fd43165081e09d5292f96717013a903fb6971f300b6658f501f
+	sha256sums = 5bc94f7d239a69219fb26bdd41f34086e6c9c976c275e64e3ef86e83c57d6e4f
 
 pkgname = kio-extras
 
