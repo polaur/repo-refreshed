@@ -1,7 +1,7 @@
 pkgbase = mpv-light
 	pkgdesc = a free, open source, and cross-platform media player (polaur)
 	pkgver = 0.32.0
-	pkgrel = 2
+	pkgrel = 4
 	url = https://mpv.io/
 	arch = x86_64
 	license = GPL3
@@ -36,7 +36,6 @@ pkgbase = mpv-light
 	depends = mujs
 	depends = libplacebo
 	depends = libplacebo.so
-	depends = sndio
 	optdepends = youtube-dl: for video-sharing websites playback
 	provides = libmpv.so
 	conflicts = mpv
