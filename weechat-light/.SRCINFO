@@ -1,7 +1,7 @@
 pkgbase = weechat-light
 	pkgdesc = Fast, light and extensible IRC client (curses UI) (polaur)
 	pkgver = 2.8
-	pkgrel = 1
+	pkgrel = 2
 	url = https://www.weechat.org/
 	arch = x86_64
 	license = GPL
@@ -24,9 +24,11 @@ pkgbase = weechat-light
 	replaces = weechat-python3-light
 	source = weechat-light-2.8.tar.xz::https://www.weechat.org/files/src/weechat-2.8.tar.xz
 	source = weechat-light-2.8.tar.xz.asc::https://www.weechat.org/files/src/weechat-2.8.tar.xz.asc
+	source = weechat-fix-sharedir.patch::https://github.com/weechat/weechat/pull/1461.patch
 	validpgpkeys = A9AB5AB778FA5C3522FD0378F82F4B16DEC408F8
 	sha512sums = 3bebb42118fca6b601f1de8f4d52378619a10e5c490f5b46f86d27a9680f00a56d48a1ade729e78d965cae589e6c80647c22414393000c7d3cfcc94a1e41c4df
 	sha512sums = SKIP
+	sha512sums = ad845cc5c0796b2dd32b7c5a0e7527da50ad0297111d9ddc2a711ea40b89f4ebe84c7f0e506e99a4c67e395fa0d14230de0d3f3b087e5c69739a0f564fa7a9ff
 
 pkgname = weechat-light
 
