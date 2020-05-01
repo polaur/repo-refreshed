@@ -5,7 +5,7 @@
 
 pkgname=dolphin
 pkgver=20.04.0
-pkgrel=1.3
+pkgrel=1.4
 pkgdesc="KDE File Manager"
 arch=(x86_64)
 url="https://kde.org/applications/system/dolphin/"
@@ -20,13 +20,15 @@ kdebug-362834.patch::"https://cgit.kde.org/dolphin.git/patch/?id=5351db95c6460b5
 D28370.patch::"https://cgit.kde.org/dolphin.git/patch/?id=4440e961a07aaee5b5da7c8967ff05de14808ad4"
 kdebug-420512.patch::"https://cgit.kde.org/dolphin.git/patch/?id=b0ad83eeeed9f484bc034103d6e3df1893b034dd"
 D26362.patch::"https://cgit.kde.org/dolphin.git/patch/?id=196f4553e68a89d0162685f2df9a32a58e3ff479"
+kdebug-420340.patch::"https://cgit.kde.org/dolphin.git/patch/?id=dcd8c646a566eff1ff2c487fb2e7abe9a53a23cb"
 )
 sha256sums=('3c5bb9dc0b5ba55c54eb1c13b123b34f3437c22424142cb7d1957b6ebe4ad5ba'
             'SKIP'
             '0b520b799927b95ec489503aaacbb1082d34d1de66cf4ffb994eb8f13d03a163'
             'e15296867f47170d7d8c1553e92ceec4e0759f37bc09f82af808423090685409'
             '24602f89f1de84c32a8feed65aef012d5c948bcda0dff9687106077821e1a1a8'
-            'dca31d4bd20fc39cb927e285fc00a6469e6cc20628ad7b54e56010e73710088d')
+            'dca31d4bd20fc39cb927e285fc00a6469e6cc20628ad7b54e56010e73710088d'
+            '047ea771b3fd2f01d23759a0b79f863c99fdbf56007f98d184522ca545eb6097')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
@@ -42,6 +44,8 @@ prepare() {
   patch -p1 -i ../kdebug-420512.patch
   msg "Add D26362 patch; fix in 20.08.0"
   patch -p1 -i ../D26362.patch
+  msg "Add kdebug 420340 patch; fix in 20.08.0"
+  patch -p1 -i ../kdebug-420340.patch
 }
 
 build() {
