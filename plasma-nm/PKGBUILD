@@ -1,9 +1,12 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=plasma-nm
-pkgver=5.18.4.1
+pkgver=5.18.5
 pkgrel=1.1
 pkgdesc='Plasma applet written in QML for managing network connections'
 arch=(x86_64)
@@ -13,13 +16,15 @@ depends=(plasma-workspace modemmanager-qt networkmanager-qt qca mobile-broadband
 makedepends=(extra-cmake-modules openconnect)
 optdepends=('openconnect: Cisco AnyConnect VPN plugin')
 groups=(plasma)
-source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+source=("https://download.kde.org/stable/plasma/${pkgver}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-418416_2.patch::"https://cgit.kde.org/plasma-nm.git/patch/?id=7de9e9cdbd57b991226fe7467fbca4841e73e9e0"
-kdebug-418416_1.patch::"https://cgit.kde.org/plasma-nm.git/patch/?id=c9b2684a49d369dcfef95e0c26a64664138fc434")
-sha256sums=('a7ae36b47c2ee85590b01a1e03fae179d243bb4e718417be0b8e93e7dfc77e6a'
+kdebug-418416_1.patch::"https://cgit.kde.org/plasma-nm.git/patch/?id=c9b2684a49d369dcfef95e0c26a64664138fc434"
+kdebug-420983.patch::"https://cgit.kde.org/plasma-nm.git/patch/?id=da52d01788f5f07aa60ed7a6f21d7943a2e0c8d3")
+sha256sums=('1e091d01993708220f89501bb8a289279bf527d0593fd9e4b9223e6e8caf9aaa'
             'SKIP'
             '066b46915c50e0ec7f2b31f24557af180741b0985afc50b68920fb1e29445c58'
-            '5e53388d250d27301b0e1d162580780f9fda1e239d60beb4b60f20ffdafb440c')
+            '5e53388d250d27301b0e1d162580780f9fda1e239d60beb4b60f20ffdafb440c'
+            '8e67df599d4b31499a20b9d60c938560e607350eb84d638b9105c61c68f3ce87')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -32,6 +37,8 @@ prepare() {
   msg "KDEBUG 418416 patch; fix in 5.19"
   patch -p1 -i ../kdebug-418416_1.patch
   patch -p1 -i ../kdebug-418416_2.patch
+  msg "KDEBUG 420983 patch; fix in 5.19"
+  patch -p1 -i ../kdebug-420983.patch
 } 
 
 build() {
