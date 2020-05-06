@@ -1,6 +1,6 @@
 pkgbase = breeze
 	pkgdesc = Artwork, styles and assets for the Breeze visual style for the Plasma Desktop
-	pkgver = 5.18.4.1
+	pkgver = 5.18.5
 	pkgrel = 1.1
 	url = https://www.kde.org/workspaces/plasmadesktop/
 	arch = x86_64
@@ -15,14 +15,14 @@ pkgbase = breeze
 	depends = hicolor-icon-theme
 	optdepends = breeze-gtk: Breeze widget style for GTK applications
 	optdepends = kcmutils: for breeze-settings
-	source = https://download.kde.org/stable/plasma/5.18.4/breeze-5.18.4.1.tar.xz
-	source = https://download.kde.org/stable/plasma/5.18.4/breeze-5.18.4.1.tar.xz.sig
+	source = https://download.kde.org/stable/plasma/5.18.5/breeze-5.18.5.tar.xz
+	source = https://download.kde.org/stable/plasma/5.18.5/breeze-5.18.5.tar.xz.sig
 	source = D28330.patch::https://cgit.kde.org/breeze.git/patch/?id=a1e1a53f3b734a22e69e567016ee764a566d988b
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
 	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
-	sha256sums = b809be5c434aa974e529a296a5a602b3b2c659613f59d23034da812dc21eeebd
+	sha256sums = 1d08dfd24df4a4fcacad1e3759e559e82f6014ba63dc75dc32a24de6cd133563
 	sha256sums = SKIP
 	sha256sums = ed717bab7c6affb81f018bceebb45395175ce997ea3b87cbde68be533f6e616f
 
