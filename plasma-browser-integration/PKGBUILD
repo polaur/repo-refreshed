@@ -4,7 +4,7 @@
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 
 pkgname=plasma-browser-integration
-pkgver=5.18.4.1
+pkgver=5.18.5
 pkgrel=1.1
 pkgdesc='Components necessary to integrate browsers into the Plasma Desktop'
 arch=(x86_64)
@@ -13,9 +13,9 @@ license=(GPL)
 depends=(krunner purpose kfilemetadata)
 makedepends=(extra-cmake-modules)
 groups=(plasma)
-source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+source=("https://download.kde.org/stable/plasma/${pkgver}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-419699.patch::"https://cgit.kde.org/plasma-browser-integration.git/patch/?id=b50818455f89d3b8de059efcc99518c0db4e5353")
-sha256sums=('5b37e9e84435d1dc77e4b68c97042be60da0ba66e7dc2ef7d60d210785154c90'
+sha256sums=('3a087a836657b5304e2e0ef9ebefb84ce1f896bfbfc5dbf948d4b3eb7b709383'
             'SKIP'
             '17936e4ca32eeaa07578df997b0998505360930b3bef21ace2d3eb5e51749936')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
