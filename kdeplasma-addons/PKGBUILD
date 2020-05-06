@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kdeplasma-addons
-pkgver=5.18.4.1
+pkgver=5.18.5
 pkgrel=1.1
 pkgdesc='All kind of addons to improve your Plasma experience'
 arch=(x86_64)
@@ -19,13 +19,15 @@ optdepends=('kross: comic applet'
             'quota-tools: disk quota applet'
             'qt5-webengine: dictionary and webbrowser applets')
 groups=(plasma)
-source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+source=("https://download.kde.org/stable/plasma/${pkgver}/$pkgname-$pkgver.tar.xz"{,.sig}
         "kdebug-417608.patch::https://cgit.kde.org/kdeplasma-addons.git/patch/?id=9abedfec9d23106cfd8e66c3241155d31e29b896"
-        "qt5.15-build-fix.patch::https://cgit.kde.org/kdeplasma-addons.git/patch/?id=47381a65debe01a0a015e1aa423cbb78af649648")
-sha256sums=('09a4ff1e4384f4e77998bc45a9c2ed3c56746a8e114967013d25b08b2a5b6a99'
+        "qt5.15-build-fix.patch::https://cgit.kde.org/kdeplasma-addons.git/patch/?id=47381a65debe01a0a015e1aa423cbb78af649648"
+        D29144.patch::"https://cgit.kde.org/kdeplasma-addons.git/patch/?id=ef213aaa5a2ce46092638ae747e5674fde56bf34")
+sha256sums=('1d135a32a7442f79dba4cb4e23221cd2ad1aad36b54fb12bfa91918daf3ff53f'
             'SKIP'
             'a0b449f2a777fbbf2361228de43b65ae06f8c39855fd8137dc411da7fe01e1ee'
-            '1df363caf7745063f6e227d61e54868af3498e9130cfad7237afe5f97178020a')
+            '1df363caf7745063f6e227d61e54868af3498e9130cfad7237afe5f97178020a'
+            '92dfec0d9a329ff69028a985cbb42a245b3f31a802999de7f66661789ab0701d')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -38,6 +40,8 @@ prepare() {
   patch -p1 -i ../qt5.15-build-fix.patch
   msg "Apply kdebug 417608 patch; fix in 5.19"
   patch -p1 -i ../kdebug-417608.patch
+  msg "Apply D29144 patch; fix in 5.18.5"
+  patch -p1 -i ../D29144.patch
   }
 
 build() {
