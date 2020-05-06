@@ -2,8 +2,8 @@
 # Maintainer:Antonio Rojas <arojas@archlinux.org>
 
 pkgname=plasma-pa
-pkgver=5.18.4.1
-pkgrel=1.2
+pkgver=5.18.5
+pkgrel=1.1
 pkgdesc='Plasma applet for audio volume management using PulseAudio'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -11,15 +11,12 @@ license=(LGPL)
 depends=(plasma-workspace libcanberra-pulse pulseaudio perl)
 makedepends=(extra-cmake-modules kdoctools)
 groups=(plasma)
-source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+source=("https://download.kde.org/stable/plasma/${pkgver}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-417607.patch::"https://cgit.kde.org/plasma-pa.git/patch/?id=606c6499750a1d776d73b052eab828dc5eedca07"
-kdebug-363983.patch::"https://cgit.kde.org/plasma-pa.git/patch/?id=1df3476ced191db667b042a799d2092b529e4872"
-kdebug-407398.patch::"https://cgit.kde.org/plasma-pa.git/patch/?id=5bdd1368957955c900d5a17bf6c890bb0920d356")
-sha256sums=('dc137b769f0c8aadcb93f12fda16582a0c899684fdffb29c257385ee4f72a7ba'
+)
+sha256sums=('28765c07f584e7688a85c9761155e606440936de2ebb678917dac2c85f5d0209'
             'SKIP'
-            '36e2d6ec93b9ea6e7cb609cddef6bd829f77f1ce60b1f14542d7e7cc48789b08'
-            '7a82938b9d7924a4c112fb2d70ca2ca51e35cfcf2c9a23371d136065b6a5a5db'
-            'ed7d8322d674ac216f0c507091010bcced739cbc4beeb83aa3154a201e8e3625')
+            '36e2d6ec93b9ea6e7cb609cddef6bd829f77f1ce60b1f14542d7e7cc48789b08')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -31,10 +28,6 @@ prepare() {
   cd $pkgname-$pkgver
   msg "Applying kdebug 417607 patch; fix in 5.19.0"
   patch -p1 -i ../kdebug-417607.patch
-  msg "Applying kdebug 407398 patch"
-  patch -p1 -i ../kdebug-407398.patch
-#  msg "Applying kdebug 363983 patch; fix in 5.19.0"
-#  patch -p1 -i ../kdebug-363983.patch
 }
 
 build() {
