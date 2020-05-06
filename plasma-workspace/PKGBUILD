@@ -8,8 +8,8 @@
 
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
-pkgver=5.18.4.1
-pkgrel=2.2
+pkgver=5.18.5
+pkgrel=1.1
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -20,25 +20,19 @@ depends=(knotifyconfig libksysguard ktexteditor libqalculate kde-cli-tools appst
 	 phonon-qt5)
 makedepends=(extra-cmake-modules kdoctools gpsd baloo networkmanager-qt kdesignerplugin)
 groups=(plasma)
-source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgbase-$pkgver.tar.xz"{,.sig} kde.pam
+source=("https://download.kde.org/stable/plasma/${pkgver}/$pkgbase-$pkgver.tar.xz"{,.sig} kde.pam
 kdebug-414885.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=c7c190488e46f49d85ab8695f32008eb6f352ad8"
-kdebug-386114.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=731a190810440726f2db252b3a935648346f4a12"
 kdebug-411973.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=db2518b063e493da5bf5f5a48c931ff51bd22924"
-#kdebug-395956.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=a05dc73cf7fb41a7a5956f309a884acc6be0ac21"
 kdebug-416510.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=175424169d18766565a9b105b76136c4113515e1"
-kdebug-418483.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=ac0124c48ce685db42ef0a99ce48e4b86621ed12"
 D28989.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=0e40a1cadf480d1c38700396367d0919db4b4247"
-# D29143.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=082aaaf7b56e59286af857857338318a8f178b8b"
 kdebug-420085.patch::"https://cgit.kde.org/plasma-workspace.git/patch/?id=ed09a3baf3e00b6f831132ae55391548130f1d48"
 )
-sha256sums=('924d8401c3d1fe5d107b6d3facaf96c292f1d4972529831993056982f28b1601'
+sha256sums=('14e82033be745f4db46a70d319e2c86012295ea31056092bc974004189b92354'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
             'ac9a74a9a43942e874e1562ec8c8ab091c4d27fd84b23fcbefc160f85626ee48'
-            'fb10cdbad03283e3b3b80b4d65747b19c75f43f62900c916991648b567b74cd1'
             '83a650587a28a85abdd79b843d3711e6982078120ce7d005e6bc63171821f416'
             '96999d6b97751da41f6b0bd309a9f4b1c99ea9d737a111898b53a50bea483277'
-            'c3e51b10f7086ae615e8e504535b700be6fb3ee334846b76ebee2083ceac1f45'
             '27ab47530d4f2c04bb6e9b45a84d9a8f3bc08e64ea73a7a3cd45e4f8134588a2'
             '24c09c164ab182c3e50a7a799db17259fa64ba9640f1fa43db6b126b23e85ead')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
@@ -52,16 +46,10 @@ prepare() {
   cd $pkgname-$pkgver
   msg "Applying kdebug 414885 patch; fix in 5.19.0"
   patch -p1 -i ../kdebug-414885.patch
-  msg "Applying kdebug 386114 patch"
-  patch -p1 -i ../kdebug-386114.patch
   msg "Applying kdebug 411973 patch; fix in 5.19.0"
   patch -p1 -i ../kdebug-411973.patch
- # msg "Applying kdebug 395956 patch; fix in 5.19.0"
- # patch -p1 -i ../kdebug-395956.patch
   msg "Applying kdebug 416510 patch; fix in 5.19.0"
   patch -p1 -i ../kdebug-416510.patch
-  msg "Applying kdebug 418483 patch; fix in 5.18.5"
-  patch -p1 -i ../kdebug-418483.patch
   msg "Applying D28989 patch"
   patch -p1 -i ../D28989.patch
   msg "Applying kdebug 420085 patch; fix in 5.19.0"
