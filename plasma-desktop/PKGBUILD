@@ -7,55 +7,40 @@
 
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
-pkgver=5.18.4.1
-pkgrel=1.12
+pkgver=5.18.5
+pkgrel=1.1
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 
 url='https://www.kde.org/workspaces/plasmadesktop/'
 license=(LGPL)
-source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+source=("https://download.kde.org/stable/plasma/${pkgver}/$pkgname-$pkgver.tar.xz"{,.sig}
         kdebug-416553.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=a35d2b9adf40072e242b8820dcb07cf0a7ed037b"
         kdebug-415649.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=c32b5a85cae6f99bb5097b16a25983fc611aecc6"
         kdebug-417461.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=fffb352cfa1eb5e18f038d5b423d2dce0dca8727"
-        kdebug-418604.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=4d33b8276e00471f6bfc14a174b3a33fe17627b3"
         kdebug-406932.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=3e8c7dada73ed838a93b0b0ffcd5c679627ffa54"
         kdebug-403842.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=0cf73170479bb271fb7498e67d38d3c6255594a4"
-        kdebug-419853.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=ba66d2eabe38bc357d799bff391cf5edbce139c0"
         kdebug-420079.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=fe4d395d792d50174fd4529cd259fcf933b7af09"
         kdebug-413954.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=35e18420a76ab4f738a813e67c2e304834b60bf7"
-        kdebug-412331.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=2fb0bf85fe63fa7ba7fc0af4e0bf7db6da8d5d40"
-        kdebug-401861.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=020c67fc8ba30240215f498eb8106635b05ecd04"
-        kdebug-420385.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=080e9dd6a4dc5e1985b11a91b4cebd945c6adfe8"
-        kdebug-414417.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=dacb3a8bdd206ec14a588bb25b37caa48c3b36aa"
-        kdebug-419552.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=17ef374a8cc469a9eefc516fc4885cbbce0c0afc"
-        kdebug-377653.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=8e0f525a96331102cdb3d20aadbc4cd8508e5146"
         kdebug-413198.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=fd6f3bacc91e8651aae21557f0f316690e6b8852"
-        kdebug-420452.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=0eba5453b9d46d99dc6623b165b1be1c1659003c"
+#        kdebug-157468.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=1ee6660ceb62d4584a5371d0cce107b7008e75df"
+        kdebug-418269.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=1d557e8a78a737b6c63bf2400e863738f1f063ff"
         )
 depends=(polkit-kde-agent libxkbfile kmenuedit systemsettings ksysguard baloo)
 makedepends=(extra-cmake-modules kdoctools xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
              libibus scim kdesignerplugin)
 groups=(plasma)
-sha256sums=('19c50781ced6608b8efb3d94e94575a397f58a159d63bba64c27a6c6d72e0af3'
+sha256sums=('aeb106018fd90da79c8a3c444d880282846a842029b1223e7830db2d4b42df9f'
             'SKIP'
             '674976dfb7b78c66f489d4f04bafcad395c0dddff439fb7bef386cb7cd3a86ee'
             '2d83b72c1fa5e44a68140ec981eb2d9ea2e39270fc7246910e12341df31b3a92'
             '9dc1158dadf84731d298e1d3f3fbb64f3b02df95e04f584f88093aebe43e7a4f'
-            '8a909d705910675d0b966c9b17e8b0784d8a5714c17306800e2dfae2d18a1a90'
             '5d688a9f644be7c57469b84211b565fd4b4242b6a812bd1df289aeb4805979ee'
             '8315a85a5e5ef3fac6e07755c2b3abec7326de2225c82871f3198c006d3919c5'
-            '786f1609c31e9413ec66a81eb8aae09b9ea3a552e8c1c5645c05b332b4735fbe'
             '3373e4f8122e52c204b623c43df3d1e2de8ae3aaf228acc88b2189b1e6375b64'
             '814602b30a7160fe550e1deec64f270f0c7d56e0ebb90e260ebfb0795d592b5a'
-            '5bf2500d77e66a4e4ff9dcdf4d25dbab9e6119c319625282cfc7f7f3a6f58778'
-            'cf98f9e917e3c557cf73f5deac177eef68961f4e3cb941c58bf7de40c20e6515'
-            '2fad752f50a59c86b4a8ff150d366ae070dee94caa9e709a32f79a5c1794d17c'
-            '272a8f19f15d178fce410a90c7456db411873c1aeadee83157b094d37f8d5db4'
-            'e9f2143d8eb9f645ed94aaf761fe3c9affec5f5f7a020aa895256a0c895c6d4b'
-            '1d47d24f7de37748c3d755194b447360da1d224823e512b24c8a1fbc3f353d94'
             '489054d747b8f577d53bac3d0d2f5acb943a680b112a3e6de218104272bf6563'
-            '4003150eb143619a9b09a293ac170bf531050fb7af56d1404814e17b32262a77')
+            'ab10818d57fe6eed5a6c629b4e519a48a02085772b0a8fa87038b940ce2bcc4f')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -71,34 +56,21 @@ prepare() {
   patch -p1 -i ../kdebug-415649.patch
   msg "Applying kdebug 397595 patch; fix in 5.19.0"
   patch -p1 -i ../kdebug-417461.patch
-  msg "Applying kdebug 418604 patch"
-  patch -p1 -i ../kdebug-418604.patch
   msg "Applying kdebug 406932 patch; fix in 5.19.0"
   patch -p1 -i ../kdebug-406932.patch
   msg "Applying kdebug 403842 patch; fix in 5.19.0"
   patch -p1 -i ../kdebug-403842.patch
-  msg "Applying kdebug 419853 patch; fix in 5.18.5"
-  patch -p1 -i ../kdebug-419853.patch
   msg "Applying kdebug 420079 patch"
   patch -p1 -i ../kdebug-420079.patch
   msg "Applying kdebug 413954 patch"
   patch -p1 -i ../kdebug-413954.patch
-  msg "Applying kdebug 412331 patch; fix in 5.19.0 or even in 5.18.5"
-  patch -p1 -i ../kdebug-412331.patch
-  msg "Applying kdebug 401861 patch; fix in 5.18.5"
-  patch -p1 -i ../kdebug-401861.patch
-  msg "Applying kdebug 420385 patch; fix in 5.18.5"
-  patch -p1 -i ../kdebug-420385.patch
-  msg "Applying kdebug 414417 patch; fix in 5.18.5"
-  patch -p1 -i ../kdebug-414417.patch
-  msg "Applying kdebug 419552 and 418698 patch; fix in 5.18.5"
-  patch -p1 -i ../kdebug-419552.patch
-  msg "Applying kdebug 377653 patch; fix in 5.18.5"
-  patch -p1 -i ../kdebug-377653.patch
   msg "Applying kdebug 413198 patch; fix in 5.19"
   patch -p1 -i ../kdebug-413198.patch
-  msg "Applying kdebug 420452 patch; fix in 5.18.5"
-  patch -p1 -i ../kdebug-420452.patch
+#  msg "Applying kdebug 157468, 213101, 230583, 250121, 251437, 272554, 318964, 341817, 348264, 366257, 369020, 388574, 393403, 408942, 416149, 416737, 417915, 419215, 419515, 419624, 419692, 419825, 419909, 420093 patch; fix in 5.19.0"
+#  patch -p1 -i ../kdebug-157468.patch
+  msg "Applying kdebug 418269 patch; fix in 5.19.0"
+  patch -p1 -i ../kdebug-418269.patch
+
 }
 
 build() {
