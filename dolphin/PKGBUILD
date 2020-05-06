@@ -8,7 +8,7 @@
 
 pkgname=dolphin
 pkgver=20.04.0
-pkgrel=1.5
+pkgrel=1.6
 pkgdesc="KDE File Manager"
 arch=(x86_64)
 url="https://kde.org/applications/system/dolphin/"
@@ -26,6 +26,8 @@ D26362.patch::"https://cgit.kde.org/dolphin.git/patch/?id=196f4553e68a89d0162685
 kdebug-420340.patch::"https://cgit.kde.org/dolphin.git/patch/?id=dcd8c646a566eff1ff2c487fb2e7abe9a53a23cb"
 kdebug-420354.patch::"https://cgit.kde.org/dolphin.git/patch/?id=e076d8668f673e09ddd01b3367e413a494d6d2bb"
 kdebug-190580.patch::"https://cgit.kde.org/dolphin.git/patch/?id=e6ea3ab4c41dcc115143a237aafd3a1152849433"
+kdebug-420911.patch::"https://cgit.kde.org/dolphin.git/patch/?id=9f268f5f76a4a4f0c91abcc213e159c8bde4869c"
+kdebug-405226.patch::"https://cgit.kde.org/dolphin.git/patch/?id=1d72710039b547d91b7138d3899e783e26aac849"
 )
 sha256sums=('3c5bb9dc0b5ba55c54eb1c13b123b34f3437c22424142cb7d1957b6ebe4ad5ba'
             'SKIP'
@@ -35,7 +37,9 @@ sha256sums=('3c5bb9dc0b5ba55c54eb1c13b123b34f3437c22424142cb7d1957b6ebe4ad5ba'
             'dca31d4bd20fc39cb927e285fc00a6469e6cc20628ad7b54e56010e73710088d'
             '047ea771b3fd2f01d23759a0b79f863c99fdbf56007f98d184522ca545eb6097'
             '888ed0f1bd2ef12abc178749aaa42e6a5c9196e0ccd923187db42663b34200d0'
-            '870e44a448c6123f139adc8339f467a3d77581f6a604bac7813860081694c6de')
+            '870e44a448c6123f139adc8339f467a3d77581f6a604bac7813860081694c6de'
+            '3e290e988f530e45795ad86b47edd6b513da9443b267a361dc18dacb9cffb997'
+            'b872c0c143a989bdde0c67cef36c80debf64cf3097c1780291116dc71ac1507c')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
@@ -57,6 +61,10 @@ prepare() {
   patch -p1 -i ../kdebug-420354.patch
   msg "Add kdebug 190580 and 158090 patches; fix in 20.08.0"
   patch -p1 -i ../kdebug-190580.patch
+  msg "Add kdebug 420911 patch; fix in 20.04.1"
+  patch -p1 -i ../kdebug-420911.patch
+  msg "Add kdebug 405226 patch"
+  patch -p1 -i ../kdebug-405226.patch
 }
 
 build() {
