@@ -1,0 +1,39 @@
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=libkomparediff2
+pkgver=20.04.0
+pkgrel=1.1
+pkgdesc="Library to compare files and strings"
+url='https://www.kde.org/applications/development/kompare/'
+arch=(x86_64)
+license=(GPL LGPL FDL)
+depends=(kio)
+makedepends=(extra-cmake-modules)
+source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-420771.patch::"https://cgit.kde.org/libkomparediff2.git/patch/?id=759183c4bc9ed26eff9426862eece835a2aee106")
+sha256sums=('a4f0d91a274bbc7e7a47d428be5e252750d081499c2e2514b8691a051aaa35f5'
+            'SKIP'
+            '4afb97d0e7a845ef2d4a3b8e54b5b66f8b19454b46d6d8a650b2a693885616ce')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  msg "Add kdebug 420771 patch; fix in 20.04.1"
+  patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-420771.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
