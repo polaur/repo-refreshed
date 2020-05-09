@@ -1,0 +1,31 @@
+pkgbase = knewstuff
+	pkgdesc = Support for downloading application assets from the network
+	pkgver = 5.70.0
+	pkgrel = 1.2
+	url = https://community.kde.org/Frameworks
+	arch = x86_64
+	groups = kf5
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = doxygen
+	makedepends = qt5-tools
+	makedepends = qt5-doc
+	makedepends = qt5-declarative
+	depends = kio
+	optdepends = kirigami2: QML components
+	source = https://download.kde.org/stable/frameworks/5.70/knewstuff-5.70.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.70/knewstuff-5.70.0.tar.xz.sig
+	source = kdebug-419959.patch::https://cgit.kde.org/knewstuff.git/patch/?id=12642a1c0174bb4f0cd3163fee9f8e66f5959c32
+	source = kdebug-416762.patch::https://cgit.kde.org/knewstuff.git/patch/?id=25d391c6f36b16a9c4f685de1e6e8d1a5d9d71b4
+	source = D29451.patch::https://cgit.kde.org/knewstuff.git/patch/?id=2838e55acd176e6d8eb363902d0c30ba1cc2c4fe
+	source = kdebug-420312.patch::https://cgit.kde.org/knewstuff.git/patch/?id=4c6b3afcd80a7b03e0381e2a5c8bb693a8f916fd
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = d8a5e07b3ec3d472de4ca493ea5cecd79559cba2573e6228e2a740ae2c91fdc2
+	sha256sums = SKIP
+	sha256sums = a60b414fce2494f3da6bf34f9f5a051386ce84dba582ae3799a970f3228944b6
+	sha256sums = ca70d72003bf003d8cca5d1869dbb40478c7c44b18fc0e87994d46e64ec0f7d3
+	sha256sums = 7908b577beda735d124704d5506df4e12719cc5688bd686c7202305f77b560b4
+	sha256sums = 63386171cd3942cfae448168fc2e8937de9f41b72228d81f588bc497953b7fec
+
+pkgname = knewstuff
+
