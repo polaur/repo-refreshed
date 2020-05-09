@@ -25,6 +25,11 @@ sha256sums=('de08c27a63f3dd9cab085604fda9f94efb3abfd1ffb1e0ec2f7be9fcf79d2fb6')
 
 prepare() {
     mkdir -p build
+    
+#    cd $pkgname-$pkgver
+#    msg "Apply kdebug 418067 patch; fix in 3.3"
+#    patch -p1 -i ../kdebug-418067_a.patch
+#    patch -p1 -i ../kdebug-418067_b.patch
     }
 
 build() {

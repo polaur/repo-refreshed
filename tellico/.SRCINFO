@@ -1,6 +1,6 @@
 pkgbase = tellico
 	pkgdesc = A collection manager for KDE
-	pkgver = 3.2.3
+	pkgver = 3.3
 	pkgrel = 1.1
 	url = http://tellico-project.org/
 	arch = x86_64
@@ -21,8 +21,8 @@ pkgbase = tellico
 	depends = qimageblitz-svn
 	depends = btparse
 	depends = libcsv
-	source = http://tellico-project.org/files/tellico-3.2.3.tar.xz
-	sha256sums = f4456eb31f71151b9786fa171531265b421b2de8140e9adbf6bb584862c42952
+	source = http://tellico-project.org/files/tellico-3.3.tar.xz
+	sha256sums = de08c27a63f3dd9cab085604fda9f94efb3abfd1ffb1e0ec2f7be9fcf79d2fb6
 
 pkgname = tellico
 
