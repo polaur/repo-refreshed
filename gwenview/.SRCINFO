@@ -1,7 +1,7 @@
 pkgbase = gwenview
 	pkgdesc = A fast and easy to use image viewer
 	pkgver = 20.04.0
-	pkgrel = 2.1
+	pkgrel = 2.2
 	url = https://kde.org/applications/graphics/gwenview/
 	arch = x86_64
 	groups = kde-applications
@@ -33,6 +33,8 @@ pkgbase = gwenview
 	source = D28342.patch::https://cgit.kde.org/gwenview.git/patch/?id=2f48c62670954b7e743f1fa264f32124775256c3
 	source = D28346.patch::https://cgit.kde.org/gwenview.git/patch/?id=4f7d35d1753262a9e6497c3b13ca74ff254d2ea3
 	source = D28480.patch::https://cgit.kde.org/gwenview.git/patch/?id=3da2a23822860cc4cfe310ff223db56986712d6c
+	source = D28375.patch::https://cgit.kde.org/gwenview.git/patch/?id=a585df06926922baf247b0ac8790721b066f2ef3
+	source = D28376.patch::https://cgit.kde.org/gwenview.git/patch/?id=662c29b3ae90a723fcaf7d2fe2ff84990cf7c612
 	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
 	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
 	sha256sums = 420671703565f5d2824d430589cd104e6030fd2ffd13ba6453af92d897c9a574
@@ -43,6 +45,8 @@ pkgbase = gwenview
 	sha256sums = 9c01c9d42c0f8054633a765c1b3c17951949aa0e0ba994be47fd521465251d21
 	sha256sums = fe09a0ab1c7a93a1f2a36bf79cb96c1d5f385bda9de9e188ad84b9a84e8209cf
 	sha256sums = 0b9e0e86924d561eccfbb5448049b656e0c89f734a356def779b5355eb113e4d
+	sha256sums = 4328750db0270ab1bfe3c815f149b8904986e2282899d32d041f90e77a3fe181
+	sha256sums = bdb6d2fd3674068e800708bf3a85c8d880d685f26ad3266c3f85d3a197c37d0b
 
 pkgname = gwenview
 
