@@ -3,7 +3,7 @@
 
 pkgname=syntax-highlighting
 pkgver=5.70.0
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='Syntax highlighting engine for structured text and code'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -12,10 +12,12 @@ depends=(qt5-base)
 makedepends=(extra-cmake-modules qt5-xmlpatterns qt5-tools qt5-doc doxygen)
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-418876.patch::"https://cgit.kde.org/syntax-highlighting.git/patch/?id=1e8466029c821575a2869acc0ca28e673426d397")
+kdebug-418876.patch::"https://cgit.kde.org/syntax-highlighting.git/patch/?id=1e8466029c821575a2869acc0ca28e673426d397"
+kdebug-421445.patch::"https://cgit.kde.org/syntax-highlighting.git/patch/?id=f804af905ef3a3de8aa6bdd49344f231e420b82d")
 sha256sums=('4b0e25e2e0070e52f0e463dc876087dc1613910df644757512c3a0ab313d568a'
             'SKIP'
-            'ba4c3f8fcdda2d7a0ba4fbf13d7cac2f4a1c2f743cfe92d85fd812c644449e50')
+            'ba4c3f8fcdda2d7a0ba4fbf13d7cac2f4a1c2f743cfe92d85fd812c644449e50'
+            'fc46ac04a620649bdda17d77defa9d306eb7b1d7dceb8f9506bdf2326141dbb4')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -23,6 +25,7 @@ prepare() {
   
   cd $pkgname-$pkgver
   patch -p1 -i ../kdebug-418876.patch
+  patch -p1 -i ../kdebug-421445.patch
 }
 
 build() {
