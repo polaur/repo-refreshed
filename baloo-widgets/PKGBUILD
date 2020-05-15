@@ -2,8 +2,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=baloo-widgets
-pkgver=20.04.0
-pkgrel=1.2
+pkgver=20.04.1
+pkgrel=1.1
 pkgdesc="Widgets for Baloo"
 arch=(x86_64)
 url='https://community.kde.org/Baloo'
@@ -12,9 +12,9 @@ depends=(baloo)
 makedepends=(extra-cmake-modules kdoctools)
 source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-413091.patch::"https://cgit.kde.org/baloo-widgets.git/patch/?id=50fdd3e154ffac3b4b42cc03735255aca8272ae8")
-sha256sums=('8ce3bdafd8b3598799d5303af483295625db7a7b66b08cff2d6c3d35df759853'
+sha256sums=('00f271d90c92ac4be978270fee323a8e8617cb975e0ea7d7ecb1b00d773a9bf4'
             'SKIP'
-            'd4e0b4c99e2b2b2b7d2e220ea3eb7797e1645b86cde7d0fab373f5bfe5ba4ce6')
+            'f5449697f2d67be34c07581b6fc3fb011d59a5c9e203aaf57d89b9ef3be8dd47')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
