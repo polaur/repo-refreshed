@@ -1,0 +1,33 @@
+pkgbase = kio
+	pkgdesc = Resource and network access abstraction
+	pkgver = 5.70.0
+	pkgrel = 3.1
+	url = https://community.kde.org/Frameworks
+	arch = x86_64
+	groups = kf5
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	makedepends = doxygen
+	makedepends = qt5-tools
+	makedepends = qt5-doc
+	depends = solid
+	depends = kjobwidgets
+	depends = kbookmarks
+	depends = libxslt
+	depends = kwallet
+	depends = ktextwidgets
+	optdepends = kio-extras: extra protocols support (sftp, fish and more)
+	optdepends = kdoctools: for the help kioslave
+	optdepends = knetattach: to add new kio-remote entries
+	optdepends = kio-fuse: to mount remote filesystems via FUSE
+	source = https://download.kde.org/stable/frameworks/5.70/kio-5.70.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.70/kio-5.70.0.tar.xz.sig
+	source = kdebug-421213.patch::https://cgit.kde.org/kio.git/patch/?id=8769b6360d87c1b688eac4d0ce97594351bad13c
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = 0a99acc697f07eb3c27176c26f8904cb409628bfca46e2a1b0633cdcf84e4ce8
+	sha256sums = SKIP
+	sha256sums = 2f29d954618db1b58b8c6407d5979e553957a397d0958b23ce5908e1b84f5df1
+
+pkgname = kio
+
