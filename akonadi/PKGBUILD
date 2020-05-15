@@ -1,3 +1,6 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
@@ -5,7 +8,7 @@
 
 pkgbase=akonadi
 pkgname=(akonadi libakonadi)
-pkgver=20.04.0
+pkgver=20.04.1
 pkgrel=1.1
 pkgdesc="PIM layer, which provides an asynchronous API to access all kind of PIM data"
 arch=(x86_64)
@@ -13,8 +16,9 @@ url='https://kontact.kde.org'
 license=(LGPL)
 makedepends=(extra-cmake-modules postgresql qt5-tools boost kitemmodels kaccounts-integration)
 source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-408897.patch::"https://cgit.kde.org/akonadi.git/patch/?id=b94b8115f9586033983b059ae1faa731ef3defb1")
-sha256sums=('e78ed3daee90613c2f58f5b33b5acbce6e78b2790f746b4ad02b5d4eace0eff8'
+kdebug-408897.patch::"https://cgit.kde.org/akonadi.git/patch/?id=b94b8115f9586033983b059ae1faa731ef3defb1"
+)
+sha256sums=('0bffbcd00e0d4f4f3a2084ce6a42da8f05fdf14cb361141b4b734e35203d764e'
             'SKIP'
             '6666cd2630e88dceda20e9c4e6a8aab8d55c100214c1930e7fcec601889669f0')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>

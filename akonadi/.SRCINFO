@@ -1,6 +1,6 @@
 pkgbase = akonadi
 	pkgdesc = PIM layer, which provides an asynchronous API to access all kind of PIM data
-	pkgver = 20.04.0
+	pkgver = 20.04.1
 	pkgrel = 1.1
 	url = https://kontact.kde.org
 	arch = x86_64
@@ -11,12 +11,12 @@ pkgbase = akonadi
 	makedepends = boost
 	makedepends = kitemmodels
 	makedepends = kaccounts-integration
-	source = https://download.kde.org/stable/release-service/20.04.0/src/akonadi-20.04.0.tar.xz
-	source = https://download.kde.org/stable/release-service/20.04.0/src/akonadi-20.04.0.tar.xz.sig
+	source = https://download.kde.org/stable/release-service/20.04.1/src/akonadi-20.04.1.tar.xz
+	source = https://download.kde.org/stable/release-service/20.04.1/src/akonadi-20.04.1.tar.xz.sig
 	source = kdebug-408897.patch::https://cgit.kde.org/akonadi.git/patch/?id=b94b8115f9586033983b059ae1faa731ef3defb1
 	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
 	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
-	sha256sums = e78ed3daee90613c2f58f5b33b5acbce6e78b2790f746b4ad02b5d4eace0eff8
+	sha256sums = 0bffbcd00e0d4f4f3a2084ce6a42da8f05fdf14cb361141b4b734e35203d764e
 	sha256sums = SKIP
 	sha256sums = 6666cd2630e88dceda20e9c4e6a8aab8d55c100214c1930e7fcec601889669f0
 
