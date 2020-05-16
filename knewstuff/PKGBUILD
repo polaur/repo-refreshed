@@ -19,13 +19,13 @@ groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-419959.patch::"https://cgit.kde.org/knewstuff.git/patch/?id=12642a1c0174bb4f0cd3163fee9f8e66f5959c32"
 kdebug-416762.patch::"https://cgit.kde.org/knewstuff.git/patch/?id=25d391c6f36b16a9c4f685de1e6e8d1a5d9d71b4"
+kdebug-421270.patch::"https://cgit.kde.org/knewstuff.git/patch/?id=5ce4d1a29b9696d59450a960da2d9df0136673a5"
 )
 sha256sums=('d8a5e07b3ec3d472de4ca493ea5cecd79559cba2573e6228e2a740ae2c91fdc2'
             'SKIP'
             'a60b414fce2494f3da6bf34f9f5a051386ce84dba582ae3799a970f3228944b6'
             'ca70d72003bf003d8cca5d1869dbb40478c7c44b18fc0e87994d46e64ec0f7d3'
-            '7908b577beda735d124704d5506df4e12719cc5688bd686c7202305f77b560b4'
-            '63386171cd3942cfae448168fc2e8937de9f41b72228d81f588bc497953b7fec')
+            'c9b74ccbbb14b1a58e08953de271a3dc0ba30a1c63a7475d161539f5ef78b6cb')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -36,6 +36,8 @@ prepare() {
   patch -p1 -i ../kdebug-419959.patch
   msg "Applying kdebug 416762 patch; fix in 5.71"
   patch -p1 -i ../kdebug-416762.patch
+  msg "Applying kdebug 421270 patch; fix in 5.71"
+  patch -p1 -i ../kdebug-421270.patch
 }
 
 build() {
