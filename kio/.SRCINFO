@@ -1,7 +1,7 @@
 pkgbase = kio
 	pkgdesc = Resource and network access abstraction
 	pkgver = 5.70.0
-	pkgrel = 3.1
+	pkgrel = 3.2
 	url = https://community.kde.org/Frameworks
 	arch = x86_64
 	groups = kf5
@@ -24,10 +24,14 @@ pkgbase = kio
 	source = https://download.kde.org/stable/frameworks/5.70/kio-5.70.0.tar.xz
 	source = https://download.kde.org/stable/frameworks/5.70/kio-5.70.0.tar.xz.sig
 	source = kdebug-421213.patch::https://cgit.kde.org/kio.git/patch/?id=8769b6360d87c1b688eac4d0ce97594351bad13c
+	source = kdebug-421374.patch::https://cgit.kde.org/kio.git/patch/?id=6452a34cf01d03d3167b38bc28a2fe8e13569021
+	source = kdebug-418443.patch::https://cgit.kde.org/kio.git/patch/?id=1cac602d9966f82a2e85440d74d9cc3ad014a1aa
 	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
 	sha256sums = 0a99acc697f07eb3c27176c26f8904cb409628bfca46e2a1b0633cdcf84e4ce8
 	sha256sums = SKIP
 	sha256sums = 2f29d954618db1b58b8c6407d5979e553957a397d0958b23ce5908e1b84f5df1
+	sha256sums = a9ad7092aeb8d166c4f179e099a19b61b0e8f8b803aff89c4757216a0c577e61
+	sha256sums = d3de85b5d66e52863a1a442f4d4a4f13445c4d9d667a9bab237168db78422e1a
 
 pkgname = kio
 
