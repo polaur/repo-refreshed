@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=okular
-pkgver=20.04.0
-pkgrel=1.2
+pkgver=20.04.1
+pkgrel=1.1
 pkgdesc='Document Viewer'
 arch=(x86_64)
 url="https://kde.org/applications/graphics/okular/"
@@ -21,11 +21,16 @@ optdepends=('ebook-tools: mobi and epub support'
             'unrar: Comic Book Archive support' 'unarchiver: Comic Book Archive support (alternative)')
 source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-419096.patch::"https://cgit.kde.org/okular.git/patch/?id=d735d50cdea61cefc2413637ca164d0b33221eaa"
-kdebug-420525.patch::"https://cgit.kde.org/okular.git/patch/?id=8fdfeeb6c7fe178f69de07f6fd9073e3e27604f2")
-sha256sums=('1b6521b4eaa0a0eb41a39c3f84252d9833f6d26fa410afaef815ec661737dfe7'
+kdebug-421163.patch::"https://cgit.kde.org/okular.git/patch/?id=b1c02b7e79c8be1716ddba73d92d5792032821c6"
+kdebug-421468.patch::"https://cgit.kde.org/okular.git/patch/?id=7eb37c99c9cd27bfd918dffe2dca7b9ec22ab5fb"
+# kdebug-415199.patch::"https://cgit.kde.org/okular.git/patch/?id=4b1d85f81bf0df1fdfc86e74ad71e9cf8201092f"
+#kdebug-421004.patch::"https://cgit.kde.org/okular.git/patch/?id=390a88411acc9893425789cee9963709255d25c5"
+)
+sha256sums=('10e29f50f7616b4784ce673ef7fd6c04d622b02c175f96cd127a99cc5cffa9bc'
             'SKIP'
             '55681350e2a7acfeb1121f2a2829b0680c74f3237e1a1faebfccfc5ce0650328'
-            '80e3883294fb0c74e1d4dd7de8f9e0a8f4b6d5a9b814c21e67c78fb9d1ab2102')
+            '503d3f7fa0a067b426f22d2053724f29f69d75c61c1d34ac5b925e14689fd859'
+            '56efefb738e15fe13691578bbcc6b6fbc6a11ac7e3f9be3d6264a22c45385dfd')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 options=(!zipman)
@@ -34,8 +39,16 @@ prepare() {
   mkdir -p build
   
   cd $pkgname-$pkgver
+  msg "Add kdebug 419096 patch"
   patch -p1 -i ../kdebug-419096.patch
-  patch -p1 -i ../kdebug-420525.patch
+  msg "Add kdebug 421163 patch"
+  patch -p1 -i ../kdebug-421163.patch
+  msg "Add kdebug 421468 patch"
+  patch -p1 -i ../kdebug-421468.patch
+ # msg "Add kdebug 415199 patch"
+ # patch -p1 -i ../kdebug-415199.patch
+#  msg "Add kdebug 421004 patch"
+#  patch -p1 -i ../kdebug-415199.patch
 }
 
 build() {
