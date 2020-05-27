@@ -8,7 +8,7 @@
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
 pkgver=5.18.5
-pkgrel=1.2
+pkgrel=2.1
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 
@@ -26,7 +26,7 @@ source=("https://download.kde.org/stable/plasma/${pkgver}/$pkgname-$pkgver.tar.x
 #        kdebug-157468.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=1ee6660ceb62d4584a5371d0cce107b7008e75df"
         kdebug-418269.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=1d557e8a78a737b6c63bf2400e863738f1f063ff"
         kdebug-418165.patch::"https://cgit.kde.org/plasma-desktop.git/patch/?id=2c46f28170c785f04fa396803037a608c8077025"
-        )
+        plasma-desktop-animation-duration.patch)
 depends=(polkit-kde-agent libxkbfile kmenuedit systemsettings ksysguard baloo)
 makedepends=(extra-cmake-modules kdoctools xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
              libibus scim kdesignerplugin)
@@ -42,7 +42,8 @@ sha256sums=('aeb106018fd90da79c8a3c444d880282846a842029b1223e7830db2d4b42df9f'
             '814602b30a7160fe550e1deec64f270f0c7d56e0ebb90e260ebfb0795d592b5a'
             '489054d747b8f577d53bac3d0d2f5acb943a680b112a3e6de218104272bf6563'
             'ab10818d57fe6eed5a6c629b4e519a48a02085772b0a8fa87038b940ce2bcc4f'
-            '4a56a39be443cb316b4b576f039be388928745766f8fe81ec39165b0b71b4650')
+            '4a56a39be443cb316b4b576f039be388928745766f8fe81ec39165b0b71b4650'
+            'ebb9c75c8b913a965b899b82ec6c809b1fd24036730b961cd3dcd40237ec784c')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -74,6 +75,7 @@ prepare() {
   patch -p1 -i ../kdebug-418269.patch
   msg "Applying kdebug 418165 patch"
   patch -p1 -i ../kdebug-418165.patch
+  patch -p1 -i ../plasma-desktop-animation-duration.patch # Fix slow animations with Frameworks 5.70
 
 }
 
