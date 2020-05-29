@@ -1,0 +1,43 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+
+pkgname=akregator
+pkgver=20.04.1
+pkgrel=1.1
+pkgdesc="A Feed Reader by KDE"
+arch=(x86_64)
+url="https://kontact.kde.org"
+license=(GPL2)
+depends=(kontactinterface messagelib knotifyconfig ktexteditor syndication kuserfeedback)
+makedepends=(extra-cmake-modules boost kdoctools)
+optdepends=('kdepim-addons: additional plugins')
+groups=(kde-applications kdepim)
+source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-422193.patch::"https://invent.kde.org/pim/akregator/commit/e7a75745baae5a9fab8b3e032ba9507d16f52714.patch")
+sha256sums=('574c507cbe2e26c4b4d2a840c0f686e3dc807eed448dca07f331e1a639f4219c'
+            'SKIP'
+            '8e345f05cf08fc5bdb487d361c3eadf8b1e0e04ee53f78cb28c17650d6e9ebb2')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  msg "Add kdebug 422193 patch; fix in 5.14.2"
+  patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-422193.patch
+}
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
