@@ -1,0 +1,26 @@
+From 6cb0e3c3b155bea462204d6981068d22e840fdf7 Mon Sep 17 00:00:00 2001
+From: Alexander Lohnau <alexander.lohnau@gmx.de>
+Date: Sat, 13 Jun 2020 15:50:21 +0200
+Subject: [PATCH] Add searchprovider for ArchWiki
+
+FEATURE: 398944
+---
+ src/urifilters/ikws/searchproviders/archwiki.desktop | 6 ++++++
+ 1 file changed, 6 insertions(+)
+ create mode 100644 src/urifilters/ikws/searchproviders/archwiki.desktop
+
+diff --git a/src/urifilters/ikws/searchproviders/archwiki.desktop b/src/urifilters/ikws/searchproviders/archwiki.desktop
+new file mode 100644
+index 00000000..907ba103
+--- /dev/null
++++ b/src/urifilters/ikws/searchproviders/archwiki.desktop
+@@ -0,0 +1,6 @@
++[Desktop Entry]
++Keys=archwiki,arch
++Name=ArchWiki
++Query=https://wiki.archlinux.org/index.php?search=\\{@}
++X-KDE-ServiceTypes=SearchProvider
++Type=Service
+-- 
+2.27.0
+

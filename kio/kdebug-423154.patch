@@ -1,0 +1,27 @@
+From 590dd7132705821b05e09ee50135937f28bf92ab Mon Sep 17 00:00:00 2001
+From: Alexander Lohnau <alexander.lohnau@gmx.de>
+Date: Fri, 19 Jun 2020 12:39:29 +0200
+Subject: [PATCH] Fix setting of default shortcut in webshortcuts KCM
+
+BUG: 423154
+---
+ src/urifilters/ikws/ikwsopts.cpp | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/urifilters/ikws/ikwsopts.cpp b/src/urifilters/ikws/ikwsopts.cpp
+index 28edf2fc..c43f9e33 100644
+--- a/src/urifilters/ikws/ikwsopts.cpp
++++ b/src/urifilters/ikws/ikwsopts.cpp
+@@ -316,7 +316,8 @@ void FilterOptions::load()
+ 
+     for (SearchProvider *provider : providers) {
+         if (defaultSearchEngine == provider->desktopEntryName()) {
+-            defaultProviderIndex = providers.size();
++            defaultProviderIndex = providers.indexOf(provider);
++            break;
+         }
+     }
+ 
+-- 
+2.27.0
+

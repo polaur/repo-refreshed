@@ -7,7 +7,7 @@
 
 pkgname=kio
 pkgver=5.71.0
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -18,15 +18,23 @@ optdepends=('kio-extras: extra protocols support (sftp, fish and more)' 'kdoctoo
             'knetattach: to add new kio-remote entries' 'kio-fuse: to mount remote filesystems via FUSE')
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-398944.patch::"https://invent.kde.org/frameworks/kio/commit/6cb0e3c3b155bea462204d6981068d22e840fdf7.patch")
+kdebug-398944.patch::"https://invent.kde.org/frameworks/kio/commit/6cb0e3c3b155bea462204d6981068d22e840fdf7.patch"
+kdebug-423153.patch::"https://invent.kde.org/frameworks/kio/commit/46b825fcddb47a604752e9befe15fdff7e4dda47.patch"
+kdebug-423154.patch::"https://invent.kde.org/frameworks/kio/commit/590dd7132705821b05e09ee50135937f28bf92ab.patch")
 sha256sums=('b972c8dede50be3e89babb5a536054759db2a87003e6df770c598c7c1c94b8d6'
             'SKIP'
-            '6295ab660f6beabf4bd3bb2284ae9858570800dcbaaef4b288daad5536ea3db9')
+            '6295ab660f6beabf4bd3bb2284ae9858570800dcbaaef4b288daad5536ea3db9'
+            '499becff6b0232a042b117dec2dbf7191246f96a9862b34af59a088afb06c682'
+            '13f8560505c44ea7b7c8692aa3b3676d91b152ab7cddc02ad7e6b6f6a6a4217f')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
     msg "Add Arch Wiki to krunner sercher aka kdebug 398944 patch"
     patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-398944.patch
+    msg "Add kdebug 432153 patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-423153.patch
+    msg "Add kdebug 423154 patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-423154.patch
     }
     
 build() {

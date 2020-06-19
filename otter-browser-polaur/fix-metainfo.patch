@@ -1,0 +1,22 @@
+From 8dff5167c339f855b1bd481ababbf678cf5b6ea8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Micha=C5=82=20Dutkiewicz?= <emdeck@gmail.com>
+Date: Fri, 5 Jun 2020 22:26:35 +0200
+Subject: [PATCH] Fix name of the .desktop file, fixes #1649
+
+---
+ packaging/otter-browser.appdata.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/packaging/otter-browser.appdata.xml b/packaging/otter-browser.appdata.xml
+index b867b946f..047ab2775 100644
+--- a/packaging/otter-browser.appdata.xml
++++ b/packaging/otter-browser.appdata.xml
+@@ -2,7 +2,7 @@
+ <!-- Copyright 2014 Martin Gansser <martinkg@fedoraproject.org> -->
+ <component>
+   <id>org.otter_browser.Otter_Browser</id>
+-  <launchable type="desktop-id">org.otter_browser.Otter_Browser.desktop</launchable>
++  <launchable type="desktop-id">otter-browser.desktop</launchable>
+   <metadata_license>CC0-1.0</metadata_license>
+   <project_license>GPL-3.0-or-later</project_license>
+   <name>Otter Browser</name>

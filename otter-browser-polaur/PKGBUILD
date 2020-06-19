@@ -3,7 +3,7 @@
 
 pkgname=otter-browser-polaur
 pkgver=1.0.01
-pkgrel=2
+pkgrel=3
 pkgdesc="Web browser controlled by the user, not vice-versa; version with qt5-webengine enabled, also."
 arch=('x86_64')
 url="https://${pkgname%-*}.org"
@@ -13,11 +13,16 @@ makedepends=('cmake' 'qt5-tools' 'qt5-webengine')
 optdepends=('hunspell: for spell checking'
             'qt5-webengine: for experimental backend using Qt5-Webengine')
 conflicts=(otter-browser otter-browser-git otter-browser-weekly)
-source=(https://github.com/OtterBrowser/${pkgname%-*}/archive/v$pkgver.tar.gz)
-md5sums=('99601d0b230956dc542a04f0df912626')
+source=($pkgname-$pkgver.tar.gz::https://github.com/OtterBrowser/${pkgname%-*}/archive/v$pkgver.tar.gz
+fix-metainfo.patch::"https://github.com/OtterBrowser/otter-browser/commit/8dff5167c339f855b1bd481ababbf678cf5b6ea8.patch")
+md5sums=('99601d0b230956dc542a04f0df912626'
+         '4747113620919045012b7b42b6eb58cb')
 
 prepare() {
     mkdir -p build
+    
+    msg "Fix metainfo file: https://github.com/OtterBrowser/otter-browser/issues/1649"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/fix-metainfo.patch
     }
     
 build() {

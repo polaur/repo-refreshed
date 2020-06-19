@@ -1,0 +1,26 @@
+From 46b825fcddb47a604752e9befe15fdff7e4dda47 Mon Sep 17 00:00:00 2001
+From: Alexander Lohnau <alexander.lohnau@gmx.de>
+Date: Thu, 18 Jun 2020 23:05:23 +0200
+Subject: [PATCH] Ensure readability of webshortcuts KCM by setting minimum
+ width
+
+BUG: 423153
+---
+ src/kcms/webshortcuts/main.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/kcms/webshortcuts/main.cpp b/src/kcms/webshortcuts/main.cpp
+index 2903556f..acacab21 100644
+--- a/src/kcms/webshortcuts/main.cpp
++++ b/src/kcms/webshortcuts/main.cpp
+@@ -95,6 +95,7 @@ KURIFilterModule::KURIFilterModule(QWidget *parent, const QVariantList &args)
+     if (m_widget) {
+         layout->addWidget(m_widget);
+     }
++    setMinimumWidth(600);
+ }
+ 
+ void KURIFilterModule::load()
+-- 
+2.27.0
+
