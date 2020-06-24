@@ -8,7 +8,7 @@ pkgname=weechat-light
 replaces=('weechat-python3-light')
 _pkgname=weechat
 pkgver=2.8
-pkgrel=2
+pkgrel=3
 pkgdesc="Fast, light and extensible IRC client (curses UI) (polaur)"
 conflicts=('weechat')
 arch=('x86_64')
@@ -23,11 +23,12 @@ optdepends=('lua: support for lua scripts'
             'tcl: support for tcl scripts')
 source=("${pkgname}-${pkgver}.tar.xz::https://www.weechat.org/files/src/${_pkgname}-${pkgver}.tar.xz"
         "${pkgname}-${pkgver}.tar.xz.asc::https://www.weechat.org/files/src/${_pkgname}-${pkgver}.tar.xz.asc"
-	"weechat-fix-sharedir.patch::https://github.com/weechat/weechat/pull/1461.patch")
-
+	"weechat-cmake-datarootdir.patch::https://github.com/weechat/weechat/commit/683464626d.patch"
+	"weechat-fix-bugged-sharedir.patch::https://github.com/weechat/weechat/commit/973a4b2e77.patch")
 sha512sums=('3bebb42118fca6b601f1de8f4d52378619a10e5c490f5b46f86d27a9680f00a56d48a1ade729e78d965cae589e6c80647c22414393000c7d3cfcc94a1e41c4df'
             'SKIP'
-            'ad845cc5c0796b2dd32b7c5a0e7527da50ad0297111d9ddc2a711ea40b89f4ebe84c7f0e506e99a4c67e395fa0d14230de0d3f3b087e5c69739a0f564fa7a9ff')
+            '973990a496370c35a4aaf607e660dd28b6bfcd561d7f354f551ad59a1ec84ccb77ad6cc09a2389fa65d5b4059dc1a544b08dc26c02f3d3d4f584c62759109c21'
+            '75ad367745a08805f11835f5b451ead8220b7940cf2f792ad77bda017ef25d987d098b111ffd423c38b5f891b13fb45ff688fdda646e77308600e466d4e858da')
 validpgpkeys=('A9AB5AB778FA5C3522FD0378F82F4B16DEC408F8') # WeeChat (signing key) <webmaster@weechat.org>
 
 # cmake does not correctly handle CPPFLAGS, so kludge it in anyway:
@@ -39,7 +40,9 @@ prepare() {
 
 	# https://github.com/weechat/weechat/pull/1461
 	# make /usr/share/weechat work, e.g. community/weech      at-matrix
-	patch -p1 -i ../weechat-fix-sharedir.patch
+	patch -p1 -i ../weechat-cmake-datarootdir.patch
+	patch -p1 -i ../weechat-fix-bugged-sharedir.patch
+
 }
 
 build() {
