@@ -8,7 +8,7 @@ pkgname=weechat-light
 replaces=('weechat-python3-light')
 _pkgname=weechat
 pkgver=2.8
-pkgrel=3
+pkgrel=4
 pkgdesc="Fast, light and extensible IRC client (curses UI) (polaur)"
 conflicts=('weechat')
 arch=('x86_64')
@@ -58,7 +58,8 @@ build() {
 		-DENABLE_ENCHANT=OFF \
 		-DENABLE_PHP=OFF \
 		-DENABLE_JAVASCRIPT=OFF \
-		-DENABLE_SPELL=OFF
+		-DENABLE_SPELL=OFF \
+		-DENABLE_PERL=ON
   make
 }
 
