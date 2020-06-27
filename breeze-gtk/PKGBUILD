@@ -1,0 +1,38 @@
+# Maintainer: pavbaranov <pavbaranov @ gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original work by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=breeze-gtk
+pkgver=5.19.2
+pkgrel=1.1
+pkgdesc="Breeze widget theme for GTK 2 and 3"
+arch=(any)
+url='https://quickgit.kde.org/?p=breeze-gtk.git'
+license=(LGPL)
+depends=()
+makedepends=(extra-cmake-modules sassc python-cairo breeze)
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+reduce-gtk3-popover-shadow.patch::"https://invent.kde.org/plasma/breeze-gtk/-/commit/84530aee0955d5bfb561ae6267c847cd544d6084.patch")
+sha256sums=('317c2d0eacc4f194d8f84774e2bbb15dcf6f2ecbb447b8dafcec3e8ebd3ff186'
+            'SKIP'
+            'b763eaafb955a9eb6ff845482911b01eb9c65224bcd331b6b6ac4b3fcba5bbe2')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+    msg "Add reduce-gtk3-popover-shadow patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/reduce-gtk3-popover-shadow.patch
+    }
+
+build(){
+  cmake -B build -S $pkgname-$pkgver
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
