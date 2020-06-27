@@ -1,0 +1,25 @@
+pkgbase = kxmlgui
+	pkgdesc = User configurable main windows
+	pkgver = 5.71.0
+	pkgrel = 1.1
+	url = https://community.kde.org/Frameworks
+	arch = x86_64
+	groups = kf5
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = doxygen
+	makedepends = qt5-tools
+	makedepends = qt5-doc
+	depends = kglobalaccel
+	depends = kiconthemes
+	depends = attica
+	source = https://download.kde.org/stable/frameworks/5.71/kxmlgui-5.71.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.71/kxmlgui-5.71.0.tar.xz.sig
+	source = kdebug-177856.patch::https://invent.kde.org/frameworks/kxmlgui/commit/a957f121882469596330f2afb25e95c9943b1c34.patch
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = 2e4b2563daeedf35a54d38002c05d7c39017a36c0b8a19c236ea87324eebf7cc
+	sha256sums = SKIP
+	sha256sums = 3ab56f3fb0bbe9327e2d472d37c9634f177af1280b5d8ead1c89d8838c634f10
+
+pkgname = kxmlgui
+
