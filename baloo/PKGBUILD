@@ -1,0 +1,40 @@
+# Maintainer: pavbaranov <pavbaranov @ gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original work by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=baloo
+pkgver=5.71.0
+pkgrel=1.1
+pkgdesc="A framework for searching and managing metadata"
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(kfilemetadata kidletime kio lmdb)
+makedepends=(extra-cmake-modules kdoctools doxygen qt5-tools qt5-doc qt5-declarative)
+optdepends=('qt5-declarative: QML bindings')
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-422085.patch::"https://invent.kde.org/frameworks/baloo/commit/24b1392e0094a954bb15c99d71cb0ccf527e88ea.patch")
+sha256sums=('23378213d00ecf1f26eeb417987984f5a63bbd643359403dfd20638cbc1ec84b'
+            'SKIP'
+            'e1249062274d8006af5bb600a673b2b7ac01c705788e973e0d6bd11af69869a8')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+    msg "Add kdebug 422085 patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-422085.patch
+    }
+    
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
