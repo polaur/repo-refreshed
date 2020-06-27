@@ -1,0 +1,46 @@
+# Maintainer: pavbaranov <pavbaranov @ gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original work by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kdeplasma-addons
+pkgver=5.19.2
+pkgrel=1.1
+pkgdesc='All kind of addons to improve your Plasma experience'
+arch=(x86_64)
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=(LGPL)
+depends=(plasma-workspace)
+makedepends=(extra-cmake-modules kross qt5-webengine)
+optdepends=('kross: comic applet'
+            'purpose: Quickshare applet'
+            'quota-tools: disk quota applet'
+            'qt5-webengine: dictionary and webbrowser applets')
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-389962.patch::"https://invent.kde.org/plasma/kdeplasma-addons/commit/d5f9e6af9f9cda210b15d5c10b370006c86bd7ad.patch")
+sha256sums=('eb45eed2031ed75f79b022d55ced1f81b51e1023a2d145388b428a1655472c0d'
+            'SKIP'
+            '49d24bcfdcd2c6a4175f92bc4c64ff5e02f3609a9a0e642b268b276b8f1e1a83')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+    msg "Add kdebug 389962 patch; fix in 5.20"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-389962.patch
+    }
+    
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
