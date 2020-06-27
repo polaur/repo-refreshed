@@ -1,0 +1,38 @@
+# Maintainer: pavbaranov <pavbaranov @ gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original work by:
+# Maintainer:Antonio Rojas <arojas@archlinux.org>
+
+pkgname=plasma-pa
+pkgver=5.19.2
+pkgrel=1.1
+pkgdesc='Plasma applet for audio volume management using PulseAudio'
+arch=(x86_64)
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=(LGPL)
+depends=(plasma-workspace libcanberra-pulse pulseaudio perl)
+makedepends=(extra-cmake-modules kdoctools)
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-422612.patch::"https://invent.kde.org/plasma/plasma-pa/commit/6611ff9e89ecedbedb38c630ece042d57832f72c.patch")
+sha256sums=('64a278f72553c0da4862b5aba73d5aad39709a9a5029ebb0479363e60d5f7afb'
+            'SKIP'
+            'acc95da4b4acce1c090e32cca2f13f65850b05a7c3d39fced7fe9ac54e42f171')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+prepare() {
+    msg "Add kdebug 422612 patch; fix in 5.20"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-422612.patch
+    }
+    
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
