@@ -1,0 +1,53 @@
+# Maintainer: pavbaranov <pavbaranov @ gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original work by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kwin
+pkgver=5.19.2
+pkgrel=1.1
+pkgdesc='An easy to use, but flexible, composited Window Manager'
+arch=(x86_64)
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=(LGPL)
+depends=(kscreenlocker xcb-util-cursor plasma-framework kcmutils kwayland-server breeze qt5-sensors qt5-script)
+makedepends=(extra-cmake-modules qt5-tools kdoctools)
+optdepends=('qt5-virtualkeyboard: virtual keyboard support for kwin-wayland')
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-423138.patch::"https://invent.kde.org/plasma/kwin/commit/3bfc750a79f967a93612385def636dced1ed1337.patch"
+kdebug-423214.patch::"https://invent.kde.org/plasma/kwin/commit/8b9472e0bfcff8cb7467ee3055282a133a808349.patch"
+kdebug-394772.patch::"https://invent.kde.org/plasma/kwin/-/commit/ec5a0249e26acdf12677df535df3d3faa6a18b49.patch")
+install=$pkgname.install
+sha256sums=('998a4c9651c412a7e8b1e24d88e7c59d158497955f6da1d69624f53cb59688b9'
+            'SKIP'
+            '5b57ef4758ba7ffdb06ca7abbb5f4460763c03e89711495e25127de187943e66'
+            '724c66820a18b502e54df7944f9e54168315baad9303ee30507d92c04a80eec5'
+            'b9d69e7a1c514ce68e714abf1f79c740d9f96ca445bacb03df79f698080bb560')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+    msg "All patches fixes in 5.19.3"
+    msg "Add kdebug 423138 patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-423138.patch
+    msg "Add kdebug 423214 patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-423214.patch
+    msg "Add kdebug 394772 patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-394772.patch
+    }
+    
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
