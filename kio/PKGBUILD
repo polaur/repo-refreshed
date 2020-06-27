@@ -7,7 +7,7 @@
 
 pkgname=kio
 pkgver=5.71.0
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -20,21 +20,39 @@ groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-398944.patch::"https://invent.kde.org/frameworks/kio/commit/6cb0e3c3b155bea462204d6981068d22e840fdf7.patch"
 kdebug-423153.patch::"https://invent.kde.org/frameworks/kio/commit/46b825fcddb47a604752e9befe15fdff7e4dda47.patch"
-kdebug-423154.patch::"https://invent.kde.org/frameworks/kio/commit/590dd7132705821b05e09ee50135937f28bf92ab.patch")
+kdebug-423154.patch::"https://invent.kde.org/frameworks/kio/commit/590dd7132705821b05e09ee50135937f28bf92ab.patch"
+kdebug-411537.patch::"https://invent.kde.org/frameworks/kio/commit/e8780b64b62bb3da5ed86911eeeb36155c4cbe52.patch"
+kdebug-326880.patch::"https://invent.kde.org/frameworks/kio/commit/c2faaae697f11ee600989b67b4406981838ae628.patch"
+kdebug-422748.patch::"https://invent.kde.org/frameworks/kio/commit/5f4a501f992a534b569324f95941459c27c61588.patch"
+kdebug-419069.patch::"https://invent.kde.org/frameworks/kio/commit/a34cd22e3206588938323865bc77cfdb52c407aa.patch"
+# kdebug-179678.patch::"" # just to remember for prepare in the future release
+)
 sha256sums=('b972c8dede50be3e89babb5a536054759db2a87003e6df770c598c7c1c94b8d6'
             'SKIP'
             '6295ab660f6beabf4bd3bb2284ae9858570800dcbaaef4b288daad5536ea3db9'
             '499becff6b0232a042b117dec2dbf7191246f96a9862b34af59a088afb06c682'
-            '13f8560505c44ea7b7c8692aa3b3676d91b152ab7cddc02ad7e6b6f6a6a4217f')
+            '13f8560505c44ea7b7c8692aa3b3676d91b152ab7cddc02ad7e6b6f6a6a4217f'
+            'c4b3ac24c35b347d8b64ef15501d13445881e67cb60e75945490047447fd22a5'
+            '268fb6723b6ad08279f455ad9e9e802a17687a85afb32d27e93637f16f18cc89'
+            'd93eb62faa3e9a38646772cb488fa72c983439da874bd90ddc571697bf097771'
+            '948e0b5a17a0450eca030699d188f7933cca13bdb2fb19717ca8244164b590d8')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
-    msg "Add Arch Wiki to krunner sercher aka kdebug 398944 patch"
+    msg "Add kdebug 398944 patch"
     patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-398944.patch
     msg "Add kdebug 432153 patch"
     patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-423153.patch
     msg "Add kdebug 423154 patch"
     patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-423154.patch
+    msg "Add kdebug 411537 patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-411537.patch
+    msg "Add kdebug 326880 patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-326880.patch
+    msg "Add kdebug 422748 patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-422748.patch
+    msg "Add kdebug 419069 patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-419069.patch
     }
     
 build() {
