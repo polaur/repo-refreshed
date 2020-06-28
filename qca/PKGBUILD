@@ -1,0 +1,69 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: Pierre Schmitz <pierre@archlinux.de>
+
+pkgname=qca
+pkgver=2.3.0
+pkgrel=1.1
+pkgdesc="Qt Cryptographic Architecture"
+arch=(x86_64)
+url="https://userbase.kde.org/QCA"
+license=(LGPL)
+depends=(qt5-base nss ca-certificates)
+optdepends=('pkcs11-helper: PKCS-11 plugin' 'botan: botan plugin')
+makedepends=(cmake doxygen pkcs11-helper botan)
+conflicts=(qca-qt5)
+provides=(qca-qt5)
+replaces=(qca-qt5)
+source=("https://download.kde.org/stable/$pkgname/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-423355.patch::"https://invent.kde.org/libraries/qca/-/commit/3242caee6aa7bb07d2f0e3d9ed23e4fcacc82140.patch"
+fix-memory-leak-1.patch::"https://invent.kde.org/libraries/qca/-/commit/c68a5e449f393e2bb64c9cb0e5deb15be4da92be.patch"
+fix-memory-leak-2.patch::"https://invent.kde.org/libraries/qca/-/commit/a014df24c5014ee3484306814264152a3952c26b.patch"
+fix-memory-leak-3.patch::"https://invent.kde.org/libraries/qca/-/commit/cfc80a9d6e1ccbc58872c66b2c34f8c19a90de32.patch"
+fix-memory-leak-4.patch::"https://invent.kde.org/libraries/qca/-/commit/e23bf00919cd675dcf407a1022ac2597bb294b45.patch"
+fix-memory-leak-5.patch::"https://invent.kde.org/libraries/qca/-/commit/5d027c8012bc2a3da8259ed5c9dbe26b0a745ce3.patch"
+#fix-memory-leak-6.patch::"https://invent.kde.org/libraries/qca/-/commit/6ee845ba60225228153035072da42b23f391a196.patch"
+)
+sha256sums=('1d68ef41a1b61dc9786beb923a68902a6276a77cced5e5ea7ff985ef113932d7'
+            'SKIP'
+            '44b4dbf4aa9e00d27afad31cef22362bfb10646c7b323f37d7a1b7d37ab0bdee'
+            '65d0bcd80e398a46f06e0f55d619841d0a29d0e0082122cd9b15bb85534aead3'
+            '58a75126f79df17e41928345f16321de00029677ecfdcfde1ee89498158d959e'
+            '97f410b45093df388efb4dcd0f03ced04252d89bd0949aa664097ef8ad476d66'
+            '4778c86d27cc8136c96ac08f1c25e558202723b76f7b06996b335865340819ed'
+            '1006f78e402514085df7c2828da8062f7e1620ec77f006eaae329176ed590ae3'
+            'd8d7c88faa86d3bdbac2a2d83b4843de6004d3650da07ec7e146ef20f48966f9')
+validpgpkeys=(CB9387521E1EE0127DA804843FDBB55084CC5D84) # Harald Sitter <sitter@kde.org>
+
+prepare() {
+  mkdir -p build
+  
+  cd $pkgname-$pkgver
+  msg "Add kdebug-423355.patch"
+  patch -p1 -i ../kdebug-423355.patch
+  msg "Add fix memory leaks patches"
+  patch -p1 -i ../fix-memory-leak-1.patch
+  patch -p1 -i ../fix-memory-leak-2.patch
+  patch -p1 -i ../fix-memory-leak-3.patch
+  patch -p1 -i ../fix-memory-leak-4.patch
+  patch -p1 -i ../fix-memory-leak-5.patch
+#  patch -p1 -i ../fix-memory-leak-6.patch
+  }
+
+build() {
+  cd build
+  cmake ../$pkgname-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DBUILD_TESTS=OFF \
+    -DQCA_INSTALL_IN_QT_PREFIX=ON \
+    -DQCA_MAN_INSTALL_DIR=/usr/share/man
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+}
