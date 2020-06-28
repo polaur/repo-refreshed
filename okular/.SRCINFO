@@ -1,7 +1,7 @@
 pkgbase = okular
 	pkgdesc = Document Viewer
-	pkgver = 20.04.1
-	pkgrel = 1.2
+	pkgver = 20.04.2
+	pkgrel = 1.1
 	url = https://kde.org/applications/graphics/okular/
 	arch = x86_64
 	groups = kde-applications
@@ -37,20 +37,20 @@ pkgbase = okular
 	optdepends = unrar: Comic Book Archive support
 	optdepends = unarchiver: Comic Book Archive support (alternative)
 	options = !zipman
-	source = https://download.kde.org/stable/release-service/20.04.1/src/okular-20.04.1.tar.xz
-	source = https://download.kde.org/stable/release-service/20.04.1/src/okular-20.04.1.tar.xz.sig
+	source = https://download.kde.org/stable/release-service/20.04.2/src/okular-20.04.2.tar.xz
+	source = https://download.kde.org/stable/release-service/20.04.2/src/okular-20.04.2.tar.xz.sig
 	source = kdebug-419096.patch::https://cgit.kde.org/okular.git/patch/?id=d735d50cdea61cefc2413637ca164d0b33221eaa
 	source = kdebug-421163.patch::https://cgit.kde.org/okular.git/patch/?id=b1c02b7e79c8be1716ddba73d92d5792032821c6
 	source = kdebug-421468.patch::https://cgit.kde.org/okular.git/patch/?id=7eb37c99c9cd27bfd918dffe2dca7b9ec22ab5fb
-	source = kdebug-421469.patch::https://cgit.kde.org/okular.git/patch/?id=793f1692db244621a0a603a2a7c404cc1757b9ab
+	source = kdebug-421508.patch::https://invent.kde.org/graphics/okular/commit/d78cbb79c98e01fc524ec91fb099ec8ff98cc1fa.patch
 	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
 	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
-	sha256sums = 10e29f50f7616b4784ce673ef7fd6c04d622b02c175f96cd127a99cc5cffa9bc
+	sha256sums = b783aaac1661d1d8ec5c5e26fdec7035a6b0241a21d18caac1587ecfde44c49b
 	sha256sums = SKIP
 	sha256sums = 55681350e2a7acfeb1121f2a2829b0680c74f3237e1a1faebfccfc5ce0650328
 	sha256sums = 503d3f7fa0a067b426f22d2053724f29f69d75c61c1d34ac5b925e14689fd859
 	sha256sums = 56efefb738e15fe13691578bbcc6b6fbc6a11ac7e3f9be3d6264a22c45385dfd
-	sha256sums = deca6c52295b543e9e2bac918c23c0dc486a676dcd22998530c7e6cc9a3ca124
+	sha256sums = 891d30e8f263910266abc87bd70490297e22139872e98cd6b3fee0e180dfffc3
 
 pkgname = okular
 
