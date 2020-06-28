@@ -1,7 +1,7 @@
 pkgbase = dolphin
 	pkgdesc = KDE File Manager
-	pkgver = 20.04.1
-	pkgrel = 1.2
+	pkgver = 20.04.2
+	pkgrel = 1.1
 	url = https://kde.org/applications/system/dolphin/
 	arch = x86_64
 	groups = kde-applications
@@ -21,8 +21,8 @@ pkgbase = dolphin
 	optdepends = kdegraphics-thumbnailers: PDF and PS thumbnails
 	optdepends = konsole: terminal panel
 	optdepends = purpose: share context menu
-	source = https://download.kde.org/stable/release-service/20.04.1/src/dolphin-20.04.1.tar.xz
-	source = https://download.kde.org/stable/release-service/20.04.1/src/dolphin-20.04.1.tar.xz.sig
+	source = https://download.kde.org/stable/release-service/20.04.2/src/dolphin-20.04.2.tar.xz
+	source = https://download.kde.org/stable/release-service/20.04.2/src/dolphin-20.04.2.tar.xz.sig
 	source = kdebug-362834.patch::https://cgit.kde.org/dolphin.git/patch/?id=5351db95c6460b568052f23399e0ea9b4a02d9b4
 	source = D28370.patch::https://cgit.kde.org/dolphin.git/patch/?id=4440e961a07aaee5b5da7c8967ff05de14808ad4
 	source = kdebug-420512.patch::https://cgit.kde.org/dolphin.git/patch/?id=b0ad83eeeed9f484bc034103d6e3df1893b034dd
@@ -32,9 +32,10 @@ pkgbase = dolphin
 	source = kdebug-190580.patch::https://cgit.kde.org/dolphin.git/patch/?id=e6ea3ab4c41dcc115143a237aafd3a1152849433
 	source = kdebug-405226.patch::https://cgit.kde.org/dolphin.git/patch/?id=1d72710039b547d91b7138d3899e783e26aac849
 	source = kdebug-276167.patch::https://cgit.kde.org/dolphin.git/patch/?id=a291c5999035bb17fe764c1910c3e78ba041f8ac
+	source = kdebug-423326.patch::https://invent.kde.org/system/dolphin/commit/37df39b93bf23b89ca760d4dd793788833d9a3e1.patch
 	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
 	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
-	sha256sums = ba5db89b338d29c5fa492fc7ce08304427d8db51775fe5a4d34b444034d02577
+	sha256sums = 37e4c1510227112365418cacccabc6d535fb0880e182a2341bfe00d585d14fb2
 	sha256sums = SKIP
 	sha256sums = 0b520b799927b95ec489503aaacbb1082d34d1de66cf4ffb994eb8f13d03a163
 	sha256sums = e15296867f47170d7d8c1553e92ceec4e0759f37bc09f82af808423090685409
@@ -45,6 +46,7 @@ pkgbase = dolphin
 	sha256sums = 870e44a448c6123f139adc8339f467a3d77581f6a604bac7813860081694c6de
 	sha256sums = b872c0c143a989bdde0c67cef36c80debf64cf3097c1780291116dc71ac1507c
 	sha256sums = a734b048e9148ffc99cbba40a0c599225cc6661aa43afc1b0827c99ef4a23636
+	sha256sums = 19fbcf99e575d80fcee141ce4858e1e1e1b25df83d6708e084491001c7291fb7
 
 pkgname = dolphin
 
