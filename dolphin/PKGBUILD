@@ -19,29 +19,29 @@ optdepends=('kde-cli-tools: for editing file type options' 'ffmpegthumbs: video 
             'konsole: terminal panel' 'purpose: share context menu')
 groups=(kde-applications kdebase)
 source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-362834.patch::"https://cgit.kde.org/dolphin.git/patch/?id=5351db95c6460b568052f23399e0ea9b4a02d9b4"
-D28370.patch::"https://cgit.kde.org/dolphin.git/patch/?id=4440e961a07aaee5b5da7c8967ff05de14808ad4"
-kdebug-420512.patch::"https://cgit.kde.org/dolphin.git/patch/?id=b0ad83eeeed9f484bc034103d6e3df1893b034dd"
-D26362.patch::"https://cgit.kde.org/dolphin.git/patch/?id=196f4553e68a89d0162685f2df9a32a58e3ff479"
-kdebug-420340.patch::"https://cgit.kde.org/dolphin.git/patch/?id=dcd8c646a566eff1ff2c487fb2e7abe9a53a23cb"
-kdebug-420354.patch::"https://cgit.kde.org/dolphin.git/patch/?id=e076d8668f673e09ddd01b3367e413a494d6d2bb"
-kdebug-190580.patch::"https://cgit.kde.org/dolphin.git/patch/?id=e6ea3ab4c41dcc115143a237aafd3a1152849433"
-kdebug-405226.patch::"https://cgit.kde.org/dolphin.git/patch/?id=1d72710039b547d91b7138d3899e783e26aac849"
-kdebug-276167.patch::"https://cgit.kde.org/dolphin.git/patch/?id=a291c5999035bb17fe764c1910c3e78ba041f8ac"
-kdebug-423326.patch::"https://invent.kde.org/system/dolphin/commit/37df39b93bf23b89ca760d4dd793788833d9a3e1.patch"
+kdebug-362834.patch::"https://invent.kde.org/system/dolphin/-/commit/5351db95c6460b568052f23399e0ea9b4a02d9b4.patch"
+kdebug-28370.patch::"https://invent.kde.org/system/dolphin/-/commit/4440e961a07aaee5b5da7c8967ff05de14808ad4.patch"
+kdebug-420512.patch::"https://invent.kde.org/system/dolphin/-/commit/b0ad83eeeed9f484bc034103d6e3df1893b034dd.patch"
+kdebug-26362.patch::"https://invent.kde.org/system/dolphin/-/commit/196f4553e68a89d0162685f2df9a32a58e3ff479.patch"
+kdebug-420340.patch::"https://invent.kde.org/system/dolphin/-/commit/dcd8c646a566eff1ff2c487fb2e7abe9a53a23cb.patch"
+kdebug-420354.patch::"https://invent.kde.org/system/dolphin/-/commit/e076d8668f673e09ddd01b3367e413a494d6d2bb.patch"
+kdebug-190580.patch::"https://invent.kde.org/system/dolphin/-/commit/e6ea3ab4c41dcc115143a237aafd3a1152849433.patch"
+kdebug-405226.patch::"https://invent.kde.org/system/dolphin/-/commit/1d72710039b547d91b7138d3899e783e26aac849.patch"
+kdebug-276167.patch::"https://invent.kde.org/system/dolphin/-/commit/a291c5999035bb17fe764c1910c3e78ba041f8ac.patch"
+kdebug-423326.patch::"https://invent.kde.org/system/dolphin/-/commit/37df39b93bf23b89ca760d4dd793788833d9a3e1.patch"
 #kdebug-415281.patch::"https://invent.kde.org/system/dolphin/commit/c81927651a6f50af860b21d1be5c04bb4295b7cc.patch"
 )
 sha256sums=('37e4c1510227112365418cacccabc6d535fb0880e182a2341bfe00d585d14fb2'
             'SKIP'
-            '0b520b799927b95ec489503aaacbb1082d34d1de66cf4ffb994eb8f13d03a163'
-            'e15296867f47170d7d8c1553e92ceec4e0759f37bc09f82af808423090685409'
-            '24602f89f1de84c32a8feed65aef012d5c948bcda0dff9687106077821e1a1a8'
-            'dca31d4bd20fc39cb927e285fc00a6469e6cc20628ad7b54e56010e73710088d'
-            '047ea771b3fd2f01d23759a0b79f863c99fdbf56007f98d184522ca545eb6097'
-            '888ed0f1bd2ef12abc178749aaa42e6a5c9196e0ccd923187db42663b34200d0'
-            '870e44a448c6123f139adc8339f467a3d77581f6a604bac7813860081694c6de'
-            'b872c0c143a989bdde0c67cef36c80debf64cf3097c1780291116dc71ac1507c'
-            'a734b048e9148ffc99cbba40a0c599225cc6661aa43afc1b0827c99ef4a23636'
+            'e58d7dc34c58c5359dd684141e7cafd5bb9b32825563bf32fc9385990c205c8c'
+            '047c183dbe11ff502ea60a01c544a360a1a7b4d1c5e4d0b1547cea1af8be6265'
+            '3c97c39f9925366f6e835dfed18936cbc5ec19fc105d9043fb84f4018062e469'
+            '16126890679ec0a2b63af5d37e7a58a827ca556f0af5e9fc47741cf374064c1b'
+            '868d20b54c4975b0ff634fcbb0fb7812b786af469f419c40c7d9b90d4fc505cc'
+            '7ee9a44abcb8ad02dd769669263741af5e2cbe79b5e8a7d815d67f052b7c12fd'
+            'a926bb0d5ab852fe950e400d01dfc579151fa7c064f71f412f2e677848d461b2'
+            '84723027c5829c409df3778617a0c2fed57e4e13277d22853d7a420e01badeb4'
+            '4848b7108d7cd7c372247f94e967bef6f9dfbe8e54fba64983a8ee0b081c0273'
             '19fbcf99e575d80fcee141ce4858e1e1e1b25df83d6708e084491001c7291fb7')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
@@ -53,11 +53,11 @@ prepare() {
   msg "Add kdebug 362834 patch; fix in 20.08.0"
   patch -p1 -i ../kdebug-362834.patch
   msg "Add D28370 patch; fix in 20.08.0"
-  patch -p1 -i ../D28370.patch
+  patch -p1 -i ../kdebug-28370.patch
   msg "Add kdebug 420512 patch"
   patch -p1 -i ../kdebug-420512.patch
   msg "Add D26362 patch; fix in 20.08.0"
-  patch -p1 -i ../D26362.patch
+  patch -p1 -i ../kdebug-26362.patch
   msg "Add kdebug 420340 patch; fix in 20.08.0"
   patch -p1 -i ../kdebug-420340.patch
   msg "Add kdebug 420354 patch; fix in 20.08.0"
