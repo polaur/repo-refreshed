@@ -1,0 +1,26 @@
+pkgbase = kaccounts-integration
+	pkgdesc = Small system to administer web accounts for the sites and services across the KDE desktop, including: Google, Facebook, Owncloud, IMAP, Jabber and others
+	pkgver = 20.04.2
+	pkgrel = 1.1
+	url = https://www.kde.org/applications/internet/
+	arch = x86_64
+	groups = kde-applications
+	groups = kde-network
+	license = GPL
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	depends = kcmutils
+	depends = signon-kwallet-extension
+	depends = signon-plugin-oauth2
+	depends = signon-ui
+	source = https://download.kde.org/stable/release-service/20.04.2/src/kaccounts-integration-20.04.2.tar.xz
+	source = https://download.kde.org/stable/release-service/20.04.2/src/kaccounts-integration-20.04.2.tar.xz.sig
+	source = kdebug-422191.patch::https://invent.kde.org/network/kaccounts-integration/commit/839bce4ba5399fd5924f7316f8df402a86cb4262.patch
+	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
+	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
+	sha256sums = d97e2e0fe7d6327e89bafe6fce290291c7a9bc4ce1ddf4606a4e29430d3241be
+	sha256sums = SKIP
+	sha256sums = 2fb554ac26dcb8b6a41fa939de829f70d47dd39acedd157e0c5ce00ba1432dc7
+
+pkgname = kaccounts-integration
+
