@@ -1,7 +1,7 @@
 pkgbase = plasma-pa
 	pkgdesc = Plasma applet for audio volume management using PulseAudio
 	pkgver = 5.19.2
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://www.kde.org/workspaces/plasmadesktop/
 	arch = x86_64
 	groups = plasma
@@ -15,6 +15,7 @@ pkgbase = plasma-pa
 	source = https://download.kde.org/stable/plasma/5.19.2/plasma-pa-5.19.2.tar.xz
 	source = https://download.kde.org/stable/plasma/5.19.2/plasma-pa-5.19.2.tar.xz.sig
 	source = kdebug-422612.patch::https://invent.kde.org/plasma/plasma-pa/commit/6611ff9e89ecedbedb38c630ece042d57832f72c.patch
+	source = kdebug-422537.patch::https://invent.kde.org/plasma/plasma-pa/commit/3f2040d4e13381713b94317b017f42b9ab31b8de.patch
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
@@ -22,6 +23,7 @@ pkgbase = plasma-pa
 	sha256sums = 64a278f72553c0da4862b5aba73d5aad39709a9a5029ebb0479363e60d5f7afb
 	sha256sums = SKIP
 	sha256sums = acc95da4b4acce1c090e32cca2f13f65850b05a7c3d39fced7fe9ac54e42f171
+	sha256sums = 0ce5bb0b4fa381ee1170921f68454ea4227844c2f2b813a8fed7c69449969091
 
 pkgname = plasma-pa
 
