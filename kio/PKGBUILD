@@ -7,7 +7,7 @@
 
 pkgname=kio
 pkgver=5.71.0
-pkgrel=1.4
+pkgrel=1.6
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -26,6 +26,10 @@ kdebug-326880.patch::"https://invent.kde.org/frameworks/kio/commit/c2faaae697f11
 kdebug-422748.patch::"https://invent.kde.org/frameworks/kio/commit/5f4a501f992a534b569324f95941459c27c61588.patch"
 kdebug-419069.patch::"https://invent.kde.org/frameworks/kio/commit/a34cd22e3206588938323865bc77cfdb52c407aa.patch"
 kdebug-422189.patch::"https://invent.kde.org/frameworks/kio/commit/73cc5a82de887b197ddfd35e0dce3d1a34d5eb47.patch"
+#kdebug-304276.patch::"https://invent.kde.org/frameworks/kio/commit/759624d03bf7a0358ba07422655cb3ab873d7e4c.patch"
+fix-memory-leak.patch::"https://invent.kde.org/frameworks/kio/-/commit/f1464334ea7f7fe60cd5f13fd43320016690e94f.patch"
+kdebug-386325.patch::"https://invent.kde.org/frameworks/kio/commit/0d64e4fb4cf2a9f1ebe681de85ffc4221f291906.patch"
+kdebug-423412.patch::"https://invent.kde.org/frameworks/kio/commit/8d6b306f585920230acecd19903325f6f0387b8e.patch"
 # kdebug-179678.patch::"" # just to remember for prepare in the future release
 )
 sha256sums=('b972c8dede50be3e89babb5a536054759db2a87003e6df770c598c7c1c94b8d6'
@@ -37,7 +41,10 @@ sha256sums=('b972c8dede50be3e89babb5a536054759db2a87003e6df770c598c7c1c94b8d6'
             '268fb6723b6ad08279f455ad9e9e802a17687a85afb32d27e93637f16f18cc89'
             'd93eb62faa3e9a38646772cb488fa72c983439da874bd90ddc571697bf097771'
             '948e0b5a17a0450eca030699d188f7933cca13bdb2fb19717ca8244164b590d8'
-            'fa0a13e17b22c0c8f2174351b824cd2d4e8774c091b29a6f96f38e215562ae5d')
+            'fa0a13e17b22c0c8f2174351b824cd2d4e8774c091b29a6f96f38e215562ae5d'
+            '10f97bcee2feae034ce6343621aa9ea53197a2c60ed9fb7a65475126d572558a'
+            'bde406c8a0e8a2799dfa8373c7a395697a926eb69238d19cdcafec4157da4da3'
+            'd79f3873ea98410c0a83d6ee72b93ea3f9d67d4498c8032541e1c7a252dff70b')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -57,6 +64,14 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-419069.patch
     msg "Add kdebug 422189 patch"
     patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-422189.patch
+    msg "Add potential memory leak patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/fix-memory-leak.patch
+    msg "Add kdebug 386325 patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-386325.patch
+    msg "Add kdebug 423412 patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-423412.patch
+#    msg "Add kdebug 304276 patch"
+#    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-304276.patch
     }
     
 build() {

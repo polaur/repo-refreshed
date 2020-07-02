@@ -1,7 +1,7 @@
 pkgbase = kio
 	pkgdesc = Resource and network access abstraction
 	pkgver = 5.71.0
-	pkgrel = 1.4
+	pkgrel = 1.6
 	url = https://community.kde.org/Frameworks
 	arch = x86_64
 	groups = kf5
@@ -32,6 +32,9 @@ pkgbase = kio
 	source = kdebug-422748.patch::https://invent.kde.org/frameworks/kio/commit/5f4a501f992a534b569324f95941459c27c61588.patch
 	source = kdebug-419069.patch::https://invent.kde.org/frameworks/kio/commit/a34cd22e3206588938323865bc77cfdb52c407aa.patch
 	source = kdebug-422189.patch::https://invent.kde.org/frameworks/kio/commit/73cc5a82de887b197ddfd35e0dce3d1a34d5eb47.patch
+	source = fix-memory-leak.patch::https://invent.kde.org/frameworks/kio/-/commit/f1464334ea7f7fe60cd5f13fd43320016690e94f.patch
+	source = kdebug-386325.patch::https://invent.kde.org/frameworks/kio/commit/0d64e4fb4cf2a9f1ebe681de85ffc4221f291906.patch
+	source = kdebug-423412.patch::https://invent.kde.org/frameworks/kio/commit/8d6b306f585920230acecd19903325f6f0387b8e.patch
 	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
 	sha256sums = b972c8dede50be3e89babb5a536054759db2a87003e6df770c598c7c1c94b8d6
 	sha256sums = SKIP
@@ -43,6 +46,9 @@ pkgbase = kio
 	sha256sums = d93eb62faa3e9a38646772cb488fa72c983439da874bd90ddc571697bf097771
 	sha256sums = 948e0b5a17a0450eca030699d188f7933cca13bdb2fb19717ca8244164b590d8
 	sha256sums = fa0a13e17b22c0c8f2174351b824cd2d4e8774c091b29a6f96f38e215562ae5d
+	sha256sums = 10f97bcee2feae034ce6343621aa9ea53197a2c60ed9fb7a65475126d572558a
+	sha256sums = bde406c8a0e8a2799dfa8373c7a395697a926eb69238d19cdcafec4157da4da3
+	sha256sums = d79f3873ea98410c0a83d6ee72b93ea3f9d67d4498c8032541e1c7a252dff70b
 
 pkgname = kio
 
