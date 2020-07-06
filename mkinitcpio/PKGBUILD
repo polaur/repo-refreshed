@@ -39,8 +39,8 @@ prepare() {
 
   # Apply 0002-mkinitcpio-fix-builtin.patch
   patch -Np1 < $srcdir/0002-mkinitcpio-fix-builtin.patch
-  
-  # 0003-alpm-hooks-should-use-Type-Path-not-File.patch
+
+  #Apply 0003-alpm-hooks-should-use-Type-Path-not-File.patch
   patch -Np1 < $srcdir/0003-alpm-hooks-should-use-Type-Path-not-File.patch
 }
 
