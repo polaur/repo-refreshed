@@ -8,8 +8,8 @@
 
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
-pkgver=5.19.2
-pkgrel=1.2
+pkgver=5.19.3
+pkgrel=1.1
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -20,21 +20,15 @@ depends=(knotifyconfig libksysguard ktexteditor libqalculate kde-cli-tools appst
 makedepends=(extra-cmake-modules kdoctools gpsd baloo networkmanager-qt kdesignerplugin kinit)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgbase-$pkgver.tar.xz"{,.sig} kde.pam
-kdebug-423391.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/fcf4aabe4209fa5a797953e36546394739f6fa75.patch"
 kdebug-390009.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/6443792eb946033542ad5ea26cbb2212be162c81.patch"
-kdebug-422736.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/e9fa9bf8174c72b3d33afdbd4e969ff40a288551.patch"
-kdebug-417070.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/edc64d04a1e569d7032c41e6ee0ebf59833c26f2.patch"
 kdebug-416161.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/1db6885605a90c2528febb3276225f068ad26667.patch"
 kdebug-423566.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/0ab573ced32652be58c4524abeac2e2bf7cce17f.patch"
 #kdebug-404355.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/8475fe4545998c806704a45a7d912f777a11533f.patch"
 )
-sha256sums=('5c0d667ece57d195cc06aca70a49568bfd08ffa84855b29a27daa70fa02e79c7'
+sha256sums=('a967b4b3679f17b6e01b4811015ef6210f0f73bb035642867415c51c1ed20894'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
-            'b2e3d3cd416a8fdb21ac7c34bc8f65c1b9e791e6a8432df45359354761a7ce5c'
             '1b5ff173637961bb9ebb97bf563d53ed19d3812d1f01687b251a757a5c524456'
-            '4c4bccadf4fa226aa26369f938fb4ee2caf89b96adb05be629a71df474688adf'
-            '5486344df7486fdf0083ec56da1b906284310e14b795d353cb346026438365f5'
             'af61aa9001d1a426351dc0935fda2c6f6c99d0c9a384d5da036977f248e81e4e'
             'a7a5271dea76b88ac9af9eac16818ca272b3d1cbb6ea2e9d6929f8df4e0887d3')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
@@ -44,15 +38,9 @@ validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr
 
 prepare() {
   sed -e 's|dbus-run-session ||' -i $pkgbase-$pkgver/login-sessions/plasmawayland.desktop.cmake # Don't start a second user dbus session
-  
-  msg "Add kdebug 423391 patch; fix in 4.19.3"
-  patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-423391.patch
-  msg "Add kdebug 390009 patch; fix in 4.20"
+
+  msg "Add kdebug 390009 patch; fix in 5.20"
   patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-390009.patch
-  msg "Add kdebug 422736 patch; fix in 4.19.3"
-  patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-422736.patch
-  msg "Add kdebug 417070, 176650, 327757 patch"
-  patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-417070.patch
   msg "Add kdebug 416161 patch; fix in 5.20"
   patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-416161.patch
   msg "Add kdebug 423566 patch"
