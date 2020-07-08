@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=libksysguard
-pkgver=5.19.2
+pkgver=5.19.3
 pkgrel=1.1
 pkgdesc='Library to retrieve information on the current status of computer hardware'
 arch=(x86_64)
@@ -17,7 +17,7 @@ makedepends=(extra-cmake-modules kdoctools plasma-framework)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-394467.patch::"https://invent.kde.org/plasma/libksysguard/commit/bc59d3f6532aaf34d738444a566ab491dd4b5fbc.patch")
-sha256sums=('c44561f6a260eebdce852274fb23323cc2c7f1181a2c000fc14c982ee0ebe736'
+sha256sums=('9546c4264d47c5d9ffdf12bb4075218e43995c194ec8b43bb423acd535cf1938'
             'SKIP'
             '68d22c3cc0f77b701261d3dd20d2d6567af86011ea6f0ad7ad061ad613b2d90d')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
