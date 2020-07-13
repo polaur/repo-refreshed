@@ -7,7 +7,7 @@
 # Contributor: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=dolphin
-pkgver=20.04.2
+pkgver=20.04.3
 pkgrel=1.1
 pkgdesc="KDE File Manager"
 arch=(x86_64)
@@ -28,10 +28,9 @@ kdebug-420354.patch::"https://invent.kde.org/system/dolphin/-/commit/e076d8668f6
 kdebug-190580.patch::"https://invent.kde.org/system/dolphin/-/commit/e6ea3ab4c41dcc115143a237aafd3a1152849433.patch"
 kdebug-405226.patch::"https://invent.kde.org/system/dolphin/-/commit/1d72710039b547d91b7138d3899e783e26aac849.patch"
 kdebug-276167.patch::"https://invent.kde.org/system/dolphin/-/commit/a291c5999035bb17fe764c1910c3e78ba041f8ac.patch"
-kdebug-423326.patch::"https://invent.kde.org/system/dolphin/-/commit/37df39b93bf23b89ca760d4dd793788833d9a3e1.patch"
 #kdebug-415281.patch::"https://invent.kde.org/system/dolphin/commit/c81927651a6f50af860b21d1be5c04bb4295b7cc.patch"
 )
-sha256sums=('37e4c1510227112365418cacccabc6d535fb0880e182a2341bfe00d585d14fb2'
+sha256sums=('5e493e898e02005780b59474f506904742625b50e4669c113906d4f30daa863e'
             'SKIP'
             'e58d7dc34c58c5359dd684141e7cafd5bb9b32825563bf32fc9385990c205c8c'
             '047c183dbe11ff502ea60a01c544a360a1a7b4d1c5e4d0b1547cea1af8be6265'
@@ -41,8 +40,7 @@ sha256sums=('37e4c1510227112365418cacccabc6d535fb0880e182a2341bfe00d585d14fb2'
             '7ee9a44abcb8ad02dd769669263741af5e2cbe79b5e8a7d815d67f052b7c12fd'
             'a926bb0d5ab852fe950e400d01dfc579151fa7c064f71f412f2e677848d461b2'
             '84723027c5829c409df3778617a0c2fed57e4e13277d22853d7a420e01badeb4'
-            '4848b7108d7cd7c372247f94e967bef6f9dfbe8e54fba64983a8ee0b081c0273'
-            '19fbcf99e575d80fcee141ce4858e1e1e1b25df83d6708e084491001c7291fb7')
+            '4848b7108d7cd7c372247f94e967bef6f9dfbe8e54fba64983a8ee0b081c0273')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
@@ -68,8 +66,6 @@ prepare() {
   patch -p1 -i ../kdebug-405226.patch
   msg "Add kdebug 276167 patch; fix in 20.08"
   patch -p1 -i ../kdebug-276167.patch
-  msg "Add kdebug 423326 patch; fix in 20.04.3"
-  patch -p1 -i ../kdebug-423326.patch
  # msg "Add kdebug 415281 patch; fix in 20.08"
  # patch -p1 -i ../kdebug-415281.patch
 }
