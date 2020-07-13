@@ -1,7 +1,7 @@
 pkgbase = okular
 	pkgdesc = Document Viewer
 	pkgver = 20.04.3
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://kde.org/applications/graphics/okular/
 	arch = x86_64
 	groups = kde-applications
