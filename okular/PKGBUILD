@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=okular
-pkgver=20.04.2
+pkgver=20.04.3
 pkgrel=1.1
 pkgdesc='Document Viewer'
 arch=(x86_64)
@@ -25,14 +25,12 @@ kdebug-421163.patch::"https://invent.kde.org/graphics/okular/-/commit/b1c02b7e79
 kdebug-421468.patch::"https://invent.kde.org/graphics/okular/-/commit/7eb37c99c9cd27bfd918dffe2dca7b9ec22ab5fb.patch"
 # kdebug-415199.patch::"https://invent.kde.org/graphics/okular/-/commit/4b1d85f81bf0df1fdfc86e74ad71e9cf8201092f.patch"
 # kdebug-421004.patch::"https://invent.kde.org/graphics/okular/-/commit/390a88411acc9893425789cee9963709255d25c5.patch"
-kdebug-421508.patch::"https://invent.kde.org/graphics/okular/commit/d78cbb79c98e01fc524ec91fb099ec8ff98cc1fa.patch"
 )
-sha256sums=('b783aaac1661d1d8ec5c5e26fdec7035a6b0241a21d18caac1587ecfde44c49b'
+sha256sums=('60865a5d09f41d30572b72224fb61baf9dde18cf6e246565d852e672e7bc4cfe'
             'SKIP'
             '1f38bae516e8ee6cfce3f9d0ee17985ac8d76ebbd05818c5b61f05adcabb8a81'
             '17847c89625cb434acd36d83f04ada3910fdb59e0ff2c6325030ca7d0ce3719a'
-            '003325cb4be18005215be060b9ad186b3d7e664c7e1bea6dfaa84b57ce661f8f'
-            '891d30e8f263910266abc87bd70490297e22139872e98cd6b3fee0e180dfffc3')
+            '003325cb4be18005215be060b9ad186b3d7e664c7e1bea6dfaa84b57ce661f8f')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 options=(!zipman)
@@ -51,8 +49,6 @@ prepare() {
 #  patch -p1 -i ../kdebug-415199.patch
 #  msg "Add kdebug 421004 patch"
 #  patch -p1 -i ../kdebug-415199.patch
-  msg "Add kdebug 421508 patch"
-  patch -p1 -i ../kdebug-421508.patch
 }
 
 build() {
