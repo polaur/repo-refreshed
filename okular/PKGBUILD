@@ -23,6 +23,8 @@ source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$p
 kdebug-419096.patch::"https://invent.kde.org/graphics/okular/-/commit/d735d50cdea61cefc2413637ca164d0b33221eaa.patch"
 kdebug-421163.patch::"https://invent.kde.org/graphics/okular/-/commit/b1c02b7e79c8be1716ddba73d92d5792032821c6.patch"
 kdebug-421468.patch::"https://invent.kde.org/graphics/okular/-/commit/7eb37c99c9cd27bfd918dffe2dca7b9ec22ab5fb.patch"
+#kdebug-422827.patch::"https://invent.kde.org/graphics/okular/commit/a73012a91c32227ee5e6862052c3eb6c6e91d942.patch"
+
 # kdebug-415199.patch::"https://invent.kde.org/graphics/okular/-/commit/4b1d85f81bf0df1fdfc86e74ad71e9cf8201092f.patch"
 # kdebug-421004.patch::"https://invent.kde.org/graphics/okular/-/commit/390a88411acc9893425789cee9963709255d25c5.patch"
 )
@@ -45,6 +47,8 @@ prepare() {
   patch -p1 -i ../kdebug-421163.patch
   msg "Add kdebug 421468 patch"
   patch -p1 -i ../kdebug-421468.patch
+#  msg "Add kdebug 422827 patch"
+#  patch -p1 -i ../kdebug-422827.patch
 #  msg "Add kdebug 415199 patch"
 #  patch -p1 -i ../kdebug-415199.patch
 #  msg "Add kdebug 421004 patch"
