@@ -9,7 +9,7 @@
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
 pkgver=5.19.3
-pkgrel=1.2
+pkgrel=2.1
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -20,6 +20,7 @@ depends=(knotifyconfig libksysguard ktexteditor libqalculate kde-cli-tools appst
 makedepends=(extra-cmake-modules kdoctools gpsd baloo networkmanager-qt kdesignerplugin kinit)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgbase-$pkgver.tar.xz"{,.sig} kde.pam
+kdebug-423995.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/1cfd9e88.patch"
 kdebug-390009.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/6443792eb946033542ad5ea26cbb2212be162c81.patch"
 kdebug-416161.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/1db6885605a90c2528febb3276225f068ad26667.patch"
 kdebug-423566.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/0ab573ced32652be58c4524abeac2e2bf7cce17f.patch"
@@ -29,6 +30,7 @@ kdebug-423612.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/5bc6
 sha256sums=('a967b4b3679f17b6e01b4811015ef6210f0f73bb035642867415c51c1ed20894'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
+            '8e522a95d6dc552a55be8aae26ea21fdfb478d98f2ce43ac5b2523016af30e09'
             '1b5ff173637961bb9ebb97bf563d53ed19d3812d1f01687b251a757a5c524456'
             'af61aa9001d1a426351dc0935fda2c6f6c99d0c9a384d5da036977f248e81e4e'
             'a7a5271dea76b88ac9af9eac16818ca272b3d1cbb6ea2e9d6929f8df4e0887d3'
@@ -41,6 +43,7 @@ validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr
 prepare() {
   sed -e 's|dbus-run-session ||' -i $pkgbase-$pkgver/login-sessions/plasmawayland.desktop.cmake # Don't start a second user dbus session
   
+  patch -d $pkgbase-$pkgver -p1 -i ../kdebug-423995.patch # Don't overwrite systemwide local settings
   msg "Add kdebug 390009 patch; fix in 5.20"
   patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-390009.patch
   msg "Add kdebug 416161 patch; fix in 5.20"
