@@ -1,0 +1,36 @@
+pkgbase = kio
+	pkgdesc = Resource and network access abstraction
+	pkgver = 5.72.0
+	pkgrel = 1.1
+	url = https://community.kde.org/Frameworks
+	arch = x86_64
+	groups = kf5
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	makedepends = doxygen
+	makedepends = qt5-tools
+	makedepends = qt5-doc
+	depends = solid
+	depends = kjobwidgets
+	depends = kbookmarks
+	depends = libxslt
+	depends = kwallet
+	depends = ktextwidgets
+	depends = kded
+	optdepends = kio-extras: extra protocols support (sftp, fish and more)
+	optdepends = kdoctools: for the help kioslave
+	optdepends = knetattach: to add new kio-remote entries
+	optdepends = kio-fuse: to mount remote filesystems via FUSE
+	source = https://download.kde.org/stable/frameworks/5.72/kio-5.72.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.72/kio-5.72.0.tar.xz.sig
+	source = kdebug-420966.patch::https://invent.kde.org/frameworks/kio/-/commit/9f5f8540112e1178aa54a350f29b542c5de7df68.patch
+	source = kdebug-424281.patch::https://invent.kde.org/frameworks/kio/commit/a82d5712403de7817833b59d8089dfeea91a07b2.patch
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = 0ab32bff63f542598e95be64a793eefe8f51b041fbb447256a4aa1c756214ba2
+	sha256sums = SKIP
+	sha256sums = e17efc562875d1ffbbb179db0952136242c59e769400d149270e1a78a6fbb2df
+	sha256sums = 5d14bfa0c25cbc53df21536720cc2bdfd0c3371259b23cdd05b189619cf38159
+
+pkgname = kio
+
