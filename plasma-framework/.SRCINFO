@@ -1,7 +1,7 @@
 pkgbase = plasma-framework
 	pkgdesc = Plasma library and runtime components based upon KF5 and Qt5
 	pkgver = 5.72.0
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://community.kde.org/Frameworks
 	arch = x86_64
 	groups = kf5
@@ -18,10 +18,12 @@ pkgbase = plasma-framework
 	source = https://download.kde.org/stable/frameworks/5.72/plasma-framework-5.72.0.tar.xz
 	source = https://download.kde.org/stable/frameworks/5.72/plasma-framework-5.72.0.tar.xz.sig
 	source = kdebug-419239.patch::https://invent.kde.org/frameworks/plasma-framework/commit/a707731607c5accbc99e813fc3fd3422eec53483.patch
+	source = kdebug-423643.patch::https://invent.kde.org/frameworks/plasma-framework/commit/ac6bff575f934bceab03abdabc6a5c841c5b1f5e.patch
 	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
 	sha256sums = e54c9453df39163f03cc7b4f834fd3fcfe02dfb58ff031935088b95fbb4d3133
 	sha256sums = SKIP
 	sha256sums = 30ee99c86787f2fee7976b05e95b03933d61e078acea83c980f71e61c88ec41f
+	sha256sums = bf767f277173a160f7a2a1d264fb6f44c15b619082d1e1893ed8744655c09b16
 
 pkgname = plasma-framework
 
