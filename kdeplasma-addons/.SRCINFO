@@ -1,7 +1,7 @@
 pkgbase = kdeplasma-addons
 	pkgdesc = All kind of addons to improve your Plasma experience
 	pkgver = 5.19.3
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://www.kde.org/workspaces/plasmadesktop/
 	arch = x86_64
 	groups = plasma
@@ -17,6 +17,7 @@ pkgbase = kdeplasma-addons
 	source = https://download.kde.org/stable/plasma/5.19.3/kdeplasma-addons-5.19.3.tar.xz
 	source = https://download.kde.org/stable/plasma/5.19.3/kdeplasma-addons-5.19.3.tar.xz.sig
 	source = kdebug-389962.patch::https://invent.kde.org/plasma/kdeplasma-addons/commit/d5f9e6af9f9cda210b15d5c10b370006c86bd7ad.patch
+	source = kdebug-424349.patch::https://invent.kde.org/plasma/kdeplasma-addons/commit/4854cd0e0e06d727ab3175e07acb792429c4e834.patch
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
@@ -24,6 +25,7 @@ pkgbase = kdeplasma-addons
 	sha256sums = da062805c959ea1a4ad75691936a221e5380640509d17900398cb57915f92965
 	sha256sums = SKIP
 	sha256sums = 49d24bcfdcd2c6a4175f92bc4c64ff5e02f3609a9a0e642b268b276b8f1e1a83
+	sha256sums = 3b4f1715fec58616b7cb2d399d274d3e7b5670e86fdd1ec22dd62b8d7584bf17
 
 pkgname = kdeplasma-addons
 
