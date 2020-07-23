@@ -1,0 +1,42 @@
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=systemsettings
+pkgver=5.19.3
+pkgrel=1.2
+pkgdesc='KDE system manager for hardware, software, and workspaces'
+arch=(x86_64)
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=(LGPL)
+depends=(plasma-workspace)
+makedepends=(extra-cmake-modules kdoctools)
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-424490.patch::"https://invent.kde.org/plasma/systemsettings/commit/d8483b0fd9f76933272ec7ffdd705bd2e765ea38.patch"
+kdebug-424228.patch::"https://invent.kde.org/plasma/systemsettings/commit/e711edd7a8592d1dd789ef9782de53d4726f3262.patch")
+sha256sums=('32d09d536f02a3e01b1250aff52612952470a051a49242a00874da0b20c0b33f'
+            'SKIP'
+            '01193cf2b4216adb4e078442522ad4f505d3c3cc713c5b1dcee8e3989f954767'
+            '9bccd973e15cd2a7b0f80e6c9fdc363f28fb7ed427fa845e1f0aa83de157e1fb')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+    msg "Add kdebug 424490 patch; fix in 5.20"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-424490.patch
+    msg "Add kdebug 424228 patch; fix in 5.20"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-424228.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
