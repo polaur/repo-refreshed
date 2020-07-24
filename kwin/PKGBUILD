@@ -4,7 +4,7 @@
 
 pkgname=kwin
 pkgver=5.19.3
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -17,6 +17,7 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
 kdebug-424223.patch::"https://invent.kde.org/plasma/kwin/commit/2717252861048794737f6aa72c90548404814746.patch"
 kdebug-424389.patch::"https://invent.kde.org/plasma/kwin/commit/3609a029ea4001b9134784f95d92c8f99bf8ef05.patch"
 kdebug-423596.patch::"https://invent.kde.org/plasma/kwin/commit/b3c7d2b3f050e4a8e2c62303e419cac63bbdbc2a.patch"
+kdebug-424571.patch::"https://invent.kde.org/plasma/kwin/-/commit/83aa8dccd25f0000ec8b98b699ff36486f14373d.patch"
 #kdebug-424255.patch::"https://invent.kde.org/plasma/kwin/commit/4a6badc22c88a30b10b4e288728981f225cba728.patch"
 #kdebug-422460.patch::"https://invent.kde.org/plasma/kwin/commit/6c9026628cdbfd38baeeceb48e672c5458e93f8e.patch"
 #kdebug-421232.patch::"https://invent.kde.org/plasma/kwin/commit/2d13bc3aa8e6943fc169ab71310ee1ecc680a14b.patch"
@@ -27,6 +28,7 @@ sha256sums=('955e889f6f25a777d1063480c67782788a3665c432e338d37ea7c61cdc02a34a'
             '75556f40c00ba00a5bd09728a9286fb71fd0d88b932e8795c73240c19410081a'
             '7193906c829e34eba8ed0bde16aa97b2f0bb5b835b43771a9f867cbb74b94cfc'
             'd5b0e982632eb05433e195aa2bec3d4b20a350ed938a5450fe09ca7f323dbeef'
+            'c68acbcc96c49753d45abf426caae03774829601574a8ab8f3561c8ee1c5920e'
             '586106fd2fabddff7cbaa21320c0135aeec848d021704e9a3713d0bcd96cced3')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
@@ -40,6 +42,8 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-424389.patch
     msg "Add kdebug 423596 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-423596.patch
+    msg "Add kdebug 424571 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-424571.patch
  #   msg "Add kdebug 424255 patch"
  #   patch -d $pkgname-$pkgver -p1 -i ../kdebug-424255.patch
  #   msg "Add kdebug 422460 patch; fix in 5.20"
