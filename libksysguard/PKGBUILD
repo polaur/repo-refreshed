@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=libksysguard
-pkgver=5.19.3
-pkgrel=1.2
+pkgver=5.19.4
+pkgrel=1.1
 pkgdesc='Library to retrieve information on the current status of computer hardware'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -16,14 +16,10 @@ depends=(libxres qt5-webengine kdeclarative knewstuff)
 makedepends=(extra-cmake-modules kdoctools plasma-framework)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-394467.patch::"https://invent.kde.org/plasma/libksysguard/commit/bc59d3f6532aaf34d738444a566ab491dd4b5fbc.patch"
-kdebug-423071.patch::"https://invent.kde.org/plasma/libksysguard/commit/5992fb4c2ee5a6ee72432a766e33980529f79ab7.patch"
-kdebug-421512.patch::"https://invent.kde.org/plasma/libksysguard/commit/5992fb4c2ee5a6ee72432a766e33980529f79ab7.patch")
-sha256sums=('9546c4264d47c5d9ffdf12bb4075218e43995c194ec8b43bb423acd535cf1938'
+kdebug-394467.patch::"https://invent.kde.org/plasma/libksysguard/commit/bc59d3f6532aaf34d738444a566ab491dd4b5fbc.patch")
+sha256sums=('576ec7c114c337fb5e888ba3ebb46d0cea4c4164e7fc8c0bdead59655d901c37'
             'SKIP'
-            '68d22c3cc0f77b701261d3dd20d2d6567af86011ea6f0ad7ad061ad613b2d90d'
-            'f5a7c4132a3bed2c7db1e503a51370f78db22962ee8f5b5fe8535dd584eac5a6'
-            'f5a7c4132a3bed2c7db1e503a51370f78db22962ee8f5b5fe8535dd584eac5a6')
+            '68d22c3cc0f77b701261d3dd20d2d6567af86011ea6f0ad7ad061ad613b2d90d')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -32,11 +28,7 @@ validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr
 prepare() {
     msg "Add kdebug 394467 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-394467.patch
-    msg "Add kdebug 423071 patch"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-423071.patch
-#    msg "Add kdebug 421512 patch; fix in 5.20"
-#    patch -d $pkgname-$pkgver -p1 -i ../kdebug-421512.patch
-    }
+}
     
 build() {
   cmake -B build -S $pkgname-$pkgver \
