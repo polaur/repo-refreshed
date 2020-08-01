@@ -9,7 +9,7 @@
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
 pkgver=5.19.4
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -25,8 +25,7 @@ kdebug-390009.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/6443
 kdebug-416161.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/1db6885605a90c2528febb3276225f068ad26667.patch"
 kdebug-423566.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/0ab573ced32652be58c4524abeac2e2bf7cce17f.patch"
 kdebug-423612.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/5bc6d83ae083632fa4eef21a03b1ef59dd9a852e.patch"
-#kdebug-404355.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/8475fe4545998c806704a45a7d912f777a11533f.patch"
-)
+kdebug-398439.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/5b010aa1fa954855ad67788f0a3a35f6805e9c21.patch")
 sha256sums=('584fada178f8a3d770080e1faa631cb64eebbf70af89f5d611ac9438fa868bd3'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
@@ -34,7 +33,8 @@ sha256sums=('584fada178f8a3d770080e1faa631cb64eebbf70af89f5d611ac9438fa868bd3'
             '1b5ff173637961bb9ebb97bf563d53ed19d3812d1f01687b251a757a5c524456'
             'af61aa9001d1a426351dc0935fda2c6f6c99d0c9a384d5da036977f248e81e4e'
             'a7a5271dea76b88ac9af9eac16818ca272b3d1cbb6ea2e9d6929f8df4e0887d3'
-            '8a6e2d2ed3cde1decfb172d821d55c1b8beba26ff1cc04c0e6ce5c5dd46083ce')
+            '8a6e2d2ed3cde1decfb172d821d55c1b8beba26ff1cc04c0e6ce5c5dd46083ce'
+            'd9f6542af99ed756a166170ba096d0f91e1cb0e7c642bd938579cfe1b8bcd31d')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -49,8 +49,8 @@ prepare() {
   patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-416161.patch
   msg "Add kdebug 423566 patch"
   patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-423566.patch
- # msg "Add kdebug 404355 patch"
- # patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-404355.patch
+  msg "Add kdebug 398439 patch"
+  patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-398439.patch
 }
 
 build() {
