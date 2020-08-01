@@ -1,6 +1,6 @@
 pkgbase = breeze-gtk
 	pkgdesc = Breeze widget theme for GTK 2 and 3
-	pkgver = 5.19.3
+	pkgver = 5.19.4
 	pkgrel = 1.1
 	url = https://quickgit.kde.org/?p=breeze-gtk.git
 	arch = any
@@ -10,14 +10,14 @@ pkgbase = breeze-gtk
 	makedepends = sassc
 	makedepends = python-cairo
 	makedepends = breeze
-	source = https://download.kde.org/stable/plasma/5.19.3/breeze-gtk-5.19.3.tar.xz
-	source = https://download.kde.org/stable/plasma/5.19.3/breeze-gtk-5.19.3.tar.xz.sig
+	source = https://download.kde.org/stable/plasma/5.19.4/breeze-gtk-5.19.4.tar.xz
+	source = https://download.kde.org/stable/plasma/5.19.4/breeze-gtk-5.19.4.tar.xz.sig
 	source = reduce-gtk3-popover-shadow.patch::https://invent.kde.org/plasma/breeze-gtk/-/commit/84530aee0955d5bfb561ae6267c847cd544d6084.patch
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
 	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
-	sha256sums = 1bdd68c224b01ae9d804cc4b341295f622db579c88ebaffb0c847b773893c2cc
+	sha256sums = 42d300f78eaf61cc56cb4961231aaafc1fa509ed93e3771b7afdcc1643d81aa9
 	sha256sums = SKIP
 	sha256sums = b763eaafb955a9eb6ff845482911b01eb9c65224bcd331b6b6ac4b3fcba5bbe2
 
