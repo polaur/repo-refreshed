@@ -7,7 +7,7 @@
 
 pkgname=knewstuff
 pkgver=5.72.0
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc='Support for downloading application assets from the network'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -22,7 +22,7 @@ kdebug-369561.patch::"https://invent.kde.org/frameworks/knewstuff/commit/f5fd545
 kdebug-406993.patch::"https://invent.kde.org/frameworks/knewstuff/commit/91e46e975fa52ecde1fa0bc54e678c1bdeea8ae8.patch"
 kdebug-417843.patch::"https://invent.kde.org/frameworks/knewstuff/commit/5e31f8505a9ed335e56eee4087f1435d993f97ca.patch"
 kdebug-418034.patch::"https://invent.kde.org/frameworks/knewstuff/commit/36665de5091ae456e97615bdfa9519c0b57d3cc9.patch"
-#kdebug-260836.patch::"https://invent.kde.org/frameworks/knewstuff/commit/139981be02da82bbd4016e9933e57395f490ad78.patch"
+kdebug-424724.patch::"https://invent.kde.org/frameworks/knewstuff/-/commit/19cd11a295f1c4f77b1e8001499556629dea9f58.patch"
 )
 sha256sums=('04cf371431112b7267f093bff1c8aec56ab80749a1505092f73e8bf390d6bc6a'
             'SKIP'
@@ -30,7 +30,8 @@ sha256sums=('04cf371431112b7267f093bff1c8aec56ab80749a1505092f73e8bf390d6bc6a'
             '926d3b96e3c9c19ea800457f6fb9b9472dafd9da0a961bc75a1bf2100f6bddb4'
             '20010a40f05829459ab7b66c5005f4af39e941628949ad40946df800d34cde24'
             '452a3adf3fb8bf2d20bd4116a2eaa299e6428bd81959f15546f92f13f6b2bba7'
-            'd70095313b66e6b2b956721613120ad8db515b532a97a82ddb329be2f95c00db')
+            'd70095313b66e6b2b956721613120ad8db515b532a97a82ddb329be2f95c00db'
+            '7fb5371e23fa5998d317c4c98aba1f111fee796ab29bc6c2f496ba5de7e77756')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -42,10 +43,10 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-406993.patch
     msg "Add kdebug 417843 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-417843.patch
-    #msg "Add kdebug 260836 patch"
-    #patch -d $pkgname-$pkgver -p1 -i ../kdebug-260836.patch
     msg "Add kdebug 418034 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-418034.patch
+    msg "Add kdebug 424724 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-424724.patch
     }
     
 build() {
