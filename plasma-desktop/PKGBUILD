@@ -9,7 +9,7 @@
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
 pkgver=5.19.4
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -18,6 +18,9 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
 kdebug-419718.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/075a43667cfd75f36ca3430ca87518228617aaa5.patch"
 kdebug-414546.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/923e797209a3799cb600f9b39abff3558fa8f959.patch"
 kdebug-424197.patch::"https://invent.kde.org/plasma/plasma-desktop/-/commit/ad97508add4dd7608278270d154b0221d53e9059.patch"
+kdebug-423511.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/519d076a350fc834090202836ce39cf32d9f873a.patch"
+kdebug-357790.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/8868bb835d23afd3caf46ade3a3236421c492ba8.patch"
+provide-components-for-supporting-thumbnails-on-Wayland.patch::"https://invent.kde.org/plasma/plasma-desktop/-/commit/6dbf8d7911be05cd15527b2f07dee2e988ffdc06.patch"
 )
 depends=(polkit-kde-agent libxkbfile kmenuedit systemsettings ksysguard baloo libibus)
 makedepends=(extra-cmake-modules kdoctools xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel
@@ -27,7 +30,10 @@ sha256sums=('54321901c3d32b7699fb60d67e8630c17e38523d73a18e1feba51c98dd77de87'
             'SKIP'
             '5588106a44ff13d2c1669cfd818595efd2d9882355ce5cc56c85a3735e8f2f2d'
             'd1a0962e9732a039eba6f0c2a85f4bd6c94ea443754a5422250ed726eeaaa051'
-            'da57cfe8e438722c9e81e59cba78d7951523220d14658be15b4752c2efb48b07')
+            'da57cfe8e438722c9e81e59cba78d7951523220d14658be15b4752c2efb48b07'
+            '31f05e276d4f46551b2532296e993dca468a34482df0b7180fca5b40d779fd66'
+            'f1a7b82da26c0247fe7f6e02ef53b533c8761f109a8c2b1538e4b585e4c76696'
+            '64ee65673e7afa8c7ab992ef0968a705f13c813d2353d981b97f1fb25a58548f')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -40,7 +46,13 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-414546.patch
     msg "Add kdebug 424197, 424198, 424194, 424195 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-424197.patch
- }
+    msg "Add kdebug 423511 patch; fix in 5.19.5"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-423511.patch
+    msg "Add kdebug 357790 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-357790.patch
+    msg "Add provide-components-for-supporting-thumbnails-on-Wayland patch"
+    patch -d $pkgname-$pkgver -p1 -i ../provide-components-for-supporting-thumbnails-on-Wayland.patch
+}
     
 build() {
   cmake -B build -S $pkgname-$pkgver \
