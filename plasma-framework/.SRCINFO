@@ -1,7 +1,7 @@
 pkgbase = plasma-framework
 	pkgdesc = Plasma library and runtime components based upon KF5 and Qt5
-	pkgver = 5.72.0
-	pkgrel = 1.2
+	pkgver = 5.73.0
+	pkgrel = 1.1
 	url = https://community.kde.org/Frameworks
 	arch = x86_64
 	groups = kf5
@@ -15,15 +15,13 @@ pkgbase = plasma-framework
 	depends = kdeclarative
 	depends = kwayland
 	depends = kirigami2
-	source = https://download.kde.org/stable/frameworks/5.72/plasma-framework-5.72.0.tar.xz
-	source = https://download.kde.org/stable/frameworks/5.72/plasma-framework-5.72.0.tar.xz.sig
-	source = kdebug-419239.patch::https://invent.kde.org/frameworks/plasma-framework/commit/a707731607c5accbc99e813fc3fd3422eec53483.patch
-	source = kdebug-423643.patch::https://invent.kde.org/frameworks/plasma-framework/commit/ac6bff575f934bceab03abdabc6a5c841c5b1f5e.patch
+	source = https://download.kde.org/stable/frameworks/5.73/plasma-framework-5.73.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.73/plasma-framework-5.73.0.tar.xz.sig
+	source = dont-truncate-DPR-to-an-integer-in-cache-ID.patch::https://invent.kde.org/frameworks/plasma-framework/-/commit/e510d9d3ce35e91f7020ad3e3b4b63b4fd9a06ef.patch
 	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
-	sha256sums = e54c9453df39163f03cc7b4f834fd3fcfe02dfb58ff031935088b95fbb4d3133
+	sha256sums = e5415143f0a08cd75cf758b0692021d2a2febdcb1364e2aa1e5c8fbeee148c93
 	sha256sums = SKIP
-	sha256sums = 30ee99c86787f2fee7976b05e95b03933d61e078acea83c980f71e61c88ec41f
-	sha256sums = bf767f277173a160f7a2a1d264fb6f44c15b619082d1e1893ed8744655c09b16
+	sha256sums = dad5e863006a73e0a7093af10db2230c48b5b419a16d130f146e5e75104152c7
 
 pkgname = plasma-framework
 
