@@ -7,7 +7,7 @@
 
 pkgname=ksysguard
 pkgver=5.19.4
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='Track and control the processes running in your system'
 arch=(x86_64)
 url='https://userbase.kde.org/KSysGuard'
@@ -21,12 +21,14 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
 kdebug-329324.patch::"https://invent.kde.org/plasma/ksysguard/commit/8a64cd93e939063e1e592772a889b904222b974c.patch"
 kdebug-423260.patch::"https://invent.kde.org/plasma/ksysguard/commit/3cd5873692cf58e7d046a402d125476538596811.patch"
 kdebug-346228.patch::"https://invent.kde.org/plasma/ksysguard/commit/566d5faba288c9abdbc8436fea43d4c7207ea41e.patch"
+kdebug-422839.patch::"https://invent.kde.org/plasma/ksysguard/-/commit/a7d1b0d95c7ad22e0249e86d5e14092f06ca4299.patch"
 )
 sha256sums=('1f49c29f361c7831ac540bf267855563633f9b7ad4c3b7ec0d6f600af81e5179'
             'SKIP'
             '8addefe1a2edb5b2ba2fdea9bbdeb5fa668fb5d9408e413fecac9319ce765c1b'
             '067e4889bf5662b288205ba9f062f418a23e9b402fda319d335ba8a83e13c841'
-            'b7eb193fa24f0e799c0778734faf64a5ed357ad5ffa29ffc1904c655d1725b07')
+            'b7eb193fa24f0e799c0778734faf64a5ed357ad5ffa29ffc1904c655d1725b07'
+            'f451eaf04008e0a6f85005f7d253d70059415b5ca191e66a9665cec345a980fd')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -39,6 +41,8 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-423260.patch
     msg "Add kdebug 346228 patch"
     patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-346228.patch
+    msg "Add kdebug 422839 patch"
+    patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-422839.patch
 }
 
 build() {
