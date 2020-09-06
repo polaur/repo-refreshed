@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kdeplasma-addons
-pkgver=5.19.4
+pkgver=5.19.5
 pkgrel=1.1
 pkgdesc='All kind of addons to improve your Plasma experience'
 arch=(x86_64)
@@ -21,11 +21,13 @@ optdepends=('kross: comic applet'
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-389962.patch::"https://invent.kde.org/plasma/kdeplasma-addons/commit/d5f9e6af9f9cda210b15d5c10b370006c86bd7ad.patch"
-kdebug-424349.patch::"https://invent.kde.org/plasma/kdeplasma-addons/commit/4854cd0e0e06d727ab3175e07acb792429c4e834.patch")
-sha256sums=('91e1fdef2f03201f9d35003d895836649ad88e36fa18307349650ba0ef40f3de'
+kdebug-424349.patch::"https://invent.kde.org/plasma/kdeplasma-addons/commit/4854cd0e0e06d727ab3175e07acb792429c4e834.patch"
+kdebug-425048.patch::"https://invent.kde.org/plasma/kdeplasma-addons/-/commit/e7c51a046583213467d5a4d453334d6e98d61512.patch")
+sha256sums=('659e10b553c7db1abd488f77c43a919046f5e7f29126972926afe1350f93ff23'
             'SKIP'
             '49d24bcfdcd2c6a4175f92bc4c64ff5e02f3609a9a0e642b268b276b8f1e1a83'
-            '3b4f1715fec58616b7cb2d399d274d3e7b5670e86fdd1ec22dd62b8d7584bf17')
+            '3b4f1715fec58616b7cb2d399d274d3e7b5670e86fdd1ec22dd62b8d7584bf17'
+            '0988bc97a868a9cf508f4500f4bfdb59aac49d0c52c31e7810ca0f9a9dad7d5d')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -36,6 +38,8 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-389962.patch
     msg "Add kdebug 424349 patch; fix probably in 5.20"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-424349.patch
+    msg "Add kdebug 425048; fix in 5.20"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-425048.patch
     }
     
 build() {
