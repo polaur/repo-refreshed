@@ -4,7 +4,7 @@
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 
 pkgname=breeze-gtk
-pkgver=5.19.4
+pkgver=5.19.5
 pkgrel=1.1
 pkgdesc="Breeze widget theme for GTK 2 and 3"
 arch=(any)
@@ -15,7 +15,7 @@ makedepends=(extra-cmake-modules sassc python-cairo breeze)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 reduce-gtk3-popover-shadow.patch::"https://invent.kde.org/plasma/breeze-gtk/-/commit/84530aee0955d5bfb561ae6267c847cd544d6084.patch")
-sha256sums=('42d300f78eaf61cc56cb4961231aaafc1fa509ed93e3771b7afdcc1643d81aa9'
+sha256sums=('5213b2f6815e542cda6bf9ae153636285e178962c6a59ff9ab4fe5c07dc256c8'
             'SKIP'
             'b763eaafb955a9eb6ff845482911b01eb9c65224bcd331b6b6ac4b3fcba5bbe2')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
