@@ -1,0 +1,25 @@
+pkgbase = kdeclarative
+	pkgdesc = Provides integration of QML and KDE Frameworks
+	pkgver = 5.73.0
+	pkgrel = 1.1
+	url = https://community.kde.org/Frameworks
+	arch = x86_64
+	groups = kf5
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = doxygen
+	makedepends = qt5-tools
+	makedepends = qt5-doc
+	depends = kio
+	depends = kpackage
+	depends = libepoxy
+	source = https://download.kde.org/stable/frameworks/5.73/kdeclarative-5.73.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.73/kdeclarative-5.73.0.tar.xz.sig
+	source = kdebug-423305.patch::https://invent.kde.org/frameworks/kdeclarative/-/commit/acd8dd06412b8af1650bfdbf46eee82b7eaef5ca.patch
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = 713ae2ea41e1bac8f6d47cffa376d62c7805eb3e4cc41c3168c1f1b2ca70a598
+	sha256sums = SKIP
+	sha256sums = 1084db97aabf2226f1e56d52a8aa0db278752f20cdcb6bd5629f2b7993619022
+
+pkgname = kdeclarative
+
