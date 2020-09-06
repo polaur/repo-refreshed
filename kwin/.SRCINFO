@@ -1,6 +1,6 @@
 pkgbase = kwin
 	pkgdesc = An easy to use, but flexible, composited Window Manager
-	pkgver = 5.19.4
+	pkgver = 5.19.5
 	pkgrel = 1.1
 	url = https://www.kde.org/workspaces/plasmadesktop/
 	install = kwin.install
@@ -19,18 +19,18 @@ pkgbase = kwin
 	depends = qt5-sensors
 	depends = qt5-script
 	optdepends = qt5-virtualkeyboard: virtual keyboard support for kwin-wayland
-	source = https://download.kde.org/stable/plasma/5.19.4/kwin-5.19.4.tar.xz
-	source = https://download.kde.org/stable/plasma/5.19.4/kwin-5.19.4.tar.xz.sig
+	source = https://download.kde.org/stable/plasma/5.19.5/kwin-5.19.5.tar.xz
+	source = https://download.kde.org/stable/plasma/5.19.5/kwin-5.19.5.tar.xz.sig
 	source = kdebug-424571.patch::https://invent.kde.org/plasma/kwin/-/commit/83aa8dccd25f0000ec8b98b699ff36486f14373d.patch
-	source = kdebug-424607.patch::https://invent.kde.org/plasma/kwin/commit/a051baf1a921905e318b47c4489a0a78b8cf873f.patch
+	source = kdebug-382136.patch::https://invent.kde.org/plasma/kwin/commit/0d3c20d3866b4ed53a13b06d1aa37d3a974ba0f4.patch
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
 	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
-	sha256sums = 456205b964efadadc6df8e5f3db40da3719bec567cf93f2719b015561a57672e
+	sha256sums = 36afa37b773d31c0bcb8f4e32fa1f06cc33e15ad00e729ba36f120bbe034903b
 	sha256sums = SKIP
 	sha256sums = c68acbcc96c49753d45abf426caae03774829601574a8ab8f3561c8ee1c5920e
-	sha256sums = 8a3a1420f3307a3df8c39fb80af85874c42800b51b8f6acec8155775d3c2b861
+	sha256sums = dee864b4b58a376cc641d57cb8ccf974bf19695c7decdd8863547ea8f038ff7e
 
 pkgname = kwin
 
