@@ -1,7 +1,7 @@
 pkgbase = libksysguard
 	pkgdesc = Library to retrieve information on the current status of computer hardware
-	pkgver = 5.19.3
-	pkgrel = 1.2
+	pkgver = 5.19.5
+	pkgrel = 1.1
 	url = https://www.kde.org/workspaces/plasmadesktop/
 	arch = x86_64
 	groups = plasma
@@ -13,20 +13,16 @@ pkgbase = libksysguard
 	depends = qt5-webengine
 	depends = kdeclarative
 	depends = knewstuff
-	source = https://download.kde.org/stable/plasma/5.19.3/libksysguard-5.19.3.tar.xz
-	source = https://download.kde.org/stable/plasma/5.19.3/libksysguard-5.19.3.tar.xz.sig
+	source = https://download.kde.org/stable/plasma/5.19.5/libksysguard-5.19.5.tar.xz
+	source = https://download.kde.org/stable/plasma/5.19.5/libksysguard-5.19.5.tar.xz.sig
 	source = kdebug-394467.patch::https://invent.kde.org/plasma/libksysguard/commit/bc59d3f6532aaf34d738444a566ab491dd4b5fbc.patch
-	source = kdebug-423071.patch::https://invent.kde.org/plasma/libksysguard/commit/5992fb4c2ee5a6ee72432a766e33980529f79ab7.patch
-	source = kdebug-421512.patch::https://invent.kde.org/plasma/libksysguard/commit/5992fb4c2ee5a6ee72432a766e33980529f79ab7.patch
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
 	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
-	sha256sums = 9546c4264d47c5d9ffdf12bb4075218e43995c194ec8b43bb423acd535cf1938
+	sha256sums = d8adb311dae1a699a3fd3fbdc9e6cdde037503ca303b70f12d33b985ee80a0cd
 	sha256sums = SKIP
 	sha256sums = 68d22c3cc0f77b701261d3dd20d2d6567af86011ea6f0ad7ad061ad613b2d90d
-	sha256sums = f5a7c4132a3bed2c7db1e503a51370f78db22962ee8f5b5fe8535dd584eac5a6
-	sha256sums = f5a7c4132a3bed2c7db1e503a51370f78db22962ee8f5b5fe8535dd584eac5a6
 
 pkgname = libksysguard
 
