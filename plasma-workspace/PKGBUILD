@@ -9,7 +9,7 @@
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
 pkgver=5.19.5
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -20,37 +20,62 @@ depends=(knotifyconfig libksysguard ktexteditor libqalculate kde-cli-tools appst
 makedepends=(extra-cmake-modules kdoctools gpsd baloo networkmanager-qt kdesignerplugin kinit)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgbase-$pkgver.tar.xz"{,.sig} kde.pam
+"https://raw.githubusercontent.com/archlinux/svntogit-packages/packages/plasma-workspace/trunk/plasma-workspace-gpsd-3.21.patch"
 kdebug-423995.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/1cfd9e88.patch"
 kdebug-390009.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/6443792eb946033542ad5ea26cbb2212be162c81.patch"
 kdebug-416161.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/1db6885605a90c2528febb3276225f068ad26667.patch"
 kdebug-423566.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/0ab573ced32652be58c4524abeac2e2bf7cce17f.patch"
 kdebug-423612.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/5bc6d83ae083632fa4eef21a03b1ef59dd9a852e.patch"
-kdebug-398439.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/5b010aa1fa954855ad67788f0a3a35f6805e9c21.patch")
+kdebug-398439.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/5b010aa1fa954855ad67788f0a3a35f6805e9c21.patch"
+fix-memory-leak.patch::"https://github.com/KDE/plasma-workspace/commit/6a312085a713a2a048e5f40b3e500024f88c9b40.patch"
+kdebug-423155.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/8b0164b03ec659aa4ef3748bf807b3f91b129203.patch"
+kdebug-423055.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/ce920603ea93ae4abf391d477001bb67cd429ed1.patch"
+kdebug-424259.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/5aebd1a8c122a30f950582832ab3d6cf1bc978f7.patch"
+kdebug-425982.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/d24cef54d68fb29994ed610bc70867d6fc811287.patch"
+)
 sha256sums=('490329e08e63016edd696a9132bf80b76ef51dacf53308b865d2e27b67ce8127'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
+            '27bdc2f751cb6a418d4cf08b08d260ec5621dc3190418fcea9fa80870f857348'
             '8e522a95d6dc552a55be8aae26ea21fdfb478d98f2ce43ac5b2523016af30e09'
             '1b5ff173637961bb9ebb97bf563d53ed19d3812d1f01687b251a757a5c524456'
             'af61aa9001d1a426351dc0935fda2c6f6c99d0c9a384d5da036977f248e81e4e'
             'a7a5271dea76b88ac9af9eac16818ca272b3d1cbb6ea2e9d6929f8df4e0887d3'
             '8a6e2d2ed3cde1decfb172d821d55c1b8beba26ff1cc04c0e6ce5c5dd46083ce'
-            'd9f6542af99ed756a166170ba096d0f91e1cb0e7c642bd938579cfe1b8bcd31d')
+            'd9f6542af99ed756a166170ba096d0f91e1cb0e7c642bd938579cfe1b8bcd31d'
+            'a59a6aba51a70a291dd5873b78105b509169a28d76cef494f96e25d372487969'
+            'fa957868969f71911d6246a7624629b81f842bc9aa69a56b7cfa52acda70167d'
+            'b30246e3dcd5d818806abd029ee1240e7349096a756df826cca7fc72d8535606'
+            '8696c6a8e95d07aebd70d15707fd179eb4559552901b90575214f0b4e9cc17f5'
+            'a0bc88e53adc1d0f68318e247853adfdddbd88f278b7b5208dee23ac573ac6ab')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
               '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
 
 prepare() {
+    patch -d $pkgbase-$pkgver -p1 -i ../plasma-workspace-gpsd-3.21.patch # fix build with gpsd 3.21
+    
   sed -e 's|dbus-run-session ||' -i $pkgbase-$pkgver/login-sessions/plasmawayland.desktop.cmake # Don't start a second user dbus session
   
+  msg "Add fix"
+  patch -d $pkgbase-$pkgver -p1 -i ../fix-memory-leak.patch
   msg "Add kdebug 390009 patch; fix in 5.20"
-  patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-390009.patch
+  patch -d $pkgbase-$pkgver -p1 -i ../kdebug-390009.patch
   msg "Add kdebug 416161 patch; fix in 5.20"
-  patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-416161.patch
+  patch -d $pkgbase-$pkgver -p1 -i ../kdebug-416161.patch
   msg "Add kdebug 423566 patch"
-  patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-423566.patch
+  patch -d $pkgbase-$pkgver -p1 -i ../kdebug-423566.patch
   msg "Add kdebug 398439 patch"
-  patch -d $pkgname-$pkgver -p1 -i $srcdir/kdebug-398439.patch
+  patch -d $pkgbase-$pkgver -p1 -i ../kdebug-398439.patch
+  msg "Add kdebug 423155 patch"
+  patch -d $pkgbase-$pkgver -p1 -i ../kdebug-423155.patch
+  msg "Add kdebug 423055 patch"
+  patch -d $pkgbase-$pkgver -p1 -i ../kdebug-423055.patch
+  msg "Add kdebug 424259 patch"
+  patch -d $pkgbase-$pkgver -p1 -i ../kdebug-424259.patch
+  msg "Add kdebug 425982 patch"
+  patch -d $pkgbase-$pkgver -p1 -i ../kdebug-425982.patch
 }
 
 build() {

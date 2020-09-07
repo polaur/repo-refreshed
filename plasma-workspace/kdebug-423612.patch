@@ -1,0 +1,31 @@
+From 5bc6d83ae083632fa4eef21a03b1ef59dd9a852e Mon Sep 17 00:00:00 2001
+From: Alexander Lohnau <alexander.lohnau@gmx.de>
+Date: Wed, 8 Jul 2020 08:53:32 +0000
+Subject: [PATCH] Only open KCM in systemsettings if it can be displayed
+
+We have to check for the presence of a X-KDE-System-Settings-Parent-Category entry when opening a KCM in systemsettings.
+BUG: 423612
+
+
+(cherry picked from commit 2ebf8ab391466146a7a6ae3d4dad3e0ff0c7276d)
+---
+ runners/services/servicerunner.cpp | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/runners/services/servicerunner.cpp b/runners/services/servicerunner.cpp
+index 81b06343e..51884c8c1 100644
+--- a/runners/services/servicerunner.cpp
++++ b/runners/services/servicerunner.cpp
+@@ -469,7 +469,8 @@ void ServiceRunner::run(const Plasma::RunnerContext &context, const Plasma::Quer
+         if (service->serviceTypes().contains(QLatin1String("KCModule"))) {
+             if (service->parentApp() == QStringLiteral("kinfocenter")) {
+                 service->setExec(QStringLiteral("kinfocenter ") + service->desktopEntryName());
+-            } else {
++            // We can't display a KCM in systemsettings if it has no parent, BUG: 423612
++            } else if (!service->property("X-KDE-System-Settings-Parent-Category").toString().isEmpty()) {
+                 service->setExec(QStringLiteral("systemsettings5 ") + service->desktopEntryName());
+             }
+         }
+-- 
+GitLab
+

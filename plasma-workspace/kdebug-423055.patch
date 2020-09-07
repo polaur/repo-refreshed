@@ -1,0 +1,31 @@
+From ce920603ea93ae4abf391d477001bb67cd429ed1 Mon Sep 17 00:00:00 2001
+From: Alexander Lohnau <alexander.lohnau@gmx.de>
+Date: Mon, 31 Aug 2020 09:41:37 +0200
+Subject: [PATCH] Fix undetected KPackage installation
+
+This was the last occurrence that didn't get ported/detected.
+Because of that the updating did not work and uninstalling
+an entry using the "Widget Explorer" did not work.
+
+BUG: 423055
+BUG: 424429
+FIXED-IN: 5.20
+---
+ components/shellprivate/widgetexplorer/plasmoids.knsrc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/components/shellprivate/widgetexplorer/plasmoids.knsrc b/components/shellprivate/widgetexplorer/plasmoids.knsrc
+index 5b13e8256..6c24e5096 100644
+--- a/components/shellprivate/widgetexplorer/plasmoids.knsrc
++++ b/components/shellprivate/widgetexplorer/plasmoids.knsrc
+@@ -50,5 +50,5 @@ Name[zh_TW]=Plasma 元件
+ ProvidersUrl=https://autoconfig.kde.org/ocs/providers.xml
+ Categories=Plasma 5 Plasmoid
+ StandardResource=tmp
+-InstallationCommand=kpackagetool5 --install %f --type Plasma/Applet
+-UninstallCommand=kpackagetool5 --remove %f --type Plasma/Applet
++Uncompress=kpackage
++KPackageType=Plasma/Applet
+-- 
+GitLab
+

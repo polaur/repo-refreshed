@@ -1,0 +1,28 @@
+From 0ab573ced32652be58c4524abeac2e2bf7cce17f Mon Sep 17 00:00:00 2001
+From: Alexander Lohnau <alexander.lohnau@gmx.de>
+Date: Thu, 4 Jun 2020 08:23:05 +0000
+Subject: [PATCH] Don't insert unprintable characters in KRunner
+
+---
+ lookandfeel/contents/runcommand/RunCommand.qml | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/lookandfeel/contents/runcommand/RunCommand.qml b/lookandfeel/contents/runcommand/RunCommand.qml
+index 41e14beb5..c42df8ba8 100644
+--- a/lookandfeel/contents/runcommand/RunCommand.qml
++++ b/lookandfeel/contents/runcommand/RunCommand.qml
+@@ -221,7 +221,10 @@ ColumnLayout {
+                 } else if (ctrl && event.key === Qt.Key_K) {
+                     decrementCurrentIndex()
+                 } else if (event.text !== "") {
+-                    queryField.text += event.text;
++                    // This prevents unprintable control characters from being inserted
++                    if (!/[\x00-\x1F\x7F]/.test(event.text)) {
++                        queryField.text += event.text;
++                    }
+                     queryField.focus = true;
+                 }
+             }
+-- 
+GitLab
+
