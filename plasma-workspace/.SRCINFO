@@ -50,6 +50,7 @@ pkgbase = plasma-workspace
 	source = kdebug-423055.patch::https://invent.kde.org/plasma/plasma-workspace/commit/ce920603ea93ae4abf391d477001bb67cd429ed1.patch
 	source = kdebug-424259.patch::https://invent.kde.org/plasma/plasma-workspace/commit/5aebd1a8c122a30f950582832ab3d6cf1bc978f7.patch
 	source = kdebug-425982.patch::https://invent.kde.org/plasma/plasma-workspace/commit/d24cef54d68fb29994ed610bc70867d6fc811287.patch
+	source = kdebug-416145.patch::https://invent.kde.org/plasma/plasma-workspace/-/commit/003e30a64e976e66c02d3aa8b06301710a231889.patch
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
@@ -69,6 +70,7 @@ pkgbase = plasma-workspace
 	sha256sums = b30246e3dcd5d818806abd029ee1240e7349096a756df826cca7fc72d8535606
 	sha256sums = 8696c6a8e95d07aebd70d15707fd179eb4559552901b90575214f0b4e9cc17f5
 	sha256sums = a0bc88e53adc1d0f68318e247853adfdddbd88f278b7b5208dee23ac573ac6ab
+	sha256sums = 478a3da2af4080c54df464a44d3e0f1c6a5648a14dd4002ce8199ceac8a8ea1a
 
 pkgname = plasma-workspace
 	optdepends = plasma-workspace-wallpapers: additional wallpapers
