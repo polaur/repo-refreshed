@@ -1,6 +1,6 @@
 pkgbase = kio
 	pkgdesc = Resource and network access abstraction
-	pkgver = 5.73.0
+	pkgver = 5.74.1
 	pkgrel = 1.1
 	url = https://community.kde.org/Frameworks
 	arch = x86_64
@@ -22,15 +22,13 @@ pkgbase = kio
 	optdepends = kdoctools: for the help kioslave
 	optdepends = knetattach: to add new kio-remote entries
 	optdepends = kio-fuse: to mount remote filesystems via FUSE
-	source = https://download.kde.org/stable/frameworks/5.73/kio-5.73.0.tar.xz
-	source = https://download.kde.org/stable/frameworks/5.73/kio-5.73.0.tar.xz.sig
-	source = kdebug-425387.patch::https://invent.kde.org/frameworks/kio/commit/955984a1a3cc8a64d98e6ddfcc09881a4dd7880a.patch
-	source = kdebug-425958.patch::https://invent.kde.org/frameworks/kio/-/commit/222f2d73f6cc87b9db588ee8f75e94b71daa5b34.patch
+	source = https://download.kde.org/stable/frameworks/5.74/kio-5.74.1.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.74/kio-5.74.1.tar.xz.sig
+	source = kdebug-185433.patch::https://invent.kde.org/frameworks/kio/commit/87adf7f6bcbd9baddafda58e2dbf7052eb323358.patch
 	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
-	sha256sums = 05da159e6cf5ef9aa4dd7ede86ce28a5581624a1b3f0b4718c5b7e30c4aa2a66
+	sha256sums = 2f88a383b751194d4f327d3f87f8ea25fe882f8cc5c58a368529d9ab7143a6e7
 	sha256sums = SKIP
-	sha256sums = f656a988fe0d4852245904043d9eee8826359918ae3538426083b3c1f85f85a7
-	sha256sums = f1e23338dc84b3de83ae3fcaa23d9ea488ca7d3bb5f80c7afddbe9065e17ccd8
+	sha256sums = 329678fa158af698944f19097dff2e6c7937d7894bdf1243e39fbe2c2b1fd22b
 
 pkgname = kio
 
