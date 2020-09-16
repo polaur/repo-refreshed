@@ -1,7 +1,7 @@
 pkgbase = kwin
 	pkgdesc = An easy to use, but flexible, composited Window Manager
 	pkgver = 5.19.5
-	pkgrel = 2.1
+	pkgrel = 2.2
 	url = https://www.kde.org/workspaces/plasmadesktop/
 	install = kwin.install
 	arch = x86_64
@@ -24,6 +24,7 @@ pkgbase = kwin
 	source = kdebug-424571.patch::https://invent.kde.org/plasma/kwin/-/commit/83aa8dccd25f0000ec8b98b699ff36486f14373d.patch
 	source = kdebug-382136.patch::https://invent.kde.org/plasma/kwin/commit/0d3c20d3866b4ed53a13b06d1aa37d3a974ba0f4.patch
 	source = add-effect-that-animates-full-screen-changes.patch::https://invent.kde.org/plasma/kwin/-/commit/e14a0111651fbe460c1887572836dee78c48e87d.patch
+	source = kdebug-315829.patch::https://invent.kde.org/plasma/kwin/commit/4e481d0e66768cd71904be92f9d3de2bed4be20c.patch
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
@@ -33,6 +34,7 @@ pkgbase = kwin
 	sha256sums = c68acbcc96c49753d45abf426caae03774829601574a8ab8f3561c8ee1c5920e
 	sha256sums = dee864b4b58a376cc641d57cb8ccf974bf19695c7decdd8863547ea8f038ff7e
 	sha256sums = 6e3afddcdc283fc57e09e0934f056e69e5eccce85aa8230647317695115dba95
+	sha256sums = 670bd2fbe937500dd7222a16b4a6ab1f798eba9b1df4d19dd4dc790c5b1bc154
 
 pkgname = kwin
 
