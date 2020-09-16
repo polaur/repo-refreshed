@@ -7,7 +7,7 @@
 
 pkgname=kdeplasma-addons
 pkgver=5.19.5
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='All kind of addons to improve your Plasma experience'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -22,12 +22,14 @@ groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-389962.patch::"https://invent.kde.org/plasma/kdeplasma-addons/commit/d5f9e6af9f9cda210b15d5c10b370006c86bd7ad.patch"
 kdebug-424349.patch::"https://invent.kde.org/plasma/kdeplasma-addons/commit/4854cd0e0e06d727ab3175e07acb792429c4e834.patch"
-kdebug-425048.patch::"https://invent.kde.org/plasma/kdeplasma-addons/-/commit/e7c51a046583213467d5a4d453334d6e98d61512.patch")
+kdebug-425048.patch::"https://invent.kde.org/plasma/kdeplasma-addons/-/commit/e7c51a046583213467d5a4d453334d6e98d61512.patch"
+kdebug-426428.patch::"https://invent.kde.org/plasma/kdeplasma-addons/commit/97c0c472d216cff2ee44804adf835406a3ec7452.patch")
 sha256sums=('659e10b553c7db1abd488f77c43a919046f5e7f29126972926afe1350f93ff23'
             'SKIP'
             '49d24bcfdcd2c6a4175f92bc4c64ff5e02f3609a9a0e642b268b276b8f1e1a83'
             '3b4f1715fec58616b7cb2d399d274d3e7b5670e86fdd1ec22dd62b8d7584bf17'
-            '0988bc97a868a9cf508f4500f4bfdb59aac49d0c52c31e7810ca0f9a9dad7d5d')
+            '0988bc97a868a9cf508f4500f4bfdb59aac49d0c52c31e7810ca0f9a9dad7d5d'
+            '470c59541cc432c8e853b552ce5e733ba0b038aed9ab0863162c1323b0e4a0e3')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -40,6 +42,8 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-424349.patch
     msg "Add kdebug 425048; fix in 5.20"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-425048.patch
+    msg "Add kdebug 426428 patch; fix in 5.20"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-426428.patch
     }
     
 build() {
