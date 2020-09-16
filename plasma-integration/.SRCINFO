@@ -1,0 +1,32 @@
+pkgbase = plasma-integration
+	pkgdesc = Qt Platform Theme integration plugins for the Plasma workspaces
+	pkgver = 5.19.5
+	pkgrel = 1.1
+	url = https://www.kde.org/workspaces/plasmadesktop/
+	arch = x86_64
+	groups = plasma
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = breeze
+	depends = kio
+	depends = kwayland
+	depends = libxcursor
+	depends = noto-fonts
+	depends = ttf-hack
+	depends = qqc2-desktop-style
+	depends = perl
+	source = https://download.kde.org/stable/plasma/5.19.5/plasma-integration-5.19.5.tar.xz
+	source = https://download.kde.org/stable/plasma/5.19.5/plasma-integration-5.19.5.tar.xz.sig
+	source = kdebug-421450.patch::https://invent.kde.org/plasma/plasma-integration/commit/857ee264e62e68dfa7c5ce7086dc6fc4195234a5.patch
+	source = kdebug-426573.patch::https://invent.kde.org/plasma/plasma-integration/commit/b629b1d297b9758fe6207a45e960655cdf50bfd0.patch
+	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
+	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
+	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
+	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
+	sha256sums = f7fdd854e78e366a310116ef190bd7bed42df15a059d8ad75b763cbcebfb6389
+	sha256sums = SKIP
+	sha256sums = 3a134364676294fc9c7602d3c1e3915b3d1a40b9bad5906fe78e108bf006bbe3
+	sha256sums = c15f93491fb3315016a27dc03566854e6bb6ffa1716c0d924f90048f7175a238
+
+pkgname = plasma-integration
+
