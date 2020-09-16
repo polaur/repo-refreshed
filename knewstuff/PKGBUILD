@@ -1,9 +1,12 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original work by:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=knewstuff
-pkgver=5.73.0
+pkgver=5.74.0
 pkgrel=1.1
 pkgdesc='Support for downloading application assets from the network'
 arch=(x86_64)
@@ -14,19 +17,15 @@ makedepends=(extra-cmake-modules doxygen qt5-tools qt5-doc qt5-declarative)
 optdepends=('kirigami2: QML components')
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-417985.patch::"https://invent.kde.org/frameworks/knewstuff/commit/7453b03a4ecce6f51de366f84e04ddadae19a68b.patch"
-kdebug-425135.patch::"https://invent.kde.org/frameworks/knewstuff/commit/8531bbcc004bdafa0a0c6060966c2daec457b776.patch")
-sha256sums=('7669e62973f7e228975a07f15bb1c7f716edd81ce82d5f578a80b1f501abda1e'
+kdebug-417510.patch::"https://invent.kde.org/frameworks/knewstuff/commit/28f254aa6bdf5336f9b4a280f33577d5397fdcf8.patch")
+sha256sums=('638ba6cee3091a94a0ef60977b6e22c7b58267ea6fd1bc17d3e7ac47bd9a3d27'
             'SKIP'
-            '732c2c81e5055cddab4e4bc7082d3f5509e6ed0b3865601d1af8934a2fb08991'
-            '7d85f67b7d17fe5981130afe56b98fd64136719d33aee2b32cb438803330415d')
+            '0111c6942e953192de53128dfe92a2e919dc8a89c819ec53552bd7eb3efc5ceb')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
-#    msg "Add kdebug 417985 patch"
-#    patch -d $pkgname-$pkgver -p1 -i ../kdebug-417985.patch
-    msg "Add kdebug 425135 patch"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-425135.patch
+    msg "Add kdebug 417510 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-417510.patch
 }
 
 build() {
