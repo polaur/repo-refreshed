@@ -1,7 +1,7 @@
 pkgbase = kirigami2
 	pkgdesc = A QtQuick based components set
 	pkgver = 5.74.0
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://community.kde.org/Frameworks
 	arch = x86_64
 	groups = kf5
@@ -18,10 +18,12 @@ pkgbase = kirigami2
 	source = https://download.kde.org/stable/frameworks/5.74/kirigami2-5.74.0.tar.xz
 	source = https://download.kde.org/stable/frameworks/5.74/kirigami2-5.74.0.tar.xz.sig
 	source = display-a-seperator-between-breadcrums-and-the-icons-to-the-left.patch::https://invent.kde.org/frameworks/kirigami/-/commit/57bf842b414a69df37afa57c715d24455ba4684e.patch
+	source = kdebug-425670.patch::https://invent.kde.org/frameworks/kirigami/commit/6eaefba5001445fa7e198e4caa0bde738240d66f.patch
 	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
 	sha256sums = 9706915f219ef9394b030dbb24974d4fddef091008954cf75cf97cc97586e35f
 	sha256sums = SKIP
 	sha256sums = 36de6bdcb67c97a15b3bb970add967b1432b2c396df0c2ff6bbc2d0a06114af5
+	sha256sums = 34837e1bf8a83dbb24ef1a051f2eb8cbb140533968a358ee8f24973ff41dae89
 
 pkgname = kirigami2
 
