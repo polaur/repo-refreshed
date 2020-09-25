@@ -7,7 +7,7 @@
 
 pkgname=okular
 pkgver=20.08.1
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='Document Viewer'
 arch=(x86_64)
 url="https://kde.org/applications/graphics/okular/"
@@ -27,6 +27,7 @@ fix-dangling-annotation-tooltip.patch::"https://invent.kde.org/graphics/okular/-
 kdebug-406831.patch::"https://invent.kde.org/graphics/okular/commit/b696d6dbfb8453948010ed786d9ab24bd3d1b485.patch"
 kdebug-420842.patch::"https://invent.kde.org/graphics/okular/commit/a5be0149ec627fbc086e5b26cbbe7be13cde49b8.patch"
 kdebug-426467.patch::"https://invent.kde.org/graphics/okular/commit/7ccb475df82cb3ee8c838a32511ceb59ba3b8337.patch"
+kdebug-421354.patch::"https://invent.kde.org/graphics/okular/commit/bdb2df773d774c15cf0a17fcae198d3f2452cdfa.patch"
 )
 sha256sums=('77b5d8e410a2a008ea63f60a561f99053ec07d92da6ee3afaeefd977aadebd83'
             'SKIP'
@@ -36,7 +37,8 @@ sha256sums=('77b5d8e410a2a008ea63f60a561f99053ec07d92da6ee3afaeefd977aadebd83'
             '3ff366b9b6fb53851fadb7a4900c5db8ca81368c5d6d842783b8fb5f26e36d1a'
             '8a86b6ced4bb58defaaf87b0735e2b64199b0adee1154e759247a33a321a2f42'
             'ef7d7797967377757d50e47e1f42b994ed435db88fd23cf395534bc9e5d23b72'
-            '6820d56755ff3090486a676e08a0491251eea769348998d30cdb05720b974bf2')
+            '6820d56755ff3090486a676e08a0491251eea769348998d30cdb05720b974bf2'
+            'c6b83efe4b693d95b4469d076c1660132842cf5c7a22a739269f6ad7a7cce3e1')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 options=(!zipman)
@@ -56,6 +58,8 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-420842.patch
     msg "Add kdebug 426467 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-426467.patch
+    msg "Add kdebug 421354 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-421354.patch
 }
 build() {
   cmake -B build -S $pkgname-$pkgver \
