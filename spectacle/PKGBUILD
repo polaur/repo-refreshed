@@ -1,0 +1,48 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original work by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=spectacle
+pkgver=20.08.1
+pkgrel=1.1
+pkgdesc="KDE screenshot capture utility"
+arch=(x86_64)
+url='https://kde.org/applications/utilities/org.kde.spectacle'
+license=(GPL)
+depends=(xcb-util-cursor libkipi purpose knewstuff kwayland qt5-tools)
+makedepends=(extra-cmake-modules kdoctools)
+optdepends=('kipi-plugins: export to various online services')
+groups=(kde-applications kde-graphics)
+source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-372464.patch::"https://invent.kde.org/graphics/spectacle/commit/fa60f99470485143015b547b03ecba7811569480.patch"
+kdebug-385885.patch::"https://invent.kde.org/graphics/spectacle/commit/ccf8d5220dc5ac2a5722247386d6cde82494dbb3.patch"
+kdebug-425995.patch::"https://invent.kde.org/graphics/spectacle/commit/0b3bb8a60ae70115d86b60d43a3df2ddcbded46c.patch"
+)
+sha256sums=('4a01b5ef41901ff2e83bb517c2e96a978188b98cb62243eb541a317f57a2bd69'
+            'SKIP'
+            'bbfe1709b91a01e304606e6b8d413c75aa1ce5431fdd3c6d32c7ae28a08b5f9f'
+            '930f8f63db3b96778397df8e6eb266aea80b7a9f295eb404d520583096322573'
+            'ad3b371f072c15ce512370808db61ed92152aea03882e5cca87867ce1f1a04f4')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+
+prapare() {
+    msg "Add kdebug 372464 patch; fix in 20.12"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-372464.patch
+    msg "Add kdebug 385885 patch; fix in 20.08.2"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-385885.patch
+    msg "Add kdebug 425995 patch; fix in 20.12"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-425995.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+   -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
+
