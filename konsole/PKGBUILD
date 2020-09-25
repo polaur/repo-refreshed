@@ -1,0 +1,40 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=konsole
+pkgver=20.08.1
+pkgrel=1.1
+arch=(x86_64)
+url='https://kde.org/applications/system/konsole/'
+pkgdesc="KDE's terminal emulator"
+license=(GPL LGPL FDL)
+groups=(kde-applications kde-utilities)
+depends=(knotifyconfig kpty kparts kinit knewstuff)
+makedepends=(extra-cmake-modules kdoctools)
+optdepends=('keditbookmarks: to manage bookmarks')
+source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+improve-launch-speed.patch::"https://invent.kde.org/utilities/konsole/-/commit/688428398ed9d0e939dba855d278c041e86aa981.patch")
+sha256sums=('bdd82f9104b2f76c53bdbdef613391719b70719a132d24f12e5f620e1c9313d1'
+            'SKIP'
+            '8c7fd78fcdec23d92edbfab1a34bdc30374d84a3aa1b92c58363ee54920c1edd')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+
+prepare() {
+    msg "Add improve launch speed patch; fix in 20.12"
+    patch -d $pkgname-$pkgver -p1 -i ../improve-launch-speed.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
