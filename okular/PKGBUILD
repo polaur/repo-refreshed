@@ -1,0 +1,68 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the orignal works by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=okular
+pkgver=20.08.1
+pkgrel=1.1
+pkgdesc='Document Viewer'
+arch=(x86_64)
+url="https://kde.org/applications/graphics/okular/"
+license=(GPL LGPL FDL)
+groups=(kde-applications kde-graphics)
+depends=(djvulibre libspectre libkexiv2 poppler-qt5 qca kpty kactivities threadweaver kjs kparts purpose discount phonon-qt5)
+makedepends=(extra-cmake-modules ebook-tools kdegraphics-mobipocket kdoctools khtml chmlib)
+optdepends=('ebook-tools: mobi and epub support'
+            'kdegraphics-mobipocket: mobi support' 'libzip: CHM support'
+            'khtml: CHM support' 'chmlib: CHM support' 'calligra: ODT and ODP support'
+            'unrar: Comic Book Archive support' 'unarchiver: Comic Book Archive support (alternative)')
+source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-420050.patch::"https://invent.kde.org/graphics/okular/-/commit/e637e2ed519cb2dfe523981b2d6dc34a9855716c.patch"
+kdebug-422041.patch::"https://invent.kde.org/graphics/okular/commit/c54c38f761fb79efd0d552bdb88c7977f22b3a88.patch"
+remove-artifact.patch::"https://invent.kde.org/graphics/okular/-/commit/5d947905f754ad0c11b1c77e4a34a2ecefa75802.patch"
+fix-dangling-annotation-tooltip.patch::"https://invent.kde.org/graphics/okular/-/commit/e238f21bbbad4d139217924a0b5fd055b7c396d3.patch"
+kdebug-406831.patch::"https://invent.kde.org/graphics/okular/commit/b696d6dbfb8453948010ed786d9ab24bd3d1b485.patch"
+kdebug-420842.patch::"https://invent.kde.org/graphics/okular/commit/a5be0149ec627fbc086e5b26cbbe7be13cde49b8.patch"
+kdebug-426467.patch::"https://invent.kde.org/graphics/okular/commit/7ccb475df82cb3ee8c838a32511ceb59ba3b8337.patch"
+)
+sha256sums=('77b5d8e410a2a008ea63f60a561f99053ec07d92da6ee3afaeefd977aadebd83'
+            'SKIP'
+            'bdec3a8a2a8af768f60fa2fa828d406292b0c49a57a8c158abd0c3380fc57ec5'
+            'e9a064d0437e769421ff8f56749be0e0a8bea97070358388e771f44c1b04fea1'
+            '5da9747adfe0f6f45f87d191193adf8657d5a73710eba3822e1ce2869b65eecb'
+            '3ff366b9b6fb53851fadb7a4900c5db8ca81368c5d6d842783b8fb5f26e36d1a'
+            '8a86b6ced4bb58defaaf87b0735e2b64199b0adee1154e759247a33a321a2f42'
+            'ef7d7797967377757d50e47e1f42b994ed435db88fd23cf395534bc9e5d23b72'
+            '6820d56755ff3090486a676e08a0491251eea769348998d30cdb05720b974bf2')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+options=(!zipman)
+
+prepare() {
+    msg "Add kdebug 422041 and 425850 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-422041.patch
+    msg "Add Remove artifact while navigating though pages patch"
+    patch -d $pkgname-$pkgver -p1 -i ../remove-artifact.patch
+    msg "Add Fix dangling annotation tooltip patch"
+    patch -d $pkgname-$pkgver -p1 -i ../fix-dangling-annotation-tooltip.patch
+    msg "Add kdebug 420050 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-420050.patch
+    msg "Add kdebug 406831 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-406831.patch
+    msg "Add kdebug 420842 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-420842.patch
+    msg "Add kdebug 426467 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-426467.patch
+}
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
