@@ -1,0 +1,37 @@
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=qqc2-desktop-style
+pkgver=5.74.0
+pkgrel=1.2
+pkgdesc='A style for Qt Quick Controls 2 to make it follow your desktop theme'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+groups=(kf5)
+depends=(kirigami2 kiconthemes)
+makedepends=(extra-cmake-modules)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+move-the-dbus-connection-in-the-singleton.patch::"https://invent.kde.org/frameworks/qqc2-desktop-style/-/commit/f8e56a22721057107bccdf319da36ff82ca2a804.patch"
+kdebug-412685.patch::"https://invent.kde.org/frameworks/qqc2-desktop-style/-/commit/7b7946e110afae7b2364fa46c2cb874f2e501204.patch")
+sha256sums=('1605a9904ae59ed2acb3439bedfa1acb51dcb02d59f1e4b37d9c64ee45b7be83'
+            'SKIP'
+            '89457a120253386da3435f216b1d4dd8554b89e6f3d3a3610eea98865915da04'
+            '50918e2ab943f052a0b943a9f24e490340153819fa8f958952695b078d357aa4')
+validpgpkeys=('53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB') # David Faure <faure@kde.org>
+
+prepare() {
+    msg "Add move-the-dbus-connection-in-the-singleton patch"
+    patch -d $pkgname-$pkgver -p1 -i ../move-the-dbus-connection-in-the-singleton.patch
+    msg "Add kdebug 412685 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-412685.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
