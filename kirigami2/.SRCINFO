@@ -1,7 +1,7 @@
 pkgbase = kirigami2
 	pkgdesc = A QtQuick based components set
 	pkgver = 5.74.0
-	pkgrel = 1.3
+	pkgrel = 1.4
 	url = https://community.kde.org/Frameworks
 	arch = x86_64
 	groups = kf5
@@ -20,12 +20,14 @@ pkgbase = kirigami2
 	source = display-a-seperator-between-breadcrums-and-the-icons-to-the-left.patch::https://invent.kde.org/frameworks/kirigami/-/commit/57bf842b414a69df37afa57c715d24455ba4684e.patch
 	source = kdebug-425670.patch::https://invent.kde.org/frameworks/kirigami/commit/6eaefba5001445fa7e198e4caa0bde738240d66f.patch
 	source = kdebug-426738.patch::https://invent.kde.org/frameworks/kirigami/commit/50c1156166d38ce1b6172d7b7131132a2cdb9fdb.patch
+	source = kdebug-422182.patch::https://invent.kde.org/frameworks/kirigami/-/commit/aaaabf1ea84d9c5ae9cf50a306b79f15f44f5b35.patch
 	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
 	sha256sums = 9706915f219ef9394b030dbb24974d4fddef091008954cf75cf97cc97586e35f
 	sha256sums = SKIP
 	sha256sums = 36de6bdcb67c97a15b3bb970add967b1432b2c396df0c2ff6bbc2d0a06114af5
 	sha256sums = 34837e1bf8a83dbb24ef1a051f2eb8cbb140533968a358ee8f24973ff41dae89
 	sha256sums = 195612a3f0cac07f93e3907ffbdd0167ab6bba2254db36afa936aed2d4f40b14
+	sha256sums = 7d5c1805c120fada6c856794f146426c32da29025a01462a248db3b99852af2c
 
 pkgname = kirigami2
 
