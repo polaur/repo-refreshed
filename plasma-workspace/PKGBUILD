@@ -9,7 +9,7 @@
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
 pkgver=5.19.5
-pkgrel=1.2
+pkgrel=2.1
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -33,6 +33,7 @@ kdebug-423055.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/ce92
 kdebug-424259.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/5aebd1a8c122a30f950582832ab3d6cf1bc978f7.patch"
 kdebug-425982.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/d24cef54d68fb29994ed610bc70867d6fc811287.patch"
 kdebug-416145.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/003e30a64e976e66c02d3aa8b06301710a231889.patch"
+kdebug-423526.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/bb7b1226.patch"
 )
 sha256sums=('490329e08e63016edd696a9132bf80b76ef51dacf53308b865d2e27b67ce8127'
             'SKIP'
@@ -49,17 +50,19 @@ sha256sums=('490329e08e63016edd696a9132bf80b76ef51dacf53308b865d2e27b67ce8127'
             'b30246e3dcd5d818806abd029ee1240e7349096a756df826cca7fc72d8535606'
             '8696c6a8e95d07aebd70d15707fd179eb4559552901b90575214f0b4e9cc17f5'
             'a0bc88e53adc1d0f68318e247853adfdddbd88f278b7b5208dee23ac573ac6ab'
-            '478a3da2af4080c54df464a44d3e0f1c6a5648a14dd4002ce8199ceac8a8ea1a')
+            '478a3da2af4080c54df464a44d3e0f1c6a5648a14dd4002ce8199ceac8a8ea1a'
+            'ffda98d84a18f6a1111607411c85b18dc20c6d7899b1037c209970b25845d2b0')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
               '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
 
 prepare() {
-    patch -d $pkgbase-$pkgver -p1 -i ../plasma-workspace-gpsd-3.21.patch # fix build with gpsd 3.21
+    
     
   sed -e 's|dbus-run-session ||' -i $pkgbase-$pkgver/login-sessions/plasmawayland.desktop.cmake # Don't start a second user dbus session
   
+  patch -d $pkgbase-$pkgver -p1 -i ../plasma-workspace-gpsd-3.21.patch # fix build with gpsd 3.21
   msg "Add fix"
   patch -d $pkgbase-$pkgver -p1 -i ../fix-memory-leak.patch
   msg "Add kdebug 390009 patch; fix in 5.20"
@@ -80,6 +83,7 @@ prepare() {
   patch -d $pkgbase-$pkgver -p1 -i ../kdebug-425982.patch
   msg "Add kdebug 416145 patch"
   patch -d $pkgname-$pkgver -p1 -i ../kdebug-416145.patch
+  patch -d $pkgbase-$pkgver -p1 -i ../kdebug-423526.patch # Fix switching sessions with systemd 246
 }
 
 build() {
