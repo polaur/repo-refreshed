@@ -1,7 +1,7 @@
 pkgbase = knewstuff
 	pkgdesc = Support for downloading application assets from the network
 	pkgver = 5.74.0
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://community.kde.org/Frameworks
 	arch = x86_64
 	groups = kf5
@@ -17,10 +17,12 @@ pkgbase = knewstuff
 	source = https://download.kde.org/stable/frameworks/5.74/knewstuff-5.74.0.tar.xz
 	source = https://download.kde.org/stable/frameworks/5.74/knewstuff-5.74.0.tar.xz.sig
 	source = kdebug-417510.patch::https://invent.kde.org/frameworks/knewstuff/commit/28f254aa6bdf5336f9b4a280f33577d5397fdcf8.patch
+	source = kdebug-426732.patch::https://invent.kde.org/frameworks/knewstuff/-/commit/68824589fe8a1356f06e80098556b77914f96824.patch
 	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
 	sha256sums = 638ba6cee3091a94a0ef60977b6e22c7b58267ea6fd1bc17d3e7ac47bd9a3d27
 	sha256sums = SKIP
 	sha256sums = 0111c6942e953192de53128dfe92a2e919dc8a89c819ec53552bd7eb3efc5ceb
+	sha256sums = c32d157f6aee80766e8f21b7e1bcdc4ddab80255d1f77927bde93459a93ad2f7
 
 pkgname = knewstuff
 
