@@ -9,7 +9,7 @@
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
 pkgver=5.19.5
-pkgrel=2.1
+pkgrel=3.1
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -33,7 +33,8 @@ kdebug-423055.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/ce92
 kdebug-424259.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/5aebd1a8c122a30f950582832ab3d6cf1bc978f7.patch"
 kdebug-425982.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/d24cef54d68fb29994ed610bc70867d6fc811287.patch"
 kdebug-416145.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/003e30a64e976e66c02d3aa8b06301710a231889.patch"
-kdebug-423526.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/bb7b1226.patch"
+kdebug-423526a.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/05414ed5.patch"
+kdebug-423526b.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/bb7b1226.patch"
 )
 sha256sums=('490329e08e63016edd696a9132bf80b76ef51dacf53308b865d2e27b67ce8127'
             'SKIP'
@@ -51,6 +52,7 @@ sha256sums=('490329e08e63016edd696a9132bf80b76ef51dacf53308b865d2e27b67ce8127'
             '8696c6a8e95d07aebd70d15707fd179eb4559552901b90575214f0b4e9cc17f5'
             'a0bc88e53adc1d0f68318e247853adfdddbd88f278b7b5208dee23ac573ac6ab'
             '478a3da2af4080c54df464a44d3e0f1c6a5648a14dd4002ce8199ceac8a8ea1a'
+            '7c87253df33c7145eb90082dee1e9ccc19eb650c4715bfde61b67989d5b0650d'
             'ffda98d84a18f6a1111607411c85b18dc20c6d7899b1037c209970b25845d2b0')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
@@ -83,7 +85,8 @@ prepare() {
   patch -d $pkgbase-$pkgver -p1 -i ../kdebug-425982.patch
   msg "Add kdebug 416145 patch"
   patch -d $pkgname-$pkgver -p1 -i ../kdebug-416145.patch
-  patch -d $pkgbase-$pkgver -p1 -i ../kdebug-423526.patch # Fix switching sessions with systemd 246
+  patch -d $pkgbase-$pkgver -p1 -i ../kdebug-423526a.patch # Fix switching sessions with systemd 246
+  patch -d $pkgbase-$pkgver -p1 -i ../kdebug-423526b.patch
 }
 
 build() {
