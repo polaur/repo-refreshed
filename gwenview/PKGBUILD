@@ -4,7 +4,7 @@
 
 pkgname=gwenview
 pkgver=20.08.1
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="A fast and easy to use image viewer"
 url='https://kde.org/applications/graphics/gwenview/'
 arch=(x86_64)
@@ -17,16 +17,20 @@ optdepends=('qt5-imageformats: support for tiff, webp, and more image formats'
             'kamera: import pictures from gphoto2 cameras')
 makedepends=(extra-cmake-modules kdoctools)
 source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-425479.patch::"https://invent.kde.org/graphics/gwenview/commit/f5cb19e887902599a31e0b8169a6dfd3a57069cf.patch")
+kdebug-425479.patch::"https://invent.kde.org/graphics/gwenview/commit/f5cb19e887902599a31e0b8169a6dfd3a57069cf.patch"
+kdebug-425971.patch::"https://invent.kde.org/graphics/gwenview/commit/d15622e1655ba7fcd33479f9677112340b2de7ff.patch")
 sha256sums=('df1c45317aff9aece8b023cd87aab62c9cd222520795922564e89fdc9df48995'
             'SKIP'
-            '430f6b6227e522681584c210ce8eb3a41a6c8637d372e71b73016554d7ec1769')
+            '430f6b6227e522681584c210ce8eb3a41a6c8637d372e71b73016554d7ec1769'
+            '5886e2aeca72583b66f80ed4977072c654b2bf9ba8d5514b155fd37f929b3fff')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
 prepare() {
     msg "Add kdebug 425479 patch; fix in 20.12"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-425479.patch
+    msg "Add kdebug 425971 patch; fix in 20.08.2"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-425971.patch
 }
 
 build() {
