@@ -1,6 +1,6 @@
 pkgbase = ark
 	pkgdesc = Archiving Tool
-	pkgver = 20.08.1
+	pkgver = 20.08.2
 	pkgrel = 1.1
 	url = https://kde.org/applications/utilities/ark/
 	arch = x86_64
@@ -20,12 +20,12 @@ pkgbase = ark
 	optdepends = unarchiver: RAR format support
 	optdepends = lzop: LZO format support
 	optdepends = lrzip: LRZ format support
-	source = https://download.kde.org/stable/release-service/20.08.1/src/ark-20.08.1.tar.xz
-	source = https://download.kde.org/stable/release-service/20.08.1/src/ark-20.08.1.tar.xz.sig
+	source = https://download.kde.org/stable/release-service/20.08.2/src/ark-20.08.2.tar.xz
+	source = https://download.kde.org/stable/release-service/20.08.2/src/ark-20.08.2.tar.xz.sig
 	source = memory-leaks-fix.patch::https://invent.kde.org/utilities/ark/-/commit/8ac8238b707f4a5dce57415587a87f3963baa19d.patch
 	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
 	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
-	sha256sums = 32e8546b186b88efc9d4688e02def0b6225d921f9b92cfcd328417f09ec0f725
+	sha256sums = ec061ac07687b5a3541af293e3bc2aa7bedcfe0ef38ba6e57e2704068a726ffc
 	sha256sums = SKIP
 	sha256sums = 2cb812e5c7330e97d511992a36acd501898dc8f56bbba0ce1325703919b62ba3
 
