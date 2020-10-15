@@ -7,7 +7,7 @@
 
 pkgname=kio
 pkgver=5.75.0
-pkgrel=1.1
+pkgrel=2.1
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -23,6 +23,7 @@ kdebug-424082.patch::"https://invent.kde.org/frameworks/kio/commit/5f84f12d68ef3
 kdebug-426690.patch::"https://invent.kde.org/frameworks/kio/commit/74904f0cac872aac2423fe41adb115c3dc330ad5.patch"
 kdebug-426704.patch::"https://invent.kde.org/frameworks/kio/commit/c6f0c8b856e6183c625e0526ddc3a8c64ecd558.patch"
 kdebug-418518.patch::"https://invent.kde.org/frameworks/kio/-/commit/62055ce1a44d1455011478e0302ab91868bd43db.patch"
+https://invent.kde.org/frameworks/kio/-/commit/4321b8ff.patch
 )
 sha256sums=('27af8d83d0ea6c68fc62675a0d0d34e94489e9e518c4a4c32fa9d4784510bc8e'
             'SKIP'
@@ -30,7 +31,8 @@ sha256sums=('27af8d83d0ea6c68fc62675a0d0d34e94489e9e518c4a4c32fa9d4784510bc8e'
             '5dfe1d95d68c841fab221385342bd983688ee777c17bee6a11146dac221b920e'
             'c1ddd3738597ca248315223ee76bd7a275029d558b41282287025d2ba2f065bf'
             'abeb978675ecfb7c0445f6a2a3f1fec319974be231bca0965036b6b19c776227'
-            '54b1c5a51ba094f2b1c65f45a0e19e955e9c68add125f9633414a6dc1c17d7f3')
+            '54b1c5a51ba094f2b1c65f45a0e19e955e9c68add125f9633414a6dc1c17d7f3'
+            '6516a723e910ae34a3c8572b86e420e234f5a6a37f680ae17ce4d82e64a761e7')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -44,6 +46,7 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-426704.patch
     msg "Add kdebug 418518 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-418518.patch
+    patch -d $pkgname-$pkgver -p1 -i ../4321b8ff.patch # Fix selecting files with '#'
 }
 
 build() {
