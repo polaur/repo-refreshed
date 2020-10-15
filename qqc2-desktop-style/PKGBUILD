@@ -20,8 +20,7 @@ kdebug-412444.patch::"https://invent.kde.org/frameworks/qqc2-desktop-style/-/com
 sha256sums=('770895c4363973ddcbac281526de8297a4df37bfe1df08be59e62a8caf9368d3'
             'SKIP'
             'c2c708e4364ca726438cde6ad8f642f793776080e103ebd242c4167a8f53d9c6'
-            '1d52aaca79501b57a72e7288de95a9332589a631bcf88fc9c178e3128fbe7a80'
-            '31ab58ef65c0e1eb716d8ee932951210dee7ccd778a102324c426d285d2eb1d6')
+            '1d52aaca79501b57a72e7288de95a9332589a631bcf88fc9c178e3128fbe7a80')
 validpgpkeys=('53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB') # David Faure <faure@kde.org>
 
 prepare() {
