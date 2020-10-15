@@ -7,30 +7,47 @@
 
 pkgbase=kate
 pkgname=(kwrite kate)
-pkgver=20.08.1
-pkgrel=1.2
+pkgver=20.08.2
+pkgrel=1.1
 arch=(x86_64)
 license=(GPL LGPL FDL)
 makedepends=(extra-cmake-modules kdoctools plasma-framework knewstuff kitemmodels ktexteditor threadweaver kactivities kuserfeedback)
 source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgbase-$pkgver.tar.xz"{,.sig}
 kdebug-426300.patch::"https://invent.kde.org/utilities/kate/commit/14e0da664a2733dee652795323b128ecbcf85c5c.patch"
-kdebug-426042.patch::"https://invent.kde.org/utilities/kate/commit/4eaa3b75bd91febbcf9823aeeb45b91e1158f98a.patch"
-kdebug-426605.patch::"https://invent.kde.org/utilities/kate/commit/972903d2620932477c91c62b8b8c56e8d3bf40bd.patch")
-sha256sums=('44607f6a1d5ca8bb7173bedbeabef65bb98dde0fd009987bd8139fbb53959146'
+kdebug-427084.patch::"https://invent.kde.org/utilities/kate/-/commit/566dfd8dd9cbefc332a52be665b035b60619a93b.patch"
+kdebug-427338.patch::"https://invent.kde.org/utilities/kate/-/commit/a3165104ff6a7b39ec624c2ec970b4701a3fae88.patch"
+kdebug-427270.patch::"https://invent.kde.org/utilities/kate/-/commit/98876895d629baa573e50f9337ec4e06ed0f9c6d.patch"
+#kdebug-424471.patch::"https://invent.kde.org/utilities/kate/-/commit/895160f40b9f55c50a17f7a9d968b952bcac4f50.patch"
+"https://raw.githubusercontent.com/polaur/wip/master/kate-polaur/kdebug-424471.patch"
+merge_requests-100.patch::"https://invent.kde.org/utilities/kate/-/merge_requests/100/diffs.patch"
+merge_requests-110.patch::"https://invent.kde.org/utilities/kate/-/merge_requests/110/diffs.patch"
+)
+sha256sums=('718e8230edfa16f93f54380c4e214a0f25f8a398fe74ad23f12b7dcffae419d0'
             'SKIP'
             'b8a021d8614696ced9d161a41c04c06fb85f258d98ccf49c367b82426303f8cb'
-            '4e83a3495c6ad9a7889f67a01f4b4547971b5c27dbb62738cc0b3057a107bf8a'
-            '4d0a4eceabf74562263eb388a330e8be566b105c8ec3111fe24a4769b4d5b01e')
+            '14e3a6a4cbddfd13769ba11fe4675d998aa41c112ddd099a3efd4a5d079cbe86'
+            '59dc6c829f47d8627335a0409a2faf68b3ec7002c6779697d5c222f8cc4eb879'
+            'e097180637b15260f8adc32cfebc857302e8e58434496fdf294d736cbfe360b6'
+            '92181809c667a8bc947505f2a222a87e4f6969952bbd746f6da222ffb2c39df0'
+            '4d50a005d49dbd13829dc3550cb5e22313627b477b89d8fcf140e8715d463636'
+            '87f2edb419b150000feefa5ff8df2ae8ae78ffeb94d78d3eedead4c4c105bd2f')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
 prepare() {
     msg "Add kdebug 426300 patch; fix in 20.12"
     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-426300.patch
-    msg "Add kdebug 426042 patch"
-    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-426042.patch
-    msg "Add kdebug 426605 patch; fix in 20.08.2"
-    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-426605.patch
+    msg "Add kdebug 424471 patch; fix in 20.12"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-424471.patch
+    msg "Add kdebug 427270 patch"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-427270.patch
+    msg "Add kdebug 427338 patch"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-427338.patch
+    msg "Add kdebug 427084 patch"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-427084.patch
+    msg "Add additional patches"
+    patch -d $pkgbase-$pkgver -p1 -i ../merge_requests-100.patch
+    patch -d $pkgbase-$pkgver -p1 -i ../merge_requests-110.patch
 }
 
 build() {
