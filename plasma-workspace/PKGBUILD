@@ -1,0 +1,100 @@
+# Maintainer: pavbaranov <pavbaranov @ gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: Alexey D. <lq07829icatm at rambler.ru>
+
+pkgbase=plasma-workspace
+pkgname=(plasma-workspace plasma-wayland-session)
+pkgver=5.20.0
+pkgrel=2.1
+pkgdesc='KDE Plasma Workspace'
+arch=(x86_64)
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=(LGPL)
+depends=(knotifyconfig libksysguard ktexteditor libqalculate kde-cli-tools appstream-qt phonon-qt5
+         xorg-xrdb xorg-xsetroot kactivitymanagerd kholidays xorg-xmessage milou prison kwin
+         plasma-integration kdelibs4support kpeople kactivities-stats libkscreen kquickcharts kuserfeedback)
+makedepends=(extra-cmake-modules kdoctools gpsd baloo networkmanager-qt kdesignerplugin kinit)
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgbase-$pkgver.tar.xz"{,.sig} kde.pam
+plasma-workspace-gitk.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/ae43cd88.patch"
+#systemd-startup.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/256b6e1738d907cd2e4aaa0e89f113f096473258.patch"
+kdebug-423526.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/3acf8f30249ef256c2a915a12048f55da0568492.patch"
+kdebug-426900.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/63e0ba2dfa334dfb46ad3071baa50af7b43ae042.patch"
+#kdebug-424230.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/371e91b93209206cee3a7146a35b090569e3fd24.patch"
+#kdebug-426746.patch::"https://invent.kde.org/frameworks/plasma-framework/commit/e0e7840a0307deaee7a0b63f341973f8e3508873.patch"
+kdebug-353026.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/0004a1f83b909a04414c56b6519645f1eae62dfd.patch"
+#kdebug-374637.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/84b547914741e6f6754388cae85cafd67ec2a9a8.patch"
+#kdebug-423003.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/84b547914741e6f6754388cae85cafd67ec2a9a8.patch"
+kdebug-426187.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/684bc80657e4ccaf52aed6426e8d80d1d475742d.patch"
+)
+sha256sums=('20fc599fdfc6477c7315fdf3059bae7ac4843294e550a8d18b6cf1af2ed2b2ca'
+            'SKIP'
+            '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
+            '1d5f51407aa33999a710b7f15fc849f3059931a5fce68c419962504ee4556a72'
+            'e57019acf9faf166ffe5804e713ce09e074c0ac9941487d45c917b09ee4c7af8'
+            'c40aa5f2583303fac0444105fad3d562665a76ba23100857f26cfba01df79281'
+            'fbaa17cfa9ab84d68393a5f93fa97984fc26870830c643c6b58332ff07015d93'
+            '4d6d40a7fc8f6a958dacd9dde46d1abd2ecc301000db4788c6e9b060f7d34de5')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+  sed -e 's|dbus-run-session ||' -i $pkgbase-$pkgver/login-sessions/plasmawayland.desktop.cmake # Don't start a second user dbus session
+  
+  patch -d $pkgbase-$pkgver -p1 -i ../plasma-workspace-gitk.patch # Fix gitk error at runtime
+#  msg "Add systemd startup patch"
+#  patch -d $pkgbase-$pkgver -p1 -i ../systemd-startup.patch
+    msg "Add kdebug 426187 patch"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-426187.patch
+    msg "Add kdebug 426900 patch"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-426900.patch
+ #   msg "Add kdebug 424230 patch; fix in 5.21"
+ #   patch -d $pkgbase-$pkgver -p1 -i ../kdebug-424230.patch
+ #   msg "Add kdebug 426746 patch"
+ #   patch -d $pkgbase-$pkgver -p1 -i ../kdebug-426746.patch
+    msg "Add kdebug 353026 patch; fix in 5.21"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-353026.patch
+ #   msg "Add kdebug 374637 patch; fix in 5.21"
+ #   patch -d $pkgbase-$pkgver -p1 -i ../kdebug-374637.patch
+ #   msg "Add kdebug 423003 patch; fix in 5.21"
+ #   patch -d $pkgbase-$pkgver -p1 -i ../kdebug-423003.patch
+}
+
+build() {
+  cmake -B build -S $pkgbase-$pkgver \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package_plasma-workspace() {
+  optdepends=('plasma-workspace-wallpapers: additional wallpapers'
+              'gpsd: GPS based geolocation' 'networkmanager-qt: IP based geolocation'
+              'kdepim-addons: displaying PIM events in the calendar'
+              'appmenu-gtk-module: global menu support for GTK2 and some GTK3 applications'
+              'qt5-virtualkeyboard: virtual keyboard support in lock screen'
+              'baloo: Baloo search runner' 'discover: manage applications installation from the launcher')
+  provides=(notification-daemon)
+  backup=('etc/pam.d/kde')
+
+  DESTDIR="$pkgdir" cmake --install build
+
+  install -Dm644 "$srcdir"/kde.pam "$pkgdir"/etc/pam.d/kde
+
+  # Split plasma-wayland scripts
+  rm -r "$pkgdir"/usr/share/wayland-sessions
+}
+
+package_plasma-wayland-session() {
+  pkgdesc='Plasma Wayland session'
+  depends=(plasma-workspace qt5-wayland kwayland-integration xorg-server-xwayland)
+  groups=()
+
+  install -Dm644 build/login-sessions/plasmawayland.desktop "$pkgdir"/usr/share/wayland-sessions/plasmawayland.desktop
+}
