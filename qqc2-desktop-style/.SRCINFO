@@ -1,7 +1,7 @@
 pkgbase = qqc2-desktop-style
 	pkgdesc = A style for Qt Quick Controls 2 to make it follow your desktop theme
 	pkgver = 5.75.0
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://community.kde.org/Frameworks
 	arch = x86_64
 	groups = kf5
@@ -13,11 +13,13 @@ pkgbase = qqc2-desktop-style
 	source = https://download.kde.org/stable/frameworks/5.75/qqc2-desktop-style-5.75.0.tar.xz.sig
 	source = kdebug-427449.patch::https://invent.kde.org/frameworks/qqc2-desktop-style/commit/015891bf58b5f96ae142920bba48b92fe31ea0e4.patch
 	source = kdebug-412444.patch::https://invent.kde.org/frameworks/qqc2-desktop-style/-/commit/7220dad12864d8e7701a66557ed32e25685612ec.patch
+	source = kdebug-425865.patch::https://invent.kde.org/frameworks/qqc2-desktop-style/commit/2d8d877373e088f94675a0d1fc969bf6dd048a26.patch
 	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
 	sha256sums = 770895c4363973ddcbac281526de8297a4df37bfe1df08be59e62a8caf9368d3
 	sha256sums = SKIP
 	sha256sums = c2c708e4364ca726438cde6ad8f642f793776080e103ebd242c4167a8f53d9c6
 	sha256sums = 1d52aaca79501b57a72e7288de95a9332589a631bcf88fc9c178e3128fbe7a80
+	sha256sums = 31ab58ef65c0e1eb716d8ee932951210dee7ccd778a102324c426d285d2eb1d6
 
 pkgname = qqc2-desktop-style
 
