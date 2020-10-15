@@ -1,0 +1,47 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original work by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=plasma-framework
+pkgver=5.75.0
+pkgrel=1.1
+pkgdesc='Plasma library and runtime components based upon KF5 and Qt5'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(kactivities kdeclarative kwayland kirigami2)
+makedepends=(extra-cmake-modules qt5-tools qt5-doc kdoctools doxygen)
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-427171.patch::"https://invent.kde.org/frameworks/plasma-framework/commit/21b27e90bf938bc66b555f108c8114d74a678bf6.patch"
+kdebug-400278.patch::"https://invent.kde.org/frameworks/plasma-framework/commit/d6a5b10b3b9a4984209f6509a3ed9196b0c1d5d6.patch"
+kdebug-424076.patch::"https://invent.kde.org/frameworks/plasma-framework/commit/086a710478592bc4c93b90c28d4ec88e8ae8b86f.patch")
+sha256sums=('a6a68cdfeaeded999ebe7207c524f8a4a6fd13562a6d95b9f6137730ada0697a'
+            'SKIP'
+            'c766d2f702c0aa4840320907da5cd91a8b908ade3f0e89bdc878c2d2572b20f3'
+            '8c830618da3998ed59b6e77a7a16ff1625519ed55a349781174df71aea952575'
+            '35e5c553544f7b7daae7f08cb40c2cf08f6a5174a9d8f90e848fca6606e63697')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+    msg "Add kdebug 400278 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-400278.patch
+    msg "Add kdebug 427171 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-427171.patch
+    msg "Add kdebug 424076 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-424076.patch
+    }
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
