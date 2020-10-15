@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kwin
-pkgver=5.19.90
-pkgrel=2.6
+pkgver=5.20.0
+pkgrel=1.1
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -16,67 +16,33 @@ depends=(kscreenlocker xcb-util-cursor plasma-framework kcmutils kwayland-server
 makedepends=(extra-cmake-modules qt5-tools kdoctools)
 optdepends=('qt5-virtualkeyboard: virtual keyboard support for kwin-wayland')
 groups=(plasma)
-source=("https://download.kde.org/unstable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-425472.patch::"https://invent.kde.org/plasma/kwin/commit/a3b50500.patch"
-kdebug-426686.patch::"https://invent.kde.org/plasma/kwin/commit/23b85e2b852573c5dc3d794e45c1a1a46e56d837.patch"
-kdebug-425869.patch::"https://invent.kde.org/plasma/kwin/commit/5b46e01c45fd650aef81d250e2850697af0db223.patch"
-commit-75cad57c.patch::"https://invent.kde.org/plasma/kwin/-/commit/75cad57cd9369b184d4906618bdd52b70cda9666.patch"
-commit-375691c6.patch::"https://invent.kde.org/plasma/kwin/-/commit/375691c6c21162ddcf49f072e648ee5ebc701c0e.patch"
-kdebug-423319.patch::"https://invent.kde.org/plasma/kwin/commit/381b685b518f5dcffb93c18cdd89b558acde987b.patch"
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-425590.patch::"https://invent.kde.org/plasma/kwin/commit/769c8959d87792f85a7fb5f03106c720681aec4d.patch"
-kdebug-400675.patch::"https://invent.kde.org/plasma/kwin/commit/6e56d5741da68a76e5038c2ceb168ad74dc8effb.patch"
-kdebug-426988.patch::"https://invent.kde.org/plasma/kwin/commit/dfa08f22598582753638cfe6016232bc3b62edb9.patch"
-kdebug-425294.patch::"https://invent.kde.org/plasma/kwin/commit/f53d90a9f916895ec53c7c35a71e4185b8ddae2f.patch"
 kdebug-426120.patch::"https://invent.kde.org/plasma/kwin/commit/2bbab06fc4e8277095049d04809a6f7d43d3d29c.patch"
 kdebug-426122.patch::"https://invent.kde.org/plasma/kwin/commit/db202f5c265d552ca8c908c72c1a46f9270b0291.patch"
-kdebug-427172.patch::"https://invent.kde.org/plasma/kwin/commit/743b06d3a18728077f20c4e8879c86e4ca44c635.patch")
+kdebug-427688.patch::"https://invent.kde.org/plasma/kwin/-/commit/2093820aba4bbb26130b2b6d788b73584a5a6ebd.patch"
+)
 install=$pkgname.install
-sha256sums=('a63c60f0be5f32e05b18337b5957e708560613d8ddc59dfe0baaef70e7d726dd'
+sha256sums=('b91d6101d0a303d42ce05c1a04d7e2e2b0c91ecde3153dac36b17e73cd1a9c96'
             'SKIP'
-            'eee72a9a20c02f783eb09b53ee75d733cc35a09a96e3f1f13482e69be067ec30'
-            'db831c54c20376ee30a3dbcb36db597cf32c639e1f702691ef8ed249758ba9eb'
-            '8fc59b27549d4e06dcbcba94918c007c1702b77e437913e03cd5069e5fc8312a'
-            '32df21f3e5202f7ad6036c6543e84723fe23fc24ee597a5e7ec9bccb9963bed8'
-            '7c636d76175c4e4224deebe1b5ba05f0a8fac362ba5287bd36c4c347783bbd15'
-            '57049ef95d6394d47f0f8eb3033499c33443ce1607ae3dabae435a047d3ba1bd'
             '45a67458a88137438bd334ac1b4e3e18d79f21097343698613c6d1bc578e5c8f'
-            'ea4cfdb9496637e91d9c343ae22f98322c9f1d803c1f74dcdde176fdcd429a44'
-            'cab21c475319f12398671f7ee05fc7efead1f21f525077df04e206c7bb00c267'
-            '0364e1bda930c8249ace00974233d94cfde87456cea37428614841cbfb67d88e'
             '4a49a89e8c88ed9df7f0a2b604ca496dda5b4d71e676b7a1c53204c660895850'
             'cd6bcf4147a6adb72e866dbf765888bede47e70881bd6c3814342110cc850d89'
-            '8c1d3a00f3283c6442fa005916687f8de9306e3f82a8820103f8c84987bff075')
+            '312b4e34a0926b7fbed9b77777ba53e5e21c6251a37fbf2445b419c0efd033c9')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
               '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
 
 prepare() {
-  patch -d $pkgname-$pkgver -p1 -i ../kdebug-425472.patch # Fix crash with auto-hide panels on Wayland
-  msg "Add kdebug 426686 patch"
-  patch -d $pkgname-$pkgver -p1 -i ../kdebug-426686.patch
-  msg "Add kdebug 425869 patch"
-  patch -d $pkgname-$pkgver -p1 -i ../kdebug-425869.patch
-  msg "Add fix invalidation of cached x stacking order in wayland only mode patch"
-  patch -d $pkgname-$pkgver -p1 -i ../commit-75cad57c.patch
-  msg "Add improve opacity detection patch; fix in 5.21"
-  patch -d $pkgname-$pkgver -p1 -i ../commit-375691c6.patch
-  msg "Add kdebug 423319 patch"
-  patch -d $pkgname-$pkgver -p1 -i ../kdebug-423319.patch
+  msg "Add kdebug 427688 patch; fix in 5.20.1"
+  patch -d $pkgname-$pkgver -p1 -i ../kdebug-427688.patch
   msg "Add kdebug 425590 patch"
   patch -d $pkgname-$pkgver -p1 -i ../kdebug-425590.patch
-  msg "Add kdebug 400675 patch"
-  patch -d $pkgname-$pkgver -p1 -i ../kdebug-400675.patch
-  msg "Add kdebug 426988 patch"
-  patch -d $pkgname-$pkgver -p1 -i ../kdebug-426988.patch
-  msg "Add kdebug 425294 patch"
-  patch -d $pkgname-$pkgver -p1 -i ../kdebug-425294.patch
   msg "Add kdebug 426120 patch"
   patch -d $pkgname-$pkgver -p1 -i ../kdebug-426120.patch
   msg "Add kdebug 426122 patch"
   patch -d $pkgname-$pkgver -p1 -i ../kdebug-426122.patch
-  msg "Add kdebug 427172 patch"
-  patch -d $pkgname-$pkgver -p1 -i ../kdebug-427172.patch
 }
 
 build() {
