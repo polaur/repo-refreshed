@@ -1,7 +1,7 @@
 pkgbase = spectacle
 	pkgdesc = KDE screenshot capture utility
 	pkgver = 20.08.2
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://kde.org/applications/utilities/org.kde.spectacle
 	arch = x86_64
 	groups = kde-applications
@@ -20,14 +20,16 @@ pkgbase = spectacle
 	source = https://download.kde.org/stable/release-service/20.08.2/src/spectacle-20.08.2.tar.xz.sig
 	source = kdebug-372464.patch::https://invent.kde.org/graphics/spectacle/commit/fa60f99470485143015b547b03ecba7811569480.patch
 	source = kdebug-425995.patch::https://invent.kde.org/graphics/spectacle/commit/0b3bb8a60ae70115d86b60d43a3df2ddcbded46c.patch
-	source = kdebug-425573.patch::https://invent.kde.org/graphics/spectacle/commit/1e7b22b8c60575d4a12c267db818f8a15f17d500.patch
+	source = commit-0f4e2979.patch::https://invent.kde.org/graphics/spectacle/-/commit/0f4e2979cd35cae5ae2a7353ab6050de2cac415b.patch
+	source = commit-f4dbec3f.patch::https://invent.kde.org/graphics/spectacle/-/commit/f4dbec3f8ffdd7feb5538837e1d12bf75b1c1107.patch
 	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
 	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
 	sha256sums = 9a467ea3b05981d588d39573cca375636b825ad8cab8a36ce48dbbc12425ab0d
 	sha256sums = SKIP
 	sha256sums = bbfe1709b91a01e304606e6b8d413c75aa1ce5431fdd3c6d32c7ae28a08b5f9f
 	sha256sums = ad3b371f072c15ce512370808db61ed92152aea03882e5cca87867ce1f1a04f4
-	sha256sums = 78252ffd01fe0a14e47cee2e0ecb72024b9683c13ce50d4456fcf215812c777c
+	sha256sums = d66d35b47448dd918e5d7715ab9288fdda820ef5d21b5ec53187a755bf4da3ae
+	sha256sums = 8c45b99ef77b1dc70c764fe193777f6aef17bdf37578814be6851f74ae20c61c
 
 pkgname = spectacle
 
