@@ -1,6 +1,6 @@
 pkgbase = konsole
 	pkgdesc = KDE's terminal emulator
-	pkgver = 20.08.1
+	pkgver = 20.08.2
 	pkgrel = 1.1
 	url = https://kde.org/applications/system/konsole/
 	arch = x86_64
@@ -17,12 +17,12 @@ pkgbase = konsole
 	depends = kinit
 	depends = knewstuff
 	optdepends = keditbookmarks: to manage bookmarks
-	source = https://download.kde.org/stable/release-service/20.08.1/src/konsole-20.08.1.tar.xz
-	source = https://download.kde.org/stable/release-service/20.08.1/src/konsole-20.08.1.tar.xz.sig
+	source = https://download.kde.org/stable/release-service/20.08.2/src/konsole-20.08.2.tar.xz
+	source = https://download.kde.org/stable/release-service/20.08.2/src/konsole-20.08.2.tar.xz.sig
 	source = improve-launch-speed.patch::https://invent.kde.org/utilities/konsole/-/commit/688428398ed9d0e939dba855d278c041e86aa981.patch
 	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
 	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
-	sha256sums = bdd82f9104b2f76c53bdbdef613391719b70719a132d24f12e5f620e1c9313d1
+	sha256sums = af08ac7666f1ba7c407205f32aaaf015329621247502e80d8df4abe103148951
 	sha256sums = SKIP
 	sha256sums = 8c7fd78fcdec23d92edbfab1a34bdc30374d84a3aa1b92c58363ee54920c1edd
 
