@@ -1,0 +1,25 @@
+pkgbase = kwalletmanager
+	pkgdesc = Wallet management tool
+	pkgver = 20.08.2
+	pkgrel = 1.1
+	url = https://www.kde.org/applications/system/kwalletmanager/
+	arch = x86_64
+	groups = kde-applications
+	groups = kde-utilities
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = kcmutils
+	makedepends = kdoctools
+	depends = kio
+	depends = hicolor-icon-theme
+	source = https://download.kde.org/stable/release-service/20.08.2/src/kwalletmanager-20.08.2.tar.xz
+	source = https://download.kde.org/stable/release-service/20.08.2/src/kwalletmanager-20.08.2.tar.xz.sig
+	source = kdebug-398803.patch::https://invent.kde.org/utilities/kwalletmanager/commit/707f0e3f5559217660db9fff4951eac4e9b5876c.patch
+	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
+	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
+	sha256sums = 7950e250c5351a9b8e3b36165fa2003baa044bb2d3553a32360000a322bddad8
+	sha256sums = SKIP
+	sha256sums = 45a2489093ae07ddb5cb3fe5d6072429020ae9a31198ed1e80ba3f97fa5547f1
+
+pkgname = kwalletmanager
+
