@@ -1,0 +1,38 @@
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=xdg-desktop-portal-kde
+pkgver=5.20.1
+pkgrel=1.1
+pkgdesc='A backend implementation for xdg-desktop-portal using Qt/KF5'
+arch=(x86_64)
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=(LGPL)
+depends=(pipewire kirigami2 plasma-framework)
+makedepends=(extra-cmake-modules)
+provides=(xdg-desktop-portal-impl)
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-427306.patch::"https://invent.kde.org/plasma/xdg-desktop-portal-kde/commit/62e6605207d151b34b8c78c00ff5087d4831e85a.patch")
+sha256sums=('e09362a184e3814725206abe7d28e997851d4be0249c4b88619a51b1c3cfee2c'
+            'SKIP'
+            '363ae738c8374ae5d620729967d09fae031eeb6c213e1b552f566bf9b548d994')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+    msg "Add kdebug 427306 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-427306.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
