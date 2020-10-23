@@ -1,0 +1,29 @@
+pkgbase = kdeplasma-addons
+	pkgdesc = All kind of addons to improve your Plasma experience
+	pkgver = 5.20.1
+	pkgrel = 1.1
+	url = https://www.kde.org/workspaces/plasmadesktop/
+	arch = x86_64
+	groups = plasma
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = kross
+	makedepends = qt5-webengine
+	depends = plasma-workspace
+	optdepends = kross: comic applet
+	optdepends = purpose: Quickshare applet
+	optdepends = quota-tools: disk quota applet
+	optdepends = qt5-webengine: dictionary and webbrowser applets
+	source = https://download.kde.org/stable/plasma/5.20.1/kdeplasma-addons-5.20.1.tar.xz
+	source = https://download.kde.org/stable/plasma/5.20.1/kdeplasma-addons-5.20.1.tar.xz.sig
+	source = kdebug-428154.patch::https://invent.kde.org/plasma/kdeplasma-addons/commit/753bbb37e05b832fdedff801fe20c6e04f52eba2.patch
+	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
+	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
+	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
+	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
+	sha256sums = 1a25926ced1555418fea53afff50ef9218d9c73e22c285e7ced89a56bfa24e2e
+	sha256sums = SKIP
+	sha256sums = 48e022496c320b756bcb8e049c0dcdd9482ec6f974ddd1d4ffd4905ff0a66ae0
+
+pkgname = kdeplasma-addons
+
