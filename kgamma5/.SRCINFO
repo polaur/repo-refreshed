@@ -1,0 +1,24 @@
+pkgbase = kgamma5
+	pkgdesc = Adjust your monitor's gamma settings
+	pkgver = 5.20.1
+	pkgrel = 1.1
+	url = https://www.kde.org/workspaces/plasmadesktop/
+	arch = x86_64
+	groups = plasma
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	depends = kconfigwidgets
+	source = https://download.kde.org/stable/plasma/5.20.1/kgamma5-5.20.1.tar.xz
+	source = https://download.kde.org/stable/plasma/5.20.1/kgamma5-5.20.1.tar.xz.sig
+	source = kdebug-398803.patch::https://invent.kde.org/plasma/kgamma5/-/commit/c290f5a6b4bca08ef450fffc11b519052783418f.patch
+	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
+	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
+	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
+	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
+	sha256sums = 401ea7194bd1199b5eabf615d6499d17c629db3b27480e225afe7b73ccdaece8
+	sha256sums = SKIP
+	sha256sums = cc148bd0f88a0212ecad0ff741c376b520c852538a87c1afe30dbdd1fd88c634
+
+pkgname = kgamma5
+
