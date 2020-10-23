@@ -1,0 +1,28 @@
+pkgbase = kscreen
+	pkgdesc = KDE's screen management software
+	pkgver = 5.20.1
+	pkgrel = 1.1
+	url = https://www.kde.org/workspaces/plasmadesktop/
+	arch = x86_64
+	groups = plasma
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = plasma-framework
+	makedepends = kcmutils
+	depends = libkscreen
+	depends = kdeclarative
+	depends = qt5-graphicaleffects
+	depends = qt5-sensors
+	source = https://download.kde.org/stable/plasma/5.20.1/kscreen-5.20.1.tar.xz
+	source = https://download.kde.org/stable/plasma/5.20.1/kscreen-5.20.1.tar.xz.sig
+	source = kdebug-427930.patch::https://invent.kde.org/plasma/kscreen/-/commit/49c5d9c5db553a745534099484a6f3e7c6b7bcf4.patch
+	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
+	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
+	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
+	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
+	sha256sums = 37e2d32d1d0b707f28dfb77084a34af3f21602112819c468f1db74b44df3cdf7
+	sha256sums = SKIP
+	sha256sums = 6517b6e51ab5a0c2a5def4e5d5021c1406cdfd805d1eab85d321bd28a1d0b070
+
+pkgname = kscreen
+
