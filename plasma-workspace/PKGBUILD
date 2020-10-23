@@ -9,7 +9,7 @@
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
 pkgver=5.20.1.1
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -28,13 +28,26 @@ kdebug-426900.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/63
 kdebug-353026.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/0004a1f83b909a04414c56b6519645f1eae62dfd.patch"
 #kdebug-374637.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/84b547914741e6f6754388cae85cafd67ec2a9a8.patch"
 #kdebug-423003.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/84b547914741e6f6754388cae85cafd67ec2a9a8.patch"
+kdebug-428026.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/9d252c407125dc1d05e5cc7cd69ba39bf93d2354.patch"
+kdebug-211255.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/879b2b3899c6b5ec94f3e70d73c07cf346c5d5f5.patch"
+kdebug-354239.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/5244e2be7d748a36ea83f0109a26ebce46c5d68f.patch"
+kdebug-342876.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/b62fe57e799ec73c622998116a984042a4f8641a.patch"
+commit-b79f44f4.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/b79f44f4e1cee14e2c3b3faaa2c7ba4462623d27.patch"
+#commit-540f598c.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/540f598c960b2afe21b55eefd5f250508bbada52.patch"
+commit-64f46dc0.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/64f46dc01746804d33b8665f4f433c7b0c713cc1.patch"
 )
 sha256sums=('75b625dc705ec72c374dbcdb4c359ce199a33dea4af72dbf45d3830e375439a6'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
             'e57019acf9faf166ffe5804e713ce09e074c0ac9941487d45c917b09ee4c7af8'
             'c40aa5f2583303fac0444105fad3d562665a76ba23100857f26cfba01df79281'
-            'fbaa17cfa9ab84d68393a5f93fa97984fc26870830c643c6b58332ff07015d93')
+            'fbaa17cfa9ab84d68393a5f93fa97984fc26870830c643c6b58332ff07015d93'
+            '6a5361aacec7c3063f1714585aee7023f672315c903de4be99059cdda6394fdd'
+            '80942b79a8cc24543f74376f7992a65c7ea60850b6af588c8524e8904e43760c'
+            '446f2f59503921c65aeb3c79727880492064b552412bd67aee705200a65ab222'
+            '4c41a941e8c0b5076408effc4b56f2830cc32c9ff246a055467e2d70f6d15899'
+            'fa8c8ecf64f8a9948cc76028fa89106af13a47e6b239f623e3d2e1587e07f33e'
+            'd0a4268897d54e8763aa196d69251e791c22bcda29680477126b6c04ec84d031')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -57,6 +70,20 @@ prepare() {
 #    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-374637.patch
 #    msg "Add kdebug 423003 patch; fix in 5.21"
 #    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-423003.patch
+     msg "Add kdebug 428026 patch; fix in 5.21"
+     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-428026.patch
+     msg "Add kdebug 211255 patch; fix in 5.21"
+     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-211255.patch
+     msg "Add kdebug 354239 patch; fix in 5.21"
+     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-354239.patch
+     msg "Add kdebug 342876 patch; fix in 5.21"
+     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-342876.patch
+     msg "Add show frequently used system settings modules for System Settings patch; fix in 5.21"
+     patch -d $pkgbase-$pkgver -p1 -i ../commit-b79f44f4.patch
+     #msg "Add use icon tabs to select player patch; fix in 5.21"
+     #patch -d $pkgbase-$pkgver -p1 -i ../commit-540f598c.patch
+     msg "Add - add button to open plasmoid configuration from Entries page to system tray patch"
+     patch -d $pkgbase-$pkgver -p1 -i ../commit-64f46dc0.patch
 }
 
 build() {
