@@ -1,0 +1,22 @@
+pkgbase = breeze-icons
+	pkgdesc = Breeze icon themes
+	pkgver = 5.75.0
+	pkgrel = 1.1
+	url = https://community.kde.org/Frameworks
+	arch = any
+	groups = kf5
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = qt5-base
+	source = https://download.kde.org/stable/frameworks/5.75/breeze-icons-5.75.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.75/breeze-icons-5.75.0.tar.xz.sig
+	source = kdebug-397996.patch::https://invent.kde.org/frameworks/breeze-icons/commit/0639985e692a5a01bebb3a8d97f70d9afbba5675.patch
+	source = kdebug-392533.patch::https://invent.kde.org/frameworks/breeze-icons/commit/2883dff5da67c7e595236e92710249846923dd90.patch
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = 21985f62c111e60ebd34bd632b3ee06bb01a1f9f1671d1295f0d24bc21e106a2
+	sha256sums = SKIP
+	sha256sums = 891c0c838bb35889d2844f33f9fa4b3cd586bdc7a72f298d94ac0ad170ea12bf
+	sha256sums = 209820f2d9ffabd7e241b22b5966eb2aefefd52e253357aa5127add5ee174637
+
+pkgname = breeze-icons
+
