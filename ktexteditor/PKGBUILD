@@ -4,7 +4,7 @@
 
 pkgname=ktexteditor
 pkgver=5.75.0
-pkgrel=1.1
+pkgrel=2.2
 pkgdesc='Advanced embeddable text editor'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -13,15 +13,19 @@ depends=(kparts syntax-highlighting libgit2 editorconfig-core-c)
 makedepends=(extra-cmake-modules doxygen qt5-tools qt5-doc)
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-427654.patch::"https://invent.kde.org/frameworks/ktexteditor/-/commit/d80782ebd1d4d92b8ef9fa1593eb93a4c052f3a4.patch")
+kdebug-427654.patch::"https://invent.kde.org/frameworks/ktexteditor/-/commit/d80782ebd1d4d92b8ef9fa1593eb93a4c052f3a4.patch"
+commit-c52de598.patch::"https://invent.kde.org/frameworks/ktexteditor/-/commit/c52de598b2b536182be84faf40f066a2fd5c71b8.patch")
 sha256sums=('acb689e7d5fdaeb43dd2450cd51bca7153d3923df968be46e4aaf2871232f983'
             'SKIP'
-            'ea58bac14cb15c0d3429fda5087e232453d3a7f8f2db0ce5db4b3d850bbb79c3')
+            'ea58bac14cb15c0d3429fda5087e232453d3a7f8f2db0ce5db4b3d850bbb79c3'
+            '486f812bb3349d11ea0e1d6e33c7a26a013f1a92585d108068eb9e011b628e60')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
     msg "Add kdebug 427654 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-427654.patch
+    msg "Add memory leak patch"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-c52de598.patch
 }
 
 build() {
