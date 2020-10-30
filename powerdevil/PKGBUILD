@@ -3,7 +3,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=powerdevil
-pkgver=5.20.1
+pkgver=5.20.2
 pkgrel=1.1
 pkgdesc='Manages the power consumption settings of a Plasma Shell'
 arch=(x86_64)
@@ -15,7 +15,7 @@ optdepends=('kinfocenter: for the Energy Information KCM')
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-398803.patch::"https://invent.kde.org/plasma/powerdevil/commit/5d5c8c0d4eb87bcab3b330b279979aecb07ffc35.patch")
-sha256sums=('36273fca26c73520c674e96039a43134254313998a2a7587c3267230530b50ae'
+sha256sums=('8fa42d77e21dc29eb5e729102717177b78e8eea0962bc7b856ba56dcce808399'
             'SKIP'
             '0af8a0d3276c353d4f243d571212b4ecacae45fe172f4a1dfc7bb876a13e1278')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
