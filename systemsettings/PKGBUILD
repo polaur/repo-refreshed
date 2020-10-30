@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=systemsettings
-pkgver=5.20.1.1
+pkgver=5.20.2
 pkgrel=1.1
 pkgdesc='KDE system manager for hardware, software, and workspaces'
 arch=(x86_64)
@@ -15,10 +15,10 @@ license=(LGPL)
 depends=(plasma-workspace)
 makedepends=(extra-cmake-modules kdoctools)
 groups=(plasma)
-source=("https://download.kde.org/stable/plasma/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-427935.patch::"https://invent.kde.org/plasma/systemsettings/commit/fcdfc86d40794621e80c9c05be0b96f3f6211a5a.patch"
 )
-sha256sums=('6923be6b9b6fbee59d917b9c7036f1a1146a5feeb5ad6442988f45c1531e4f4a'
+sha256sums=('0c7e044becc4d492fe5a313911512d7dccc08a4cd7aabfc0bf7cd878240cb6da'
             'SKIP'
             'bcd87ce5f192300769593daababbd06aa06651162122cb32b3838becf404db75')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
