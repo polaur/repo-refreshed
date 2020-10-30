@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kscreen
-pkgver=5.20.1
-pkgrel=1.2
+pkgver=5.20.2
+pkgrel=1.1
 pkgdesc="KDE's screen management software"
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -18,10 +18,10 @@ groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-427930.patch::"https://invent.kde.org/plasma/kscreen/-/commit/49c5d9c5db553a745534099484a6f3e7c6b7bcf4.patch"
 kdebug-398803.patch::"https://invent.kde.org/plasma/kscreen/commit/b90337a30aec0e8c230e0520fb8591b68cd19fa4.patch")
-sha256sums=('37e2d32d1d0b707f28dfb77084a34af3f21602112819c468f1db74b44df3cdf7'
+sha256sums=('42d55e891516192773ba1dd405c80c76fef86b7e4e5a6bbea3b9dcf38c713f28'
             'SKIP'
-            '6517b6e51ab5a0c2a5def4e5d5021c1406cdfd805d1eab85d321bd28a1d0b070'
-            '89bca611026caad70d5fc6bebb8a1ab94131ca4584d35c9c53f33a95dfa6a861')
+            '828cf0a4a05ba377edf494ab8121f0d6c34f71f9590908a68835cf6c47ccc94c'
+            'b8bf48c5218fd72e8ac855bf96e0afd4c20952059098fb32db18fcd11b1a48e9')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
