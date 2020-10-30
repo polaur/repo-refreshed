@@ -1,7 +1,7 @@
 # Maintainer:Antonio Rojas <arojas@archlinux.org>
 
 pkgname=kgamma5
-pkgver=5.20.1
+pkgver=5.20.2
 pkgrel=1.1
 pkgdesc="Adjust your monitor's gamma settings"
 arch=(x86_64)
@@ -12,7 +12,7 @@ makedepends=(extra-cmake-modules kdoctools)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-398803.patch::"https://invent.kde.org/plasma/kgamma5/-/commit/c290f5a6b4bca08ef450fffc11b519052783418f.patch")
-sha256sums=('401ea7194bd1199b5eabf615d6499d17c629db3b27480e225afe7b73ccdaece8'
+sha256sums=('79720c6899e6edff68692832a84dc3b935929000b90599ae7dd2cbb6a0d784a4'
             'SKIP'
             'cc148bd0f88a0212ecad0ff741c376b520c852538a87c1afe30dbdd1fd88c634')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
