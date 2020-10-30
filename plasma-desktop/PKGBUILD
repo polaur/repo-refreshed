@@ -7,15 +7,14 @@
 
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
-pkgver=5.20.1
-pkgrel=1.2
+pkgver=5.20.2
+pkgrel=1.1
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
 license=(LGPL)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 commit-41c47566.patch::"https://invent.kde.org/plasma/plasma-desktop/-/commit/41c47566f736fefe1e7589efd9d21bd3d05cbe33.patch"
-kdebug-394899.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/7079d0952b313b636126c39f0437ff6ba8687ca7.patch"
 kdebug-423682.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/7079d0952b313b636126c39f0437ff6ba8687ca7.patch"
 commit-0c8e0e7d.patch::"https://invent.kde.org/plasma/plasma-desktop/-/commit/0c8e0e7deefa65ff0a04dc882c041648ec162a74.patch"
 kdebug-398803.patch::"https://invent.kde.org/plasma/plasma-desktop/-/commit/4e2f4a67fed50340691c833e2560f779055b673a.patch"
@@ -23,10 +22,9 @@ kdebug-398803.patch::"https://invent.kde.org/plasma/plasma-desktop/-/commit/4e2f
 depends=(polkit-kde-agent libxkbfile kmenuedit systemsettings ksysguard baloo libibus accountsservice)
 makedepends=(extra-cmake-modules kdoctools xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel scim kdesignerplugin kaccounts-integration intltool)
 groups=(plasma)
-sha256sums=('c1988abd455680717088c133ab29f501af5c097c1fa9e07035dfb2b85df2e843'
+sha256sums=('ef569f62740aad3cf6fdea7d2f87c56df84661043a1b9572c12676937ca698b0'
             'SKIP'
             'cd163ecceebcc7a5e7a95b526708c610ac5cf3dd47289537d2a797d144d8addc'
-            '7729d8f368cfd148c5c575e19138a6eb6517c2b093e9ce22077c7d355e56edab'
             '7729d8f368cfd148c5c575e19138a6eb6517c2b093e9ce22077c7d355e56edab'
             '1bda68d7c5e1215a3f32cb907dbf5141febef4244b609e1681cbc999630a6daa'
             'b8d3aa9407b55963cb99eb48c991827f85eab7a88358d576f850dc89ececf049')
@@ -38,8 +36,6 @@ validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr
 prepare() {
     msg "Add Highlight changed settings; fix in 5.21"
     patch -d $pkgname-$pkgver -p1 -i ../commit-41c47566.patch    
-    msg "Add kdebug 394899 patch; fix in 5.20.2"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-394899.patch
 #    msg "Add kdebug 423682 patch"
 #    patch -d $pkgname-$pkgver -p1 -i ../kdebug-423682.patch
     msg "Add Show frequently used settings modules for System Settings in Task Manager patch"
