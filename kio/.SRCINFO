@@ -1,7 +1,7 @@
 pkgbase = kio
 	pkgdesc = Resource and network access abstraction
 	pkgver = 5.75.0
-	pkgrel = 2.2
+	pkgrel = 2.3
 	url = https://community.kde.org/Frameworks
 	arch = x86_64
 	groups = kf5
@@ -32,6 +32,8 @@ pkgbase = kio
 	source = https://invent.kde.org/frameworks/kio/-/commit/4321b8ff.patch
 	source = kdebug-427876.patch::https://invent.kde.org/frameworks/kio/commit/a371e23b2b667bc85c311d04549f3d7348d00af5.patch
 	source = kdebug-418711.patch::https://invent.kde.org/frameworks/kio/commit/f29ce254864ce575d12717896edcf71b35c2a30a.patch
+	source = kdebug-418655.patch::https://invent.kde.org/frameworks/kio/commit/0be10baef00c1fd3f26f6658b8c5ef6b56cbb862.patch
+	source = kdebug-116617.patch::https://invent.kde.org/frameworks/kio/commit/fd0959409f356d2c7baecb849f50901123913a63.patch
 	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
 	sha256sums = 27af8d83d0ea6c68fc62675a0d0d34e94489e9e518c4a4c32fa9d4784510bc8e
 	sha256sums = SKIP
@@ -43,6 +45,8 @@ pkgbase = kio
 	sha256sums = 6516a723e910ae34a3c8572b86e420e234f5a6a37f680ae17ce4d82e64a761e7
 	sha256sums = 4fb6cb9169226d62e864be1fe6e01b6b85b66eb925b2baab0746bdc1597d23b0
 	sha256sums = 9c11b5938c2128e2b1c4305246628e417661619cc6bbd8e64a0fed9a66b2cca9
+	sha256sums = 5ad8ff85e08ce1d0624b1bfaf6375f265a4d72e8566fc84dd784255db6cee6d1
+	sha256sums = 589586f8e4db984d684b7f1fd673aa58a9da4e4ef1ecf4ce046e8903f7080529
 
 pkgname = kio
 
