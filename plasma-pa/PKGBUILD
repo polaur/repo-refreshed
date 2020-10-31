@@ -11,10 +11,12 @@ depends=(plasma-workspace libcanberra-pulse pulseaudio perl)
 makedepends=(extra-cmake-modules kdoctools)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-398803.patch::"https://invent.kde.org/plasma/plasma-pa/commit/d11192c620bcdcd285ecda49341f597b863396f3.patch")
+kdebug-398803.patch::"https://invent.kde.org/plasma/plasma-pa/commit/d11192c620bcdcd285ecda49341f597b863396f3.patch"
+commit-cdf9fba8.patch::"https://invent.kde.org/plasma/plasma-pa/-/commit/cdf9fba8f888937726c7e2c55dcd793a3126ca5f.patch")
 sha256sums=('2011169926b9119c4574979d6fa350f16a9587ebca64a09603e9d93ccea103ec'
             'SKIP'
-            'cb4a38ce79e04650e5602a6cda786dd27ebfd27623df8982640157c762d072a6')
+            'cb4a38ce79e04650e5602a6cda786dd27ebfd27623df8982640157c762d072a6'
+            '5e59e7eee6bb6389129a1c4e70f61854d3b2d8f670d20c4bc7dcf899ea557b91')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -23,6 +25,8 @@ validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr
 prepare() {
     msg "Add kdebug 398803 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-398803.patch
+    msg "Add remove usage of tabs patch; in 5.21"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-cdf9fba8.patch
 }
 build() {
   cmake -B build -S $pkgname-$pkgver \
