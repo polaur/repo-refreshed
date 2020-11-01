@@ -19,25 +19,27 @@ optdepends=('kde-cli-tools: for editing file type options' 'ffmpegthumbs: video 
             'konsole: terminal panel' 'purpose: share context menu' 'packagekit-qt5: service menu installer')
 groups=(kde-applications kde-system)
 source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
-#kdebug-427619.patch::"https://invent.kde.org/system/dolphin/commit/c733b3aa9787a618a0ce5bb03b3fc731f5663b21.patch"
 kdebug-158934.patch::"https://invent.kde.org/system/dolphin/commit/ae1d441dacef7e52984201abdc9a918ce060021c.patch"
 kdebug-427274.patch::"https://invent.kde.org/system/dolphin/commit/4937992e93088bb572cda971bb899aed0e812aa3.patch"
 kdebug-427273.patch::"https://invent.kde.org/system/dolphin/commit/b343fdffc52ff42d83afa02f6eaf1f5a359a49a9.patch"
 #kdebug-426582.patch::"https://invent.kde.org/system/dolphin/commit/81cf9f0375c937b973900dce0979d9218d9960ee.patch"
 commit-31cba55c.patch::"https://invent.kde.org/system/dolphin/-/commit/31cba55cff36d1d1501350209482f25a429c0a27.patch"
+#commit-78a8c7d3.patch::"https://invent.kde.org/network/kio-extras/-/commit/78a8c7d3d5621fe1e716604f8a2177d565f6af95.patch"
+kdebug-427619.patch::"https://invent.kde.org/system/dolphin/commit/c733b3aa9787a618a0ce5bb03b3fc731f5663b21.patch"
+kdebug-417219.patch::"https://invent.kde.org/system/dolphin/commit/bf11c835ebd934d9916327262f23edb25aeb8ab8.patch"
 )
 sha256sums=('bd13574610fc2108b9b04249cff70ca99958fe57a42fbf260ed16e5e377071bc'
             'SKIP'
             '15a90eee20fe3a5b87db7dbb1b676ba9323eb66b206938a58dacff7d62d917be'
             'ec3d35b38c2f38385c33ddfa18926a4e856f5b78e07bcca16e0cc8e6baa38c98'
             '25c36ed35098b46df3d27bcc0e896b33da39f9a980ff8873432a97271a8e40f1'
-            'fa3aeca7bebbced41804b7b31a40d294962a539f0ed4ce37cc4dff2afeeebdb6')
+            'fa3aeca7bebbced41804b7b31a40d294962a539f0ed4ce37cc4dff2afeeebdb6'
+            '15c0cb6fa42977e6b4f998127d0d8d91f1de8288328599cbf7e23f40eb70350c'
+            '781b2a0ad0fed67b1c325f1933c5ef3d0eeb6268515fa86e666e227b0cf35b80')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
 prepare() {
- #   msg "Add kdebug 427619 patch; fix in 20.12"
- #   patch -d $pkgname-$pkgver -p1 -i ../kdebug-427619.patch
     msg "Add kdebug 158934 patch; fix in 20.12"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-158934.patch
     msg "Add kdebug 427274 patch; fix in 20.12"
@@ -48,6 +50,12 @@ prepare() {
  #   patch -d $pkgname-$pkgver -p1 -i ../kdebug-426582.patch
     msg "Add add tooltip to tabbar patch; fix in 20.12"
     patch -d $pkgname-$pkgver -p1 -i ../commit-31cba55c.patch
+ #   msg "Add optimize creation of thumbnails patch; fix in 20.12"
+ #   patch -d $pkgname-$pkgver -p1 -i ../commit-78a8c7d3.patch
+    msg "Add kdebug 427619 patch; fix in 20.12"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-427619.patch
+    msg "Add kdebug 417219 patch; fix in 20.12"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-417219.patch
 }
 
 build() {
