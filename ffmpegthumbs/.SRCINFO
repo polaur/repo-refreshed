@@ -1,0 +1,25 @@
+pkgbase = ffmpegthumbs
+	pkgdesc = FFmpeg-based thumbnail creator for video files
+	pkgver = 20.08.3
+	pkgrel = 1.1
+	url = https://www.kde.org/applications/multimedia/
+	arch = x86_64
+	groups = kde-applications
+	groups = kde-multimedia
+	license = GPL
+	license = LGPL
+	license = FDL
+	makedepends = extra-cmake-modules
+	depends = kio
+	depends = ffmpeg
+	source = https://download.kde.org/stable/release-service/20.08.3/src/ffmpegthumbs-20.08.3.tar.xz
+	source = https://download.kde.org/stable/release-service/20.08.3/src/ffmpegthumbs-20.08.3.tar.xz.sig
+	source = kdebug-408956.patch::https://invent.kde.org/multimedia/ffmpegthumbs/commit/d2ab28b9a4bcc8270ae0e0995710384eec4d46dc.patch
+	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
+	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
+	sha256sums = f179cc304eeb513444fe0079bddb34ed18cb2ef1125b6294e87de44412bed0a0
+	sha256sums = SKIP
+	sha256sums = 9636c6ee901bdd1cb401ef4774d8f436c00ac46e1b1b8bfecf709d43b8406a36
+
+pkgname = ffmpegthumbs
+
