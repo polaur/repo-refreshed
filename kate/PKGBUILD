@@ -1,0 +1,80 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgbase=kate
+pkgname=(kwrite kate)
+pkgver=20.08.3
+pkgrel=1.1
+arch=(x86_64)
+license=(GPL LGPL FDL)
+makedepends=(extra-cmake-modules kdoctools plasma-framework knewstuff kitemmodels ktexteditor threadweaver kactivities kuserfeedback)
+source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgbase-$pkgver.tar.xz"{,.sig}
+kdebug-426300.patch::"https://invent.kde.org/utilities/kate/commit/14e0da664a2733dee652795323b128ecbcf85c5c.patch"
+kdebug-427270.patch::"https://invent.kde.org/utilities/kate/-/commit/98876895d629baa573e50f9337ec4e06ed0f9c6d.patch"
+kdebug-424471.patch::"https://raw.githubusercontent.com/polaur/wip/master/kate-polaur/kdebug-424471.patch"
+merge_requests-100.patch::"https://invent.kde.org/utilities/kate/-/merge_requests/100/diffs.patch"
+merge_requests-110.patch::"https://invent.kde.org/utilities/kate/-/merge_requests/110/diffs.patch"
+)
+sha256sums=('e9b7a9b11ae54a387b5a6d6f4253f9da7f63972fe2928d7fa280d969638dfdd4'
+            'SKIP'
+            'b8a021d8614696ced9d161a41c04c06fb85f258d98ccf49c367b82426303f8cb'
+            'e097180637b15260f8adc32cfebc857302e8e58434496fdf294d736cbfe360b6'
+            '92181809c667a8bc947505f2a222a87e4f6969952bbd746f6da222ffb2c39df0'
+            '4d50a005d49dbd13829dc3550cb5e22313627b477b89d8fcf140e8715d463636'
+            '87f2edb419b150000feefa5ff8df2ae8ae78ffeb94d78d3eedead4c4c105bd2f')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+
+prepare() {
+    msg "Add kdebug 426300 patch; fix in 20.12"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-426300.patch
+    msg "Add kdebug 424471 patch; fix in 20.12"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-424471.patch
+    msg "Add kdebug 427270 patch; fix in 20.12"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-427270.patch
+    msg "Add additional patches"
+    patch -d $pkgbase-$pkgver -p1 -i ../merge_requests-100.patch
+    patch -d $pkgbase-$pkgver -p1 -i ../merge_requests-110.patch
+}
+
+build() {
+  cmake -B build -S $pkgbase-$pkgver \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package_kwrite() {
+  pkgdesc="Text Editor"
+  groups=(kde-applications kde-utilities)
+  url="https://www.kde.org/applications/utilities/kwrite/"
+  depends=(ktexteditor hicolor-icon-theme)
+
+  DESTDIR="$pkgdir" cmake --install build
+
+  find "$pkgdir" -type f -name '*kate*' -exec rm {} \;
+  rm -r "$pkgdir"/usr/lib/qt/plugins/ktexteditor \
+        "$pkgdir"/usr/share/doc/HTML/*/{kate,katepart} \
+        "$pkgdir"/usr/share/katexmltools \
+        "$pkgdir"/usr/share/locale/*/LC_MESSAGES/{ktexteditorpreviewplugin,lspclient,tabswitcherplugin}.mo \
+        "$pkgdir"/usr/share/plasma/plasmoids
+}
+
+package_kate() {
+  pkgdesc="Advanced Text Editor"
+  groups=(kde-applications kde-utilities)
+  url="https://www.kde.org/applications/utilities/kate/"
+  depends=(knewstuff ktexteditor threadweaver kactivities kuserfeedback hicolor-icon-theme)
+  optdepends=('konsole: open a terminal in Kate'
+              'clang: C and C++ LSP support'
+              'python-language-server: Python LSP support'
+              'texlab: LaTeX LSP support'
+              'rust: Rust LSP support')
+  DESTDIR="$pkgdir" cmake --install build
+
+  find "$pkgdir" -type f -name '*kwrite*' -exec rm {} \;
+  rm -r "$pkgdir"/usr/share/doc/HTML/*/kwrite
+}

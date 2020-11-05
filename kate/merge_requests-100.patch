@@ -1,0 +1,27 @@
+From 0d75b07f0a40ab056d6d4c3cbacab9eba21e46b8 Mon Sep 17 00:00:00 2001
+From: Alexander Lohnau <alexander.lohnau@gmx.de>
+Date: Sat, 12 Sep 2020 17:09:00 +0200
+Subject: [PATCH] Fix cancel button being focused
+
+---
+ kate/katesavemodifieddialog.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kate/katesavemodifieddialog.cpp b/kate/katesavemodifieddialog.cpp
+index 42eb72d6c..849d37505 100644
+--- a/kate/katesavemodifieddialog.cpp
++++ b/kate/katesavemodifieddialog.cpp
+@@ -182,9 +182,9 @@ KateSaveModifiedDialog::KateSaveModifiedDialog(QWidget *parent, const QList<KTex
+     QPushButton *cancelButton = new QPushButton;
+     KGuiItem::assign(cancelButton, KStandardGuiItem::cancel());
+     cancelButton->setDefault(true);
+-    cancelButton->setFocus();
+     buttons->addButton(cancelButton, QDialogButtonBox::RejectRole);
+     connect(cancelButton, &QPushButton::clicked, this, &KateSaveModifiedDialog::reject);
++    cancelButton->setFocus();
+ }
+ 
+ KateSaveModifiedDialog::~KateSaveModifiedDialog()
+-- 
+GitLab
+
