@@ -1,0 +1,33 @@
+pkgbase = spectacle
+	pkgdesc = KDE screenshot capture utility
+	pkgver = 20.08.3
+	pkgrel = 1.1
+	url = https://kde.org/applications/utilities/org.kde.spectacle
+	arch = x86_64
+	groups = kde-applications
+	groups = kde-graphics
+	license = GPL
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	depends = xcb-util-cursor
+	depends = libkipi
+	depends = purpose
+	depends = knewstuff
+	depends = kwayland
+	depends = qt5-tools
+	optdepends = kipi-plugins: export to various online services
+	source = https://download.kde.org/stable/release-service/20.08.3/src/spectacle-20.08.3.tar.xz
+	source = https://download.kde.org/stable/release-service/20.08.3/src/spectacle-20.08.3.tar.xz.sig
+	source = kdebug-425995.patch::https://invent.kde.org/graphics/spectacle/commit/0b3bb8a60ae70115d86b60d43a3df2ddcbded46c.patch
+	source = commit-0f4e2979.patch::https://invent.kde.org/graphics/spectacle/-/commit/0f4e2979cd35cae5ae2a7353ab6050de2cac415b.patch
+	source = commit-f4dbec3f.patch::https://invent.kde.org/graphics/spectacle/-/commit/f4dbec3f8ffdd7feb5538837e1d12bf75b1c1107.patch
+	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
+	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
+	sha256sums = 843367e7e7b0f81c9f88a2a37e5d68a993bf2244a7139d7e7d674698a65ebc99
+	sha256sums = SKIP
+	sha256sums = ad3b371f072c15ce512370808db61ed92152aea03882e5cca87867ce1f1a04f4
+	sha256sums = d66d35b47448dd918e5d7715ab9288fdda820ef5d21b5ec53187a755bf4da3ae
+	sha256sums = 8c45b99ef77b1dc70c764fe193777f6aef17bdf37578814be6851f74ae20c61c
+
+pkgname = spectacle
+
