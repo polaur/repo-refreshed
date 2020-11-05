@@ -1,0 +1,35 @@
+pkgbase = ark
+	pkgdesc = Archiving Tool
+	pkgver = 20.08.3
+	pkgrel = 1.1
+	url = https://kde.org/applications/utilities/ark/
+	arch = x86_64
+	groups = kde-applications
+	groups = kde-utilities
+	license = GPL
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	depends = kparts
+	depends = kpty
+	depends = libarchive
+	depends = libzip
+	depends = kitemmodels
+	depends = hicolor-icon-theme
+	optdepends = p7zip: 7Z format support
+	optdepends = unrar: RAR decompression support
+	optdepends = unarchiver: RAR format support
+	optdepends = lzop: LZO format support
+	optdepends = lrzip: LRZ format support
+	source = https://download.kde.org/stable/release-service/20.08.3/src/ark-20.08.3.tar.xz
+	source = https://download.kde.org/stable/release-service/20.08.3/src/ark-20.08.3.tar.xz.sig
+	source = memory-leaks-fix.patch::https://invent.kde.org/utilities/ark/-/commit/8ac8238b707f4a5dce57415587a87f3963baa19d.patch
+	source = add-zstd-support.patch::https://invent.kde.org/utilities/ark/-/commit/635df78f227c34afab4c1d9e5134fb81d22b1b82.patch
+	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
+	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
+	sha256sums = fedfb2fb9b9d5d7741e7166d2e13049d48a90501f22d046f9ae01469c5957c0e
+	sha256sums = SKIP
+	sha256sums = 2cb812e5c7330e97d511992a36acd501898dc8f56bbba0ce1325703919b62ba3
+	sha256sums = b329fd2db60b437603df62c809c155b8a7e3cbc7c181fddad4eaba5c711b9ba7
+
+pkgname = ark
+
