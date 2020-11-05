@@ -1,0 +1,25 @@
+pkgbase = ksystemlog
+	pkgdesc = System log viewer tool
+	pkgver = 20.08.3
+	pkgrel = 1.1
+	url = https://kde.org/applications/system/ksystemlog/
+	arch = x86_64
+	groups = kde-applications
+	groups = kde-system
+	license = GPL
+	license = LGPL
+	license = FDL
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	depends = kio
+	source = https://download.kde.org/stable/release-service/20.08.3/src/ksystemlog-20.08.3.tar.xz
+	source = https://download.kde.org/stable/release-service/20.08.3/src/ksystemlog-20.08.3.tar.xz.sig
+	source = fix-memory-leak.patch::https://github.com/KDE/ksystemlog/commit/82612c9d11d098a7f112bf267756f84f0788edcb.patch
+	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
+	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
+	sha256sums = 2285996b8b1447b94d5d4011a4f9e9d117702f8c4fe873fb5d914d486c15cc85
+	sha256sums = SKIP
+	sha256sums = a5ceca60d55687c1dc0dbc11701903168aac700ac8ab8885a8ce05f7e5db8d04
+
+pkgname = ksystemlog
+
