@@ -1,7 +1,7 @@
 pkgbase = dolphin
 	pkgdesc = KDE File Manager
 	pkgver = 20.08.3
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://kde.org/applications/system/dolphin/
 	arch = x86_64
 	groups = kde-applications
@@ -31,6 +31,8 @@ pkgbase = dolphin
 	source = commit-31cba55c.patch::https://invent.kde.org/system/dolphin/-/commit/31cba55cff36d1d1501350209482f25a429c0a27.patch
 	source = kdebug-427619.patch::https://invent.kde.org/system/dolphin/commit/c733b3aa9787a618a0ce5bb03b3fc731f5663b21.patch
 	source = kdebug-417219.patch::https://invent.kde.org/system/dolphin/commit/bf11c835ebd934d9916327262f23edb25aeb8ab8.patch
+	source = kdebug-420037.patch::https://invent.kde.org/system/dolphin/commit/61bf84c13d203840d4ffeb55ce92dc8b660871a1.patch
+	source = kdebug-315405.patch::https://invent.kde.org/system/dolphin/-/commit/ac6de72048fb50bca1823b8001fb012158050c25.patch
 	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
 	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
 	sha256sums = 9d29577e0ef2d364a54718f1a8e0a74cf4246f6bd020ff605825f5888739f680
@@ -41,6 +43,8 @@ pkgbase = dolphin
 	sha256sums = fa3aeca7bebbced41804b7b31a40d294962a539f0ed4ce37cc4dff2afeeebdb6
 	sha256sums = 15c0cb6fa42977e6b4f998127d0d8d91f1de8288328599cbf7e23f40eb70350c
 	sha256sums = 781b2a0ad0fed67b1c325f1933c5ef3d0eeb6268515fa86e666e227b0cf35b80
+	sha256sums = ff815027e33df39d965ee3ea46b706ffecdfa2e50065887525558c7fb4519c69
+	sha256sums = 69409bc55e8f57b5492b6621e29e1839d2f3257daf7023057b9c162d25214d79
 
 pkgname = dolphin
 
