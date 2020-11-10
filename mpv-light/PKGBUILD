@@ -5,7 +5,8 @@
 
 pkgname=mpv-light
 pkgver=0.32.0
-pkgrel=4
+pkgrel=5
+_tag='d81133141f052187016a8cb4cf034c35ba39e0ba' # git rev-parse v${pkgver}
 pkgdesc='a free, open source, and cross-platform media player (polaur)'
 conflicts=('mpv')
 arch=('x86_64')
@@ -23,11 +24,15 @@ makedepends=('mesa' 'python-docutils' 'ladspa' 'wayland-protocols'
 optdepends=('youtube-dl: for video-sharing websites playback')
 provides=('libmpv.so')
 options=('!emptydirs')
-source=("$pkgname-$pkgver.tar.gz::https://github.com/mpv-player/${pkgname%-*}/archive/v$pkgver.tar.gz")
-sha256sums=('9163f64832226d22e24bbc4874ebd6ac02372cd717bef15c28a0aa858c5fe592')
+validpgpkeys=('145077D82501AA20152CACCE8D769208D5E31419') # sfan5 <sfan5@live.de>
+# source=("$pkgname-$pkgver.tar.gz::https://github.com/mpv-player/${pkgname%-*}/archive/v$pkgver.tar.gz")
+# sha256sums=('9163f64832226d22e24bbc4874ebd6ac02372cd717bef15c28a0aa858c5fe592')
+source=("git+https://github.com/mpv-player/mpv.git#tag=${_tag}?signed")
+sha256sums=('SKIP')
 
 build() {
-  cd ${pkgname%-*}-${pkgver}
+  # cd ${pkgname%-*}-${pkgver}
+  cd ${pkgname%-*}
 
   waf configure --prefix=/usr \
     --confdir=/etc/mpv \
@@ -44,7 +49,8 @@ build() {
 }
 
 package() {
-  cd ${pkgname%-*}-${pkgver}
+  # cd ${pkgname%-*}-${pkgver}
+  cd ${pkgname%-*}
 
   waf install --destdir="$pkgdir"
 
