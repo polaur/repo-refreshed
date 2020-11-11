@@ -7,7 +7,7 @@
 pkgname=weechat-light
 replaces=('weechat-python3-light')
 _pkgname=weechat
-pkgver=2.9
+pkgver=3.0
 pkgrel=1
 pkgdesc="Fast, light and extensible IRC client (curses UI) (polaur)"
 conflicts=('weechat')
@@ -23,7 +23,7 @@ optdepends=('lua: support for lua scripts'
             'tcl: support for tcl scripts')
 source=("${pkgname}-${pkgver}.tar.xz::https://www.weechat.org/files/src/${_pkgname}-${pkgver}.tar.xz"
         "${pkgname}-${pkgver}.tar.xz.asc::https://www.weechat.org/files/src/${_pkgname}-${pkgver}.tar.xz.asc")
-sha512sums=('c4a5723accb417c0496b5427ee58fbf5d3e842e6d79a7988f8680cd605534cfc9d30f6f4844afe45f5223458f28b8deff1284fff2fb5b7d04cb99a81cde4e13e'
+sha512sums=('d6a68f35dc7363b838af811ff0a0a8d9fff519a4231c66f963e896bdda8653a56608e46333dc866e7dee25c1eafd2f1bf99c443089dde5a268bba637a0dee8ca'
             'SKIP')
 validpgpkeys=('A9AB5AB778FA5C3522FD0378F82F4B16DEC408F8') # WeeChat (signing key) <webmaster@weechat.org>
 
