@@ -8,8 +8,8 @@
 
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
-pkgver=5.20.2
-pkgrel=1.2
+pkgver=5.20.3
+pkgrel=1.1
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -36,14 +36,12 @@ commit-b79f44f4.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/
 #commit-540f598c.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/540f598c960b2afe21b55eefd5f250508bbada52.patch"
 commit-64f46dc0.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/64f46dc01746804d33b8665f4f433c7b0c713cc1.patch"
 kdebug-398803.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/29cd276f7e8cb73e0262500d68009a66d07a7f52.patch"
-kdebug-427797.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/2ff78e97ccf2763f6f4933cc32a6c95d5642c87f.patch"
 kdebug-428159.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/8b703d005fa10a22bd7adedaa54d34fd4429e642.patch"
 #kdebug-422948.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/e67dc48ae2706dcf0a2785a37823bf54c838cac9.patch"
 commit-f29c8db4.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/f29c8bd4a77fe9563204f91f524cc5020cdd5e83.patch"
-commit-69f5c3a0.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/69f5c3a06853f8ab6800f81e36fc93a4ad27c4e8.patch"
 kdebug-360965.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/3fded2b874844923514a6ac6b83b938216313f55.patch"
 )
-sha256sums=('2bd71e6054577f881b0fcab7af5c7e1d39db1ef03470fb6e662713559da9e5f4'
+sha256sums=('47466ec788bb8e6295dbacc34eefb0912e712aeed9924ce025dd48aa61cf9f04'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
             'e57019acf9faf166ffe5804e713ce09e074c0ac9941487d45c917b09ee4c7af8'
@@ -56,10 +54,8 @@ sha256sums=('2bd71e6054577f881b0fcab7af5c7e1d39db1ef03470fb6e662713559da9e5f4'
             'fa8c8ecf64f8a9948cc76028fa89106af13a47e6b239f623e3d2e1587e07f33e'
             'd0a4268897d54e8763aa196d69251e791c22bcda29680477126b6c04ec84d031'
             '9baf9ef257ae7901f884fa9fc7b5b3cf172f41e7c5373c18c6f474fba6633ba7'
-            '5327be02a9064a0de6a35a6cd43bbb6ab262af374bb5eb846cba373b82673a26'
             'ff200dafe69182380d89e20fa54e10f0f2c396b37704c6dd61239c37efa9f31a'
             '0d8228fe926d8f822c93b45366599d8496bcc31d9b475ed3ce25e744718619a2'
-            'f0d376568db99a3537e169b8f264539636ca4f3672a2c650e698c5fba7454180'
             'da5d8922c9dc69e51ef27647b03b91d16b8edfbbb07195e52873469abfe517b0')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
@@ -99,16 +95,12 @@ prepare() {
      patch -d $pkgbase-$pkgver -p1 -i ../commit-64f46dc0.patch
      msg "Add kdebug 398803 patch"
      patch -d $pkgbase-$pkgver -p1 -i ../kdebug-398803.patch
-     msg "Add kdebug 427797 patch; fix in 5.20.3"
-     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-427797.patch
      msg "Add kdebug 428159 patch; fix in 5.21"
      patch -d $pkgbase-$pkgver -p1 -i ../kdebug-428159.patch
      msg "Add kdebug 422948 patch"
 #     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-422948.patch
 #     msg "Add Demote the matches so they get less in the way patch"
      patch -d $pkgbase-$pkgver -p1 -i ../commit-f29c8db4.patch
-     msg "Add Fall back to tool tip title if no title is set"
-     patch -d $pkgbase-$pkgver -p1 -i ../commit-69f5c3a0.patch
      msg "Add kdebug 360965 patch"
      patch -d $pkgbase-$pkgver -p1 -i ../kdebug-360965.patch
 }
