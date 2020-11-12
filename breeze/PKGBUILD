@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=breeze
-pkgver=5.20.2
+pkgver=5.20.3
 pkgrel=1.1
 arch=(x86_64)
 pkgdesc='Artwork, styles and assets for the Breeze visual style for the Plasma Desktop'
@@ -19,7 +19,7 @@ optdepends=('breeze-gtk: Breeze widget style for GTK applications'
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-393238.patch::"https://invent.kde.org/plasma/breeze/-/commit/059ac0b719a885402182206aae9e7189b241cfd9.patch")
-sha256sums=('e1c1643221d9cb246cab5c7d9423effee5fe23c22785d20c0d0e841f1ced6793'
+sha256sums=('c949bc5683ec0f4f3c4c6e412f71369a9a4e96101c4927c9e9b3b26dca89bc3d'
             'SKIP'
             '4060c4629c2df4ca50da76d86e457b0583c915c5a526afcfcc2f72a3d5307064')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
