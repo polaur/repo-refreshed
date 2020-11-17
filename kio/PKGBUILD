@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kio
-pkgver=5.75.0
-pkgrel=2.3
+pkgver=5.76.0
+pkgrel=1.1
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -19,50 +19,23 @@ optdepends=('kio-extras: extra protocols support (sftp, fish and more)' 'kdoctoo
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-418528.patch::"https://invent.kde.org/frameworks/kio/commit/62055ce1a44d1455011478e0302ab91868bd43db.patch"
-kdebug-424082.patch::"https://invent.kde.org/frameworks/kio/commit/5f84f12d68ef33478b7b6f0052061c13505104ab.patch"
-kdebug-426690.patch::"https://invent.kde.org/frameworks/kio/commit/74904f0cac872aac2423fe41adb115c3dc330ad5.patch"
-kdebug-426704.patch::"https://invent.kde.org/frameworks/kio/commit/c6f0c8b856e6183c625e0526ddc3a8c64ecd558.patch"
 kdebug-418518.patch::"https://invent.kde.org/frameworks/kio/-/commit/62055ce1a44d1455011478e0302ab91868bd43db.patch"
-https://invent.kde.org/frameworks/kio/-/commit/4321b8ff.patch
 kdebug-427876.patch::"https://invent.kde.org/frameworks/kio/commit/a371e23b2b667bc85c311d04549f3d7348d00af5.patch"
-kdebug-418711.patch::"https://invent.kde.org/frameworks/kio/commit/f29ce254864ce575d12717896edcf71b35c2a30a.patch"
-kdebug-418655.patch::"https://invent.kde.org/frameworks/kio/commit/0be10baef00c1fd3f26f6658b8c5ef6b56cbb862.patch"
-kdebug-116617.patch::"https://invent.kde.org/frameworks/kio/commit/fd0959409f356d2c7baecb849f50901123913a63.patch"
 )
-sha256sums=('27af8d83d0ea6c68fc62675a0d0d34e94489e9e518c4a4c32fa9d4784510bc8e'
+sha256sums=('9351fc85c4020f2f77012e077f4f9d04d8f233e9b67f9b7619c9bc064714145b'
             'SKIP'
             '54b1c5a51ba094f2b1c65f45a0e19e955e9c68add125f9633414a6dc1c17d7f3'
-            '5dfe1d95d68c841fab221385342bd983688ee777c17bee6a11146dac221b920e'
-            'c1ddd3738597ca248315223ee76bd7a275029d558b41282287025d2ba2f065bf'
-            'abeb978675ecfb7c0445f6a2a3f1fec319974be231bca0965036b6b19c776227'
             '54b1c5a51ba094f2b1c65f45a0e19e955e9c68add125f9633414a6dc1c17d7f3'
-            '6516a723e910ae34a3c8572b86e420e234f5a6a37f680ae17ce4d82e64a761e7'
-            '4fb6cb9169226d62e864be1fe6e01b6b85b66eb925b2baab0746bdc1597d23b0'
-            '9c11b5938c2128e2b1c4305246628e417661619cc6bbd8e64a0fed9a66b2cca9'
-            '5ad8ff85e08ce1d0624b1bfaf6375f265a4d72e8566fc84dd784255db6cee6d1'
-            '589586f8e4db984d684b7f1fd673aa58a9da4e4ef1ecf4ce046e8903f7080529')
+            '4fb6cb9169226d62e864be1fe6e01b6b85b66eb925b2baab0746bdc1597d23b0')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
     msg "Add kdebug 418528 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-418528.patch
-    msg "Add kdebug 424082 patch"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-424082.patch
-    msg "Add kdebug 426690 patch"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-426690.patch
-    msg "Add kdebug 426704 patch"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-426704.patch
     msg "Add kdebug 418518 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-418518.patch
-    patch -d $pkgname-$pkgver -p1 -i ../4321b8ff.patch # Fix selecting files with '#'
-    msg "Add kdebug 418711 patch"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-418711.patch
     msg "Add kdebug 427876 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-427876.patch
-    msg "Add kdebug 418655 patch"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-418655.patch
-    msg "Add kdebug 116617 patch"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-116617.patch
 }
 
 build() {
