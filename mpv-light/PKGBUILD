@@ -4,9 +4,9 @@
 # Contributor: Eivind Uggedal <eivind@uggedal.com>
 
 pkgname=mpv-light
-pkgver=0.32.0
-pkgrel=6
-_tag='d81133141f052187016a8cb4cf034c35ba39e0ba' # git rev-parse v${pkgver}
+pkgver=0.33.0
+pkgrel=1
+_tag='d5ae9f70ea1f21c1d3794df5345a6a9366188660' # git rev-parse v${pkgver}
 pkgdesc='a free, open source, and cross-platform media player (polaur)'
 conflicts=('mpv')
 arch=('x86_64')
@@ -18,7 +18,7 @@ depends=('desktop-file-utils' 'ffmpeg' 'hicolor-icon-theme' 'libjack.so' 'lcms2'
          'libarchive' 'libcaca' 'libgl' 'libva'
          'libxinerama' 'libxkbcommon' 'libxrandr' 'libxss' 'libxv' 'lua52'
          'librubberband.so' 'uchardet' 'vulkan-icd-loader' 'wayland'
-         'xdg-utils' 'shaderc' 'mujs' 'libplacebo' 'libplacebo.so')
+         'xdg-utils' 'shaderc' 'mujs')
 makedepends=('mesa' 'python-docutils' 'ladspa' 'wayland-protocols'
              'ffnvcodec-headers' 'vulkan-headers' 'waf')
 optdepends=('youtube-dl: for video-sharing websites playback')
@@ -41,9 +41,13 @@ build() {
     --disable-dvdnav \
     --enable-libarchive \
     --enable-libmpv-shared \
-    --disable-libsmbclient \
-    --disable-sndio \
-    --disable-build-date
+    --disable-build-date \
+	--disable-libbluray \
+	--disable-libplacebo \
+	--disable-cuda-hwaccel \
+	--disable-cuda-interop \
+	--disable-d3d-hwaccel \
+	--disable-d3d9-hwaccel
 
   waf build
 }
