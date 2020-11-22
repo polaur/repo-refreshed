@@ -5,7 +5,7 @@
 
 pkgname=mpv-light
 pkgver=0.32.0
-pkgrel=5
+pkgrel=6
 _tag='d81133141f052187016a8cb4cf034c35ba39e0ba' # git rev-parse v${pkgver}
 pkgdesc='a free, open source, and cross-platform media player (polaur)'
 conflicts=('mpv')
