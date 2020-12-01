@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kscreen
-pkgver=5.20.3
+pkgver=5.20.4
 pkgrel=1.1
 pkgdesc="KDE's screen management software"
 arch=(x86_64)
@@ -18,7 +18,7 @@ groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-427930.patch::"https://invent.kde.org/plasma/kscreen/-/commit/49c5d9c5db553a745534099484a6f3e7c6b7bcf4.patch"
 kdebug-398803.patch::"https://invent.kde.org/plasma/kscreen/commit/b90337a30aec0e8c230e0520fb8591b68cd19fa4.patch")
-sha256sums=('124593bea59efd44b6209b22636205796e6e07f573c9e002c1548b66027f7303'
+sha256sums=('4063fae5cb40a22a98fd0cc217e9b0ea4aef6518203c4bbe2664d5d01dfb9d9c'
             'SKIP'
             '828cf0a4a05ba377edf494ab8121f0d6c34f71f9590908a68835cf6c47ccc94c'
             'b8bf48c5218fd72e8ac855bf96e0afd4c20952059098fb32db18fcd11b1a48e9')
