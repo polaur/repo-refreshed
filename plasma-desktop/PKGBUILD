@@ -7,7 +7,7 @@
 
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
-pkgver=5.20.3
+pkgver=5.20.4
 pkgrel=1.1
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
@@ -25,7 +25,7 @@ commit-6a0d8d6c.patch::"https://invent.kde.org/plasma/plasma-desktop/-/commit/6a
 depends=(polkit-kde-agent libxkbfile kmenuedit systemsettings ksysguard baloo libibus accountsservice)
 makedepends=(extra-cmake-modules kdoctools xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel scim kdesignerplugin kaccounts-integration intltool)
 groups=(plasma)
-sha256sums=('d78ce0d288bb657b1e417179fc5b28bb291b44df7b7840400f034243d4e10b3a'
+sha256sums=('3864e80bb9b8da596188162b14cd9bb77e7a8abedfb0fa41c8c72d47139d1355'
             'SKIP'
             '7729d8f368cfd148c5c575e19138a6eb6517c2b093e9ce22077c7d355e56edab'
             '1bda68d7c5e1215a3f32cb907dbf5141febef4244b609e1681cbc999630a6daa'
