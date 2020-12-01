@@ -3,7 +3,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kde-cli-tools
-pkgver=5.20.3
+pkgver=5.20.4
 pkgrel=1.1
 pkgdesc="Tools based on KDE Frameworks 5 to better interact with the system"
 arch=(x86_64)
@@ -15,7 +15,7 @@ optdepends=('plasma-workspace: for kcmshell5')
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-398803.patch::"https://invent.kde.org/plasma/kde-cli-tools/commit/f3bccba4cfdff3bf624fef16df0031fd29c85528.patch")
-sha256sums=('4e258f6ed63cfd37a357cfbe15fe06015086cef593d961913c328c3a4b2a866c'
+sha256sums=('55f35158715bafdd51e448a2760327ed4f91c54fcd3da807dec2736d077b16a3'
             'SKIP'
             '03a27d13fa4b49037e77b8a2c8762e2a014edcd98f77c42e49dbeea819d8bdec')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
