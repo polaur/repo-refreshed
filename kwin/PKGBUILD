@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kwin
-pkgver=5.20.3
-pkgrel=2.1
+pkgver=5.20.4
+pkgrel=1.1
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -29,7 +29,7 @@ commit-dbcf43ab.patch::"https://invent.kde.org/plasma/kwin/-/commit/dbcf43abfe08
 #commit-9cbac6fe.patch::"https://invent.kde.org/plasma/kwin/-/commit/9cbac6fe3a1e5973bcf15d3d9006c0162a2134ed.patch"
 )
 install=$pkgname.install
-sha256sums=('3bfe2a3991575328badc960e99812b36c1242c667407c377d23cc064e0bacde8'
+sha256sums=('c59861e9d456974bffaff2cb371cd8d31bdb789f89a60af632089c556111662a'
             'SKIP'
             '45a67458a88137438bd334ac1b4e3e18d79f21097343698613c6d1bc578e5c8f'
             '4a49a89e8c88ed9df7f0a2b604ca496dda5b4d71e676b7a1c53204c660895850'
