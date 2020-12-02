@@ -8,7 +8,7 @@
 pkgbase=plasma-desktop
 pkgname=(plasma-desktop knetattach)
 pkgver=5.20.4
-pkgrel=1.1
+pkgrel=2.1
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -21,6 +21,7 @@ kdebug-398803.patch::"https://invent.kde.org/plasma/plasma-desktop/-/commit/4e2f
 kdebug-366462.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/a366714231dcdb24e17bf12c39d4457ac5d7dbb7.patch"
 #kdebug-426775.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/23d221319820f27368929d30392289b33fdf535a.patch"
 commit-6a0d8d6c.patch::"https://invent.kde.org/plasma/plasma-desktop/-/commit/6a0d8d6c35dbbdf5c486fceb156aaf3aaf30b827.patch"
+kdebug-429314.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/036fd9d1.patch"
 )
 depends=(polkit-kde-agent libxkbfile kmenuedit systemsettings ksysguard baloo libibus accountsservice)
 makedepends=(extra-cmake-modules kdoctools xf86-input-evdev xf86-input-synaptics xf86-input-libinput xorg-server-devel scim kdesignerplugin kaccounts-integration intltool)
@@ -31,7 +32,8 @@ sha256sums=('3864e80bb9b8da596188162b14cd9bb77e7a8abedfb0fa41c8c72d47139d1355'
             '1bda68d7c5e1215a3f32cb907dbf5141febef4244b609e1681cbc999630a6daa'
             'b8d3aa9407b55963cb99eb48c991827f85eab7a88358d576f850dc89ececf049'
             '2b20e4128d7fc42b4caad93b95483a947a7b2466b88e7fdb5c51a2079a4e8bdc'
-            '22bfb16cec5e4a56fc5e0b454bca74ce3f316ec7885ebb4906ec3301b2ad8d8b')
+            '22bfb16cec5e4a56fc5e0b454bca74ce3f316ec7885ebb4906ec3301b2ad8d8b'
+            '3a9edde572da99cbf235b235da8ea79da1ef9540c28130045798cec8592d60e9')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -52,6 +54,8 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-366462.patch
 #    msg "Add kdebug 426775 patch; fix in 5.21"
 #    patch -d $pkgname-$pkgver -p1 -i ../kdebug-426775.patch
+    msg "Add kdebug 429314 patch"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-429314.patch # Fix race condition in users KCM
 }
 
 build() {
