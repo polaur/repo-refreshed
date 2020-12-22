@@ -7,7 +7,7 @@
 
 pkgname=kio
 pkgver=5.77.0
-pkgrel=1.1
+pkgrel=2.1
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -22,12 +22,14 @@ source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgve
 kdebug-319700.patch::"https://invent.kde.org/frameworks/kio/commit/61912633cfc7792b4a3e905ea601318d9e3e85d2.patch"
 kdebug-322837.patch::"https://invent.kde.org/frameworks/kio/commit/c5dbb7c5452f1af637540efdf09061765c0ffb2d.patch"
 kdebug-423765.patch::"https://invent.kde.org/frameworks/kio/commit/1534dd1391f947f37c0cadc30b875b62425063c8.patch"
+kdebug-430374.patch::"https://invent.kde.org/frameworks/kio/commit/9dc9e26.patch"
 )
 sha256sums=('237c85c9dbcfcd366290512005b0e8498c10f3b300524633bbc9319a8327a14f'
             'SKIP'
             'c7d3c5dde173383411ba89057120a5a470e57fd3dfe3b8f6f820cf45bb3e344e'
             '1d358db42b749b00b75b7522ffe255eac26f182b9aadf0e9b2f478b46a688b7a'
-            'f6175d811f1b69485092b9eab144150a7823655f711e24dccb2e3f41bc41b8ef')
+            'f6175d811f1b69485092b9eab144150a7823655f711e24dccb2e3f41bc41b8ef'
+            '1b2ce8586b1fd442d7b46addbcafe67f494df17d2702e951a9847ed5cd9f9314')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -39,6 +41,8 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-322837.patch
     msg "Add kdebug 423765 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-423765.patch
+    msg "Add kdebug 430374 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-430374.patch # Fix crash on overwrite dialog
 }
 
 build() {
