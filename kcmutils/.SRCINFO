@@ -1,0 +1,22 @@
+pkgbase = kcmutils
+	pkgdesc = Utilities for interacting with KCModules
+	pkgver = 5.78.0
+	pkgrel = 1.1
+	url = https://community.kde.org/Frameworks
+	arch = x86_64
+	groups = kf5
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = doxygen
+	makedepends = qt5-tools
+	makedepends = qt5-doc
+	depends = kdeclarative
+	source = https://download.kde.org/stable/frameworks/5.78/kcmutils-5.78.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.78/kcmutils-5.78.0.tar.xz.sig
+	source = kdebug-431843.patch::https://invent.kde.org/frameworks/kcmutils/-/commit/293374dc9ff305f4dae202334332bdae0e01a3b9.patch
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = 68165fa953286ba5034b1766d09b02542c9d3eaa13dc4d64e8ced84cc70cc2d3
+	sha256sums = SKIP
+	sha256sums = 4abe90bcc0787678ca48c41dda90a499cb4d4fc4d4ca7a942d5eff5d181fcaa0
+
+pkgname = kcmutils
