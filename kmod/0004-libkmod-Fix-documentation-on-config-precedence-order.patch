@@ -1,0 +1,56 @@
+From 67993d65134d10a0a0a05bfb8f56a4c6c7a9f0a4 Mon Sep 17 00:00:00 2001
+From: Lucas De Marchi <lucas.demarchi@intel.com>
+Date: Mon, 18 Jan 2021 18:05:09 -0800
+Subject: [PATCH 4/7] libkmod: Fix documentation on config precedence order
+
+/etc is has higher priority than /run.
+---
+ libkmod/libkmod.c  | 2 +-
+ man/depmod.d.xml   | 2 +-
+ man/modprobe.d.xml | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/libkmod/libkmod.c b/libkmod/libkmod.c
+index 43423d6..25655b9 100644
+--- a/libkmod/libkmod.c
++++ b/libkmod/libkmod.c
+@@ -235,7 +235,7 @@ static char *get_kernel_release(const char *dirname)
+  * @config_paths: ordered array of paths (directories or files) where
+  *                to load from user-defined configuration parameters such as
+  *                alias, blacklists, commands (install, remove). If
+- *                NULL defaults to /run/modprobe.d, /etc/modprobe.d and
++ *                NULL defaults to /etc/modprobe.d, /run/modprobe.d and
+  *                /lib/modprobe.d. Give an empty vector if configuration should
+  *                not be read. This array must be null terminated.
+  *
+diff --git a/man/depmod.d.xml b/man/depmod.d.xml
+index 4341a56..6472bda 100644
+--- a/man/depmod.d.xml
++++ b/man/depmod.d.xml
+@@ -40,8 +40,8 @@
+ 
+   <refsynopsisdiv>
+     <para><filename>/usr/lib/depmod.d/*.conf</filename></para>
+-    <para><filename>/etc/depmod.d/*.conf</filename></para>
+     <para><filename>/run/depmod.d/*.conf</filename></para>
++    <para><filename>/etc/depmod.d/*.conf</filename></para>
+   </refsynopsisdiv>
+ 
+   <refsect1><title>DESCRIPTION</title>
+diff --git a/man/modprobe.d.xml b/man/modprobe.d.xml
+index 211af84..a674d69 100644
+--- a/man/modprobe.d.xml
++++ b/man/modprobe.d.xml
+@@ -41,8 +41,8 @@
+ 
+   <refsynopsisdiv>
+     <para><filename>/lib/modprobe.d/*.conf</filename></para>
+-    <para><filename>/etc/modprobe.d/*.conf</filename></para>
+     <para><filename>/run/modprobe.d/*.conf</filename></para>
++    <para><filename>/etc/modprobe.d/*.conf</filename></para>
+   </refsynopsisdiv>
+ 
+   <refsect1><title>DESCRIPTION</title>
+-- 
+2.30.0.155.g66e871b664
+

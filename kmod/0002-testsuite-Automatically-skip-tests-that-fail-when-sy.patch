@@ -1,7 +1,7 @@
-From 1a4b7a5111d0793f1c618e39a63fc93150e78a05 Mon Sep 17 00:00:00 2001
+From c1fb6e541421f9c250baf0247df72278ec7dd55a Mon Sep 17 00:00:00 2001
 From: Marius Bakke <marius@devup.no>
 Date: Sat, 1 Aug 2020 18:02:22 +0200
-Subject: [PATCH 2/3] testsuite: Automatically skip tests that fail when
+Subject: [PATCH 2/7] testsuite: Automatically skip tests that fail when
  sysconfdir != /etc.
 
 ---
