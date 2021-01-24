@@ -1,0 +1,51 @@
+# Maintainer Nelson89 <daniel dot karasinski at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the orginal works by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=elisa
+pkgver=20.12.1
+pkgrel=1.1
+pkgdesc='A simple music player aiming to provide a nice experience for its users'
+url='https://community.kde.org/Elisa'
+arch=(x86_64)
+license=(LGPL3)
+groups=(kde-applications kde-multimedia)
+depends=(baloo kirigami2 kdeclarative vlc) # upnp-player-qt
+makedepends=(extra-cmake-modules kdoctools)
+source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-431602.patch::"https://invent.kde.org/multimedia/elisa/commit/afaf25d815763728ac842922dd422377f66079dc.patch"
+kdebug-428218.patch::"https://invent.kde.org/multimedia/elisa/commit/6951479520ac241072ac3f03a310fff522579453.patch"
+kdebug-430743.patch::"https://invent.kde.org/multimedia/elisa/commit/d825da3dd869dc2cec45a80ecd6351bc241fafcc.patch"
+kdebug-421660.patch::"https://invent.kde.org/multimedia/elisa/commit/c2b3d0d312ac20c0aa1a4e7a34a765484c420cc3.patch"
+)
+
+sha256sums=('3e360105dd08296bee61d2d92adfc7311b46bdb813be5842f4f2fbd64fecafd2'
+            'SKIP'
+            '1c9f8e7dc41a4e51a19b56e0e86a9349f06aae5ca5af3b25574e79e956a0e68a'
+            '31d7f6bb72c3083ded67e8dd65a8ddc65c917a2d24ac5c3bca82f789f026d4b7'
+            '80cdd5a9ce53467d5a53480272e2417e837288981b507ad48ac547be91111c90'
+            '0f64a231781f1737bcde2a33082b532f4b0c5285ec6501a7de3d1adf8e28769d')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+
+prepare() {
+   msg "Add kdebug 431602 patch; fix in 20.12.2"
+   patch -d $pkgname-$pkgver -p1 -i ../kdebug-431602.patch
+   msg "Add kdebug 428218 patch; fix in 20.12.2"
+   patch -d $pkgname-$pkgver -p1 -i ../kdebug-428218.patch
+   msg "Add kdebug 430743 patch; fix in 20.04"
+   patch -d $pkgname-$pkgver -p1 -i ../kdebug-430743.patch
+   msg "Add kdebug 421660 patch"
+   patch -d $pkgname-$pkgver -p1 -i ../kdebug-421660.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF 
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
