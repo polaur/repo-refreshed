@@ -1,0 +1,26 @@
+pkgbase = plasma-framework
+	pkgdesc = Plasma library and runtime components based upon KF5 and Qt5
+	pkgver = 5.78.0
+	pkgrel = 1.1
+	url = https://community.kde.org/Frameworks
+	arch = x86_64
+	groups = kf5
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = qt5-tools
+	makedepends = qt5-doc
+	makedepends = kdoctools
+	makedepends = doxygen
+	depends = kactivities
+	depends = kdeclarative
+	depends = kwayland
+	depends = kirigami2
+	source = https://download.kde.org/stable/frameworks/5.78/plasma-framework-5.78.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.78/plasma-framework-5.78.0.tar.xz.sig
+	source = kdebug-418792.patch::https://invent.kde.org/frameworks/plasma-framework/commit/3c80bc83d936458bd692c4d1a7a1d3d2678180d1.patch
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = 46aee1e872728af5ec5c28c604494bbcdf01c32c19f9fe2593b749bbeb698481
+	sha256sums = SKIP
+	sha256sums = ac63a44248cff5b4e422b14b4e631a527eb6e504d6def99c5ac859ab51a7e7aa
+
+pkgname = plasma-framework

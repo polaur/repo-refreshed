@@ -1,0 +1,58 @@
+From 391a66231cd0083bb56fbc5aeec6c8e92f0624fc Mon Sep 17 00:00:00 2001
+From: Marius Bakke <marius@devup.no>
+Date: Sat, 1 Aug 2020 18:02:21 +0200
+Subject: [PATCH 1/3] testsuite: Add facility to skip tests.
+
+The Makefile helpfully warns that some tests will fail when
+--sysconfdir != /etc, but there are no provisions to easily disable
+those.  This commit provides an escape hatch.
+
+[ Lucas: add comment detailing the purpose of the field ]
+---
+ testsuite/testsuite.c | 9 +++++++++
+ testsuite/testsuite.h | 2 ++
+ 2 files changed, 11 insertions(+)
+
+diff --git a/testsuite/testsuite.c b/testsuite/testsuite.c
+index e46f3d8..05df553 100644
+--- a/testsuite/testsuite.c
++++ b/testsuite/testsuite.c
+@@ -37,6 +37,7 @@
+ #include "testsuite.h"
+ 
+ static const char *ANSI_HIGHLIGHT_GREEN_ON = "\x1B[1;32m";
++static const char *ANSI_HIGHLIGHT_YELLOW_ON = "\x1B[1;33m";
+ static const char *ANSI_HIGHLIGHT_RED_ON =  "\x1B[1;31m";
+ static const char *ANSI_HIGHLIGHT_OFF = "\x1B[0m";
+ 
+@@ -948,6 +949,14 @@ static inline int test_run_parent(const struct test *t, int fdout[2],
+ 	int err;
+ 	bool matchout, match_modules;
+ 
++	if (t->skip) {
++		LOG("%sSKIPPED%s: %s\n",
++			ANSI_HIGHLIGHT_YELLOW_ON, ANSI_HIGHLIGHT_OFF,
++			t->name);
++		err = EXIT_SUCCESS;
++		goto exit;
++	}
++
+ 	/* Close write-fds */
+ 	if (t->output.out != NULL)
+ 		close(fdout[1]);
+diff --git a/testsuite/testsuite.h b/testsuite/testsuite.h
+index f190249..c74b648 100644
+--- a/testsuite/testsuite.h
++++ b/testsuite/testsuite.h
+@@ -109,6 +109,8 @@ struct test {
+ 	const struct keyval *env_vars;
+ 	bool need_spawn;
+ 	bool expected_fail;
++	/* allow to skip tests that don't meet compile-time dependencies */
++	bool skip;
+ 	bool print_outputs;
+ } __attribute__((aligned(8)));
+ 
+-- 
+2.30.0.155.g66e871b664
+
