@@ -1,0 +1,39 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kdeclarative
+pkgver=5.78.0
+pkgrel=1.1
+pkgdesc='Provides integration of QML and KDE Frameworks'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(kio kpackage libepoxy)
+makedepends=(extra-cmake-modules doxygen qt5-tools qt5-doc)
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-406914.patch::"https://invent.kde.org/frameworks/kdeclarative/commit/d142323fb24ef6cc324fd9917610956606a946aa.patch")
+sha256sums=('4759319fd1569d64f53d299f67c8564e75f687376f2774dadc7c53e45d2f4797'
+            'SKIP'
+            '2dbfaf6a8d47fff50d3c5b9df0ef44852c5f2dc2a988f813c68e835a7b21f5d3')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+    msg "Add kdebug 406914 patch; fix in 5.79"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-406914.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
