@@ -7,7 +7,7 @@
 
 pkgname=kio
 pkgver=5.78.0
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -15,7 +15,7 @@ license=(LGPL)
 depends=(solid kjobwidgets kbookmarks libxslt kwallet ktextwidgets kded)
 makedepends=(extra-cmake-modules kdoctools doxygen qt5-tools qt5-doc)
 optdepends=('kio-extras: extra protocols support (sftp, fish and more)' 'kdoctools: for the help kioslave'
-            'knetattach: to add new kio-remote entries' 'kio-fuse: to mount remote filesystems via FUSE')
+            'kio-fuse: to mount remote filesystems via FUSE')
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 #kdebug-431454.patch::"https://invent.kde.org/frameworks/kio/commit/dff0aee217abd99ded4bde54954d5917a8a9a28b.patch"

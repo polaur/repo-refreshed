@@ -1,7 +1,7 @@
 pkgbase = kio
 	pkgdesc = Resource and network access abstraction
 	pkgver = 5.78.0
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://community.kde.org/Frameworks
 	arch = x86_64
 	groups = kf5
@@ -20,7 +20,6 @@ pkgbase = kio
 	depends = kded
 	optdepends = kio-extras: extra protocols support (sftp, fish and more)
 	optdepends = kdoctools: for the help kioslave
-	optdepends = knetattach: to add new kio-remote entries
 	optdepends = kio-fuse: to mount remote filesystems via FUSE
 	source = https://download.kde.org/stable/frameworks/5.78/kio-5.78.0.tar.xz
 	source = https://download.kde.org/stable/frameworks/5.78/kio-5.78.0.tar.xz.sig
