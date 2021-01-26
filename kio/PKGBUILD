@@ -1,0 +1,53 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kio
+pkgver=5.78.0
+pkgrel=1.1
+pkgdesc='Resource and network access abstraction'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(solid kjobwidgets kbookmarks libxslt kwallet ktextwidgets kded)
+makedepends=(extra-cmake-modules kdoctools doxygen qt5-tools qt5-doc)
+optdepends=('kio-extras: extra protocols support (sftp, fish and more)' 'kdoctools: for the help kioslave'
+            'knetattach: to add new kio-remote entries' 'kio-fuse: to mount remote filesystems via FUSE')
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+#kdebug-431454.patch::"https://invent.kde.org/frameworks/kio/commit/dff0aee217abd99ded4bde54954d5917a8a9a28b.patch"
+#commit-fad3f1f0.patch::"https://invent.kde.org/frameworks/kio/-/commit/fad3f1f0c94c27b4c7e4ada2ea4be8945f308eb8.patch"
+commit-03e6d216.patch::"https://invent.kde.org/frameworks/kio/-/commit/03e6d216fd83489f78e9723148115f097d5eb428.patch"
+kdebug-431902.patch::"https://invent.kde.org/frameworks/kio/commit/0300441bb80c3d75a305bc7b1f4a7e1c36f28845.patch"
+)
+sha256sums=('e211dba2c1ed73b67188d3ddbaf40043409912ab731aed4eba5bea32a587d620'
+            'SKIP'
+            'aec2cae804d0212c026e93b3ca90723001b5215fdd150229d98925719c3ce572'
+            '25ac2b90e13c957f4b36a8ae640672c6ca6446099f5aadd1b9a4c2abae9fa4a9')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+#    msg "Add kdebug 431454 patch; fix in 5.79"
+#    patch -d $pkgname-$pkgver -p1 -i ../kdebug-431454.patch
+#    msg "Add commit fad3f1f0 patch; fix in 5.79"
+#    patch -d $pkgname-$pkgver -p1 -i ../commit-fad3f1f0.patch
+    msg "Add commit 03e6d216 patch; fix in 5.79"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-03e6d216.patch
+    msg "Add kdebug 431902 patch; fix in 5.79"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-431902.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
