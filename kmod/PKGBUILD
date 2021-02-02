@@ -39,7 +39,7 @@ md5sums=('0a2b887b1b3dfb8c0b3f41f598203e56'
 
 prepare() {
   cd "$pkgname-$pkgver"
-  
+
   local src
   for src in "${source[@]}"; do
     src="${src%%::*}"
@@ -49,7 +49,7 @@ prepare() {
     patch -Np1 < "../$src"
   done
 }
-         
+
 build() {
   cd "$pkgname-$pkgver"
 
