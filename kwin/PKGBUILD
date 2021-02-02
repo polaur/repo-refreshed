@@ -1,4 +1,5 @@
 # Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# Maintainer Nelson89 <daniel dot karasinski at gmail dot com>
 # only for version with bugfixes from upcomming releases
 # based on the original works by:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
@@ -7,7 +8,7 @@
 
 pkgname=kwin
 pkgver=5.20.5
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -27,6 +28,7 @@ commit-dbcf43ab.patch::"https://invent.kde.org/plasma/kwin/-/commit/dbcf43abfe08
 #kdebug-419032.patch::"https://invent.kde.org/plasma/kwin/commit/4462ecf6ef142f6013dda0b0229dcbefafbb13bd.patch"
 #kdebug-428439.patch::"https://invent.kde.org/plasma/kwin/commit/74391e250e9d744c9b8a95bc2f3806bb64b51a7e.patch"
 #commit-9cbac6fe.patch::"https://invent.kde.org/plasma/kwin/-/commit/9cbac6fe3a1e5973bcf15d3d9006c0162a2134ed.patch"
+kdebug-428301.patch::"https://invent.kde.org/plasma/kwin/commit/57b6091bd58b0ca7a51618cbaea11b8b75983cab.patch"
 )
 install=$pkgname.install
 sha256sums=('ec142543935a1c9fe9b8e7e73db1bdf58669990d7c1611424062bbdd9e21384e'
@@ -35,7 +37,8 @@ sha256sums=('ec142543935a1c9fe9b8e7e73db1bdf58669990d7c1611424062bbdd9e21384e'
             '4a49a89e8c88ed9df7f0a2b604ca496dda5b4d71e676b7a1c53204c660895850'
             'cd6bcf4147a6adb72e866dbf765888bede47e70881bd6c3814342110cc850d89'
             '1b49d4112cd22093ab6320ded154824793dfc3c2f3e6e7b9311a5d022685632c'
-            '8ccf5af2e7e37ca20fca41e3dfd163d9e0d4d2c7e1aa7df8a816dd5c90b4ecf6')
+            '8ccf5af2e7e37ca20fca41e3dfd163d9e0d4d2c7e1aa7df8a816dd5c90b4ecf6'
+            '4342190b491d77fa5dc61b6d9c92e23509807fdb4cf40d6a2b5e918ff3a07f70')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -62,6 +65,8 @@ prepare() {
   #patch -d $pkgname-$pkgver -p1 -i ../kdebug-428439.patch
  # msg "Add show defaults indicator in System Settings patch"
  # patch -d $pkgname-$pkgver -p1 -i ../commit-9cbac6fe.patch
+   msg "Add kdebug 428301 patch; fix in 5.22"
+   patch -d $pkgname-$pkgver -p1 -i ../kdebug-428301.patch
 }
 
 build() {
