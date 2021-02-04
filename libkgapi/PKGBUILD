@@ -2,8 +2,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=libkgapi
-pkgver=20.12.1
-pkgrel=2.1
+pkgver=20.12.2
+pkgrel=1.1
 pkgdesc="A KDE-based library for accessing various Google services via their public API"
 url='https://www.kde.org/'
 arch=(x86_64)
@@ -11,17 +11,14 @@ license=(GPL LGPL FDL)
 depends=(kcalendarcore kcontacts kwallet)
 makedepends=(extra-cmake-modules qt5-tools)
 source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
-         kdebug-429406.patch::"https://invent.kde.org/pim/libkgapi/commit/d81d2470.patch"
          kdebug-328616.patch::"https://invent.kde.org/pim/libkgapi/commit/a48887dbbc9bdc7da50c1f93c7235c16620bba36.patch")
-sha256sums=('0df9a24e68d50f67e171ff5c6404891956c7fe675351bda8f8ab2a84ffa2a833'
+sha256sums=('d1161dc2a0b4cd93251894a6dc320273038da71e09b733545956f61e0fd04af9'
             'SKIP'
-            '28e88bd0862d7fe56f2b6a9f96b3454e73c1cafe36c813762ed963b78a89ec4f'
             '5d31dc373c5bf3154e4910616726ac5617bc0710db9c0e8f7669ad4a35d6d45a')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
 prepare() {
-  patch -d $pkgname-$pkgver -p1 -i ../kdebug-429406.patch # Fix authentication prompts popping up every hour
   msg "Add kdebug 328616 patch; fix in 5.17"
   patch -d $pkgname-$pkgver -p1 -i ../kdebug-328616.patch
 }
