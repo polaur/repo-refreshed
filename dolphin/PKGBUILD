@@ -7,8 +7,8 @@
 # Contributor: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=dolphin
-pkgver=20.12.1
-pkgrel=1.2
+pkgver=20.12.2
+pkgrel=1.1
 pkgdesc="KDE File Manager"
 arch=(x86_64)
 url="https://kde.org/applications/system/dolphin/"
@@ -19,29 +19,17 @@ optdepends=('kde-cli-tools: for editing file type options' 'ffmpegthumbs: video 
             'konsole: terminal panel' 'purpose: share context menu' 'packagekit-qt5: service menu installer')
 groups=(kde-applications kde-system)
 source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-430778.patch::"https://invent.kde.org/system/dolphin/commit/a6d095fa0450237f89e240da99877f6c79b46ecc.patch"
-kdebug-431626.patch::"https://invent.kde.org/system/dolphin/commit/33270dd4423eea329b8f20db17f8d70ab7b108da.patch"
-kdebug-426461.patch::"https://invent.kde.org/system/dolphin/commit/764861af51ec0a4f124886567725f9950961f6e6.patch"
 kdebug-426354.patch::"https://invent.kde.org/system/dolphin/commit/78c7429a35c9bdbcdb76fd6304210237e5dbc2f5.patch"
 kdebug-430085.patch::"https://invent.kde.org/system/dolphin/commit/2e79e21c3f4da5183b516e0088f2137c4f27ceff.patch"
 )
-sha256sums=('b71652f40f28d92e790a0cdffbd0124c09a7a2264a7a798297b9238171454f58'
+sha256sums=('59f82f599fec19fc3065f034089b6d35a58ddc419e10c370d99d1ca0b7d0baa6'
             'SKIP'
-            'ac4ff7a15677afa33f73b8a71a9ccb54ac99f02dbfc0d82ba13aa2cdb15d98c0'
-            'f1ca9ab9bf80ed1f8485406cc956194bf1be6be79d4c915144214a2ebb877117'
-            '6f7ed95b0834f54f78ae0edd90c16bfd5d1f7223902621755fb0a5489a02bc40'
             '35bd205727dd936e7d5ec2906f623d31e3ae941c6732aa3c535f0845996dec37'
             '75318334a7c14c7e0fc598e028c2a384d530284e56cd0c477610baeaf10d04a4')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
 
 prepare() {
-    msg "Add kdebug 430778 patch; Fix in 20.12.2"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-430778.patch
-    msg "Add kdebug 431626 patch; Fix in 21.4"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-431626.patch
-    msg "Add kdebug 426461 patch; Fix in 20.12.2"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-426461.patch
     msg "Add kdebug 426354 patch; Fix in 21.04"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-426354.patch
     msg "Add kdebug 430085 patch; Fix in 21.04"
