@@ -1,4 +1,5 @@
 # Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# Maintainer Nelson89 <daniel dot karasinski at gmail dot com>
 # only for version with bugfixes from upcomming releases
 # based on the original works by:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
@@ -7,7 +8,7 @@
 
 pkgname=kio
 pkgver=5.78.0
-pkgrel=3.1
+pkgrel=3.2
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -23,12 +24,14 @@ source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgve
 commit-03e6d216.patch::"https://invent.kde.org/frameworks/kio/-/commit/03e6d216fd83489f78e9723148115f097d5eb428.patch"
 kdebug-431902.patch::"https://invent.kde.org/frameworks/kio/commit/0300441bb80c3d75a305bc7b1f4a7e1c36f28845.patch"
 kdebug-431731.patch::"https://invent.kde.org/frameworks/kio/commit/a183dd0d.patch"
+kdebug-432406.patch::"https://invent.kde.org/frameworks/kio/commit/0a13e0a3e830be2b2b2e5c2c6cf8cef25bd68bd8.patch"
 )
 sha256sums=('e211dba2c1ed73b67188d3ddbaf40043409912ab731aed4eba5bea32a587d620'
             'SKIP'
             'aec2cae804d0212c026e93b3ca90723001b5215fdd150229d98925719c3ce572'
             '25ac2b90e13c957f4b36a8ae640672c6ca6446099f5aadd1b9a4c2abae9fa4a9'
-            '90d624ddcdae50f90e35417b0007a310241703060ac9edef0d035ce3f88c087f')
+            '90d624ddcdae50f90e35417b0007a310241703060ac9edef0d035ce3f88c087f'
+            'f0ed1baabf182cc8850bec81b118e5b5f815447e391f7bdc5b6e403871b1ced2')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -42,6 +45,8 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-431902.patch
     msg "Add kdebug 431731 patch; fix in 5.79"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-431731.patch
+    msg "Add kdebug 432406 patch; fix in 5.79"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-432406.patch
 }
 
 build() {
