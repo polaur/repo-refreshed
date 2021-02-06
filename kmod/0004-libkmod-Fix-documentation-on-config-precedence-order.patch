@@ -1,7 +1,7 @@
-From 67993d65134d10a0a0a05bfb8f56a4c6c7a9f0a4 Mon Sep 17 00:00:00 2001
+From 5d8077b1de345f55498de60af1ae5b2b662bc6cd Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Mon, 18 Jan 2021 18:05:09 -0800
-Subject: [PATCH 4/7] libkmod: Fix documentation on config precedence order
+Subject: [PATCH 4/9] libkmod: Fix documentation on config precedence order
 
 /etc is has higher priority than /run.
 ---
@@ -52,5 +52,5 @@ index 211af84..a674d69 100644
  
    <refsect1><title>DESCRIPTION</title>
 -- 
-2.30.0.155.g66e871b664
+2.30.0.335.ge6362826a0
 

@@ -1,7 +1,7 @@
-From c1fb6e541421f9c250baf0247df72278ec7dd55a Mon Sep 17 00:00:00 2001
+From a3c1dc0b8a3f614ead3ea8a13a1d2e392783a12e Mon Sep 17 00:00:00 2001
 From: Marius Bakke <marius@devup.no>
 Date: Sat, 1 Aug 2020 18:02:22 +0200
-Subject: [PATCH 2/7] testsuite: Automatically skip tests that fail when
+Subject: [PATCH 2/9] testsuite: Automatically skip tests that fail when
  sysconfdir != /etc.
 
 ---
@@ -138,5 +138,5 @@ index f908d56..f6bed8b 100644
  	.config = {
  		[TC_UNAME_R] = "4.4.4",
 -- 
-2.30.0.155.g66e871b664
+2.30.0.335.ge6362826a0
 

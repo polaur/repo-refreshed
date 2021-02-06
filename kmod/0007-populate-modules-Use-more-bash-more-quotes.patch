@@ -1,7 +1,7 @@
-From e38a30a682993ccaa6d026dab1808f99946fc8cb Mon Sep 17 00:00:00 2001
+From 3a99800e98067f64c05d541db9c32410f039caaf Mon Sep 17 00:00:00 2001
 From: Dave Reisner <dreisner@archlinux.org>
 Date: Wed, 25 Mar 2020 11:03:58 -0400
-Subject: [PATCH 7/7] populate-modules: Use more bash, more quotes
+Subject: [PATCH 7/9] populate-modules: Use more bash, more quotes
 
 We're already using associatives arrays, so there's no reason we should
 be using 'test'.
@@ -61,5 +61,5 @@ index 358e740..b0cc932 100755
 +    cat "${MODULE_PLAYGROUND}/dummy.pkcs7" >>"${ROOTFS}/$m"
  done
 -- 
-2.30.0.155.g66e871b664
+2.30.0.335.ge6362826a0
 
