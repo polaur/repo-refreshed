@@ -8,7 +8,7 @@
 
 pkgname=dolphin
 pkgver=20.12.2
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="KDE File Manager"
 arch=(x86_64)
 url="https://kde.org/applications/system/dolphin/"
@@ -21,19 +21,24 @@ groups=(kde-applications kde-system)
 source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-426354.patch::"https://invent.kde.org/system/dolphin/commit/78c7429a35c9bdbcdb76fd6304210237e5dbc2f5.patch"
 kdebug-430085.patch::"https://invent.kde.org/system/dolphin/commit/2e79e21c3f4da5183b516e0088f2137c4f27ceff.patch"
+kdebug-422282.patch::"https://invent.kde.org/system/dolphin/-/commit/a825e1bd74246dc97dde3f48b1d9ead7a214b744.patch"
 )
 sha256sums=('59f82f599fec19fc3065f034089b6d35a58ddc419e10c370d99d1ca0b7d0baa6'
             'SKIP'
             '35bd205727dd936e7d5ec2906f623d31e3ae941c6732aa3c535f0845996dec37'
-            '75318334a7c14c7e0fc598e028c2a384d530284e56cd0c477610baeaf10d04a4')
+            '75318334a7c14c7e0fc598e028c2a384d530284e56cd0c477610baeaf10d04a4'
+            'a06cac89f17fdde645d1c599c490ffd197e658fe573d0ff6dc7385e9ed583597')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
-              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87) # Christoph Feck <cfeck@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87 # Christoph Feck <cfeck@kde.org>
+              D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker
 
 prepare() {
     msg "Add kdebug 426354 patch; Fix in 21.04"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-426354.patch
     msg "Add kdebug 430085 patch; Fix in 21.04"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-430085.patch
+    msg "Add kdebug 422282 patch; Fix in 21.04"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-422282.patch
 }
 
 build() {
