@@ -1,0 +1,17 @@
+pkgbase = quazip-tomahawk
+	pkgdesc = C++ wrapper for the Gilles Vollant's ZIP/UNZIP C package with symlinks for old tomahawk-player
+	pkgver = 1.1
+	pkgrel = 1
+	url = https://stachenov.github.io/quazip/
+	arch = x86_64
+	license = LGPL
+	makedepends = cmake
+	depends = qt5-base
+	provides = quazip
+	conflicts = quazip
+	conflicts = quazip-legacy
+	conflicts = quazip-qt4
+	source = quazip-1.1.tar.gz::https://github.com/stachenov/quazip/archive/v1.1.tar.gz
+	sha256sums = 54edce9c11371762bd4f0003c2937b5d8806a2752dd9c0fd9085e90792612ad0
+
+pkgname = quazip-tomahawk

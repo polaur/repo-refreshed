@@ -1,0 +1,37 @@
+# Maintainer: Damian N. <nycko123 at gmail>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Maintainer: Jaroslav Lichtblau <svetlemodry@archlinux.org>
+# Contributor: Felix Yan <felixonmars@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: trya <tryagainprod@gmail.com>
+
+pkgname=quazip-tomahawk
+pkgver=1.1
+pkgrel=1
+pkgdesc="C++ wrapper for the Gilles Vollant's ZIP/UNZIP C package with symlinks for old tomahawk-player"
+url="https://stachenov.github.io/quazip/"
+license=(LGPL)
+arch=(x86_64)
+depends=(qt5-base)
+makedepends=(cmake)
+provides=('quazip')
+conflicts=('quazip' 'quazip-legacy' 'quazip-qt4')
+source=(${pkgname%-*}-$pkgver.tar.gz::https://github.com/stachenov/${pkgname%-*}/archive/v$pkgver.tar.gz)
+sha256sums=('54edce9c11371762bd4f0003c2937b5d8806a2752dd9c0fd9085e90792612ad0')
+
+build() {
+  cmake -B build -S ${pkgname%-*}-$pkgver \
+    -DCMAKE_INSTALL_PREFIX=/usr
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+  ## symlinks for tomahawk-player 0.8.4
+  ln -fs "/usr/lib/libquazip1-qt5.so.1.1" "${pkgdir}/usr/lib/libquazip5.so"
+  ln -fs "/usr/lib/libquazip1-qt5.so.1.1" "${pkgdir}/usr/lib/libquazip5.so.1"
+  ln -fs "/usr/lib/libquazip1-qt5.so.1.1" "${pkgdir}/usr/lib/libquazip5.so.1.1"
+  ln -fs "/usr/include/QuaZip-Qt5-1.1/quazip" "${pkgdir}/usr/include/quazip5"
+  ln -fs "/usr/lib/cmake/QuaZip-Qt5-1.1" "${pkgdir}/usr/lib/cmake/QuaZip5"
+  ln -fs "/usr/lib/pkgconfig/quazip1-qt5.pc" "${pkgdir}/usr/lib/pkgconfig/quazip.pc"
+}
