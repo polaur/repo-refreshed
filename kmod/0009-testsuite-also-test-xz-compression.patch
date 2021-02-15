@@ -1,7 +1,7 @@
-From 1b2fa8b3db6c3fe87f136f07df7430d586523cb7 Mon Sep 17 00:00:00 2001
+From 3de2afadf9c1b8c7ccdc3e6cc8425db057b7d1a3 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Fri, 29 Jan 2021 18:34:30 -0800
-Subject: [PATCH 9/9] testsuite: also test xz compression
+Subject: [PATCH 09/13] testsuite: also test xz compression
 
 Reviewed-by: Petr Vorel <pvorel@suse.cz>
 ---
@@ -36,5 +36,5 @@ index ae43884..099f026 100755
  	for m in "${zstd_array[@]}"; do
  	    zstd --rm $ROOTFS/$m
 -- 
-2.30.0.335.ge6362826a0
+2.30.1.457.gf011795891
 

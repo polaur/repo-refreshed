@@ -1,7 +1,7 @@
-From dbe154b3f842dffd07cf882ce448383a34fd88f7 Mon Sep 17 00:00:00 2001
+From 9ba1f8f684900b79fe6b106f8b8416c3b84fa67c Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Mon, 18 Jan 2021 18:13:25 -0800
-Subject: [PATCH 5/9] depmod: fix precedence order
+Subject: [PATCH 05/13] depmod: fix precedence order
 
 Configuration in /etc should have higher prio than /run.
 Given how rarely configuration in /run is used with depmod, this is
@@ -25,5 +25,5 @@ index 3f31cdf..8e1d9ec 100644
  	NULL
  };
 -- 
-2.30.0.335.ge6362826a0
+2.30.1.457.gf011795891
 

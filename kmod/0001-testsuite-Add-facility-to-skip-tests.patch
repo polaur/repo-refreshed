@@ -1,7 +1,7 @@
-From f480a29d4e43d679dcffe1a36355cc2be17613cd Mon Sep 17 00:00:00 2001
+From 06449dab83f80d9400f27381cf8d53ec23ce13d3 Mon Sep 17 00:00:00 2001
 From: Marius Bakke <marius@devup.no>
 Date: Sat, 1 Aug 2020 18:02:21 +0200
-Subject: [PATCH 1/9] testsuite: Add facility to skip tests.
+Subject: [PATCH 01/13] testsuite: Add facility to skip tests.
 
 The Makefile helpfully warns that some tests will fail when
 --sysconfdir != /etc, but there are no provisions to easily disable
@@ -54,5 +54,5 @@ index f190249..c74b648 100644
  } __attribute__((aligned(8)));
  
 -- 
-2.30.0.335.ge6362826a0
+2.30.1.457.gf011795891
 

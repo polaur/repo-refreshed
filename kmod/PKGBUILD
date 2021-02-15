@@ -2,7 +2,7 @@
 
 pkgname=kmod
 pkgver=28
-pkgrel=1.3
+pkgrel=1.4
 pkgdesc="Linux kernel module management tools and library"
 arch=('x86_64')
 url='https://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git'
@@ -25,21 +25,29 @@ source=("https://www.kernel.org/pub/linux/utils/kernel/$pkgname/$pkgname-$pkgver
         '0006-Support-usr-local-for-configuration-files.patch'
         '0007-populate-modules-Use-more-bash-more-quotes.patch'
         '0008-testsuite-compress-modules-if-feature-is-enabled.patch'
-        '0009-testsuite-also-test-xz-compression.patch')
+        '0009-testsuite-also-test-xz-compression.patch'
+        '0010-libkmod-config-revamp-kcmdline-parsing-into-a-state-.patch'
+        '0011-libkmod-config-re-quote-option-from-kernel-cmdline.patch'
+        '0012-testsuite-allow-to-re-use-single-function-for-tests.patch'
+        '0013-test-modprobe-share-single-function-for-kcmdline-tes.patch')
 md5sums=('0a2b887b1b3dfb8c0b3f41f598203e56'
          'SKIP'
          'dd62cbf62bd8f212f51ef8c43bec9a77'
          'e179ace75721e92b04b2e145b69dab29'
          '18fb3d1f6024a5a84514c8276cb3ebff'
-         '1fc127bd96d1f51d79365e524253c49e'
-         '5a87aeb0765935a4e4714bb7a70cb7b0'
-         '5b606ce059c1f88e551877c0a8c6da31'
-         'd884a36d4fdde8f1ce186fe37fa05c0f'
-         '22c4f195d954c5d85cb0768e3da180eb'
-         '299795002fd6165880bd1cfa94374590'
-         '65f686cd9bc0a2305329325db19ef4bb'
-         '6ae35d59bc62da23666c6b8df113c9b3'
-         'a4dc98b8b66aebad3e11f9643e3c38b2')
+         '65c2c8386bc381bd0491eeeab346b28b'
+         'cad1b9839de5719ea468df5506139073'
+         '22adf14baf92eb2c4ce5ab25239542fd'
+         '95f07bb977c262423b7b697250fa5528'
+         '8e2109f24ff656c370a34dbcbbca4947'
+         '1a0230f6bcb7be2e178dc4b790bf7cf7'
+         '5d8163c68841cc34c2f1c6bb18e9d8ee'
+         '15641eb0ce47dcaabc9deca51055410f'
+         '7b4f32cb0594b2de08c366961ab9d214'
+         'b657ed6a3c519c36d0166f989e9fdc5d'
+         'd0ea3b013db42a58d5c3fd1f660b67c2'
+         '16f35136d177d9aff3f71bd0863b79b2'
+         '94a30c326215ee1affb075e51867f7f7')
 
 prepare() {
   cd "$pkgname-$pkgver"

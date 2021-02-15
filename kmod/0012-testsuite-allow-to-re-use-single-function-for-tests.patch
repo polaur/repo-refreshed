@@ -1,0 +1,38 @@
+From 8b264ebeb184ca75b6c61c211ce0ff313d1a890e Mon Sep 17 00:00:00 2001
+From: Lucas De Marchi <lucas.demarchi@intel.com>
+Date: Fri, 12 Feb 2021 01:45:23 -0800
+Subject: [PATCH 12/13] testsuite: allow to re-use single function for tests
+
+Add a new DEFINE_TEST_WITH_FUNC() that accepts the function
+alongside the test name. This will allow us to share a single function
+for different tests.
+---
+ testsuite/testsuite.h | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/testsuite/testsuite.h b/testsuite/testsuite.h
+index c74b648..44d1730 100644
+--- a/testsuite/testsuite.h
++++ b/testsuite/testsuite.h
+@@ -140,14 +140,16 @@ int test_run(const struct test *t);
+ 
+ 
+ /* Test definitions */
+-#define DEFINE_TEST(_name, ...) \
++#define DEFINE_TEST_WITH_FUNC(_name, _func, ...) \
+ 	static const struct test UNIQ(s##_name) \
+ 	__attribute__((used, section("kmod_tests"), aligned(8))) = { \
+ 		.name = #_name, \
+-		.func = _name, \
++		.func = _func, \
+ 		## __VA_ARGS__ \
+ 	};
+ 
++#define DEFINE_TEST(_name, ...) DEFINE_TEST_WITH_FUNC(_name, _name, __VA_ARGS__)
++
+ #define TESTSUITE_MAIN() \
+ 	extern struct test __start_kmod_tests[] __attribute__((weak, visibility("hidden")));	\
+ 	extern struct test __stop_kmod_tests[] __attribute__((weak, visibility("hidden")));	\
+-- 
+2.30.1.457.gf011795891
+
