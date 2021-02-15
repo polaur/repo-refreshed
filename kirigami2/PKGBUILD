@@ -4,8 +4,8 @@
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 
 pkgname=kirigami2
-pkgver=5.78.0
-pkgrel=1.2
+pkgver=5.79.0
+pkgrel=1.1
 pkgdesc='A QtQuick based components set'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -14,19 +14,15 @@ groups=(kf5)
 depends=(qt5-quickcontrols qt5-quickcontrols2 qt5-graphicaleffects)
 makedepends=(extra-cmake-modules qt5-tools qt5-doc qt5-svg kpackage doxygen)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-commit-42b4fa7d.patch::"https://invent.kde.org/frameworks/kirigami/-/commit/42b4fa7d1999c41dbced45c48b962fd9483e928c.patch"
-kdebug-428461.patch::"https://invent.kde.org/frameworks/kirigami/commit/b4a6c562cde4e064494e261bc3f64000cbf628a5.patch")
-sha256sums=('5e4e2be2a03d4ff4aae99c9451c2fc81015f9e5c22cc679e188346e83be3c718'
+commit-d19e1ede.patch::"https://invent.kde.org/frameworks/kirigami/-/commit/d19e1edea4f77d95608b076a8696efc0cb5fdecd.patch")
+sha256sums=('f7d39c9dbc20ce0fda1adfe27745ffcd8ec02ca79e8f344efc5b858fd1312b07'
             'SKIP'
-            'bdfa42fc8d52d273095d9fc2712c0fddf7a8d9cc52e6b1d77129ae03c6c31848'
-            'ee27be7c86f30d2cdd8848720ae245986e0fd8bad22c5f12e6d6ad9382f2cba7')
+            'b9e26974780f466f680dd1a1dc6b2bb43d7c48da82d93e75c006097b373e774a')
 validpgpkeys=('53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB') # David Faure <faure@kde.org>
 
 prepare() {
-    msg "Use a little bit less memory"
-    patch -d $pkgname-$pkgver -p1 -i ../commit-42b4fa7d.patch
-    msg "Add kdebug 428461 and 431419 patch; fix in 5.79"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-428461.patch
+    msg "Make Platform Theme share data when possible"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-d19e1ede.patch
 }
 
 build() {
