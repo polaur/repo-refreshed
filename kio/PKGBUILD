@@ -1,5 +1,4 @@
 # Maintainer: pavbaranov <pavbaranov at gmail dot com>
-# Maintainer Nelson89 <daniel dot karasinski at gmail dot com>
 # only for version with bugfixes from upcomming releases
 # based on the original works by:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
@@ -7,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kio
-pkgver=5.78.0
-pkgrel=3.2
+pkgver=5.79.0
+pkgrel=1.1
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -19,34 +18,16 @@ optdepends=('kio-extras: extra protocols support (sftp, fish and more)' 'kdoctoo
             'kio-fuse: to mount remote filesystems via FUSE')
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-#kdebug-431454.patch::"https://invent.kde.org/frameworks/kio/commit/dff0aee217abd99ded4bde54954d5917a8a9a28b.patch"
-#commit-fad3f1f0.patch::"https://invent.kde.org/frameworks/kio/-/commit/fad3f1f0c94c27b4c7e4ada2ea4be8945f308eb8.patch"
-commit-03e6d216.patch::"https://invent.kde.org/frameworks/kio/-/commit/03e6d216fd83489f78e9723148115f097d5eb428.patch"
-kdebug-431902.patch::"https://invent.kde.org/frameworks/kio/commit/0300441bb80c3d75a305bc7b1f4a7e1c36f28845.patch"
-kdebug-431731.patch::"https://invent.kde.org/frameworks/kio/commit/a183dd0d.patch"
-kdebug-432406.patch::"https://invent.kde.org/frameworks/kio/commit/0a13e0a3e830be2b2b2e5c2c6cf8cef25bd68bd8.patch"
+kdebug-432610.patch::"https://invent.kde.org/frameworks/kio/commit/fc4d1cfc66e17f885ca4c22535031886832be685.patch"
 )
-sha256sums=('e211dba2c1ed73b67188d3ddbaf40043409912ab731aed4eba5bea32a587d620'
+sha256sums=('767c67aab4e1a43d1d2ebf74f9deab21791150cc5f533be561dc1346d16e25e6'
             'SKIP'
-            'aec2cae804d0212c026e93b3ca90723001b5215fdd150229d98925719c3ce572'
-            '25ac2b90e13c957f4b36a8ae640672c6ca6446099f5aadd1b9a4c2abae9fa4a9'
-            '90d624ddcdae50f90e35417b0007a310241703060ac9edef0d035ce3f88c087f'
-            'f0ed1baabf182cc8850bec81b118e5b5f815447e391f7bdc5b6e403871b1ced2')
+            'c9542e1e2d27fdc769e9748415496af3a2145b5911ac3301a02ab66503383fa2')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
-#    msg "Add kdebug 431454 patch; fix in 5.79"
-#    patch -d $pkgname-$pkgver -p1 -i ../kdebug-431454.patch
-#    msg "Add commit fad3f1f0 patch; fix in 5.79"
-#    patch -d $pkgname-$pkgver -p1 -i ../commit-fad3f1f0.patch
-    msg "Add commit 03e6d216 patch; fix in 5.79"
-    patch -d $pkgname-$pkgver -p1 -i ../commit-03e6d216.patch
-    msg "Add kdebug 431902 patch; fix in 5.79"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-431902.patch
-    msg "Add kdebug 431731 patch; fix in 5.79"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-431731.patch
-    msg "Add kdebug 432406 patch; fix in 5.79"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-432406.patch
+    msg "Add kdebug 432610 patch; fix in 5.80"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-432610.patch
 }
 
 build() {
