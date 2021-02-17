@@ -1,0 +1,40 @@
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kde-gtk-config
+pkgver=5.19.4
+pkgrel=1
+pkgdesc='GTK2 and GTK3 Configurator for KDE'
+arch=(x86_64)
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=(LGPL)
+depends=(kdbusaddons kconfigwidgets)
+makedepends=(extra-cmake-modules gtk2 gtk3)
+optdepends=('gtk2: GTK2 apps support' 'gtk3: GTK3 apps support' 'xsettingsd: apply settings to GTK applications on the fly')
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-421133.patch::"https://invent.kde.org/plasma/kde-gtk-config/commit/8359e316e7b14e81f4cbdf4ceb14783b7c90fc44.patch")
+sha256sums=('0df5feaf437b1a89c92df225e5cb6f18f3729ae87509c3d162c34c5e0526229d'
+            'SKIP'
+            'ada204265ca37c2a609211317c0080220fad74aaffc2766402e44a439c57e739')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+#prepare() {
+#    msg "Add kdebug 421133 patch; fix in 5.20"
+#    patch -d $pkgname-$pkgver -p1 -i ../kdebug-421133.patch
+#}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
