@@ -1,5 +1,4 @@
 # Maintainer: pavbaranov <pavbaranov at gmail dot com>
-# Maintainer Nelson89 <daniel dot karasinski at gmail dot com>
 # only for version with bugfixes from upcomming releases
 # based on the original works by:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
@@ -7,66 +6,47 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kwin
-pkgver=5.20.5
-pkgrel=1.2
+pkgver=5.21.0
+pkgrel=1.1
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
-url='https://www.kde.org/workspaces/plasmadesktop/'
+url='https://kde.org/plasma-desktop/'
 license=(LGPL)
-depends=(kscreenlocker xcb-util-cursor plasma-framework kcmutils kwayland-server breeze qt5-sensors qt5-script)
-makedepends=(extra-cmake-modules qt5-tools kdoctools)
+depends=(kscreenlocker xcb-util-cursor plasma-framework kcmutils kwayland-server breeze
+         qt5-script pipewire libqaccessibilityclient lcms2)
+makedepends=(extra-cmake-modules qt5-tools kdoctools krunner)
 optdepends=('qt5-virtualkeyboard: virtual keyboard support for kwin-wayland')
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-425590.patch::"https://invent.kde.org/plasma/kwin/commit/769c8959d87792f85a7fb5f03106c720681aec4d.patch"
-kdebug-426120.patch::"https://invent.kde.org/plasma/kwin/commit/2bbab06fc4e8277095049d04809a6f7d43d3d29c.patch"
-kdebug-426122.patch::"https://invent.kde.org/plasma/kwin/commit/db202f5c265d552ca8c908c72c1a46f9270b0291.patch"
-kdebug-428039.patch::"https://invent.kde.org/plasma/kwin/-/commit/733692f4391ebf82f0f9a44c1a9aadab95240e43.patch"
-commit-dbcf43ab.patch::"https://invent.kde.org/plasma/kwin/-/commit/dbcf43abfe08de402d056dfb74b766a63f790b91.patch"
-#kdebug-424754.patch::"https://invent.kde.org/plasma/kwin/commit/d335070b80c2f3bc5674355e3edba61bc010bc36.patch"
-#commit-9b09f039.patch::"https://invent.kde.org/plasma/kwin/-/commit/9b09f0399fee4e46fe9cbc4291434e4908b170cf.patch"
-#kdebug-419032.patch::"https://invent.kde.org/plasma/kwin/commit/4462ecf6ef142f6013dda0b0229dcbefafbb13bd.patch"
-#kdebug-428439.patch::"https://invent.kde.org/plasma/kwin/commit/74391e250e9d744c9b8a95bc2f3806bb64b51a7e.patch"
-#commit-9cbac6fe.patch::"https://invent.kde.org/plasma/kwin/-/commit/9cbac6fe3a1e5973bcf15d3d9006c0162a2134ed.patch"
+#Plasma 5.22 patches:
+#kdebug-431211.patch::"https://invent.kde.org/plasma/kwin/commit/3b87c6ea2dd854b4f5ce0f7f7af66d0184e9104f.patch"
 kdebug-428301.patch::"https://invent.kde.org/plasma/kwin/commit/57b6091bd58b0ca7a51618cbaea11b8b75983cab.patch"
+commit-30464e5c.patch::"https://invent.kde.org/plasma/kwin/-/commit/30464e5c8b3643d19176aa2c521c9dd3eb6609dd.patch"
+commit-2b721200.patch::"https://invent.kde.org/plasma/kwin/-/commit/2b721200fb5c8a0b935a1ba633d69cd1fb992719.patch"
+#commit-12e0376f.patch::"https://invent.kde.org/plasma/kwin/-/commit/12e0376fead0c5a97f205522c5b8d978227e5b12.patch"
 )
 install=$pkgname.install
-sha256sums=('ec142543935a1c9fe9b8e7e73db1bdf58669990d7c1611424062bbdd9e21384e'
+sha256sums=('dcf0e4c152707f9134e2165279ae6acdf6e3f7522812f44afb9aa4779899e5a1'
             'SKIP'
-            '45a67458a88137438bd334ac1b4e3e18d79f21097343698613c6d1bc578e5c8f'
-            '4a49a89e8c88ed9df7f0a2b604ca496dda5b4d71e676b7a1c53204c660895850'
-            'cd6bcf4147a6adb72e866dbf765888bede47e70881bd6c3814342110cc850d89'
-            '1b49d4112cd22093ab6320ded154824793dfc3c2f3e6e7b9311a5d022685632c'
-            '8ccf5af2e7e37ca20fca41e3dfd163d9e0d4d2c7e1aa7df8a816dd5c90b4ecf6'
-            '4342190b491d77fa5dc61b6d9c92e23509807fdb4cf40d6a2b5e918ff3a07f70')
+            '4342190b491d77fa5dc61b6d9c92e23509807fdb4cf40d6a2b5e918ff3a07f70'
+            '2603390a77824c322a53237261da778facf19ca274b9fa1e52f6fd6886dbe280'
+            'a735a65997ad0b0987ca85c16cc7fa8ffce4ebac3f3855314504e47d32befb24')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
               '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
 
 prepare() {
-  msg "Add kdebug 425590 patch"
-  patch -d $pkgname-$pkgver -p1 -i ../kdebug-425590.patch
-  msg "Add kdebug 426120 patch"
-  patch -d $pkgname-$pkgver -p1 -i ../kdebug-426120.patch
-  msg "Add kdebug 426122 patch"
-  patch -d $pkgname-$pkgver -p1 -i ../kdebug-426122.patch
-  msg "Add kdebug 428039 patch"
-  patch -d $pkgname-$pkgver -p1 -i ../kdebug-428039.patch
-  msg "Add allow configuring click behavior in Desktop Grid effect patch; fix in 5.21"
-  patch -d $pkgname-$pkgver -p1 -i ../commit-dbcf43ab.patch
-  #msg "Add kdebug 424754 patch; fix in 5.21"
-  #patch -d $pkgname-$pkgver -p1 -i ../kdebug-424754.patch
-  #msg "Add mark cursor as rendered after performing compositing patch"
-  #patch -d $pkgname-$pkgver -p1 -i ../commit-9b09f039.patch
-  #msg "Add kdebug 419032 patch"
-  #patch -d $pkgname-$pkgver -p1 -i ../kdebug-419032.patch
-  #msg "Add kdebug 428439 patch"
-  #patch -d $pkgname-$pkgver -p1 -i ../kdebug-428439.patch
- # msg "Add show defaults indicator in System Settings patch"
- # patch -d $pkgname-$pkgver -p1 -i ../commit-9cbac6fe.patch
-   msg "Add kdebug 428301 patch; fix in 5.22"
-   patch -d $pkgname-$pkgver -p1 -i ../kdebug-428301.patch
+    msg "Add kdebug 428301 patch; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-428301.patch
+    msg "Add commit 30464e5c patch; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-30464e5c.patch
+    msg "Add commit 2b721200 patch; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-2b721200.patch
+ #   msg "Add commit 12e0376f patch; fix in 5.22"
+ #   patch -d $pkgname-$pkgver -p1 -i ../commit-12e0376f.patch
+ #   msg "Add kdebug 431211 patch; fix in 5.22"
+ #   patch -d $pkgname-$pkgver -p1 -i ../kdebug-431211.patch
 }
 
 build() {
