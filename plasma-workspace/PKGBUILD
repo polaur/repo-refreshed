@@ -1,4 +1,4 @@
-# Maintainer: pavbaranov <pavbaranov @ gmail dot com>
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
 # only for version with bugfixes from upcomming releases
 # based on the original works by:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
@@ -8,11 +8,11 @@
 
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
-pkgver=5.20.5
-pkgrel=2.1
+pkgver=5.21.0
+pkgrel=1.2
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
-url='https://www.kde.org/workspaces/plasmadesktop/'
+url='https://kde.org/plasma-desktop/'
 license=(LGPL)
 depends=(knotifyconfig libksysguard ktexteditor libqalculate kde-cli-tools appstream-qt phonon-qt5
          xorg-xrdb xorg-xsetroot kactivitymanagerd kholidays xorg-xmessage milou prison kwin
@@ -20,95 +20,63 @@ depends=(knotifyconfig libksysguard ktexteditor libqalculate kde-cli-tools appst
 makedepends=(extra-cmake-modules kdoctools gpsd baloo networkmanager-qt kdesignerplugin kinit plasma-wayland-protocols)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgbase-$pkgver.tar.xz"{,.sig} kde.pam
-#systemd-startup.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/256b6e1738d907cd2e4aaa0e89f113f096473258.patch"
-kdebug-423526.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/3acf8f30249ef256c2a915a12048f55da0568492.patch"
-kdebug-426900.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/63e0ba2dfa334dfb46ad3071baa50af7b43ae042.patch"
-#kdebug-424230.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/371e91b93209206cee3a7146a35b090569e3fd24.patch"
-#kdebug-426746.patch::"https://invent.kde.org/frameworks/plasma-framework/commit/e0e7840a0307deaee7a0b63f341973f8e3508873.patch"
-kdebug-353026.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/0004a1f83b909a04414c56b6519645f1eae62dfd.patch"
-#kdebug-374637.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/84b547914741e6f6754388cae85cafd67ec2a9a8.patch"
-#kdebug-423003.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/84b547914741e6f6754388cae85cafd67ec2a9a8.patch"
-kdebug-428026.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/9d252c407125dc1d05e5cc7cd69ba39bf93d2354.patch"
-kdebug-211255.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/879b2b3899c6b5ec94f3e70d73c07cf346c5d5f5.patch"
-kdebug-354239.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/5244e2be7d748a36ea83f0109a26ebce46c5d68f.patch"
-kdebug-342876.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/b62fe57e799ec73c622998116a984042a4f8641a.patch"
-commit-b79f44f4.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/b79f44f4e1cee14e2c3b3faaa2c7ba4462623d27.patch"
-#commit-540f598c.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/540f598c960b2afe21b55eefd5f250508bbada52.patch"
-commit-64f46dc0.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/64f46dc01746804d33b8665f4f433c7b0c713cc1.patch"
-kdebug-398803.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/29cd276f7e8cb73e0262500d68009a66d07a7f52.patch"
-kdebug-428159.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/8b703d005fa10a22bd7adedaa54d34fd4429e642.patch"
-#kdebug-422948.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/e67dc48ae2706dcf0a2785a37823bf54c838cac9.patch"
-commit-f29c8db4.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/f29c8bd4a77fe9563204f91f524cc5020cdd5e83.patch"
-kdebug-360965.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/3fded2b874844923514a6ac6b83b938216313f55.patch"
+# Plasma 5.22 patches:
+kdebug-431691.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/22e02fbbab3584932199adde24121ccceb66187b.patch"
+kdebug-432857.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/51ca0cc28fd6d8d08844a3b27b86526ee0dcc71f.patch"
+kdebug-384469.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/47f79ce60703d2ae36d97f97ba829d4c8f257d1f.patch"
+kdebug-431398.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/97022f2f67c269cec2660ae4690e527cf452b322.patch"
+#commit-45c2a361.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/45c2a3613e55626f28fca738f304563f5577fc50.patch"
+commit-3fa447f5.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/3fa447f5648ff96985c288794c15df91484ec0f8.patch"
+commit-906a423c.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/906a423ce1e448ddf3bd98092fc1dad3f65c9dc6.patch"
+
+# Plasma 5.21.x patches:
+kdebug-432460.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/74fef0a9973e62df16ff8fc97a795bce1fa2a273.patch"
+kdebug-432364.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/a3f5ac1296e93eefaca1f70d48c6c03c688f3946.patch"
+
 )
-sha256sums=('357ef43092efb4d45f7c6ae9249a538be3484c855d0e35ae3b0b1e8d3db6c624'
+sha256sums=('fa7f0bbbad8a8b485f40746da13f7899bc69025f97b19dfa9e08352c6ca0cbd4'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
-            'e57019acf9faf166ffe5804e713ce09e074c0ac9941487d45c917b09ee4c7af8'
-            'c40aa5f2583303fac0444105fad3d562665a76ba23100857f26cfba01df79281'
-            'fbaa17cfa9ab84d68393a5f93fa97984fc26870830c643c6b58332ff07015d93'
-            '6a5361aacec7c3063f1714585aee7023f672315c903de4be99059cdda6394fdd'
-            '80942b79a8cc24543f74376f7992a65c7ea60850b6af588c8524e8904e43760c'
-            '446f2f59503921c65aeb3c79727880492064b552412bd67aee705200a65ab222'
-            '4c41a941e8c0b5076408effc4b56f2830cc32c9ff246a055467e2d70f6d15899'
-            'fa8c8ecf64f8a9948cc76028fa89106af13a47e6b239f623e3d2e1587e07f33e'
-            'd0a4268897d54e8763aa196d69251e791c22bcda29680477126b6c04ec84d031'
-            '9baf9ef257ae7901f884fa9fc7b5b3cf172f41e7c5373c18c6f474fba6633ba7'
-            'ff200dafe69182380d89e20fa54e10f0f2c396b37704c6dd61239c37efa9f31a'
-            '0d8228fe926d8f822c93b45366599d8496bcc31d9b475ed3ce25e744718619a2'
-            'da5d8922c9dc69e51ef27647b03b91d16b8edfbbb07195e52873469abfe517b0')
+            '841fce6201550accdf03ab47189cb6dbc9428fddb4f467634e5a8bf44d5726fd'
+            'ca69f693fc76e9f139aa4d0708c740d5f8cba1bde46f968241d840faacb060a5'
+            '5b329cd8ec47c03593435e28dc3eb31081fb8516236f6039fc2737ae97922d39'
+            '4b5be104e614c676486e12666fa3be82f1bb793d2b18543f6ec6850fb987e224'
+            '7693722afbc2c2c3bf718dd9eb554985bcc35921074509ab3a592d8f887338d4'
+            'b4bc5a08b30c0c7b17dd38589d2f50898a073fbe02e10aead486f681f0c067ee'
+            'a6469a4dd632df6d3f3c86910b944eb3295c251e498c18d80afcc8baa47d58ee'
+            '7b62a3bd43adfb3008304545f5a5ab7b9860ab80d2f53bdc82a280b6774f2904')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
               '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
 
 prepare() {
-  sed -e 's|dbus-run-session ||' -i $pkgbase-$pkgver/login-sessions/plasmawayland.desktop.cmake # Don't start a second user dbus session
-  
-#    msg "Add systemd startup patch"
-#    patch -d $pkgbase-$pkgver -p1 -i ../systemd-startup.patch
-     msg "Add kdebug 426900 patch"
-     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-426900.patch
-#    msg "Add kdebug 424230 patch; fix in 5.21"
-#    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-424230.patch
-#    msg "Add kdebug 426746 patch"
-#    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-426746.patch
-     msg "Add kdebug 353026 patch; fix in 5.21"
-     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-353026.patch
-#    msg "Add kdebug 374637 patch; fix in 5.21"
-#    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-374637.patch
-#    msg "Add kdebug 423003 patch; fix in 5.21"
-#    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-423003.patch
-     msg "Add kdebug 428026 patch; fix in 5.21"
-     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-428026.patch
-     msg "Add kdebug 211255 patch; fix in 5.21"
-     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-211255.patch
-     msg "Add kdebug 354239 patch; fix in 5.21"
-     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-354239.patch
-     msg "Add kdebug 342876 patch; fix in 5.21"
-     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-342876.patch
-     msg "Add show frequently used system settings modules for System Settings patch; fix in 5.21"
-     patch -d $pkgbase-$pkgver -p1 -i ../commit-b79f44f4.patch
-     #msg "Add use icon tabs to select player patch; fix in 5.21"
-     #patch -d $pkgbase-$pkgver -p1 -i ../commit-540f598c.patch
-     msg "Add - add button to open plasmoid configuration from Entries page to system tray patch"
-     patch -d $pkgbase-$pkgver -p1 -i ../commit-64f46dc0.patch
-     msg "Add kdebug 398803 patch"
-     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-398803.patch
-     msg "Add kdebug 428159 patch; fix in 5.21"
-     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-428159.patch
-     msg "Add kdebug 422948 patch"
-#     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-422948.patch
-#     msg "Add Demote the matches so they get less in the way patch"
-     patch -d $pkgbase-$pkgver -p1 -i ../commit-f29c8db4.patch
-     msg "Add kdebug 360965 patch"
-     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-360965.patch
+    msg "Add kdebug 431691 patch; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-431691.patch
+    msg "Add kdebug 432857 patch; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-432857.patch
+    msg "Add kdebug 384469 patch; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-384469.patch
+    msg "Add kdebug 431398 patch; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-431398.patch
+ #   msg "Add commit 45c2a361 patch; fix in 5.22"
+ #   patch -d $pkgname-$pkgver -p1 -i ../commit-45c2a361.patch
+    msg "Add commit 3fa447f5 patch; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-3fa447f5.patch
+    msg "Add commit 906a423c patch; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-906a423c.patch
+    # Plasma 5.21.x patches:
+    msg "Add kdebug 432460 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-432460.patch
+    msg "Add kdebug 432364 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-432364.patch
 }
 
 build() {
   cmake -B build -S $pkgbase-$pkgver \
     -DCMAKE_INSTALL_LIBEXECDIR=lib \
-    -DBUILD_TESTING=OFF
+    -DBUILD_TESTING=OFF \
+    -DPLASMA_SYSTEMD_BOOT=ON
   cmake --build build
 }
 
