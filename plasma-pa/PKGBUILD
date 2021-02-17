@@ -1,7 +1,10 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original work by:
 # Maintainer:Antonio Rojas <arojas@archlinux.org>
 
 pkgname=plasma-pa
-pkgver=5.20.5
+pkgver=5.21.0
 pkgrel=1.1
 pkgdesc='Plasma applet for audio volume management using PulseAudio'
 arch=(x86_64)
@@ -11,23 +14,26 @@ depends=(plasma-workspace libcanberra-pulse pulseaudio perl)
 makedepends=(extra-cmake-modules kdoctools)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-398803.patch::"https://invent.kde.org/plasma/plasma-pa/commit/d11192c620bcdcd285ecda49341f597b863396f3.patch"
-commit-cdf9fba8.patch::"https://invent.kde.org/plasma/plasma-pa/-/commit/cdf9fba8f888937726c7e2c55dcd793a3126ca5f.patch")
-sha256sums=('4d84422753aa362383945e8a8a9e6d6fc853f8d918e7b0b7eb1d24317e5e7377'
+# Plasma 5.22 patches:
+kdebug-407648.patch::"https://invent.kde.org/plasma/plasma-pa/commit/912beaaa7157ef25478f2b0bf4fb20f6b1a15eb5.patch"
+kdebug-372562.patch::"https://invent.kde.org/plasma/plasma-pa/commit/48037d71f8b4f20efc28bd33db6c59facc5a31ad.patch"
+)
+sha256sums=('48dea9ceca6342d1ec4c88af2c2237ab43ec7b03a9dd37f7660ef175e4986fa7'
             'SKIP'
-            'cb4a38ce79e04650e5602a6cda786dd27ebfd27623df8982640157c762d072a6'
-            '5e59e7eee6bb6389129a1c4e70f61854d3b2d8f670d20c4bc7dcf899ea557b91')
+            '24057066079df6d7bbfff6e725b3f134e2ec563f4683c605138b502731d36f47'
+            '7badcd2f772329b9357a85fec399cb9c72f8c175cbbc06f2baab13ecaee9c0d5')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
               '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
               
 prepare() {
-    msg "Add kdebug 398803 patch"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-398803.patch
-    msg "Add remove usage of tabs patch; in 5.21"
-    patch -d $pkgname-$pkgver -p1 -i ../commit-cdf9fba8.patch
+    msg "Add kdebug 407648 patch; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-407648.patch
+    msg "Add kdebug 372562 patch; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-372562.patch
 }
+
 build() {
   cmake -B build -S $pkgname-$pkgver \
     -DBUILD_TESTING=OFF
