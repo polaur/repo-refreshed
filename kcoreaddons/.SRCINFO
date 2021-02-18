@@ -1,0 +1,27 @@
+pkgbase = kcoreaddons
+	pkgdesc = Addons to QtCore
+	pkgver = 5.79.0
+	pkgrel = 1.1
+	url = https://community.kde.org/Frameworks
+	arch = x86_64
+	groups = kf5
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = qt5-tools
+	makedepends = qt5-doc
+	makedepends = qt5-doc
+	makedepends = clang
+	makedepends = python-pyqt5
+	makedepends = doxygen
+	makedepends = sip
+	depends = qt5-base
+	optdepends = python-pyqt5: for the Python bindings
+	source = https://download.kde.org/stable/frameworks/5.79/kcoreaddons-5.79.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.79/kcoreaddons-5.79.0.tar.xz.sig
+	source = kdebug-431334.patch::https://invent.kde.org/frameworks/kcoreaddons/commit/bf1825812fac68184781ad4f5321b0b631367784.patch
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = 6f221bd93be73aeec863cd7089c69e84fef76bea83a906c6cd2c853937813659
+	sha256sums = SKIP
+	sha256sums = 09487c2581707f4e50db7f265f257671e9d8cf412891e4d79b4b9f8262301976
+
+pkgname = kcoreaddons
