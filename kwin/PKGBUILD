@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kwin
-pkgver=5.21.0
+pkgver=5.21.1
 pkgrel=1.1
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
@@ -24,9 +24,11 @@ kdebug-428301.patch::"https://invent.kde.org/plasma/kwin/commit/57b6091bd58b0ca7
 commit-30464e5c.patch::"https://invent.kde.org/plasma/kwin/-/commit/30464e5c8b3643d19176aa2c521c9dd3eb6609dd.patch"
 commit-2b721200.patch::"https://invent.kde.org/plasma/kwin/-/commit/2b721200fb5c8a0b935a1ba633d69cd1fb992719.patch"
 #commit-12e0376f.patch::"https://invent.kde.org/plasma/kwin/-/commit/12e0376fead0c5a97f205522c5b8d978227e5b12.patch"
+#kdebug-407793.patch::"https://invent.kde.org/plasma/kwin/commit/378ecbc88c18600bd8286c13efb0d7df4eaa220a.patch"
+
 )
 install=$pkgname.install
-sha256sums=('dcf0e4c152707f9134e2165279ae6acdf6e3f7522812f44afb9aa4779899e5a1'
+sha256sums=('5a044450ffdc1610a73d5db3f3f50d2513de930f4be5c167da703cc7d23abc0c'
             'SKIP'
             '4342190b491d77fa5dc61b6d9c92e23509807fdb4cf40d6a2b5e918ff3a07f70'
             '2603390a77824c322a53237261da778facf19ca274b9fa1e52f6fd6886dbe280'
@@ -43,10 +45,13 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../commit-30464e5c.patch
     msg "Add commit 2b721200 patch; fix in 5.22"
     patch -d $pkgname-$pkgver -p1 -i ../commit-2b721200.patch
- #   msg "Add commit 12e0376f patch; fix in 5.22"
- #   patch -d $pkgname-$pkgver -p1 -i ../commit-12e0376f.patch
- #   msg "Add kdebug 431211 patch; fix in 5.22"
- #   patch -d $pkgname-$pkgver -p1 -i ../kdebug-431211.patch
+#    msg "Add kdebug 407793 patch; fix probably in 5.22"
+#    patch -d $pkgname-$pkgver -p1 -i ../kdebug-407793.patch
+#    msg "Add commit 12e0376f patch; fix in 5.22"
+#    patch -d $pkgname-$pkgver -p1 -i ../commit-12e0376f.patch
+#    msg "Add kdebug 431211 patch; fix in 5.22"
+#    patch -d $pkgname-$pkgver -p1 -i ../kdebug-431211.patch
+    
 }
 
 build() {
