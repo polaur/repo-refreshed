@@ -1,0 +1,27 @@
+pkgbase = libksysguard
+	pkgdesc = Library to retrieve information on the current status of computer hardware
+	pkgver = 5.21.1
+	pkgrel = 1.1
+	url = https://kde.org/plasma-desktop/
+	arch = x86_64
+	groups = plasma
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	makedepends = qt5-tools
+	depends = libxres
+	depends = qt5-webengine
+	depends = kdeclarative
+	depends = knewstuff
+	source = https://download.kde.org/stable/plasma/5.21.1/libksysguard-5.21.1.tar.xz
+	source = https://download.kde.org/stable/plasma/5.21.1/libksysguard-5.21.1.tar.xz.sig
+	source = kdebug-433007.patch::https://invent.kde.org/plasma/libksysguard/commit/504dcbd225e26fe39f1f26d65ad477fc73558762.patch
+	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
+	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
+	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
+	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
+	sha256sums = e846b0ebf1a347e6f8637a70866c17b1aa8e806c910085729b0fcf08ae74ea93
+	sha256sums = SKIP
+	sha256sums = 9a663ba26b6be0aa1627684bddcd9dfb6da60e8e390e1f85fbe30bba57f697f8
+
+pkgname = libksysguard
