@@ -1,0 +1,47 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=knewstuff
+pkgver=5.79.0
+pkgrel=1.2
+pkgdesc='Support for downloading application assets from the network'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(kio kpackage)
+makedepends=(extra-cmake-modules doxygen qt5-tools qt5-doc qt5-declarative)
+optdepends=('kirigami2: QML components')
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-402432.patch::"https://invent.kde.org/frameworks/knewstuff/commit/a3050ecff9bb830880554725a0eaf0cdb06b7575.patch"
+#kdebug-431568.patch::"https://invent.kde.org/frameworks/knewstuff/commit/1ae7749e7fdb4c981436ae7d142700ac93ef3238.patch"
+kdebug-433535.patch::"https://invent.kde.org/frameworks/knewstuff/commit/5d1c300640ba62cff1d2be748625f2dcce1156ce.patch")
+sha256sums=('3e2055002f7e2f8cbffb414b7cd98ed38b911b95d5eee914139389a041064f2f'
+            'SKIP'
+            '31935eb3b0edbc63f9ba9de9bee0036c6c05e2b8bdad45d33ac73380b59c2864'
+            'd2079121ee2f8516f9926c81d1daa62a4bffaad3bb0545f1e80b5e6e38723a21')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+    msg "Add kdebug 402432 patch; fix in 5.80"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-402432.patch
+ #   msg "Add kdebug 431568 patch"
+ #   patch -d $pkgname-$pkgver -p1 -i ../kdebug-431568.patch
+    msg "Add kdebug 433535 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433535.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
