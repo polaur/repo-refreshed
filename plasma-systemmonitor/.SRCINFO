@@ -12,11 +12,17 @@ pkgbase = plasma-systemmonitor
 	depends = kirigami2
 	source = https://download.kde.org/stable/plasma/5.21.1/plasma-systemmonitor-5.21.1.tar.xz
 	source = https://download.kde.org/stable/plasma/5.21.1/plasma-systemmonitor-5.21.1.tar.xz.sig
+	source = kdebug-429758.patch::https://invent.kde.org/plasma/plasma-systemmonitor/commit/a4fc2686753f1749001f80a8b98ff85d15135bbc.patch
+	source = ccbug-429758.patch::https://invent.kde.org/plasma/plasma-systemmonitor/commit/8a69730b5411dd77cea2b545262c517ce5118960.patch
+	source = kdebug-433532.patch::https://invent.kde.org/plasma/plasma-systemmonitor/commit/22202e061fe3299af7c2ea39c2811b261fa67bde.patch
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
 	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
 	sha256sums = caf40d632c31097e09d98e913dfb9802c8d3aecaf041115be6c447a1b4a5d5d5
 	sha256sums = SKIP
+	sha256sums = e50de31896cb2924f1791d2dd2ad61d7aadf24fa807e84df2de6654a9e831d40
+	sha256sums = a375054ed794482bc31f746ec4e38bf056239a3c67c1d45ff112b8419cbfd2ef
+	sha256sums = 50c0c81a0bfbebb605125458a360b82acdebfb4d09a44ef77dd87b1898f46d18
 
 pkgname = plasma-systemmonitor

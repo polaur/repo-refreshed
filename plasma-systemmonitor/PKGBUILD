@@ -11,17 +11,31 @@ arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
 license=(GPL LGPL)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-429758.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/a4fc2686753f1749001f80a8b98ff85d15135bbc.patch"
+ccbug-429758.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/8a69730b5411dd77cea2b545262c517ce5118960.patch"
+kdebug-433532.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/22202e061fe3299af7c2ea39c2811b261fa67bde.patch"
 )
 depends=(ksysguard kirigami2)
 makedepends=(extra-cmake-modules)
 groups=(plasma)
 sha256sums=('caf40d632c31097e09d98e913dfb9802c8d3aecaf041115be6c447a1b4a5d5d5'
-            'SKIP')
+            'SKIP'
+            'e50de31896cb2924f1791d2dd2ad61d7aadf24fa807e84df2de6654a9e831d40'
+            'a375054ed794482bc31f746ec4e38bf056239a3c67c1d45ff112b8419cbfd2ef'
+            '50c0c81a0bfbebb605125458a360b82acdebfb4d09a44ef77dd87b1898f46d18')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
               '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
 
+prepare() {
+    msg "Add kdebug 429758 patches; fix probably in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-429758.patch
+    patch -d $pkgname-$pkgver -p1 -i ../ccbug-429758.patch
+    msg "Add kdebug 433532 patch; fix in 5.21.2"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433532.patch
+    }
+    
 build() {
   cmake -B build -S $pkgname-$pkgver
   cmake --build build
