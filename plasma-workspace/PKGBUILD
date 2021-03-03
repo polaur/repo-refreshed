@@ -1,3 +1,4 @@
+# Maintainer: Nelson89 <daniel dot karasinski at gmail dot com>
 # Maintainer: pavbaranov <pavbaranov at gmail dot com>
 # only for version with bugfixes from upcomming releases
 # based on the original works by:
@@ -9,7 +10,7 @@
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
 pkgver=5.21.2
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -30,6 +31,7 @@ commit-906a423c.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/
 # commit-45c2a361.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/45c2a3613e55626f28fca738f304563f5577fc50.patch"
 kdebug-408778.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/52b625081217dfe89713a918d892de1b30a517af.patch"
 #commit-2c2cd9ba.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/2c2cd9babf2470bbb7ad1aa8626b1508204cfa24.patch"
+kdebug-433333.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/bbe0f91070ac7235066b28e57f9971ac1a4f821e.patch"
 )
 sha256sums=('f3c30b3c51dd9d127ba4086252eebef22a7fe5dd34c7fa19498559ccab73d4cc'
             'SKIP'
@@ -41,7 +43,7 @@ sha256sums=('f3c30b3c51dd9d127ba4086252eebef22a7fe5dd34c7fa19498559ccab73d4cc'
             '7693722afbc2c2c3bf718dd9eb554985bcc35921074509ab3a592d8f887338d4'
             'b4bc5a08b30c0c7b17dd38589d2f50898a073fbe02e10aead486f681f0c067ee'
             '8afd50b76ad7c3e370fdf605570a964ddd50e326387633bcd1784c5fae6072df'
-            'c7d16348c54a861273f69c90ca1cf294f4789b93bea40e1648712d9b85a24c36')
+            '7ada45a11b5317c878bb1a74a784cf52d9968e519354e625a3f06f37a6cc7dcf')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -66,6 +68,8 @@ prepare() {
     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-408778.patch
  #   msg "Add commit 2c2cd9ba patch; will be in 5.22"
  #   patch -d $pkgbase-$pkgver -p1 -i ../commit-2c2cd9ba.patch
+    msg "Add kdebug 433333 patch; fix in 5.21.3"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-433333.patch
 }
 
 build() {
