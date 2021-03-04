@@ -1,0 +1,45 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=systemsettings
+pkgver=5.21.2
+pkgrel=1.1
+pkgdesc='KDE system manager for hardware, software, and workspaces'
+arch=(x86_64)
+url='https://kde.org/plasma-desktop/'
+license=(LGPL)
+depends=(plasma-workspace)
+makedepends=(extra-cmake-modules kdoctools)
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+#kdebug-432083.patch::"https://invent.kde.org/plasma/systemsettings/commit/54da94bc12247251f778a5b6757bcdb332aa2a4e.patch"
+kdebug-433109.patch::"https://invent.kde.org/plasma/systemsettings/commit/a0b4a391bb8f0447c357922afe69241bd47fc41e.patch"
+)
+sha256sums=('cd355f1c9438cb5d177e7d8bf228342c6e0b6a3080b0ee479897d55431b788fe'
+            'SKIP'
+            '4bf077ae8333e01c4229d6bfa457f8bbaabd1e37d070c97f777f96580afb3fe0')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+    msg "Add kdebug 433109 patch; fix probably in 5.21.3"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433109.patch
+   # msg "Add kdebug 432083 patch; fix in 5.22"
+   # patch -d $pkgname-$pkgver -p1 -i ../kdebug-432083.patch
+     }
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
