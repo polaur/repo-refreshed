@@ -25,6 +25,7 @@ commit-30464e5c.patch::"https://invent.kde.org/plasma/kwin/-/commit/30464e5c8b36
 commit-2b721200.patch::"https://invent.kde.org/plasma/kwin/-/commit/2b721200fb5c8a0b935a1ba633d69cd1fb992719.patch"
 #commit-12e0376f.patch::"https://invent.kde.org/plasma/kwin/-/commit/12e0376fead0c5a97f205522c5b8d978227e5b12.patch"
 #kdebug-407793.patch::"https://invent.kde.org/plasma/kwin/commit/378ecbc88c18600bd8286c13efb0d7df4eaa220a.patch"
+#kdebug-432744.patch::"https://invent.kde.org/plasma/kwin/commit/d9ec48225702e4ce272f13ea84a28cff7acdac0d.patch"
 )
 install=$pkgname.install
 sha256sums=('14896e98e5600eba7c3aa7f18168bec697ba1670c012a560b33302075bb0465a'
@@ -50,7 +51,8 @@ prepare() {
 #    patch -d $pkgname-$pkgver -p1 -i ../commit-12e0376f.patch
 #    msg "Add kdebug 431211 patch; fix in 5.22"
 #    patch -d $pkgname-$pkgver -p1 -i ../kdebug-431211.patch
-    
+#    msg "Add kdebug 432744 patch; fix probably in 5.22"
+#    patch -d $pkgname-$pkgver -p1 -i ../kdebug-432744.patch
 }
 
 build() {

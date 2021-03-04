@@ -32,6 +32,7 @@ commit-906a423c.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/
 kdebug-408778.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/52b625081217dfe89713a918d892de1b30a517af.patch"
 #commit-2c2cd9ba.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/2c2cd9babf2470bbb7ad1aa8626b1508204cfa24.patch"
 kdebug-433333.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/bbe0f91070ac7235066b28e57f9971ac1a4f821e.patch"
+kdebug-433755.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/8fd7b38b66de36ad8b673f3ddb88f7810c4291cc.patch"
 )
 sha256sums=('f3c30b3c51dd9d127ba4086252eebef22a7fe5dd34c7fa19498559ccab73d4cc'
             'SKIP'
@@ -43,7 +44,8 @@ sha256sums=('f3c30b3c51dd9d127ba4086252eebef22a7fe5dd34c7fa19498559ccab73d4cc'
             '7693722afbc2c2c3bf718dd9eb554985bcc35921074509ab3a592d8f887338d4'
             'b4bc5a08b30c0c7b17dd38589d2f50898a073fbe02e10aead486f681f0c067ee'
             '8afd50b76ad7c3e370fdf605570a964ddd50e326387633bcd1784c5fae6072df'
-            '7ada45a11b5317c878bb1a74a784cf52d9968e519354e625a3f06f37a6cc7dcf')
+            '7ada45a11b5317c878bb1a74a784cf52d9968e519354e625a3f06f37a6cc7dcf'
+            '8432c426403dbccd1a39cfd31ee134b48f1a07fbf3b234ac91709a2b0db8b31f')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -70,6 +72,8 @@ prepare() {
  #   patch -d $pkgbase-$pkgver -p1 -i ../commit-2c2cd9ba.patch
     msg "Add kdebug 433333 patch; fix in 5.21.3"
     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-433333.patch
+    msg "Add kdebug 433755 patch; fix probably in 5.21.3"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-433755.patch
 }
 
 build() {
