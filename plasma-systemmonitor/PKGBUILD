@@ -5,7 +5,7 @@
 
 pkgname=plasma-systemmonitor
 pkgver=5.21.2
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="An interface for monitoring system sensors, process information and other system resources"
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -13,6 +13,8 @@ license=(GPL LGPL)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-429758.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/a4fc2686753f1749001f80a8b98ff85d15135bbc.patch"
 ccbug-429758.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/8a69730b5411dd77cea2b545262c517ce5118960.patch"
+kdebug-433751.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/747d0076d92e02dfcb318fbe67d92f1203b469d3.patch"
+kdebug-433726.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/2c36107c8a6d1747d809e08df3bdcdf6a5691729.patch"
 )
 depends=(ksysguard kirigami2)
 makedepends=(extra-cmake-modules)
@@ -20,7 +22,9 @@ groups=(plasma)
 sha256sums=('4471ea3115e22ee9a16f3281cce05a402cece5aa60f85ee1aa7df4ae2204ab8c'
             'SKIP'
             'e50de31896cb2924f1791d2dd2ad61d7aadf24fa807e84df2de6654a9e831d40'
-            'a375054ed794482bc31f746ec4e38bf056239a3c67c1d45ff112b8419cbfd2ef')
+            'a375054ed794482bc31f746ec4e38bf056239a3c67c1d45ff112b8419cbfd2ef'
+            'aa24ed1ab2e699ab7ce0118bdca2d2552b6ee0a03b74ce20e2843d5653938337'
+            '0c41f0513d778d755118e99f9af9b2859ddb2c4842d12b5dfb9b9b6dbf165050')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -30,6 +34,10 @@ prepare() {
     msg "Add kdebug 429758 patches; fix probably in 5.22"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-429758.patch
     patch -d $pkgname-$pkgver -p1 -i ../ccbug-429758.patch
+    msg "Add kdebug 433726 patch; fix in 5.21.3"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433726.patch
+    msg "Add kdebug 433751 patch; fix in 5.21.3"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433751.patch
     }
     
 build() {
