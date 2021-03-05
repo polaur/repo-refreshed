@@ -1,0 +1,26 @@
+pkgbase = ktexteditor
+	pkgdesc = Advanced embeddable text editor
+	pkgver = 5.79.0
+	pkgrel = 1.1
+	url = https://community.kde.org/Frameworks
+	arch = x86_64
+	groups = kf5
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = doxygen
+	makedepends = qt5-tools
+	makedepends = qt5-doc
+	depends = kparts
+	depends = syntax-highlighting
+	depends = libgit2
+	depends = editorconfig-core-c
+	source = https://download.kde.org/stable/frameworks/5.79/ktexteditor-5.79.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.79/ktexteditor-5.79.0.tar.xz.sig
+	source = kdebug-433006.patch::https://invent.kde.org/frameworks/ktexteditor/commit/52b576ed83d7329c28d94ae283481f05dd97cc81.patch
+	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
+	sha256sums = 83b94589d3a23f0b268eb5cfa9544541ac0015ecfab5cf3fd5e95e4499d155b3
+	sha256sums = SKIP
+	sha256sums = e7896f9323dd6530bcf34fff4bbf06f8edc3595c9f87ea5908e15a3880808d2f
+	sha256sums = 5ae1bd6df93547bbc41609adaf386bb9da67bb8dcf31967fb0cee988899cc271
+
+pkgname = ktexteditor
