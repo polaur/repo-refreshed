@@ -7,7 +7,7 @@
 
 pkgname=kcoreaddons
 pkgver=5.79.0
-pkgrel=1.1
+pkgrel=1.3
 pkgdesc='Addons to QtCore'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -17,15 +17,23 @@ makedepends=(extra-cmake-modules qt5-tools qt5-doc qt5-doc clang python-pyqt5 do
 optdepends=('python-pyqt5: for the Python bindings')
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-431334.patch::"https://invent.kde.org/frameworks/kcoreaddons/commit/bf1825812fac68184781ad4f5321b0b631367784.patch")
+kdebug-431334.patch::"https://invent.kde.org/frameworks/kcoreaddons/commit/bf1825812fac68184781ad4f5321b0b631367784.patch"
+kdebug-410851.patch::"https://invent.kde.org/frameworks/kcoreaddons/commit/daec110942baed6c7e8bcb7684e65411fe8acbe8.patch"
+kdebug-433402.patch::"https://invent.kde.org/frameworks/kcoreaddons/commit/c1f6b6f437cb6764875e1bf67cb859f10adcb4d7.patch")
 sha256sums=('6f221bd93be73aeec863cd7089c69e84fef76bea83a906c6cd2c853937813659'
             'SKIP'
-            '09487c2581707f4e50db7f265f257671e9d8cf412891e4d79b4b9f8262301976')
+            '09487c2581707f4e50db7f265f257671e9d8cf412891e4d79b4b9f8262301976'
+            '158ded9f7906fa2cf3951611f9d48f9aa261fc354962a38c4c16ce9440e04169'
+            'd9a67cb749b838155e912f6082047ba0dbc5f106ebd90fb01495c50365d04171')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
     msg "Add kdebug 431334 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-431334.patch
+    msg "Add kdebug 410851 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-410851.patch
+    msg "Add kdebug 433402 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433402.patch
 }
 
 build() {
