@@ -1,4 +1,5 @@
-# Maintainer Nelson89 <daniel dot karasinski at gmail dot com>
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# Maintainer: Nelson89 <daniel dot karasinski at gmail dot com>
 # only for version with bugfixes from upcomming releases
 # based on the orginal works by:
 # Maintainer: Antonio Rojas <arojas@archlinux,org>
@@ -7,8 +8,8 @@
 # Contributor: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=dolphin
-pkgver=20.12.2
-pkgrel=1.2
+pkgver=20.12.3
+pkgrel=1.1
 pkgdesc="KDE File Manager"
 arch=(x86_64)
 url="https://kde.org/applications/system/dolphin/"
@@ -22,12 +23,24 @@ source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$p
 kdebug-426354.patch::"https://invent.kde.org/system/dolphin/commit/78c7429a35c9bdbcdb76fd6304210237e5dbc2f5.patch"
 kdebug-430085.patch::"https://invent.kde.org/system/dolphin/commit/2e79e21c3f4da5183b516e0088f2137c4f27ceff.patch"
 kdebug-422282.patch::"https://invent.kde.org/system/dolphin/-/commit/a825e1bd74246dc97dde3f48b1d9ead7a214b744.patch"
+
+commit-998d71e5.patch::"https://invent.kde.org/system/dolphin/-/commit/998d71e5a7cff49ac8caa0f5ca82616237e0d038.patch"
+commit-5e5f236d.patch::"https://invent.kde.org/system/dolphin/-/commit/5e5f236d00eb80b4f3f2f1681bd039b22325d35e.patch"
+commit-f01a61b7.patch::"https://invent.kde.org/system/dolphin/-/commit/f01a61b76c8588a4df2054ab70e9a746a74f7817.patch"
+#kdebug-429447.patch::"https://invent.kde.org/system/dolphin/commit/0cee94ce82ccb82afd0c4e22d77e251276e7a447.patch"
+commit-eb4b0fb4.patch::"https://invent.kde.org/system/dolphin/commit/eb4b0fb48050ab047eecf01ccabc595a8b34d141.patch"
+commit-a73e81bf.patch::"https://invent.kde.org/system/dolphin/-/commit/a73e81bf6af745623e7e92ba012522e34b2a312a.patch"
 )
-sha256sums=('59f82f599fec19fc3065f034089b6d35a58ddc419e10c370d99d1ca0b7d0baa6'
+sha256sums=('9794b825de2440f53bd237c0bc1c974e89431b5c440ab81ccc1135e696f8a1f3'
             'SKIP'
             '35bd205727dd936e7d5ec2906f623d31e3ae941c6732aa3c535f0845996dec37'
             '75318334a7c14c7e0fc598e028c2a384d530284e56cd0c477610baeaf10d04a4'
-            'a06cac89f17fdde645d1c599c490ffd197e658fe573d0ff6dc7385e9ed583597')
+            'a06cac89f17fdde645d1c599c490ffd197e658fe573d0ff6dc7385e9ed583597'
+            '6ba1c272d628e65ca83278707c158f1eebd6739a54d0f0015e9687283bb81a6f'
+            '973fb26119a04983d6a2132b3d644cbd6095974a29b842b8f8126766775f9b23'
+            '45a5d2f3c3dc543a59be4ffa7eadf79ed74cfea6456af343256d87309b7595e9'
+            '02b3d82d75d1bbe2da2d3e65002dc054506d9120689b49393b56df2017c8ec80'
+            'b2a968e4a5447d59e473147d87f2e3b7d25d04f99c8b41e68ae5010d8460bbc1')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87 # Christoph Feck <cfeck@kde.org>
               D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker
@@ -39,6 +52,19 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-430085.patch
     msg "Add kdebug 422282 patch; Fix in 21.04"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-422282.patch
+    
+    msg "Add commit 998d71e5 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-998d71e5.patch
+    msg "Add commit 5e5f236d patch"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-5e5f236d.patch
+    msg "Add commit-f01a61b7 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-f01a61b7.patch
+    #msg "Add kdebug 429447 patch"
+    #patch -d $pkgname-$pkgver -p1 -i ../kdebug-429447.patch
+    msg "Add commit eb4b0fb4 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-eb4b0fb4.patch
+    msg "Add commit a73e81bf patch"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-a73e81bf.patch
 }
 
 build() {
