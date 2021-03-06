@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=umbrello
-pkgver=20.12.2
+pkgver=20.12.3
 pkgrel=1.1
 pkgdesc='UML modeller'
 arch=(x86_64)
@@ -24,15 +24,13 @@ kdebug-429794.patch::"https://invent.kde.org/sdk/umbrello/commit/eae999b7903c30a
 kdebug-429181.patch::"https://invent.kde.org/sdk/umbrello/commit/97ed260f37ad4040bf9b78db1c1259a4b5d82022.patch"
 # kdebug-420073.patch::"https://invent.kde.org/sdk/umbrello/commit/2bb95adcdac2b4211466fd1d7bc5425f89e12752.patch"
 )
-sha256sums=('4e4fdc0cbff6d578d6e2510c186a27e402995d35265ac203e100e6950c61f17f'
+sha256sums=('57fb7d988e115be18514f807bab483a19877acc3f1910aeb952c4d8372f4d378'
             'SKIP'
             '7fd41930e809ce4a760b156a924ad898245b120b20d41ae17aa7480743b88159'
             '0a29a850f080918492254b37e3c84b660d1ed43124478e5d53866c59f8b03fa2'
             '608258dc19b5edc35b006e98422abfc04e0037894612fd0b31a1f152f1d6237d'
-            '9bd98e09227174740845c90ce10514322b31aa387649d8d5078efd2a8c4efd7f'
             '05eea88c5e6e865fce6f349536fa5b8101b1d0c8dfc424c10384d928136ccf34'
-            'c6a319efd4e8dde0315e5aff5643828a3a7586e795a28b59b2da57d9e5a3a998'
-            '31962d6838ea19d38158b26a75dfd27d9b69e8220b4411da99c57de876e7309b')
+            'c6a319efd4e8dde0315e5aff5643828a3a7586e795a28b59b2da57d9e5a3a998')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87  # Christoph Feck <cfeck@kde.org>
               D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker <heiko.becker@kde.org>
