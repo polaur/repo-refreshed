@@ -21,6 +21,6 @@ pkgbase = ktexteditor
 	sha256sums = 83b94589d3a23f0b268eb5cfa9544541ac0015ecfab5cf3fd5e95e4499d155b3
 	sha256sums = SKIP
 	sha256sums = e7896f9323dd6530bcf34fff4bbf06f8edc3595c9f87ea5908e15a3880808d2f
-	sha256sums = 5ae1bd6df93547bbc41609adaf386bb9da67bb8dcf31967fb0cee988899cc271
 
 pkgname = ktexteditor
+
