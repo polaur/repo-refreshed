@@ -7,7 +7,7 @@
 
 pkgname=gwenview
 pkgver=20.12.3
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="A fast and easy to use image viewer"
 url='https://kde.org/applications/graphics/gwenview/'
 arch=(x86_64)
@@ -24,9 +24,10 @@ kdebug-414769.patch::"https://invent.kde.org/graphics/gwenview/commit/354e8e9967
 kdebug-393314.patch::"https://invent.kde.org/graphics/gwenview/commit/cc09a2a7ad63a6ad19cbc759dbcf5eda050b66ee.patch"
 kdebug-348746.patch::"https://invent.kde.org/graphics/gwenview/commit/275e9288c8b587078b3c4ff75633157a44197eba.patch"
 kdebug-431680.patch::"https://invent.kde.org/graphics/gwenview/commit/9aa9b09afc3422c2c2de0d4891b799f5277baa64.patch"
-
 #kdebug-426105.patch::"https://invent.kde.org/graphics/gwenview/commit/309660296dbba2f0c7b0bd93f49a91d96029211a.patch"
 kdebug-429531.patch::"https://invent.kde.org/graphics/gwenview/commit/a6ceabe9e355581c89b28625ae59a6d7b112bea4.patch"
+kdebug-297853.patch::"https://invent.kde.org/graphics/gwenview/commit/9ce466f6fd6f11da344cd1ab74537e7d59e2b59c.patch"
+commit-3635f354.patch::"https://invent.kde.org/graphics/gwenview/-/commit/3635f354e6308b48fbef67efe0f1685936de24c2.patch"
 )
 sha256sums=('68234a515f0870c295020a4a7495f42e785e4ad1cce536c77f108a41561b41a2'
             'SKIP'
@@ -52,6 +53,10 @@ prepare() {
 #    patch -d $pkgname-$pkgver -p1 -i ../kdebug-426105.patch
     msg "Added kdebug 429531 patch"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-429531.patch
+    msg "Added kdebug 297853 patch; fix in 21.04"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-297853.patch
+    msg "Added commit 3635f354; fix in 21.04"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-3635f354.patch
 }
 
 build() {
