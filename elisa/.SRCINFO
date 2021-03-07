@@ -1,0 +1,29 @@
+pkgbase = elisa
+	pkgdesc = A simple music player aiming to provide a nice experience for its users
+	pkgver = 20.12.3
+	pkgrel = 1.1
+	url = https://community.kde.org/Elisa
+	arch = x86_64
+	groups = kde-applications
+	groups = kde-multimedia
+	license = LGPL3
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	depends = baloo
+	depends = kirigami2
+	depends = kdeclarative
+	depends = vlc
+	source = https://download.kde.org/stable/release-service/20.12.3/src/elisa-20.12.3.tar.xz
+	source = https://download.kde.org/stable/release-service/20.12.3/src/elisa-20.12.3.tar.xz.sig
+	source = kdebug-389187.patch::https://invent.kde.org/multimedia/elisa/-/commit/085836632556c00bc56219e00a382a7a80680747.patch
+	source = commit-b441ad96.patch::https://invent.kde.org/multimedia/elisa/-/commit/b441ad966831e4fe526eda17727b0e3451dbdc8a.patch
+	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
+	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
+	validpgpkeys = D81C0CB38EB725EF6691C385BB463350D6EF31EF
+	sha256sums = 7a97d305b4319f077db6ce387895c2c3442112d5a3d9d4d68d0c2d884ce79865
+	sha256sums = SKIP
+	sha256sums = 8513459d0a3a5a2b0fe95c80c1eeb5fea3e66579da63e733cd87002ffcc1184f
+	sha256sums = 9cc53bed328c79e830f552600b37ec1633a6fe0b29d4285c91c377446d67e786
+
+pkgname = elisa
+
