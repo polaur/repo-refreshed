@@ -33,6 +33,9 @@ kdebug-408778.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/52
 #commit-2c2cd9ba.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/2c2cd9babf2470bbb7ad1aa8626b1508204cfa24.patch"
 kdebug-433333.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/bbe0f91070ac7235066b28e57f9971ac1a4f821e.patch"
 kdebug-433755.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/8fd7b38b66de36ad8b673f3ddb88f7810c4291cc.patch"
+kdebug-433115.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/1278ebee2a6e72de2b3600d2baa61e57378f3d9f.patch"
+kdebug-378910.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/3dee28974ebf92f078dada44d189c31cc2e1abb7.patch"
+kdebug-383202.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/7c9021ebbc6277e40e2013bda48962754d6e03a4.patch"
 )
 sha256sums=('f3c30b3c51dd9d127ba4086252eebef22a7fe5dd34c7fa19498559ccab73d4cc'
             'SKIP'
@@ -45,7 +48,10 @@ sha256sums=('f3c30b3c51dd9d127ba4086252eebef22a7fe5dd34c7fa19498559ccab73d4cc'
             'b4bc5a08b30c0c7b17dd38589d2f50898a073fbe02e10aead486f681f0c067ee'
             '8afd50b76ad7c3e370fdf605570a964ddd50e326387633bcd1784c5fae6072df'
             '7ada45a11b5317c878bb1a74a784cf52d9968e519354e625a3f06f37a6cc7dcf'
-            '8432c426403dbccd1a39cfd31ee134b48f1a07fbf3b234ac91709a2b0db8b31f')
+            '8432c426403dbccd1a39cfd31ee134b48f1a07fbf3b234ac91709a2b0db8b31f'
+            '6c866740683661501dd88e2b0fb164fdff6185c3fb42b6fd841cb41ed254a717'
+            'a988fef3209b336e451b2b0af00e5054655a2772334ddca7cee9f35cd92afab6'
+            '965bc57b074e50fc8358fb2f16615ee380f8333630d1c02336ca15c641108c42')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -74,6 +80,12 @@ prepare() {
     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-433333.patch
     msg "Add kdebug 433755 patch; fix probably in 5.21.3"
     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-433755.patch
+    msg "Add kdebug  433115 patch; fix in 5.21.3"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-433115.patch
+    msg "Add kdebug  378910 patch; fix in 5.22"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-378910.patch
+    msg "Add kdebug  383202 patch; fix in 5.22"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-383202.patch
 }
 
 build() {
