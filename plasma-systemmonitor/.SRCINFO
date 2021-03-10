@@ -17,6 +17,7 @@ pkgbase = plasma-systemmonitor
 	source = kdebug-433751.patch::https://invent.kde.org/plasma/plasma-systemmonitor/commit/747d0076d92e02dfcb318fbe67d92f1203b469d3.patch
 	source = kdebug-433726.patch::https://invent.kde.org/plasma/plasma-systemmonitor/commit/2c36107c8a6d1747d809e08df3bdcdf6a5691729.patch
 	source = kdebug-433706.patch::https://invent.kde.org/plasma/plasma-systemmonitor/commit/bc994c071ed8826893b51664ab026f8ee7b2e038.patch
+	source = kdebug-433324.patch::https://invent.kde.org/plasma/plasma-systemmonitor/commit/ef09d30da772be5e410b5f50767033ff19c43bfe.patch
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
@@ -28,6 +29,7 @@ pkgbase = plasma-systemmonitor
 	sha256sums = aa24ed1ab2e699ab7ce0118bdca2d2552b6ee0a03b74ce20e2843d5653938337
 	sha256sums = 0c41f0513d778d755118e99f9af9b2859ddb2c4842d12b5dfb9b9b6dbf165050
 	sha256sums = 47ac845f55f5aa18005ebcdd44290f1861f4ab254ff58d09d72ab7e03694701f
+	sha256sums = 4721ee34959d76a57fe5ca8d0847be7d068023c99586e910cf2a835a19bf587f
 
 pkgname = plasma-systemmonitor
 

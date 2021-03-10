@@ -17,6 +17,7 @@ ccbug-429758.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/8
 kdebug-433751.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/747d0076d92e02dfcb318fbe67d92f1203b469d3.patch"
 kdebug-433726.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/2c36107c8a6d1747d809e08df3bdcdf6a5691729.patch"
 kdebug-433706.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/bc994c071ed8826893b51664ab026f8ee7b2e038.patch"
+kdebug-433324.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/ef09d30da772be5e410b5f50767033ff19c43bfe.patch"
 )
 depends=(ksysguard kirigami2)
 makedepends=(extra-cmake-modules)
@@ -27,7 +28,8 @@ sha256sums=('4471ea3115e22ee9a16f3281cce05a402cece5aa60f85ee1aa7df4ae2204ab8c'
             'a375054ed794482bc31f746ec4e38bf056239a3c67c1d45ff112b8419cbfd2ef'
             'aa24ed1ab2e699ab7ce0118bdca2d2552b6ee0a03b74ce20e2843d5653938337'
             '0c41f0513d778d755118e99f9af9b2859ddb2c4842d12b5dfb9b9b6dbf165050'
-            '47ac845f55f5aa18005ebcdd44290f1861f4ab254ff58d09d72ab7e03694701f')
+            '47ac845f55f5aa18005ebcdd44290f1861f4ab254ff58d09d72ab7e03694701f'
+            '4721ee34959d76a57fe5ca8d0847be7d068023c99586e910cf2a835a19bf587f')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -43,6 +45,8 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-433751.patch
     msg "Add kdebug 433706 patch; fix in 5.21.3"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-433706.patch
+    msg "Add kdebug 433324 patch; fix in 5.21.3"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433324.patch
 }
     
 build() {
