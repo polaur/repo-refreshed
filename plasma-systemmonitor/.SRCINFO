@@ -1,7 +1,7 @@
 pkgbase = plasma-systemmonitor
 	pkgdesc = An interface for monitoring system sensors, process information and other system resources
 	pkgver = 5.21.2
-	pkgrel = 1.3
+	pkgrel = 1.4
 	url = https://kde.org/plasma-desktop/
 	arch = x86_64
 	groups = plasma
@@ -18,6 +18,8 @@ pkgbase = plasma-systemmonitor
 	source = kdebug-433726.patch::https://invent.kde.org/plasma/plasma-systemmonitor/commit/2c36107c8a6d1747d809e08df3bdcdf6a5691729.patch
 	source = kdebug-433706.patch::https://invent.kde.org/plasma/plasma-systemmonitor/commit/bc994c071ed8826893b51664ab026f8ee7b2e038.patch
 	source = kdebug-433324.patch::https://invent.kde.org/plasma/plasma-systemmonitor/commit/ef09d30da772be5e410b5f50767033ff19c43bfe.patch
+	source = kdebug-434007.patch::https://invent.kde.org/plasma/plasma-systemmonitor/commit/9c8ed3adbb4454d1e40a7041690fabeab7e8cfa4.patch
+	source = kdebug-433976.patch::https://invent.kde.org/plasma/plasma-systemmonitor/commit/955948e28f2bb4c6551d7a6662e1d5527b3d8e9b.patch
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
@@ -30,6 +32,7 @@ pkgbase = plasma-systemmonitor
 	sha256sums = 0c41f0513d778d755118e99f9af9b2859ddb2c4842d12b5dfb9b9b6dbf165050
 	sha256sums = 47ac845f55f5aa18005ebcdd44290f1861f4ab254ff58d09d72ab7e03694701f
 	sha256sums = 4721ee34959d76a57fe5ca8d0847be7d068023c99586e910cf2a835a19bf587f
+	sha256sums = 9c2f228de14565ac0b62db982859100729a9f082db704bdee70702b3bd2c756e
+	sha256sums = 37ea387c98b90e865607086af37605787569a81348b1aa45a289a69befacb3ac
 
 pkgname = plasma-systemmonitor
-

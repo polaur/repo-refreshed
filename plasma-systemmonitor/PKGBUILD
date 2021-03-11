@@ -1,12 +1,12 @@
-# Maintainer: Nelson89 <daniel dot karasinski at gmail dot com>
 # Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# Maintainer: Nelson89 <daniel dot karasinski at gmail dot com>
 # only for version with bugfixes from upcomming releases
 # based on the original work by:
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 
 pkgname=plasma-systemmonitor
 pkgver=5.21.2
-pkgrel=1.3
+pkgrel=1.4
 pkgdesc="An interface for monitoring system sensors, process information and other system resources"
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -18,6 +18,8 @@ kdebug-433751.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/
 kdebug-433726.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/2c36107c8a6d1747d809e08df3bdcdf6a5691729.patch"
 kdebug-433706.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/bc994c071ed8826893b51664ab026f8ee7b2e038.patch"
 kdebug-433324.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/ef09d30da772be5e410b5f50767033ff19c43bfe.patch"
+kdebug-434007.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/9c8ed3adbb4454d1e40a7041690fabeab7e8cfa4.patch"
+kdebug-433976.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/955948e28f2bb4c6551d7a6662e1d5527b3d8e9b.patch"
 )
 depends=(ksysguard kirigami2)
 makedepends=(extra-cmake-modules)
@@ -29,7 +31,9 @@ sha256sums=('4471ea3115e22ee9a16f3281cce05a402cece5aa60f85ee1aa7df4ae2204ab8c'
             'aa24ed1ab2e699ab7ce0118bdca2d2552b6ee0a03b74ce20e2843d5653938337'
             '0c41f0513d778d755118e99f9af9b2859ddb2c4842d12b5dfb9b9b6dbf165050'
             '47ac845f55f5aa18005ebcdd44290f1861f4ab254ff58d09d72ab7e03694701f'
-            '4721ee34959d76a57fe5ca8d0847be7d068023c99586e910cf2a835a19bf587f')
+            '4721ee34959d76a57fe5ca8d0847be7d068023c99586e910cf2a835a19bf587f'
+            '9c2f228de14565ac0b62db982859100729a9f082db704bdee70702b3bd2c756e'
+            '37ea387c98b90e865607086af37605787569a81348b1aa45a289a69befacb3ac')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -46,8 +50,12 @@ prepare() {
     msg "Add kdebug 433706 patch; fix in 5.21.3"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-433706.patch
     msg "Add kdebug 433324 patch; fix in 5.21.3"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433324.patch
-}
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433324.patch 
+    msg "Add kdebug 434007 patch; fix probably in 5.21.3"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-434007.patch 
+    msg "Add kdebug 433976 patch; fix probably in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433976.patch
+    }
     
 build() {
   cmake -B build -S $pkgname-$pkgver
