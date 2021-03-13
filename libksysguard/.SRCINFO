@@ -1,7 +1,7 @@
 pkgbase = libksysguard
 	pkgdesc = Library to retrieve information on the current status of computer hardware
 	pkgver = 5.21.2
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://kde.org/plasma-desktop/
 	arch = x86_64
 	groups = plasma
@@ -16,6 +16,7 @@ pkgbase = libksysguard
 	source = https://download.kde.org/stable/plasma/5.21.2/libksysguard-5.21.2.tar.xz
 	source = https://download.kde.org/stable/plasma/5.21.2/libksysguard-5.21.2.tar.xz.sig
 	source = kdebug-433954.patch::https://invent.kde.org/plasma/libksysguard/-/commit/1b6d0046f888b155cf5c4011b10d681c736b914f.patch
+	source = kdebug-422672.patch::https://invent.kde.org/plasma/libksysguard/commit/ace8d824a5d2b9793c1d8c59d0191005fb38e4e9.patch
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
@@ -23,5 +24,7 @@ pkgbase = libksysguard
 	sha256sums = 0306e2556d94e3366b015d8bb5d7430c1fb66269ad7c0fbce1fecb8970649982
 	sha256sums = SKIP
 	sha256sums = a59c43c495140a2cbe2891a66cb947ad3c78b34f75437c0a06b3f6a1b0817a9e
+	sha256sums = e5843d15973315e208795bb1dbac3dde1678dd49c990964d6cef3245c50c17e2
 
 pkgname = libksysguard
+
