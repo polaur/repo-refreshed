@@ -5,7 +5,7 @@
 
 pkgname=elisa
 pkgver=20.12.3
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='A simple music player aiming to provide a nice experience for its users'
 url='https://community.kde.org/Elisa'
 arch=(x86_64)
@@ -16,11 +16,13 @@ makedepends=(extra-cmake-modules kdoctools)
 source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-389187.patch::"https://invent.kde.org/multimedia/elisa/-/commit/085836632556c00bc56219e00a382a7a80680747.patch"
 commit-b441ad96.patch::"https://invent.kde.org/multimedia/elisa/-/commit/b441ad966831e4fe526eda17727b0e3451dbdc8a.patch"
+kdebug-433892.patch::"https://invent.kde.org/multimedia/elisa/commit/f9b949c150950b15ade9f68664497c56f2480a9a.patch"
 )
 sha256sums=('7a97d305b4319f077db6ce387895c2c3442112d5a3d9d4d68d0c2d884ce79865'
             'SKIP'
             '8513459d0a3a5a2b0fe95c80c1eeb5fea3e66579da63e733cd87002ffcc1184f'
-            '9cc53bed328c79e830f552600b37ec1633a6fe0b29d4285c91c377446d67e786')
+            '9cc53bed328c79e830f552600b37ec1633a6fe0b29d4285c91c377446d67e786'
+            '093cbf9981d6b3d45cb23219a98afb8f8a3cfa3c101e1937d396f810e1a1fde2')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87  # Christoph Feck <cfeck@kde.org>
               D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker <heiko.becker@kde.org>
@@ -30,6 +32,8 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-389187.patch
     msg "Add commit b441ad96; fix in 21.04"
     patch -d $pkgname-$pkgver -p1 -i ../commit-b441ad96.patch
+    msg "Add kdebug 433892; fix in 21.04"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433892.patch
 }
 
 build() {
