@@ -9,7 +9,7 @@
 
 pkgname=dolphin
 pkgver=20.12.3
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="KDE File Manager"
 arch=(x86_64)
 url="https://kde.org/applications/system/dolphin/"
@@ -30,6 +30,7 @@ commit-f01a61b7.patch::"https://invent.kde.org/system/dolphin/-/commit/f01a61b76
 #kdebug-429447.patch::"https://invent.kde.org/system/dolphin/commit/0cee94ce82ccb82afd0c4e22d77e251276e7a447.patch"
 commit-eb4b0fb4.patch::"https://invent.kde.org/system/dolphin/commit/eb4b0fb48050ab047eecf01ccabc595a8b34d141.patch"
 commit-a73e81bf.patch::"https://invent.kde.org/system/dolphin/-/commit/a73e81bf6af745623e7e92ba012522e34b2a312a.patch"
+kdebug-191630.patch::"https://invent.kde.org/system/dolphin/commit/c1cd4fdc913857ca0c09858bc184a91dd3842235.patch"
 )
 sha256sums=('9794b825de2440f53bd237c0bc1c974e89431b5c440ab81ccc1135e696f8a1f3'
             'SKIP'
@@ -40,7 +41,8 @@ sha256sums=('9794b825de2440f53bd237c0bc1c974e89431b5c440ab81ccc1135e696f8a1f3'
             '973fb26119a04983d6a2132b3d644cbd6095974a29b842b8f8126766775f9b23'
             '45a5d2f3c3dc543a59be4ffa7eadf79ed74cfea6456af343256d87309b7595e9'
             '02b3d82d75d1bbe2da2d3e65002dc054506d9120689b49393b56df2017c8ec80'
-            'b2a968e4a5447d59e473147d87f2e3b7d25d04f99c8b41e68ae5010d8460bbc1')
+            'b2a968e4a5447d59e473147d87f2e3b7d25d04f99c8b41e68ae5010d8460bbc1'
+            '3028a9368daafa040e726a76f66bf55ef70d4482a18a23fcd503384f4f4405ac')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87 # Christoph Feck <cfeck@kde.org>
               D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker
@@ -65,6 +67,8 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../commit-eb4b0fb4.patch
     msg "Add commit a73e81bf patch"
     patch -d $pkgname-$pkgver -p1 -i ../commit-a73e81bf.patch
+    msg "Add kdebug 191630 patch;"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-191630.patch
 }
 
 build() {
