@@ -1,0 +1,39 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes or improvements from upcomming releases
+# based on the original works by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=kholidays
+pkgver=5.80.0
+pkgrel=1.1
+epoch=1
+pkgdesc="KDE library for regional holiday information"
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(qt5-base)
+makedepends=(extra-cmake-modules qt5-declarative qt5-tools qt5-doc doxygen)
+optdepends=('qt5-declarative: QML bindings')
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-434027.patch::"https://invent.kde.org/frameworks/kholidays/commit/e4f65e74a84d90b6c1b24d8dd08dd3df5cc0ab86.patch")
+sha256sums=('5f9c0f0b652c9169b39148120d57c26d0c73c82111e8844d51e5c39fc3d7d5ce'
+            'SKIP'
+            '0d5f0dac308f19bdb1be8449916fe4e6aaaabcb5c4efea8c60e7bdaf4856e91c')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+    msg "Add kdebug 434027 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-434027.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
