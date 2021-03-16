@@ -10,7 +10,7 @@
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
 pkgver=5.21.3
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -28,15 +28,17 @@ kdebug-384469.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/47f7
 kdebug-431398.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/97022f2f67c269cec2660ae4690e527cf452b322.patch"
 commit-3fa447f5.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/3fa447f5648ff96985c288794c15df91484ec0f8.patch"
 commit-906a423c.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/906a423ce1e448ddf3bd98092fc1dad3f65c9dc6.patch"
-# commit-45c2a361.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/45c2a3613e55626f28fca738f304563f5577fc50.patch"
+kdebug-425787.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/554a4f9c48af90c1cf59bd5872b87b230b1c5e71.patch"
+#commit-45c2a361.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/45c2a3613e55626f28fca738f304563f5577fc50.patch"
 kdebug-408778.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/52b625081217dfe89713a918d892de1b30a517af.patch"
 #commit-2c2cd9ba.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/2c2cd9babf2470bbb7ad1aa8626b1508204cfa24.patch"
 kdebug-433333.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/bbe0f91070ac7235066b28e57f9971ac1a4f821e.patch"
 kdebug-433755.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/8fd7b38b66de36ad8b673f3ddb88f7810c4291cc.patch"
 kdebug-383202.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/7c9021ebbc6277e40e2013bda48962754d6e03a4.patch"
 kdebug-378910.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/3dee28974ebf92f078dada44d189c31cc2e1abb7.patch"
-#commit-e738abba.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/e738abba403412167d240bfe7b945f120974c9ec.patch"
+commit-e738abba.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/e738abba403412167d240bfe7b945f120974c9ec.patch"
 kdebug-433983.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/9dba1a78a3519cad2aa9e00d0ea31376a457e4e2.patch"
+fix-build.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/bce65152f85e656a1e02bff62ec22b35f77c023b.patch"
 )
 sha256sums=('80602e458ebabbf1685c918485bff4cb30eaae71cfd2bf2c4c9cea7a58b74ab6'
             'SKIP'
@@ -47,12 +49,15 @@ sha256sums=('80602e458ebabbf1685c918485bff4cb30eaae71cfd2bf2c4c9cea7a58b74ab6'
             '4b5be104e614c676486e12666fa3be82f1bb793d2b18543f6ec6850fb987e224'
             '7693722afbc2c2c3bf718dd9eb554985bcc35921074509ab3a592d8f887338d4'
             'b4bc5a08b30c0c7b17dd38589d2f50898a073fbe02e10aead486f681f0c067ee'
+            '0faf16afc7a521cf6a5558d476b2df00fa60713b5998ff988785e4bc23b2ea97'
             '8afd50b76ad7c3e370fdf605570a964ddd50e326387633bcd1784c5fae6072df'
             '7ada45a11b5317c878bb1a74a784cf52d9968e519354e625a3f06f37a6cc7dcf'
             '8432c426403dbccd1a39cfd31ee134b48f1a07fbf3b234ac91709a2b0db8b31f'
             '965bc57b074e50fc8358fb2f16615ee380f8333630d1c02336ca15c641108c42'
             'a988fef3209b336e451b2b0af00e5054655a2772334ddca7cee9f35cd92afab6'
-            'a4163f8e13b9933ce8745ed13c45336b18fe45f572b6f07bd74768615fa60f92')
+            '7c248a9aa709dac3a951af4ce8442a60b74e69091119302bbc6e2af53e26d0e1'
+            'a4163f8e13b9933ce8745ed13c45336b18fe45f572b6f07bd74768615fa60f92'
+            'd0cd65f7ea23419b9d5fdaedc8eac6df64c66307dfec53ae6e53281efeb6973d')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -71,16 +76,19 @@ prepare() {
     patch -d $pkgbase-$pkgver -p1 -i ../commit-3fa447f5.patch
     msg "Add commit 906a423c patch; fix in 5.22"
     patch -d $pkgbase-$pkgver -p1 -i ../commit-906a423c.patch
- #   msg "Add commit 45c2a361 patch; fix in 5.22"
- #  patch -d $pkgname-$pkgver -p1 -i ../commit-45c2a361.patch
+#   msg "Add commit 45c2a361 patch; fix in 5.22"
+#   patch -d $pkgname-$pkgver -p1 -i ../commit-45c2a361.patch
     msg "Add kdebug 408778 patch; fix in 5.22"
     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-408778.patch
- #   msg "Add commit 2c2cd9ba patch; will be in 5.22"
- #   patch -d $pkgbase-$pkgver -p1 -i ../commit-2c2cd9ba.patch
+#    msg "Add commit 2c2cd9ba patch; will be in 5.22"
+#    patch -d $pkgbase-$pkgver -p1 -i ../commit-2c2cd9ba.patch
     msg "Add kdebug 383202 patch; fix in 5.22"
     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-383202.patch
     msg "Add kdebug 378910 patch; fix in 5.22"
     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-378910.patch
+    msg "Add kdebug 425787 patch; fix in 5.22"
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-425787.patch
+    patch -d $pkgbase-$pkgver -p1 -i ../fix-build.patch
 #    msg "Add show which app will open a file when job finishes; fix in 5.22"
 #    patch -d $pkgbase-$pkgver -p1 -i ../commit-e738abba.patch
 }
