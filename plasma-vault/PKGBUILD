@@ -1,0 +1,40 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes or improvements from upcomming releases
+# based on the original work by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=plasma-vault
+pkgver=5.21.3
+pkgrel=1.1
+pkgdesc="Plasma applet and services for creating encrypted vaults"
+arch=(x86_64)
+url="https://www.kde.org/"
+license=(LGPL)
+groups=(plasma)
+depends=(plasma-workspace networkmanager-qt)
+makedepends=(extra-cmake-modules)
+optdepends=('encfs: to use encFS for encryption' 'cryfs: to use cryFS for encryption' 'gocryptfs: to use gocryptfs for encryption')
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+commit-2f5288a8.patch::"https://invent.kde.org/plasma/plasma-vault/-/commit/2f5288a83fcd8fcae20b725e9df1905cf8f02570.patch")
+sha256sums=('323d3d025546524b82b0258e861d5392b65c3f7a7ad9a2c25d98f487bcc1a9e0'
+            'SKIP'
+            '81111b83e7c717f35b249f91808a8ccd4eb15bcbe15ac29421c8f21a44212f35')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+    msg "Add "Show in File Manager" action; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-2f5288a8.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
