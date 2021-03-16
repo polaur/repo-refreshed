@@ -1,0 +1,50 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kdeplasma-addons
+pkgver=5.21.3
+pkgrel=1.1
+pkgdesc='All kind of addons to improve your Plasma experience'
+arch=(x86_64)
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=(LGPL)
+depends=(plasma-workspace)
+makedepends=(extra-cmake-modules kross qt5-webengine)
+optdepends=('kross: comic applet'
+            'purpose: Quickshare applet'
+            'quota-tools: disk quota applet'
+            'qt5-webengine: dictionary and webbrowser applets')
+groups=(plasma)
+source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
+#kdebug-427566.patch::"https://invent.kde.org/plasma/kdeplasma-addons/commit/04c4d02a334ca11c0c8954a932987ad5a5294967.patch"
+commit-850a0e88.patch::"https://invent.kde.org/plasma/kdeplasma-addons/-/commit/850a0e88bee6893ca9932bfef50a5286475e22af.patch"
+)
+sha256sums=('6121ed8b1ad433cdb531aaf8658b41f4b4744c869bae72c109c46a6652570185'
+            'SKIP'
+            '0da5ab53b1433cd8d278b23cd0e34780203d13483e944d0961ff89a332f7caac')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+#    msg "Add kdebug 427566 patch; fix in 5.22"
+#    patch -d $pkgname-$pkgver -p1 -i ../kdebug-427566.patch
+    msg "Add confirmation dialog when deleting note with real content; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-850a0e88.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
