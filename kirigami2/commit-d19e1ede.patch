@@ -1,0 +1,71 @@
+From d19e1edea4f77d95608b076a8696efc0cb5fdecd Mon Sep 17 00:00:00 2001
+From: Arjen Hiemstra <ahiemstra@heimr.nl>
+Date: Wed, 10 Feb 2021 16:10:03 +0100
+Subject: [PATCH] Set theme inherit to false on several items
+
+When inherit is not set to false, changing colorset/colorgroup has no
+effect. This is enforced more strictly with the new theme code, so
+some items did not use the correct colors even when the colorset was
+set.
+---
+ src/controls/ScrollablePage.qml                        | 1 +
+ src/controls/templates/OverlayDrawer.qml               | 2 ++
+ src/controls/templates/private/PassiveNotification.qml | 3 +++
+ 3 files changed, 6 insertions(+)
+
+diff --git a/src/controls/ScrollablePage.qml b/src/controls/ScrollablePage.qml
+index 08c88404..e22286ad 100644
+--- a/src/controls/ScrollablePage.qml
++++ b/src/controls/ScrollablePage.qml
+@@ -116,6 +116,7 @@ Page {
+     implicitHeight: (header ? header.implicitHeight : 0) + (footer ? footer.implicitHeight : 0) + contentHeight + topPadding + bottomPadding
+     implicitWidth: root.flickable.contentItem ? root.flickable.contentItem.implicitWidth : contentItem.implicitWidth + leftPadding + rightPadding
+ 
++    Theme.inherit: false
+     Theme.colorSet: flickable && flickable.hasOwnProperty("model") ? Theme.View : Theme.Window
+ 
+     clip: true
+diff --git a/src/controls/templates/OverlayDrawer.qml b/src/controls/templates/OverlayDrawer.qml
+index 96faae9b..d2da37a2 100644
+--- a/src/controls/templates/OverlayDrawer.qml
++++ b/src/controls/templates/OverlayDrawer.qml
+@@ -262,6 +262,8 @@ T2.Drawer {
+     }
+ 
+     interactive: modal
++
++    Theme.inherit: false
+     Theme.colorSet: modal ? Theme.View : Theme.Window
+     Theme.onColorSetChanged: {
+         contentItem.Theme.colorSet = Theme.colorSet
+diff --git a/src/controls/templates/private/PassiveNotification.qml b/src/controls/templates/private/PassiveNotification.qml
+index 1c9b8a6d..6eaa63ca 100644
+--- a/src/controls/templates/private/PassiveNotification.qml
++++ b/src/controls/templates/private/PassiveNotification.qml
+@@ -77,6 +77,7 @@ Controls.Popup {
+         }
+     }
+ 
++    Kirigami.Theme.inherit: false
+     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+     
+     background: Item {}
+@@ -152,6 +153,7 @@ Controls.Popup {
+             contentItem: RowLayout {
+                 id: mainLayout
+ 
++                Kirigami.Theme.inherit: false
+                 Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
+                 width: mainLayout.width
+                 //FIXME: why this is not automatic?
+@@ -189,6 +191,7 @@ Controls.Popup {
+                 }
+             }
+             background: Kirigami.ShadowedRectangle {
++                Kirigami.Theme.inherit: false
+                 Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
+                 shadow {
+                     size: Kirigami.Units.gridUnit/2
+-- 
+GitLab
+
