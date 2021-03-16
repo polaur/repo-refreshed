@@ -1,0 +1,39 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the original works by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kwindowsystem
+pkgver=5.80.0
+pkgrel=1.1
+pkgdesc='Access to the windowing system'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+depends=(qt5-x11extras)
+makedepends=(extra-cmake-modules qt5-tools qt5-doc doxygen)
+groups=(kf5)
+source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-403636.patch::"https://invent.kde.org/frameworks/kwindowsystem/commit/53daf6bff454bf8c0a2cb18a57587de5d9e93887.patch")
+sha256sums=('b352b67752d17d67a4eb120c224b5b165af3b09f9ac5e1224909d278042704b2'
+            'SKIP'
+            'cba99266adde2161bd9ea75783c6bf9dc2a1b868aa4128bb79a9f98e040014a0')
+validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
+
+prepare() {
+    msg "Add kdebug 403636 patch"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-403636.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_QCH=ON
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
