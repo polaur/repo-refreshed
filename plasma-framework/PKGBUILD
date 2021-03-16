@@ -7,8 +7,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=plasma-framework
-pkgver=5.79.0
-pkgrel=1.4
+pkgver=5.80.0
+pkgrel=1.1
 pkgdesc='Plasma library and runtime components based upon KF5 and Qt5'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -17,26 +17,14 @@ depends=(kactivities kdeclarative kwayland kirigami2)
 makedepends=(extra-cmake-modules qt5-tools qt5-doc kdoctools doxygen)
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-433243.patch::"https://invent.kde.org/frameworks/plasma-framework/commit/b84fbb01f7ea17f6953da06f8ea800b824fc9a57.patch"
-kdebug-429927.patch::"https://invent.kde.org/frameworks/plasma-framework/commit/6ac6ff028e9baa9d7ae9f5d0e0666e468e77656b.patch"
-kdebug-433864.patch::"https://invent.kde.org/frameworks/plasma-framework/commit/15b75de387af9a9cbbc8aaeac29e29d2a2e2b0f6.patch"
 kdebug-430622.patch::"https://invent.kde.org/frameworks/plasma-framework/-/commit/2f48e808d5e6c44a1f82d59f98d1cf8286b8bfb1.patch"
 )
-sha256sums=('9dfc3d9a97b6a12ec29df27db063d4ac850c50339688968d9c4768e51b760b96'
+sha256sums=('d3af0f7628c6404c63ac871ffe7540fc6d12be2bf988503724c6bb00505893d9'
             'SKIP'
-            '293a472e6fdcf0a5d6995e0316f11524382beddee445452c8cc628ccde1110bb'
-            '448fcdca1ff92379e15797ed1903cdf2638060fad513957487370a429fb23267'
-            '3b19dee03879a83581f8a27a8ee0bef9cc89a35b8a5ee7259d9a6b89258ead44'
             'ec045bf2f6969b59c0f2923ba769f45cf39795922c64eee00fdb15439f1fae0c')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
-    msg "Add kdebug 433243 patch"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433243.patch
-    msg "Add kdebug 429927 patch"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-429927.patch
-    msg "Add kdebug 433864 patch"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433864.patch
     msg "Add kdebug 430622 patch; fix in 5.81"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-430622.patch
 }
