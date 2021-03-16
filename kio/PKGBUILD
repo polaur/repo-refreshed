@@ -7,7 +7,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kio
-pkgver=5.79.0
+pkgver=5.80.0
 pkgrel=1.2
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
@@ -32,8 +32,6 @@ prepare() {
     msg "Prepare previewjob.cpp for kdebug-433127.patch"
     sed -i "567 s/Name) ||/Name)/" $pkgname-$pkgver/src/widgets/previewjob.cpp
     sed -i "568 s/    thumb/|| thumb/" $pkgname-$pkgver/src/widgets/previewjob.cpp
-    msg "Add kdebug 432610 patch; fix in 5.80"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-432610.patch
     msg "Add kdebug 433127"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-433127.patch
 }
