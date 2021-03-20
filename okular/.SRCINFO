@@ -1,7 +1,7 @@
 pkgbase = okular
 	pkgdesc = Document Viewer
 	pkgver = 20.12.3
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://kde.org/applications/graphics/okular/
 	arch = x86_64
 	groups = kde-applications
@@ -40,10 +40,16 @@ pkgbase = okular
 	source = https://download.kde.org/stable/release-service/20.12.3/src/okular-20.12.3.tar.xz
 	source = https://download.kde.org/stable/release-service/20.12.3/src/okular-20.12.3.tar.xz.sig
 	source = kdebug-366276.patch::https://invent.kde.org/graphics/okular/commit/9f5c05028d63f5a6408a57949796ebeae0e770b4.patch
+	source = kdebug-432942.patch::https://invent.kde.org/graphics/okular/commit/d0b9b138cc352b6af1dc0bb8427cfc1608b7ac30.patch
+	source = commit-c07944e6.patch::https://invent.kde.org/graphics/okular/-/commit/c07944e6c6dfea380de748f9a366261985e84853.patch
 	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
 	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
+	validpgpkeys = D81C0CB38EB725EF6691C385BB463350D6EF31EF
 	sha256sums = ae570fcd2b35cc9c061c1c55b6f8de256358f0f5dd8d0a8283f13eae006b73dc
 	sha256sums = SKIP
 	sha256sums = 68c048b5957f12f2b00e4a5a6b206312e65d7e26906faceca25e0c5134f5d98e
+	sha256sums = 4df6fe807c089f4fbce0769b474b6a072b742ec0373dc89c896fce09330c5c55
+	sha256sums = cf9307d54ba8ba07785c37c11ba6a8b37ef9d8d46c1dd18842fdfd49b2a80ff9
 
 pkgname = okular
+

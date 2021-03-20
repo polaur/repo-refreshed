@@ -1,10 +1,13 @@
+# Maintainer: Nelson89 <daniel dot karasinski at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the orginal works by:
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=okular
 pkgver=20.12.3
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='Document Viewer'
 arch=(x86_64)
 url="https://kde.org/applications/graphics/okular/"
@@ -17,10 +20,15 @@ optdepends=('ebook-tools: mobi and epub support'
             'khtml: CHM support' 'chmlib: CHM support' 'calligra: ODT and ODP support'
             'unrar: Comic Book Archive support' 'unarchiver: Comic Book Archive support (alternative)')
 source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
-kdebug-366276.patch::"https://invent.kde.org/graphics/okular/commit/9f5c05028d63f5a6408a57949796ebeae0e770b4.patch")
+kdebug-366276.patch::"https://invent.kde.org/graphics/okular/commit/9f5c05028d63f5a6408a57949796ebeae0e770b4.patch"
+kdebug-432942.patch::"https://invent.kde.org/graphics/okular/commit/d0b9b138cc352b6af1dc0bb8427cfc1608b7ac30.patch"
+commit-c07944e6.patch::"https://invent.kde.org/graphics/okular/-/commit/c07944e6c6dfea380de748f9a366261985e84853.patch"
+)
 sha256sums=('ae570fcd2b35cc9c061c1c55b6f8de256358f0f5dd8d0a8283f13eae006b73dc'
             'SKIP'
-            '68c048b5957f12f2b00e4a5a6b206312e65d7e26906faceca25e0c5134f5d98e')
+            '68c048b5957f12f2b00e4a5a6b206312e65d7e26906faceca25e0c5134f5d98e'
+            '4df6fe807c089f4fbce0769b474b6a072b742ec0373dc89c896fce09330c5c55'
+            'cf9307d54ba8ba07785c37c11ba6a8b37ef9d8d46c1dd18842fdfd49b2a80ff9')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87  # Christoph Feck <cfeck@kde.org>
               D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker <heiko.becker@kde.org>
@@ -29,8 +37,11 @@ options=(!zipman)
 prepare() {
     msg "Add kdebug 366276 patch; fix in 21.04"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-366276.patch
+    msg "Add kdebug 366276 patch; fix in 21.04"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-432942.patch
+    msg "Add commit-c07944e6 patch; fix in 21.04"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-c07944e6.patch
 }
-
 build() {
   cmake -B build -S $pkgname-$pkgver \
     -DBUILD_TESTING=OFF
