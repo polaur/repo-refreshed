@@ -4,9 +4,9 @@
 # Contributor: Eivind Uggedal <eivind@uggedal.com>
 
 pkgname=mpv-light
-pkgver=0.33.0
+pkgver=0.33.1
 pkgrel=1
-_tag='d5ae9f70ea1f21c1d3794df5345a6a9366188660' # git rev-parse v${pkgver}
+_tag='4c9d3669a0f672e6754ac456acd324db570964d3' # git rev-parse v${pkgver}
 pkgdesc='a free, open source, and cross-platform media player (polaur)'
 conflicts=('mpv')
 arch=('x86_64')
@@ -29,6 +29,13 @@ validpgpkeys=('145077D82501AA20152CACCE8D769208D5E31419') # sfan5 <sfan5@live.de
 # sha256sums=('9163f64832226d22e24bbc4874ebd6ac02372cd717bef15c28a0aa858c5fe592')
 source=("git+https://github.com/mpv-player/mpv.git#tag=${_tag}?signed")
 sha256sums=('SKIP')
+
+prepare() {
+  cd ${pkgname%-*}
+
+  # vo_gpu: placebo: update for upstream API changes
+  git cherry-pick -n 7c4465cefb27d4e0d07535d368febdf77b579566
+}
 
 build() {
   # cd ${pkgname%-*}-${pkgver}
