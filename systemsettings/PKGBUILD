@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=systemsettings
-pkgver=5.21.3
+pkgver=5.21.4
 pkgrel=1.1
 pkgdesc='KDE system manager for hardware, software, and workspaces'
 arch=(x86_64)
@@ -16,10 +16,10 @@ depends=(plasma-workspace)
 makedepends=(extra-cmake-modules kdoctools)
 groups=(plasma)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
-#kdebug-432083.patch::"https://invent.kde.org/plasma/systemsettings/commit/54da94bc12247251f778a5b6757bcdb332aa2a4e.patch"
+# kdebug-432083.patch::"https://invent.kde.org/plasma/systemsettings/commit/54da94bc12247251f778a5b6757bcdb332aa2a4e.patch"
 kdebug-434045.patch::"https://invent.kde.org/plasma/systemsettings/commit/dbf9834bedb064a3140e1921a47f985a3706a20d.patch"
 )
-sha256sums=('1d9518fa792970859d49965209138ee9944a9e1db00ed2eea3337481c4a3d623'
+sha256sums=('034b0c384cdbf38d126daf4dced6f2d42995b76f9b9268b30eb6a1d59c20ed04'
             'SKIP'
             '8151f59126ce15908a82a2521218b8133edadcf05cfe026983db571b8d5878d4')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
@@ -28,8 +28,8 @@ validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr
               '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
 
 prepare() {
-   # msg "Add kdebug 432083 patch; fix in 5.22"
-   # patch -d $pkgname-$pkgver -p1 -i ../kdebug-432083.patch
+    # msg "Add kdebug 432083 patch; fix in 5.22"
+    # patch -d $pkgname-$pkgver -p1 -i ../kdebug-432083.patch
     msg "Add kdebug 434045.patch; fix probably in 5.22"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-434045.patch
      }

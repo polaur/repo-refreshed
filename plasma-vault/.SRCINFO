@@ -1,6 +1,6 @@
 pkgbase = plasma-vault
 	pkgdesc = Plasma applet and services for creating encrypted vaults
-	pkgver = 5.21.3
+	pkgver = 5.21.4
 	pkgrel = 1.1
 	url = https://www.kde.org/
 	arch = x86_64
@@ -12,15 +12,16 @@ pkgbase = plasma-vault
 	optdepends = encfs: to use encFS for encryption
 	optdepends = cryfs: to use cryFS for encryption
 	optdepends = gocryptfs: to use gocryptfs for encryption
-	source = https://download.kde.org/stable/plasma/5.21.3/plasma-vault-5.21.3.tar.xz
-	source = https://download.kde.org/stable/plasma/5.21.3/plasma-vault-5.21.3.tar.xz.sig
+	source = https://download.kde.org/stable/plasma/5.21.4/plasma-vault-5.21.4.tar.xz
+	source = https://download.kde.org/stable/plasma/5.21.4/plasma-vault-5.21.4.tar.xz.sig
 	source = commit-2f5288a8.patch::https://invent.kde.org/plasma/plasma-vault/-/commit/2f5288a83fcd8fcae20b725e9df1905cf8f02570.patch
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
 	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
-	sha256sums = 323d3d025546524b82b0258e861d5392b65c3f7a7ad9a2c25d98f487bcc1a9e0
+	sha256sums = c577135b04d7b35227183100fcae08eaf6df5ef41c4ecf43e0706a329ef8a48d
 	sha256sums = SKIP
 	sha256sums = 81111b83e7c717f35b249f91808a8ccd4eb15bcbe15ac29421c8f21a44212f35
 
 pkgname = plasma-vault
+

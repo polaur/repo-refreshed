@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kdeplasma-addons
-pkgver=5.21.3
+pkgver=5.21.4
 pkgrel=1.1
 pkgdesc='All kind of addons to improve your Plasma experience'
 arch=(x86_64)
@@ -23,7 +23,7 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
 #kdebug-427566.patch::"https://invent.kde.org/plasma/kdeplasma-addons/commit/04c4d02a334ca11c0c8954a932987ad5a5294967.patch"
 commit-850a0e88.patch::"https://invent.kde.org/plasma/kdeplasma-addons/-/commit/850a0e88bee6893ca9932bfef50a5286475e22af.patch"
 )
-sha256sums=('6121ed8b1ad433cdb531aaf8658b41f4b4744c869bae72c109c46a6652570185'
+sha256sums=('2de617d0a750224d73a6a2d91d99508a6d725fab0f2be7b0b3c47dc3cdf056a2'
             'SKIP'
             '0da5ab53b1433cd8d278b23cd0e34780203d13483e944d0961ff89a332f7caac')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
