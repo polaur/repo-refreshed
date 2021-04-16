@@ -1,7 +1,7 @@
-From 15e9ea75034aa796609ee519245e6f9da33d8dee Mon Sep 17 00:00:00 2001
+From e53baae0577ca3903a80c4c34705a01b9be52d04 Mon Sep 17 00:00:00 2001
 From: Marius Bakke <marius@devup.no>
 Date: Sat, 1 Aug 2020 18:02:21 +0200
-Subject: [PATCH 01/14] testsuite: Add facility to skip tests.
+Subject: [PATCH 01/15] testsuite: Add facility to skip tests.
 
 The Makefile helpfully warns that some tests will fail when
 --sysconfdir != /etc, but there are no provisions to easily disable
@@ -54,13 +54,13 @@ index f190249..c74b648 100644
  } __attribute__((aligned(8)));
  
 -- 
-2.31.0
+2.31.1.272.g89b43f80a5
 
 
-From f2c0b976fc4db070783d0e197641e37023c97158 Mon Sep 17 00:00:00 2001
+From 71fca173714b204b206a9b7c713a7a9a07a7dfb1 Mon Sep 17 00:00:00 2001
 From: Marius Bakke <marius@devup.no>
 Date: Sat, 1 Aug 2020 18:02:22 +0200
-Subject: [PATCH 02/14] testsuite: Automatically skip tests that fail when
+Subject: [PATCH 02/15] testsuite: Automatically skip tests that fail when
  sysconfdir != /etc.
 
 ---
@@ -197,13 +197,13 @@ index f908d56..f6bed8b 100644
  	.config = {
  		[TC_UNAME_R] = "4.4.4",
 -- 
-2.31.0
+2.31.1.272.g89b43f80a5
 
 
-From 94ee54a3c96c3ac6d81065f35f92e2b9813ed1f1 Mon Sep 17 00:00:00 2001
+From 19af15e14db01068706ad4a17fbb8bc71a954c13 Mon Sep 17 00:00:00 2001
 From: Marco d'Itri <md@linux.it>
 Date: Thu, 7 Jan 2021 20:17:48 -0800
-Subject: [PATCH 03/14] Fix "modinfo -F always shows name for built-ins"
+Subject: [PATCH 03/15] Fix "modinfo -F always shows name for built-ins"
 
 Bug reported by Ben Hutchings <ben@decadent.org.uk>:
 https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=970871
@@ -239,13 +239,13 @@ index 0231bb0..f6a971f 100644
  	}
  
 -- 
-2.31.0
+2.31.1.272.g89b43f80a5
 
 
-From 23855a0f99d437695207e1007ea21acc587191b9 Mon Sep 17 00:00:00 2001
+From 1b797c3c268f40509051bd8c6e7291a6c14f75d6 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Mon, 18 Jan 2021 18:05:09 -0800
-Subject: [PATCH 04/14] libkmod: Fix documentation on config precedence order
+Subject: [PATCH 04/15] libkmod: Fix documentation on config precedence order
 
 /etc is has higher priority than /run.
 ---
@@ -296,13 +296,13 @@ index 211af84..a674d69 100644
  
    <refsect1><title>DESCRIPTION</title>
 -- 
-2.31.0
+2.31.1.272.g89b43f80a5
 
 
-From 2142b19e61f790e770fb9ad5ba237c88fea2d909 Mon Sep 17 00:00:00 2001
+From f9ca89aee4f5efc122ab9ed5d59404da0085a8e5 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Mon, 18 Jan 2021 18:13:25 -0800
-Subject: [PATCH 05/14] depmod: fix precedence order
+Subject: [PATCH 05/15] depmod: fix precedence order
 
 Configuration in /etc should have higher prio than /run.
 Given how rarely configuration in /run is used with depmod, this is
@@ -326,13 +326,13 @@ index 3f31cdf..8e1d9ec 100644
  	NULL
  };
 -- 
-2.31.0
+2.31.1.272.g89b43f80a5
 
 
-From 83db226c1be37f361c1c13c416b691b98703faa0 Mon Sep 17 00:00:00 2001
+From 5ee5dbae134eae6f285637462e4591bb5787f4da Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Mon, 18 Jan 2021 18:22:31 -0800
-Subject: [PATCH 06/14] Support /usr/local for configuration files
+Subject: [PATCH 06/15] Support /usr/local for configuration files
 
 Add /usr/local to the search path for configuration files. These are
 intended for local installs, provided /usr/local is given as prefix.
@@ -408,13 +408,13 @@ index 8e1d9ec..170a1d8 100644
  	NULL
  };
 -- 
-2.31.0
+2.31.1.272.g89b43f80a5
 
 
-From 701117c1fd7d30d6f44c3b1f231eea46a634c0a5 Mon Sep 17 00:00:00 2001
+From b665653357a6bab5a437887d5aab72640aa3a760 Mon Sep 17 00:00:00 2001
 From: Dave Reisner <dreisner@archlinux.org>
 Date: Wed, 25 Mar 2020 11:03:58 -0400
-Subject: [PATCH 07/14] populate-modules: Use more bash, more quotes
+Subject: [PATCH 07/15] populate-modules: Use more bash, more quotes
 
 We're already using associatives arrays, so there's no reason we should
 be using 'test'.
@@ -474,13 +474,13 @@ index 358e740..b0cc932 100755
 +    cat "${MODULE_PLAYGROUND}/dummy.pkcs7" >>"${ROOTFS}/$m"
  done
 -- 
-2.31.0
+2.31.1.272.g89b43f80a5
 
 
-From 58315feb0e68c10a2cb7a826e51cfa2f1721f46e Mon Sep 17 00:00:00 2001
+From db6f0b5c485da5eac062f84f01b76d8781bd9406 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Fri, 29 Jan 2021 18:28:38 -0800
-Subject: [PATCH 08/14] testsuite: compress modules if feature is enabled
+Subject: [PATCH 08/15] testsuite: compress modules if feature is enabled
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -581,13 +581,13 @@ index 261559c..d7802d7 100644
  #define SEARCH_ORDER_SIMPLE_ROOTFS TESTSUITE_ROOTFS "test-depmod/search-order-simple"
  static noreturn int depmod_search_order_simple(const struct test *t)
 -- 
-2.31.0
+2.31.1.272.g89b43f80a5
 
 
-From bea96549302666ee3425cdfa410ec4dffbd62b59 Mon Sep 17 00:00:00 2001
+From c9740b76a8e0284f039438a45e690ddfea6b2395 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Fri, 29 Jan 2021 18:34:30 -0800
-Subject: [PATCH 09/14] testsuite: also test xz compression
+Subject: [PATCH 09/15] testsuite: also test xz compression
 
 Reviewed-by: Petr Vorel <pvorel@suse.cz>
 ---
@@ -622,13 +622,13 @@ index ae43884..099f026 100755
  	for m in "${zstd_array[@]}"; do
  	    zstd --rm $ROOTFS/$m
 -- 
-2.31.0
+2.31.1.272.g89b43f80a5
 
 
-From 47af7acbb97c86905e158a570c56e6ff5c89fc6e Mon Sep 17 00:00:00 2001
+From e367d9a36b3eb71b1a6dee2f04199dbd334dc18e Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Fri, 12 Feb 2021 01:45:21 -0800
-Subject: [PATCH 10/14] libkmod-config: revamp kcmdline parsing into a state
+Subject: [PATCH 10/15] libkmod-config: revamp kcmdline parsing into a state
  machine
 
 The handling of spaces and quotes is becoming hard to maintain. Convert
@@ -763,13 +763,13 @@ index 971f20b..d3cd10d 100644
  	return 0;
  }
 -- 
-2.31.0
+2.31.1.272.g89b43f80a5
 
 
-From 2d30a1499284d8192b0d6c228c26dc398f4d249f Mon Sep 17 00:00:00 2001
+From 4cae0a601f8c151363a30bfddda91cb66344e4a5 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Fri, 12 Feb 2021 01:45:22 -0800
-Subject: [PATCH 11/14] libkmod-config: re-quote option from kernel cmdline
+Subject: [PATCH 11/15] libkmod-config: re-quote option from kernel cmdline
 
 It was reported that grub mangles the kernel cmdline. It turns
 
@@ -1023,13 +1023,13 @@ index f6bed8b..dbc54f3 100644
  {
  	const char *progname = ABS_TOP_BUILDDIR "/tools/modprobe";
 -- 
-2.31.0
+2.31.1.272.g89b43f80a5
 
 
-From 39dca3ee30626008b2418ae6b0bb3e5f619ab1a3 Mon Sep 17 00:00:00 2001
+From 3a2016be47544993555e6e52674091c25a5a301a Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Fri, 12 Feb 2021 01:45:23 -0800
-Subject: [PATCH 12/14] testsuite: allow to re-use single function for tests
+Subject: [PATCH 12/15] testsuite: allow to re-use single function for tests
 
 Add a new DEFINE_TEST_WITH_FUNC() that accepts the function
 alongside the test name. This will allow us to share a single function
@@ -1062,13 +1062,13 @@ index c74b648..44d1730 100644
  	extern struct test __start_kmod_tests[] __attribute__((weak, visibility("hidden")));	\
  	extern struct test __stop_kmod_tests[] __attribute__((weak, visibility("hidden")));	\
 -- 
-2.31.0
+2.31.1.272.g89b43f80a5
 
 
-From 51638ac196b64f8f53ee68929129b8adb1eaf807 Mon Sep 17 00:00:00 2001
+From 27cfa9f409b442129996c45b73d0075d8bc23307 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Fri, 12 Feb 2021 01:45:24 -0800
-Subject: [PATCH 13/14] test-modprobe: share single function for kcmdline tests
+Subject: [PATCH 13/15] test-modprobe: share single function for kcmdline tests
 
 ---
  testsuite/test-modprobe.c | 95 +++++----------------------------------
@@ -1244,13 +1244,13 @@ index dbc54f3..0255f1a 100644
  	.config = {
  		[TC_UNAME_R] = "4.4.4",
 -- 
-2.31.0
+2.31.1.272.g89b43f80a5
 
 
-From 72d056242cac8540ea01fb62767bb897a31a12c7 Mon Sep 17 00:00:00 2001
+From f2b7d288ddfe3b66fa3a41d82079191eacb9360c Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Wed, 10 Mar 2021 08:33:01 -0800
-Subject: [PATCH 14/14] libkmod-config: more chars allowed as space
+Subject: [PATCH 14/15] libkmod-config: more chars allowed as space
 
 Recently in a discussion I noticed that kernel allows more chars to be
 considered as space in the kernel command line. Switch to the equivalent
@@ -1281,5 +1281,39 @@ index 2873f06..4fdd40f 100644
  				/* no state change*/;
  			} else if (is_quoted) {
 -- 
-2.31.0
+2.31.1.272.g89b43f80a5
+
+
+From f61b948c6ab7f07bd8f2db6d2240d10182963922 Mon Sep 17 00:00:00 2001
+From: Seung-Woo Kim <sw0312.kim@samsung.com>
+Date: Fri, 9 Apr 2021 18:44:23 +0900
+Subject: [PATCH 15/15] libkmod-config: fix a memory leak when
+ kmod_list_append() fails
+
+From kmod_config_new(), when kmod_list_append() fails,
+fix not list-appended kmod_config_path leak.
+
+Signed-off-by: Seung-Woo Kim <sw0312.kim@samsung.com>
+---
+ libkmod/libkmod-config.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/libkmod/libkmod-config.c b/libkmod/libkmod-config.c
+index 4fdd40f..e83621b 100644
+--- a/libkmod/libkmod-config.c
++++ b/libkmod/libkmod-config.c
+@@ -909,8 +909,10 @@ int kmod_config_new(struct kmod_ctx *ctx, struct kmod_config **p_config,
+ 		memcpy(cf->path, path, pathlen);
+ 
+ 		tmp = kmod_list_append(path_list, cf);
+-		if (tmp == NULL)
++		if (tmp == NULL) {
++			free(cf);
+ 			goto oom;
++		}
+ 		path_list = tmp;
+ 	}
+ 
+-- 
+2.31.1.272.g89b43f80a5
 

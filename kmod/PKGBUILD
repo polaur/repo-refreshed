@@ -2,7 +2,7 @@
 
 pkgname=kmod
 pkgver=28
-pkgrel=1.6
+pkgrel=1.7
 pkgdesc="Linux kernel module management tools and library"
 arch=('x86_64')
 url='https://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git'
@@ -23,7 +23,7 @@ md5sums=('0a2b887b1b3dfb8c0b3f41f598203e56'
          'dd62cbf62bd8f212f51ef8c43bec9a77'
          'e179ace75721e92b04b2e145b69dab29'
          '18fb3d1f6024a5a84514c8276cb3ebff'
-         'd3d6cacbd8361f9288c005b37360dded')
+         '4de6642fcba395137804f3c2a67a1ffc')
 
 prepare() {
   cd "$pkgname-$pkgver"
