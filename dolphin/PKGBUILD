@@ -9,7 +9,7 @@
 
 pkgname=dolphin
 pkgver=20.12.3
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc="KDE File Manager"
 arch=(x86_64)
 url="https://kde.org/applications/system/dolphin/"
@@ -31,6 +31,8 @@ commit-f01a61b7.patch::"https://invent.kde.org/system/dolphin/-/commit/f01a61b76
 commit-eb4b0fb4.patch::"https://invent.kde.org/system/dolphin/commit/eb4b0fb48050ab047eecf01ccabc595a8b34d141.patch"
 commit-a73e81bf.patch::"https://invent.kde.org/system/dolphin/-/commit/a73e81bf6af745623e7e92ba012522e34b2a312a.patch"
 kdebug-191630.patch::"https://invent.kde.org/system/dolphin/commit/c1cd4fdc913857ca0c09858bc184a91dd3842235.patch"
+kdebug-421347.patch::"https://invent.kde.org/system/dolphin/commit/4f4e3d392c9645e3d43c362af72e2066430890f6.patch"
+kdebug-269987.patch::"https://invent.kde.org/system/dolphin/commit/5a0da4a9c8d10dc1921077d84bdabf05d20150b0.patch"
 )
 sha256sums=('9794b825de2440f53bd237c0bc1c974e89431b5c440ab81ccc1135e696f8a1f3'
             'SKIP'
@@ -42,7 +44,9 @@ sha256sums=('9794b825de2440f53bd237c0bc1c974e89431b5c440ab81ccc1135e696f8a1f3'
             '45a5d2f3c3dc543a59be4ffa7eadf79ed74cfea6456af343256d87309b7595e9'
             '02b3d82d75d1bbe2da2d3e65002dc054506d9120689b49393b56df2017c8ec80'
             'b2a968e4a5447d59e473147d87f2e3b7d25d04f99c8b41e68ae5010d8460bbc1'
-            '3028a9368daafa040e726a76f66bf55ef70d4482a18a23fcd503384f4f4405ac')
+            '3028a9368daafa040e726a76f66bf55ef70d4482a18a23fcd503384f4f4405ac'
+            'f3125dfba581ba9ce9827776582eb90cc2ca96477c4d77d67dfe3b80897f82ac'
+            'db896784510a66cc8d21a8f5a247a76a733a15fb914aa7224448c69cfd86c9bb')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87 # Christoph Feck <cfeck@kde.org>
               D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker
@@ -54,7 +58,6 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-430085.patch
     msg "Add kdebug 422282 patch; Fix in 21.04"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-422282.patch
-    
     msg "Add commit 998d71e5 patch"
     patch -d $pkgname-$pkgver -p1 -i ../commit-998d71e5.patch
     msg "Add commit 5e5f236d patch"
@@ -69,6 +72,12 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../commit-a73e81bf.patch
     msg "Add kdebug 191630 patch;"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-191630.patch
+    msg "Preparing kdebug 421347 patch"
+    sed -i "51,66d" ../kdebug-421347.patch
+    msg "Add kdebug 421347 patch; fix in 21.08"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-421347.patch
+    msg "Add kdebug 269986 patch; fix in 21.08"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-269987.patch
 }
 
 build() {
