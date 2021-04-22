@@ -1,3 +1,4 @@
+# Maintainer: Nelson89 <daniel dot karasinski at gmail dot com>
 # Maintainer: pavbaranov <pavbaranov at gmail dot com>
 # only for version with bugfixes from upcomming releases
 # based on the original works by:
@@ -7,7 +8,7 @@
 
 pkgname=kio
 pkgver=5.81.0
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -19,10 +20,16 @@ optdepends=('kio-extras: extra protocols support (sftp, fish and more)' 'kdoctoo
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-433127.patch::"https://invent.kde.org/frameworks/kio/commit/b33307901f30ec8d724a7e424838165746563d06.patch"
+kdebug-416995.patch::"https://invent.kde.org/frameworks/kio/-/commit/057062432b4b5cc4f4fa27990dcde60d3eafa758.patch"
+kdebug-430396.patch::"https://invent.kde.org/frameworks/kio/commit/7f81b92a3577fd318eef19f564206b8b0cc1cd05.patch"
+kdebug-194017.patch::"https://invent.kde.org/frameworks/kio/commit/7b1997933d1013f8a2e8cfd8ebd8c277c5622613.patch"
 )
 sha256sums=('c62bae911978d163bbb86648344708d5b963823244941de0904c2a7800ecc07e'
             'SKIP'
-            '80a0119e83e184c402e5145804e7777198053e2a9b539352e66112025e74dba5')
+            '80a0119e83e184c402e5145804e7777198053e2a9b539352e66112025e74dba5'
+            '06707cafb9cd96b3d094cb227b06413de83c082998f4cea993c86756df29a493'
+            '1ec0eea027eac23f499a5f1d7e73236856a5d23eea4f2df7afeed81ac6615b9f'
+            '6201176c11179409ebf12f70073618b6dca74cd5bde9f900a920ba732bd0e6e3')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -31,6 +38,12 @@ prepare() {
     sed -i "568 s/    thumb/|| thumb/" $pkgname-$pkgver/src/widgets/previewjob.cpp
     msg "Add kdebug 433127"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-433127.patch
+    msg "Add kdebug 416995"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-416995.patch
+    msg "Add kdebug 430396"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-430396.patch
+    msg "Add kdebug 194017"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-194017.patch
 }
 
 build() {
