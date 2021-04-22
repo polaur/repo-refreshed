@@ -1,3 +1,4 @@
+# Maintainer: Nelson89 <daniel dot karasinski at gmail dot com>
 # Maintainer: pavbaranov <pavbaranov at gmail dot com>
 # only for version with bugfixes from upcomming releases
 # based on the original works by:
@@ -7,7 +8,7 @@
 
 pkgname=plasma-desktop
 pkgver=5.21.4
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -17,6 +18,8 @@ source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"
 kdebug-394119.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/6779cfc8b11cee069833748600ceeabab1f791d5.patch"
 #kdebug-433412.patch::"https://invent.kde.org/plasma/plasma-desktop/-/commit/6fb37dc0260c298bc35ec5e39399aa1f31693e79.patch"
 kdebug-286760.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/f41eb4ff616751ba75999691decc6a202ea9ba9e.patch"
+kdebug-435694.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/28b79d4c6d6c9b9c7ec6a22de3a427aa6276495c.patch"
+kdebug-405307.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/ce0c3fead0ec1aa5d8bd6a627bb61db803e83974.patch"
 )
 depends=(polkit-kde-agent libxkbfile kmenuedit systemsettings ksysguard baloo libibus accountsservice)
 optdepends=('plasma-nm: Network manager applet'
@@ -32,7 +35,9 @@ groups=(plasma)
 sha256sums=('c9635c82ffa8fa9b22aa474e8aa2e8f9d912615137f039f5ee6080000c283bb7'
             'SKIP'
             '510dd3aaeec37aeb505c556d1f567fe7e7e2a799a273d402ff3719550b315769'
-            '83145fb799d6be5e8c8953d9bd95cd8729f1d192467947287a60553e5c18fc9e')
+            '83145fb799d6be5e8c8953d9bd95cd8729f1d192467947287a60553e5c18fc9e'
+            '1473016282ec385a3136751b51191a342ec97802962cc45297221e10d5222e4c'
+            '5a65b6066c544eaee5326e26c9a1fa0b008ed3d7a9b61fe0cd7d35fd4eab53e7')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -43,6 +48,10 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-394119.patch
 #    msg "Add kdebug 433412 patch; fix in 5.22"
 #    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433412.patch
+    msg "Add kdebug 435694 patch; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-435694.patch
+    msg "Add kdebug 405307 patch; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-405307.patch
 }
 
 build() {

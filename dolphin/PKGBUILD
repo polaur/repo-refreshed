@@ -45,7 +45,7 @@ sha256sums=('9794b825de2440f53bd237c0bc1c974e89431b5c440ab81ccc1135e696f8a1f3'
             '02b3d82d75d1bbe2da2d3e65002dc054506d9120689b49393b56df2017c8ec80'
             'b2a968e4a5447d59e473147d87f2e3b7d25d04f99c8b41e68ae5010d8460bbc1'
             '3028a9368daafa040e726a76f66bf55ef70d4482a18a23fcd503384f4f4405ac'
-            'f3125dfba581ba9ce9827776582eb90cc2ca96477c4d77d67dfe3b80897f82ac'
+            '9b977381b5187ca54e431ef9a50bbc1e6bbcbce87be0b292bc6746deae301c4a'
             'db896784510a66cc8d21a8f5a247a76a733a15fb914aa7224448c69cfd86c9bb')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87 # Christoph Feck <cfeck@kde.org>
@@ -73,9 +73,9 @@ prepare() {
     msg "Add kdebug 191630 patch;"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-191630.patch
     msg "Preparing kdebug 421347 patch"
-    sed -i "51,66d" ../kdebug-421347.patch
-    msg "Add kdebug 421347 patch; fix in 21.08"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-421347.patch
+    # sed -i "51,66d" ../kdebug-421347.patch
+    # msg "Add kdebug 421347 patch; fix in 21.08"
+    # patch -d $pkgname-$pkgver -p1 -i ../kdebug-421347.patch
     msg "Add kdebug 269986 patch; fix in 21.08"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-269987.patch
 }
