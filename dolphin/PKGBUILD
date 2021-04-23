@@ -1,0 +1,49 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# Maintainer: Nelson89 <daniel dot karasinski at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the orginal works by:
+# Maintainer: Antonio Rojas <arojas@archlinux,org>
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: Pierre Schmitz <pierre@archlinux.de>
+
+pkgname=dolphin
+pkgver=21.04.0
+pkgrel=1.1
+pkgdesc="KDE File Manager"
+arch=(x86_64)
+url="https://kde.org/applications/system/dolphin/"
+license=(LGPL)
+depends=(baloo-widgets knewstuff kio-extras kcmutils kparts kinit kactivities kuserfeedback)
+makedepends=(extra-cmake-modules kdoctools packagekit-qt5)
+optdepends=('kde-cli-tools: for editing file type options' 'ffmpegthumbs: video thumbnails' 'kdegraphics-thumbnailers: PDF and PS thumbnails'
+            'konsole: terminal panel' 'purpose: share context menu' 'packagekit-qt5: service menu installer')
+groups=(kde-applications kde-system)
+source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+kdebug-421347.patch::"https://invent.kde.org/system/dolphin/commit/4f4e3d392c9645e3d43c362af72e2066430890f6.patch"
+kdebug-269987.patch::"https://invent.kde.org/system/dolphin/commit/5a0da4a9c8d10dc1921077d84bdabf05d20150b0.patch"
+)
+sha256sums=('4988e59d4e3edfd58c2d0857745398fc1840c87ec03ea13b0d73254874cfbdbe'
+            'SKIP'
+            '2985c54722d7d047783f05eb07e4a09a544e90a6826d76eaea07605b3935d812'
+            'db896784510a66cc8d21a8f5a247a76a733a15fb914aa7224448c69cfd86c9bb')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87 # Christoph Feck <cfeck@kde.org>
+              D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker
+
+prepare() {
+    msg "Add kdebug 421347 patch; fix in 21.08"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-421347.patch
+    msg "Add kdebug 269986 patch; fix in 21.08"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-269987.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
