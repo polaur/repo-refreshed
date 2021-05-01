@@ -6,7 +6,7 @@
 
 pkgname=plasma-systemmonitor
 pkgver=5.21.4
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="An interface for monitoring system sensors, process information and other system resources"
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -14,6 +14,7 @@ license=(GPL LGPL)
 source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-429758.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/a4fc2686753f1749001f80a8b98ff85d15135bbc.patch"
 ccbug-429758.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/8a69730b5411dd77cea2b545262c517ce5118960.patch"
+kdebug-429417.patch::"https://invent.kde.org/plasma/plasma-systemmonitor/commit/9c2d8b7676ec68b60a6f8e991d61c12b6575ad17.patch"
 )
 depends=(ksysguard kirigami2)
 makedepends=(extra-cmake-modules)
@@ -21,7 +22,8 @@ groups=(plasma)
 sha256sums=('849407cf2b9333140cee9ca18ca34e1c4351a8597fea47a475eec68c8dc1b99a'
             'SKIP'
             'e50de31896cb2924f1791d2dd2ad61d7aadf24fa807e84df2de6654a9e831d40'
-            'a375054ed794482bc31f746ec4e38bf056239a3c67c1d45ff112b8419cbfd2ef')
+            'a375054ed794482bc31f746ec4e38bf056239a3c67c1d45ff112b8419cbfd2ef'
+            'b4e4fa4d3a23a575c50d18d623d79086fa0c4f2fb7b5f19b489cf3b2bcd6be20')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -31,6 +33,8 @@ prepare() {
     msg "Add kdebug 429758 patches; fix probably in 5.22"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-429758.patch
     patch -d $pkgname-$pkgver -p1 -i ../ccbug-429758.patch
+    msg "Add kdebug 429417 patch; fix in 5.22"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-429417.patch
 }
     
 build() {
