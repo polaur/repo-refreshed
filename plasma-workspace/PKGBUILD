@@ -116,9 +116,9 @@ prepare() {
     msg "Add kdebug 433557 patch; fix in 5.22"
     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-433557.patch
     msg "Add kdebug 435954 patch; fix in 5.22"
-    # patch -d $pkgbase-$pkgver -p1 -i ../kdebug-435954.patch
+    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-435954.patch
     # msg "Add kdebug 434904 patch; fix in 5.22"
-    patch -d $pkgbase-$pkgver -p1 -i ../kdebug-434904.patch
+    # patch -d $pkgbase-$pkgver -p1 -i ../kdebug-434904.patch
     msg "Add kdebug 432588 patch; fix in 5.22"
     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-432588.patch
     msg "Add kdebug 429394 patch; fix in 5.22"
