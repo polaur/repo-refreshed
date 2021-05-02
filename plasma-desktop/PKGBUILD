@@ -23,7 +23,7 @@ kdebug-405307.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/ce0c3f
 kdebug-436216.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/2b7b0c5419455a16425fc06e25cce2cd1f434121.patch"
 kdebug-417457.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/c59edc9826a64c51f9ed41f7ccaf2cc5ade86d4b.patch"
 kdebug-425360.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/07dcff19b05ed63311fc42665d559f11c7281870.patch"
-kdebug-433819.patch::"https://invent.kde.org/plasma/plasma-desktop/-/commit/d3c1366ff57775c4ee5a6dc9e105da118a0d74a0.patch"
+# kdebug-433819.patch::"https://invent.kde.org/plasma/plasma-desktop/-/commit/d3c1366ff57775c4ee5a6dc9e105da118a0d74a0.patch"
 )
 depends=(polkit-kde-agent libxkbfile kmenuedit systemsettings ksysguard baloo libibus accountsservice)
 optdepends=('plasma-nm: Network manager applet'
@@ -44,8 +44,7 @@ sha256sums=('c9635c82ffa8fa9b22aa474e8aa2e8f9d912615137f039f5ee6080000c283bb7'
             '5a65b6066c544eaee5326e26c9a1fa0b008ed3d7a9b61fe0cd7d35fd4eab53e7'
             '9208de32d7ec4dda850103fe72cdc31e75c4eedc68e7b715fc0f38517ac54b31'
             '8017758ccab8ec7c9b218df4f076bcb399e9a35f37143dd2cebb5771e3081e79'
-            'b5e1e220a2c6cf73a2f83b414b07f7e9c74cdef44f97dc366c6b354a61f31508'
-            '7ddca5c4447430fcfb79acc91085d7d1dc80e3ef2f832c23e69ce6b3ef80a5f9')
+            'b5e1e220a2c6cf73a2f83b414b07f7e9c74cdef44f97dc366c6b354a61f31508')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -66,8 +65,8 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-417457.patch
     msg "Add kdebug 425360 patch; fix in 5.22"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-425360.patch
-    msg "Add kdebug 433819 patch; fix in 5.22"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433819.patch
+    # msg "Add kdebug 433819 patch; fix in 5.22"
+    # patch -d $pkgname-$pkgver -p1 -i ../kdebug-433819.patch
 }
 
 build() {
