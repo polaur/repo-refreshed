@@ -1,6 +1,6 @@
 pkgbase = systemsettings
 	pkgdesc = KDE system manager for hardware, software, and workspaces
-	pkgver = 5.21.4
+	pkgver = 5.21.5
 	pkgrel = 1.1
 	url = https://kde.org/plasma-desktop/
 	arch = x86_64
@@ -9,14 +9,14 @@ pkgbase = systemsettings
 	makedepends = extra-cmake-modules
 	makedepends = kdoctools
 	depends = plasma-workspace
-	source = https://download.kde.org/stable/plasma/5.21.4/systemsettings-5.21.4.tar.xz
-	source = https://download.kde.org/stable/plasma/5.21.4/systemsettings-5.21.4.tar.xz.sig
+	source = https://download.kde.org/stable/plasma/5.21.5/systemsettings-5.21.5.tar.xz
+	source = https://download.kde.org/stable/plasma/5.21.5/systemsettings-5.21.5.tar.xz.sig
 	source = kdebug-434045.patch::https://invent.kde.org/plasma/systemsettings/commit/dbf9834bedb064a3140e1921a47f985a3706a20d.patch
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
 	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
-	sha256sums = 034b0c384cdbf38d126daf4dced6f2d42995b76f9b9268b30eb6a1d59c20ed04
+	sha256sums = 95784e6f0dc89778ebbd0bc4536f690cd8454001c7665eb853c0c6eace987acd
 	sha256sums = SKIP
 	sha256sums = 8151f59126ce15908a82a2521218b8133edadcf05cfe026983db571b8d5878d4
 

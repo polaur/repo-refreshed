@@ -7,8 +7,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=plasma-desktop
-pkgver=5.21.4
-pkgrel=1.3
+pkgver=5.21.5
+pkgrel=1.1
 pkgdesc='KDE Plasma Desktop'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -20,7 +20,6 @@ kdebug-394119.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/6779cf
 kdebug-286760.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/f41eb4ff616751ba75999691decc6a202ea9ba9e.patch"
 kdebug-435694.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/28b79d4c6d6c9b9c7ec6a22de3a427aa6276495c.patch"
 kdebug-405307.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/ce0c3fead0ec1aa5d8bd6a627bb61db803e83974.patch"
-kdebug-436216.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/2b7b0c5419455a16425fc06e25cce2cd1f434121.patch"
 kdebug-417457.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/c59edc9826a64c51f9ed41f7ccaf2cc5ade86d4b.patch"
 kdebug-425360.patch::"https://invent.kde.org/plasma/plasma-desktop/commit/07dcff19b05ed63311fc42665d559f11c7281870.patch"
 # kdebug-433819.patch::"https://invent.kde.org/plasma/plasma-desktop/-/commit/d3c1366ff57775c4ee5a6dc9e105da118a0d74a0.patch"
@@ -59,8 +58,6 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-435694.patch
     msg "Add kdebug 405307 patch; fix in 5.22"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-405307.patch
-    msg "Add kdebug 436216 patch; fix in 5.21.5"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-436216.patch
     msg "Add kdebug 417457 patch; fix in 5.22"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-417457.patch
     msg "Add kdebug 425360 patch; fix in 5.22"
