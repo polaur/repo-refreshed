@@ -1,7 +1,7 @@
 pkgbase = plasma-vault
 	pkgdesc = Plasma applet and services for creating encrypted vaults
 	pkgver = 5.21.5
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://www.kde.org/
 	arch = x86_64
 	groups = plasma
@@ -15,6 +15,7 @@ pkgbase = plasma-vault
 	source = https://download.kde.org/stable/plasma/5.21.5/plasma-vault-5.21.5.tar.xz
 	source = https://download.kde.org/stable/plasma/5.21.5/plasma-vault-5.21.5.tar.xz.sig
 	source = commit-2f5288a8.patch::https://invent.kde.org/plasma/plasma-vault/-/commit/2f5288a83fcd8fcae20b725e9df1905cf8f02570.patch
+	source = commit-03c7ff3e.patch::https://invent.kde.org/plasma/plasma-vault/-/commit/03c7ff3e12849b5bb333d7b3bd0e81783ab167a5.patch
 	validpgpkeys = 2D1D5B0588357787DE9EE225EC94D18F7F05997E
 	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
 	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
@@ -22,6 +23,7 @@ pkgbase = plasma-vault
 	sha256sums = 7519b5da20e59f571128b66fc22e5d2b2027752e01caa1c70574b12dcfd8979b
 	sha256sums = SKIP
 	sha256sums = 81111b83e7c717f35b249f91808a8ccd4eb15bcbe15ac29421c8f21a44212f35
+	sha256sums = 94171944f1065a547f4177ccfe88ba29e5e06fd4e733329b936670f386afac68
 
 pkgname = plasma-vault
 
