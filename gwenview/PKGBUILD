@@ -1,0 +1,50 @@
+# Maintainer: Nelson89 <daniel dot karasinski at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the orginal works by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=gwenview
+pkgver=21.04.1
+pkgrel=1.1
+pkgdesc='A fast and easy to use image viewer'
+url='https://apps.kde.org/gwenview/'
+arch=(x86_64)
+license=(GPL LGPL FDL)
+groups=(kde-applications kde-graphics)
+depends=(kactivities baloo libkipi libkdcraw kparts kitemmodels cfitsio phonon-qt5 purpose perl)
+optdepends=('qt5-imageformats: support for tiff, webp, and more image formats'
+            'kimageformats: support for dds, xcf, exr, psd, and more image formats'
+            'kipi-plugins: export to various online services'
+            'kamera: import pictures from gphoto2 cameras')
+makedepends=(extra-cmake-modules kdoctools)
+source=(https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz{,.sig}
+commit-fb706906.patch::"https://invent.kde.org/graphics/gwenview/-/commit/fb706906a42b2bc59fa04af6eddc779e9e22eb8d.patch"
+kdebug-271671.patch::"https://invent.kde.org/graphics/gwenview/commit/726c52998c50252fe2ce74c1ba63e52c3355a18a.patch"
+)
+sha256sums=('675c7109c95e5a592d68e7c132afff5e48868895c54428a65c66ebeae56633c5'
+            'SKIP'
+            '959510bb258d27fca881766eb28b444198e0b13ba9e520ff009df55bbc06068b'
+            '264f98dc09afbb0bd801a6898c970810936a887de1ea80657903e2039b507564')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87  # Christoph Feck <cfeck@kde.org>
+              D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker <heiko.becker@kde.org>
+
+prepare() {
+    msg "Add commit fb706906 patch; fix in 21.08"
+    patch -d $pkgname-$pkgver -p1 -i ../commit-fb706906.patch
+    msg "Add kdebug-271671 patch; fix in 21.08"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-271671.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DGWENVIEW_SEMANTICINFO_BACKEND="Baloo" \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
