@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=konsole
-pkgver=21.04.0
-pkgrel=2.1
+pkgver=21.04.1
+pkgrel=1.1
 arch=(x86_64)
 url='https://apps.kde.org/konsole/'
 pkgdesc='KDE terminal emulator'
@@ -17,25 +17,17 @@ depends=(knotifyconfig kpty kparts kinit knewstuff)
 makedepends=(extra-cmake-modules kdoctools)
 optdepends=('keditbookmarks: to manage bookmarks')
 source=(https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz{,.sig}
-        kdebug-435309.patch::https://invent.kde.org/utilities/konsole/commit/2b441030.patch
-        kdebug-436031.patch::"https://invent.kde.org/utilities/konsole/commit/ed2a9a9e3c3e69f4611c61716f51bb7dc3f5e11f.patch"
         commit-29e86dde.patch::"https://invent.kde.org/utilities/konsole/-/commit/29e86ddeb7b9bee1b73014a97439570dafb78f31.patch"
         )
 
-sha256sums=('260a1748a065c22d3bb63ffe57bd4bc79067e24a24f6332e5c91317d0e0799b6'
+sha256sums=('46802bbddca8dd4c264107a411a58c86cc7707c9210ddfbd38d8a971ea735293'
             'SKIP'
-            'e9f7c155f6842e94d46d43f84d755fa2aa82c1983d85c38b4495bf413de82178'
-            '0a72fbe5c97600868de67a4138b8e709dc267989acd8c1ee830d98ffd8cec042'
             '8fbc5e2a2c87abb64fbbc43e883c34675275c74acb3d0f346e0ad7645267eb73')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87  # Christoph Feck <cfeck@kde.org>
               D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker <heiko.becker@kde.org>
 
 prepare() {
-  msg "Add kdebug 435309 patch; fix in 21.08"
-  patch -d $pkgname-$pkgver -p1 < kdebug-435309.patch # Fix selection colors
-  msg "Add kdebug 436031 patch; fix in 21.04.01"
-  patch -d $pkgname-$pkgver -p1 -i ../kdebug-436031.patch
   msg "Add commit 29e86dde patch; fix in 21.08"
   patch -d $pkgname-$pkgver -p1 -i ../commit-29e86dde.patch
 }
