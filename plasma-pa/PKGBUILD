@@ -6,7 +6,7 @@
 
 pkgname=plasma-pa
 pkgver=5.21.5
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='Plasma applet for audio volume management using PulseAudio'
 arch=(x86_64)
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -22,15 +22,17 @@ kdebug-433476.patch::"https://invent.kde.org/plasma/plasma-pa/commit/9b8a0218f62
 commit-84a205e3.patch::"https://invent.kde.org/plasma/plasma-pa/-/commit/84a205e3950c3b58bb551fb1ef590997a524f949.patch"
 commit-a6e22e5e.patch::"https://invent.kde.org/plasma/plasma-pa/-/commit/a6e22e5e19aa94bbb29d4e861c3ef1700e2812a3.patch"
 commit-c36c18c5.patch::"https://invent.kde.org/plasma/plasma-pa/-/commit/c36c18c5608c36ba20fee01e37d3dacb252f7d2a.patch"
+kdebug-398476.patch::"https://invent.kde.org/plasma/plasma-pa/commit/6bebee67110d48adcd2a46cd9a1ae8c31247e17b.patch"
 )
-sha256sums=('e9575c6bb4d73e3b45f9bdd256ed0cdc0e36014a1676abe2ad8d6ab5f1838fe5'
+sha256sums=('f6ef1ea24bc8ef8717a09fc4396e8611c315da3175ffa69d873d485524ca9002'
             'SKIP'
             '24057066079df6d7bbfff6e725b3f134e2ec563f4683c605138b502731d36f47'
             '7badcd2f772329b9357a85fec399cb9c72f8c175cbbc06f2baab13ecaee9c0d5'
             'bd1c5321189405f3b219ec304ecd80ecf370947c6efc35858659039e3e248079'
             'dadb8b41d3638d42af763401c7ef232135c38e1066be35b530f2cf7df57622e6'
             '9b07aa1db8a1a3d51c6122e45a8de3ddf7c4f8be74ae72a6a20c55ee645326f9'
-            '6fef236d02ca37c626e6eae7bbeb1799bd2fa050cf7b82b48aae077bb4142e3e')
+            '6fef236d02ca37c626e6eae7bbeb1799bd2fa050cf7b82b48aae077bb4142e3e'
+            '4a8471693475be49a43be726cbc52a01fb42ff3170ee6f157f74d04417f27c2f')
 validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -49,6 +51,8 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../commit-a6e22e5e.patch
     msg "Add commit c36c18c5 patch; fix in 5.22"
     patch -d $pkgname-$pkgver -p1 -i ../commit-c36c18c5.patch
+    msg "Add kdebug-398476 patch; fix in 5.23"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-398476.patch
 }
 
 build() {
