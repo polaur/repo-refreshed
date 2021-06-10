@@ -4,8 +4,8 @@
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 
 pkgname=elisa
-pkgver=21.04.1
-pkgrel=1.2
+pkgver=21.04.2
+pkgrel=1.1
 pkgdesc='A simple music player aiming to provide a nice experience for its users'
 url='https://apps.kde.org/elisa/'
 arch=(x86_64)
@@ -18,7 +18,7 @@ commit-9713eb29.patch::"https://invent.kde.org/multimedia/elisa/-/commit/9713eb2
 kdebug-436217.patch::"https://invent.kde.org/multimedia/elisa/commit/2667a6474efe55c5941898bc982d52a27e32079e.patch"
 commit-ab712cd2.patch::"https://invent.kde.org/multimedia/elisa/-/commit/6bac7e23dfe90af1a27f9a3d0b3c7254b26fd9fd.patch"
 )
-sha256sums=('226560f2ed42610c98535a457f8cff1dc953ec144e2de3819373a3a5de421ea2'
+sha256sums=('11d28647afe7f7aba84585f76a5f1ee0260c8f3852fe4c2e4f1a70af49b7182b'
             'SKIP'
             '592f9e6243e25afe5cc35ee1bf147d48d94121f71be5582c898680d507b99953'
             'b3c354126cc606cfd47477ea16e7e8587dd36ecafa4503b7df82e8cfdd569cbd'
