@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=konsole
-pkgver=21.04.1
+pkgver=21.04.2
 pkgrel=1.1
 arch=(x86_64)
 url='https://apps.kde.org/konsole/'
@@ -20,7 +20,7 @@ source=(https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pk
         commit-29e86dde.patch::"https://invent.kde.org/utilities/konsole/-/commit/29e86ddeb7b9bee1b73014a97439570dafb78f31.patch"
         )
 
-sha256sums=('46802bbddca8dd4c264107a411a58c86cc7707c9210ddfbd38d8a971ea735293'
+sha256sums=('0b67b1b854b670f30e45a8613b6c9372de6817af17851e910cbec155d104f366'
             'SKIP'
             '8fbc5e2a2c87abb64fbbc43e883c34675275c74acb3d0f346e0ad7645267eb73')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
