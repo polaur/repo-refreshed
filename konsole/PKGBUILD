@@ -7,7 +7,7 @@
 
 pkgname=konsole
 pkgver=21.04.2
-pkgrel=1.1
+pkgrel=1.2
 arch=(x86_64)
 url='https://apps.kde.org/konsole/'
 pkgdesc='KDE terminal emulator'
@@ -17,12 +17,18 @@ depends=(knotifyconfig kpty kparts kinit knewstuff)
 makedepends=(extra-cmake-modules kdoctools)
 optdepends=('keditbookmarks: to manage bookmarks')
 source=(https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz{,.sig}
-        commit-29e86dde.patch::"https://invent.kde.org/utilities/konsole/-/commit/29e86ddeb7b9bee1b73014a97439570dafb78f31.patch"
-        )
+commit-29e86dde.patch::"https://invent.kde.org/utilities/konsole/-/commit/29e86ddeb7b9bee1b73014a97439570dafb78f31.patch"
+kdebug-416530.patch::"https://invent.kde.org/utilities/konsole/commit/b5d174385529e5ba3551406bb8d90fa317b5bf00.patch"
+kdebug-425926.patch::"https://invent.kde.org/utilities/konsole/commit/7cbbb07fb14ad018cba162d7051f5b2066e73a01.patch"
+kdebug-302731.patch::"https://invent.kde.org/utilities/konsole/commit/027e8c150c45ad1821d828ea93545a36f7b0a5f3.patch"
+)
 
 sha256sums=('0b67b1b854b670f30e45a8613b6c9372de6817af17851e910cbec155d104f366'
             'SKIP'
-            '8fbc5e2a2c87abb64fbbc43e883c34675275c74acb3d0f346e0ad7645267eb73')
+            '7ad15b173e4214462da475f4a2bab6ebe421da287266ae68c23bc273fb6d5ee4'
+            '0af8f85ce0d355596b703d96327dc6b3e20c50e6193847d5620acb057c9a2997'
+            'c63c0c4935d0606603920ed66d9e109068b7db9909b63299b2f95760a4fa45df'
+            '08fb0944950db657c917fb1a0a34be06b50e3344f78c9a81dda0f4900f4ae332')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87  # Christoph Feck <cfeck@kde.org>
               D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker <heiko.becker@kde.org>
@@ -30,6 +36,13 @@ validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aac
 prepare() {
   msg "Add commit 29e86dde patch; fix in 21.08"
   patch -d $pkgname-$pkgver -p1 -i ../commit-29e86dde.patch
+  msg "Add commit 416530 patch; fix in 21.08"
+  patch -d $pkgname-$pkgver -p1 -i ../kdebug-416530.patch
+  msg "Add commit 425926 patch; fix in 21.08"
+  patch -d $pkgname-$pkgver -p1 -i ../kdebug-425926.patch
+  msg "Add commit 302731 patch; fix in 21.08"
+  patch -d $pkgname-$pkgver -p1 -i ../kdebug-302731.patch
+
 }
 
 build() {
