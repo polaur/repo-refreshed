@@ -8,8 +8,8 @@
 # Contributor: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=dolphin
-pkgver=21.04.2
-pkgrel=1.2
+pkgver=21.04.3
+pkgrel=1.1
 pkgdesc="KDE File Manager"
 arch=(x86_64)
 url="https://kde.org/applications/system/dolphin/"
@@ -28,7 +28,7 @@ kdebug-367583.patch::"https://invent.kde.org/system/dolphin/commit/6b64c7ff56e00
 kdebug-437080.patch::"https://invent.kde.org/system/dolphin/commit/98e1fb66d054d188a7c07683e7e6768b84f63605.patch"
 commit-152a7b4f.patch::"https://invent.kde.org/system/dolphin/-/commit/152a7b4fcbc06ab536083abe0a7f63c1722960fb.patch"
 )
-sha256sums=('4fb3d6c15725fc86f78d6f6fb305f32d94ba95bf6d02480f3c06feaeb6e5c553'
+sha256sums=('e3a1560c216efaa80c3ec99138c4657e9602e17aea250a418b18c2fc85295264'
             'SKIP'
             '2985c54722d7d047783f05eb07e4a09a544e90a6826d76eaea07605b3935d812'
             'db896784510a66cc8d21a8f5a247a76a733a15fb914aa7224448c69cfd86c9bb'
