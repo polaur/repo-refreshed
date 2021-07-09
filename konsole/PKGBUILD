@@ -6,8 +6,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=konsole
-pkgver=21.04.2
-pkgrel=1.2
+pkgver=21.04.3
+pkgrel=1.1
 arch=(x86_64)
 url='https://apps.kde.org/konsole/'
 pkgdesc='KDE terminal emulator'
@@ -23,7 +23,7 @@ kdebug-425926.patch::"https://invent.kde.org/utilities/konsole/commit/7cbbb07fb1
 kdebug-302731.patch::"https://invent.kde.org/utilities/konsole/commit/027e8c150c45ad1821d828ea93545a36f7b0a5f3.patch"
 )
 
-sha256sums=('0b67b1b854b670f30e45a8613b6c9372de6817af17851e910cbec155d104f366'
+sha256sums=('bcb1fe3af641de857e2b2991f2ccb8a1fb5d5b46ebef57869b271f4ffb722b14'
             'SKIP'
             '7ad15b173e4214462da475f4a2bab6ebe421da287266ae68c23bc273fb6d5ee4'
             '0af8f85ce0d355596b703d96327dc6b3e20c50e6193847d5620acb057c9a2997'
