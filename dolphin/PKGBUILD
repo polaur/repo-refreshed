@@ -9,7 +9,7 @@
 
 pkgname=dolphin
 pkgver=21.04.3
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc="KDE File Manager"
 arch=(x86_64)
 url="https://kde.org/applications/system/dolphin/"
@@ -28,6 +28,8 @@ kdebug-367583.patch::"https://invent.kde.org/system/dolphin/commit/6b64c7ff56e00
 kdebug-437080.patch::"https://invent.kde.org/system/dolphin/commit/98e1fb66d054d188a7c07683e7e6768b84f63605.patch"
 commit-152a7b4f.patch::"https://invent.kde.org/system/dolphin/-/commit/152a7b4fcbc06ab536083abe0a7f63c1722960fb.patch"
 commit-aba4462e.patch::"https://invent.kde.org/system/dolphin/-/commit/aba4462e0238d6075e8822d56a78372eacfa7d2e.patch"
+kdebug-433247.patch::"https://invent.kde.org/system/dolphin/commit/baaf0c29b857997720b9cb0d584a44306963fb97.patch"
+kdebug-401170.patch::"https://invent.kde.org/system/dolphin/commit/6f632283d022aaf9d8e2bda81a5409aa36242d4d.patch"
 )
 sha256sums=('e3a1560c216efaa80c3ec99138c4657e9602e17aea250a418b18c2fc85295264'
             'SKIP'
@@ -38,7 +40,9 @@ sha256sums=('e3a1560c216efaa80c3ec99138c4657e9602e17aea250a418b18c2fc85295264'
             'd11ae5b310ca3d76d1df62c8f8bd09ca259a1ee386e82944ffb62c2f18d1c8b1'
             'e739750419de1adf1ce84edb1d34945cc15fc5ca0e9d5f11371f5342c3aa4c93'
             '148567c1bf79ae64d75eadb9f1d60bf27f18b32d1ee70f43ec410cf2a63cb4f8'
-            '8a9efaae57276e33d52c9a442aedd94acbf0ad4e3a039b2acfc17d5f4680587b')
+            '8a9efaae57276e33d52c9a442aedd94acbf0ad4e3a039b2acfc17d5f4680587b'
+            '3ea08b6ee771941f3de3b342aa98759d7d70c9cd2f277ab4326e86d0b9dad31a'
+            '4c7ea5abc5f17106c066e2cece0caed5471b5aab753bc76c47d7d53425ae830d')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87 # Christoph Feck <cfeck@kde.org>
               D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker
@@ -60,6 +64,12 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../commit-152a7b4f.patch
     msg "Add commit aba4462e patch; fix in 21.08"
     patch -d $pkgname-$pkgver -p1 -i ../commit-aba4462e.patch
+    msg "Add kdebug 433247 patch; fix in 21.08"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-433247.patch
+    msg "Add kdebug 401170 patch; fix in 21.08"
+    patch -d $pkgname-$pkgver -p1 -i ../kdebug-401170.patch
+
+
 }
 
 build() {
