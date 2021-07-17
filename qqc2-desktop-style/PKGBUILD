@@ -1,0 +1,37 @@
+# Maintainer: Nelson89 <daniel dot karasinski at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the orginal works by:
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=qqc2-desktop-style
+pkgver=5.84.0
+pkgrel=1.1
+pkgdesc='A style for Qt Quick Controls 2 to make it follow your desktop theme'
+arch=(x86_64)
+url='https://community.kde.org/Frameworks'
+license=(LGPL)
+groups=(kf5)
+depends=(kirigami2 kiconthemes)
+makedepends=(extra-cmake-modules)
+source=(https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz{,.sig}
+        kdebug-438525.patch::"https://invent.kde.org/frameworks/qqc2-desktop-style/commit/9d0a282abd005d4fbf541255c09f9a0972b92bad.patch"
+)
+sha256sums=('1c0b8803512135b7c63c3978fd7230a264486b95c1bd4925e422f968a045e66f'
+            'SKIP'
+            'a3878d03b84ea2c95fc04037f4f64b26685d13fd710732a2b162f4fc14ef544e')
+validpgpkeys=('53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB') # David Faure <faure@kde.org>
+
+prepare(){
+         msg "Add kdebug 438525 patch; fix in 5.85"
+         patch -d $pkgname-$pkgver -p1 -i ../kdebug-438525.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
