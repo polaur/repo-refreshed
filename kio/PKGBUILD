@@ -7,8 +7,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kio
-pkgver=5.84.0
-pkgrel=2.1
+pkgver=5.85.0
+pkgrel=1.1
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -20,12 +20,10 @@ optdepends=('kio-extras: extra protocols support (sftp, fish and more)' 'kdoctoo
 groups=(kf5)
 source=("https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz"{,.sig}
 kdebug-433127.patch::"https://invent.kde.org/frameworks/kio/commit/b33307901f30ec8d724a7e424838165746563d06.patch"
-"https://invent.kde.org/frameworks/kio/-/commit/8ad69215.patch"
 )
-sha256sums=('96be2b732faf97a484edc5238049ad22f0f233b9e404468f4da40c5ec839e0d3'
+sha256sums=('e4d58a7d2ae6530c4b676fe7f7e4583a86436c68861eb971bf91af9efead19f6'
             'SKIP'
-            '80a0119e83e184c402e5145804e7777198053e2a9b539352e66112025e74dba5'
-            '1b0e4575282769d64f334ea2c4a9ba17986bdc9bad9813272d350a937668467e')
+            '80a0119e83e184c402e5145804e7777198053e2a9b539352e66112025e74dba5')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 
 prepare() {
@@ -34,7 +32,6 @@ prepare() {
     sed -i "568 s/    thumb/|| thumb/" $pkgname-$pkgver/src/widgets/previewjob.cpp
     msg "Add kdebug 433127"
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-433127.patch
-    patch -d $pkgname-$pkgver -p1 < 8ad69215.patch # Fix selecting binaries from component chooser KCM
 }
 
 build() {
