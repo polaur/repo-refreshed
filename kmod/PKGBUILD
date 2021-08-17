@@ -20,6 +20,7 @@ source=("https://www.kernel.org/pub/linux/utils/kernel/$pkgname/$pkgname-$pkgver
         'depmod.hook' 'depmod.script')
 md5sums=('e81e63acd80697d001c8d85c1acb38a0'
          'SKIP'
+         '56aa97c9b926cd73f65d8a36cd248b25'
          'dd62cbf62bd8f212f51ef8c43bec9a77'
          'e179ace75721e92b04b2e145b69dab29'
          '18fb3d1f6024a5a84514c8276cb3ebff')
