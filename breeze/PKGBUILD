@@ -1,0 +1,41 @@
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=breeze
+pkgver=5.22.5
+pkgrel=1.1
+arch=(x86_64)
+pkgdesc='Artwork, styles and assets for the Breeze visual style for the Plasma Desktop'
+url='https://kde.org/plasma-desktop/'
+license=(LGPL)
+depends=(frameworkintegration kdecoration breeze-icons kwayland hicolor-icon-theme)
+makedepends=(extra-cmake-modules kcmutils)
+optdepends=('breeze-gtk: Breeze widget style for GTK applications'
+            'kcmutils: for breeze-settings')
+groups=(plasma)
+source=(https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz{,.sig}
+        oceanic-plasma.patch::"https://invent.kde.org/plasma/breeze/-/merge_requests/26/commits.patch")
+sha256sums=('e3fc4ca04cc0df694ab90fa4f9e8ca72512adae2c0320ce3f9702dddda029426'
+            'SKIP'
+            '57bf29bdec5ed9670614a117e39803b8bbc15482edae498b8724e2c619389003')
+validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+
+prepare() {
+    msg "Add oceanic theme"
+    patch -d $pkgname-$pkgver -p1 -i ../oceanic-plasma.patch
+}
+              
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+} 
