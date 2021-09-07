@@ -9,7 +9,7 @@
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
 pkgver=5.22.5
-pkgrel=1.2
+pkgrel=2.1
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -21,6 +21,7 @@ makedepends=(extra-cmake-modules kdoctools gpsd baloo networkmanager-qt plasma-w
 groups=(plasma)
 source=(https://download.kde.org/stable/plasma/$pkgver/$pkgbase-$pkgver.tar.xz{,.sig} kde.pam
         kdebug-438874.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/61e2ea2323ae63c5805c87353701ba6fb722205a.patch"
+        https://invent.kde.org/plasma/plasma-workspace/-/commit/6379d1ec.patch
 )
 sha256sums=('f22e12dea303478d949f69b88fcf30787ef7f5d098be55595ec562aee4b13606'
             'SKIP'
@@ -34,6 +35,7 @@ validpgpkeys=('2D1D5B0588357787DE9EE225EC94D18F7F05997E'  # Jonathan Riddell <jr
 prepare() {
     msg "Add kdebug-438874 patch; fix in 5.23"
     patch -d $pkgbase-$pkgver -p1 -i ../kdebug-438874.patch
+    patch -d $pkgbase-$pkgver -p1 < 6379d1ec.patch # Fix power management inhibition
 }
 
 build() {
