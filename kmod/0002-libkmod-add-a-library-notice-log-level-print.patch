@@ -1,0 +1,52 @@
+From a5ad4f32d820fd618e22361ca8c185cea1b97013 Mon Sep 17 00:00:00 2001
+From: Luis Chamberlain <mcgrof@kernel.org>
+Date: Mon, 9 Aug 2021 22:16:00 -0700
+Subject: [PATCH 2/2] libkmod: add a library notice log level print
+
+When you use pass the -v argument to modprobe we bump
+the log level from the default modprobe log level of
+LOG_WARNING (4) to LOG_NOTICE (5), however the library
+only has avaiable to print:
+
+ #define DBG(ctx, arg...) kmod_log_cond(ctx, LOG_DEBUG, ## arg)
+ #define INFO(ctx, arg...) kmod_log_cond(ctx, LOG_INFO, ## arg)
+ #define ERR(ctx, arg...) kmod_log_cond(ctx, LOG_ERR, ## arg)
+
+LOG_INFO (6) however is too high of a level for it to be
+effective at printing anything when modprobe -v is passed.
+And so the only way in which modprobe -v can trigger the
+library to print a verbose message is to use ERR() but that
+always prints something and we don't want that in some
+situations.
+
+We need to add a new log level macro which uses LOG_NOTICE (5)
+for a "normal but significant condition" which users and developers
+can use to look underneath the hood to confirm if a situation is
+happening.
+
+Signed-off-by: Luis Chamberlain <mcgrof@kernel.org>
+Signed-off-by: Lucas De Marchi <lucas.demarchi@intel.com>
+---
+ libkmod/libkmod-internal.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/libkmod/libkmod-internal.h b/libkmod/libkmod-internal.h
+index 398af9c..c22644a 100644
+--- a/libkmod/libkmod-internal.h
++++ b/libkmod/libkmod-internal.h
+@@ -25,10 +25,12 @@ static _always_inline_ _printf_format_(2, 3) void
+ #  else
+ #    define DBG(ctx, arg...) kmod_log_null(ctx, ## arg)
+ #  endif
++#  define NOTICE(ctx, arg...) kmod_log_cond(ctx, LOG_NOTICE, ## arg)
+ #  define INFO(ctx, arg...) kmod_log_cond(ctx, LOG_INFO, ## arg)
+ #  define ERR(ctx, arg...) kmod_log_cond(ctx, LOG_ERR, ## arg)
+ #else
+ #  define DBG(ctx, arg...) kmod_log_null(ctx, ## arg)
++#  define NOTICE(ctx, arg...) kmod_log_null(ctx, ## arg)
+ #  define INFO(ctx, arg...) kmod_log_null(ctx, ## arg)
+ #  define ERR(ctx, arg...) kmod_log_null(ctx, ## arg)
+ #endif
+-- 
+2.33.0.610.gcefe983a32
+
