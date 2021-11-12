@@ -1,0 +1,27 @@
+pkgbase = powerdevil
+	pkgdesc = Manages the power consumption settings of a Plasma Shell
+	pkgver = 5.23.3
+	pkgrel = 1.1
+	url = https://kde.org/plasma-desktop/
+	arch = x86_64
+	groups = plasma
+	license = LGPL
+	makedepends = extra-cmake-modules
+	makedepends = kdoctools
+	depends = plasma-workspace
+	depends = bluez-qt
+	depends = networkmanager-qt
+	optdepends = kinfocenter: for the Energy Information KCM
+	optdepends = power-profiles-daemon: power profiles support
+	source = https://download.kde.org/stable/plasma/5.23.3/powerdevil-5.23.3.tar.xz
+	source = https://download.kde.org/stable/plasma/5.23.3/powerdevil-5.23.3.tar.xz.sig
+	source = kdebug-445171.patch::https://invent.kde.org/plasma/powerdevil/commit/d8c5490c99bae9f979f6483dc7b0381121a4f997.patch
+	validpgpkeys = E0A3EB202F8E57528E13E72FD7574483BB57B18D
+	validpgpkeys = 0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D
+	validpgpkeys = D07BD8662C56CB291B316EB2F5675605C74E02CF
+	validpgpkeys = 1FA881591C26B276D7A5518EEAAF29B42A678C20
+	sha256sums = eb57941e0381b6dc4a27c31d7210d895c250eaafcab43a66fe5443e29b108b41
+	sha256sums = SKIP
+	sha256sums = f225799d3392ddfcde78b326e11f633564e6b68266480b0fdb0a4c5f7f173536
+
+pkgname = powerdevil
