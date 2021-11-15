@@ -1,6 +1,6 @@
 pkgbase = kio
 	pkgdesc = Resource and network access abstraction
-	pkgver = 5.87.0
+	pkgver = 5.88.0
 	pkgrel = 1.1
 	url = https://community.kde.org/Frameworks
 	arch = x86_64
@@ -21,11 +21,11 @@ pkgbase = kio
 	optdepends = kio-extras: extra protocols support (sftp, fish and more)
 	optdepends = kdoctools: for the help kioslave
 	optdepends = kio-fuse: to mount remote filesystems via FUSE
-	source = https://download.kde.org/stable/frameworks/5.87/kio-5.87.0.tar.xz
-	source = https://download.kde.org/stable/frameworks/5.87/kio-5.87.0.tar.xz.sig
+	source = https://download.kde.org/stable/frameworks/5.88/kio-5.88.0.tar.xz
+	source = https://download.kde.org/stable/frameworks/5.88/kio-5.88.0.tar.xz.sig
 	source = kdebug-433127.patch::https://invent.kde.org/frameworks/kio/commit/b33307901f30ec8d724a7e424838165746563d06.patch
 	validpgpkeys = 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB
-	sha256sums = b91ed59de09c3b69c1eb50e6df2e087d912bda06a5d394763aa6e2e936cebc6b
+	sha256sums = ffd4aa4277ce545a50ee01783eeb92ca060094fc582c1affd8186c9df0d4a66c
 	sha256sums = SKIP
 	sha256sums = 80a0119e83e184c402e5145804e7777198053e2a9b539352e66112025e74dba5
 
