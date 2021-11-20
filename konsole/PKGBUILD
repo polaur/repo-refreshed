@@ -7,7 +7,7 @@
 
 pkgname=konsole
 pkgver=21.08.3
-pkgrel=1.1
+pkgrel=1.2
 arch=(x86_64)
 url='https://apps.kde.org/konsole/'
 pkgdesc='KDE terminal emulator'
@@ -18,11 +18,13 @@ makedepends=(extra-cmake-modules kdoctools)
 optdepends=('keditbookmarks: to manage bookmarks')
 source=(https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz{,.sig}
 kdebug-302731.patch::"https://invent.kde.org/utilities/konsole/commit/027e8c150c45ad1821d828ea93545a36f7b0a5f3.patch"
+commit-295435d8.patch::"https://invent.kde.org/utilities/konsole/-/commit/295435d8fa056151409c135ef0cceddba2ac0a47.patch"
 )
 
 sha256sums=('21f57b47cc89de69cc4184ff9dfac0fd3ced0eac42771ae7a519225dd21300f1'
             'SKIP'
-            '08fb0944950db657c917fb1a0a34be06b50e3344f78c9a81dda0f4900f4ae332')
+            '08fb0944950db657c917fb1a0a34be06b50e3344f78c9a81dda0f4900f4ae332'
+            'e1a48bd6b38e9d76baeec4990da0b338beed8e66655c331149019629761a0246')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87  # Christoph Feck <cfeck@kde.org>
               D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker <heiko.becker@kde.org>
@@ -30,6 +32,8 @@ validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aac
 prepare() {
   msg "Add commit 302731 patch"
   patch -d $pkgname-$pkgver -p1 -i ../kdebug-302731.patch
+  msg "Add commit-295435d8 patch; fix in 22.04"
+  patch -d $pkgname-$pkgver -p1 -i ../commit-295435d8.patch
 }
 
 build() {
