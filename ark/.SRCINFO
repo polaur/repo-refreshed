@@ -1,7 +1,7 @@
 pkgbase = ark
 	pkgdesc = Archiving Tool
 	pkgver = 21.08.3
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://apps.kde.org/ark/
 	arch = x86_64
 	groups = kde-applications
@@ -23,11 +23,13 @@ pkgbase = ark
 	source = https://download.kde.org/stable/release-service/21.08.3/src/ark-21.08.3.tar.xz
 	source = https://download.kde.org/stable/release-service/21.08.3/src/ark-21.08.3.tar.xz.sig
 	source = kdebug-444965.patch::https://invent.kde.org/utilities/ark/commit/70ead5fe6d1005fbcbce252030bfb351f1c5e26f.patch
+	source = kdebug-445610.patch::https://invent.kde.org/utilities/ark/commit/1f3a3b554056d4d3cdec651b4add086c0dcbe42b.patch
 	validpgpkeys = CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7
 	validpgpkeys = F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87
 	validpgpkeys = D81C0CB38EB725EF6691C385BB463350D6EF31EF
 	sha256sums = 671858504c628991bf579b1a20edd822f6bb235b4fced618cf3906a919da3df3
 	sha256sums = SKIP
 	sha256sums = 2786c84d4c629d6e72f852f3d90c5d9f4196262c4b76a3476ceb9e3e34660b96
+	sha256sums = 055e0dd7679f903a401c9e864a28882a5e77cd5893ed7e7fc2b1f157be8a7b72
 
 pkgname = ark
