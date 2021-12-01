@@ -8,7 +8,7 @@
 
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
-pkgver=5.23.3
+pkgver=5.23.4
 pkgrel=1.1
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
@@ -28,7 +28,7 @@ source=(https://download.kde.org/stable/plasma/$pkgver/$pkgbase-$pkgver.tar.xz{,
     kdebug-399354.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/f2afc13d6b3adb439c0571695ecd1e68d63b6a5f.patch"
     # kdebug-433293.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/f377696bff39e35ae0f7ae6104d8732b3856744e.patch"
 )
-sha256sums=('86802e3305bd91faef25c1876e333ad22ae751e556e8503945481b52ad52e257'
+sha256sums=('13ec4eedfaae97fe441aaad57cdd6bf949d06d42370e15e3426e41f49c3ea34d'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
             'd84c90ff64dfbd73a6be520d057ecef9da7faf45ab0ecec4b3d2c0f3bc675928'
