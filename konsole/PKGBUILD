@@ -1,0 +1,47 @@
+# Maintainer: Nelson89 <daniel dot karasinski at gmail dot com>
+# only for version with bugfixes from upcomming releases
+# based on the orginal works by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=konsole
+pkgver=21.12.0
+pkgrel=1.1
+arch=(x86_64)
+url='https://apps.kde.org/konsole/'
+pkgdesc='KDE terminal emulator'
+license=(GPL LGPL FDL)
+groups=(kde-applications kde-utilities)
+depends=(knotifyconfig kpty kparts knewstuff)
+makedepends=(extra-cmake-modules kdoctools)
+optdepends=('keditbookmarks: to manage bookmarks')
+source=(https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz{,.sig}
+kdebug-302731.patch::"https://invent.kde.org/utilities/konsole/commit/027e8c150c45ad1821d828ea93545a36f7b0a5f3.patch"
+commit-295435d8.patch::"https://invent.kde.org/utilities/konsole/-/commit/295435d8fa056151409c135ef0cceddba2ac0a47.patch"
+)
+
+sha256sums=('f3529987eb7b7c1a11f2efa110023925a47a7d02cc96a41160e671742fe36f73'
+            'SKIP'
+            '08fb0944950db657c917fb1a0a34be06b50e3344f78c9a81dda0f4900f4ae332'
+            'e1a48bd6b38e9d76baeec4990da0b338beed8e66655c331149019629761a0246')
+validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
+              F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87  # Christoph Feck <cfeck@kde.org>
+              D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker <heiko.becker@kde.org>
+
+prepare() {
+  msg "Add commit 302731 patch"
+  patch -d $pkgname-$pkgver -p1 -i ../kdebug-302731.patch
+  msg "Add commit-295435d8 patch; fix in 22.04"
+  patch -d $pkgname-$pkgver -p1 -i ../commit-295435d8.patch
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
