@@ -1,6 +1,6 @@
 pkgbase = weechat-light
 	pkgdesc = Fast, light and extensible IRC client (curses UI) (polaur)
-	pkgver = 3.3
+	pkgver = 3.4
 	pkgrel = 1
 	url = https://www.weechat.org/
 	arch = x86_64
@@ -22,10 +22,10 @@ pkgbase = weechat-light
 	optdepends = tcl: support for tcl scripts
 	conflicts = weechat
 	replaces = weechat-python3-light
-	source = weechat-light-3.3.tar.xz::https://www.weechat.org/files/src/weechat-3.3.tar.xz
-	source = weechat-light-3.3.tar.xz.asc::https://www.weechat.org/files/src/weechat-3.3.tar.xz.asc
+	source = weechat-light-3.4.tar.xz::https://www.weechat.org/files/src/weechat-3.4.tar.xz
+	source = weechat-light-3.4.tar.xz.asc::https://www.weechat.org/files/src/weechat-3.4.tar.xz.asc
 	validpgpkeys = A9AB5AB778FA5C3522FD0378F82F4B16DEC408F8
-	sha512sums = 18bbaa93620185ead64f64833e4c5df6a1cbc49dc6f60362614e955947221b78baaa93a2748f153bbb6f7867c7760f7a8fa8d6d9ed30040ad5e12af127526e13
+	sha512sums = b5e36802bb8b8f0e518da590d675ca63b0fa0b88acd24c2803d4f8468e6bce775691d3994db5090570f1286ad38be31615921b0d3ead697ad51986cddca57330
 	sha512sums = SKIP
 
 pkgname = weechat-light
