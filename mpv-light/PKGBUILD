@@ -4,9 +4,9 @@
 # Contributor: Eivind Uggedal <eivind@uggedal.com>
 
 pkgname=mpv-light
-pkgver=0.34.0
-pkgrel=4.2
-_tag='79b4060a573e83ae42d51d995bca1ccf80690997' # git rev-parse v${pkgver}
+pkgver=0.34.1
+pkgrel=3.1
+_tag='df6d84c1cf4bbc2b998f4d320542c78df674512d' # git rev-parse v${pkgver}
 pkgdesc='a free, open source, and cross-platform media player (polaur - changed: removed smbclient libcdio-paranoia libdvdnav dvb )'
 arch=('x86_64')
 # We link against libraries that are licensed GPLv3 explicitly, libsmbclient
@@ -14,8 +14,12 @@ arch=('x86_64')
 license=('GPL3')
 url='https://mpv.io/'
 depends=('alsa-lib' 'desktop-file-utils' 'ffmpeg'
-         'glibc' 'hicolor-icon-theme' 'jack' 'lcms2'
-         'lua52' 'mesa' 'mujs' 'rubberband' 'shaderc'
+         'glibc' 'hicolor-icon-theme' 'jack' 'lcms2' 'libarchive'
+         'libdrm' 'libegl' 'libgl' 'libglvnd'
+         'libjpeg' 'libass'
+         'libva' 'libvdpau' 'libx11'
+         'libxext' 'libxinerama' 'libxkbcommon' 'libxrandr' 'libxss'
+         'libxv' 'lua' 'mesa' 'mujs' 'rubberband' 'shaderc'
          'uchardet' 'vulkan-icd-loader' 'wayland' 'xdg-utils'
          'zlib')
 makedepends=('git' 'python-docutils' 'ladspa' 'wayland-protocols'
