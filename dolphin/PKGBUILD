@@ -8,7 +8,7 @@
 # Contributor: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=dolphin
-pkgver=21.12.0
+pkgver=21.12.1
 pkgrel=1.1
 pkgdesc="KDE File Manager"
 arch=(x86_64)
