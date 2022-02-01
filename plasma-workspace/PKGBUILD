@@ -8,8 +8,8 @@
 
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
-pkgver=5.23.4
-pkgrel=1.1
+pkgver=5.23.5
+pkgrel=2.1
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -27,13 +27,17 @@ source=(https://download.kde.org/stable/plasma/$pkgver/$pkgbase-$pkgver.tar.xz{,
     # kdebug-384950.patch::"https://invent.kde.org/plasma/plasma-workspace/-/commit/590e0c0708febb9de4f88f4127e0f26fba6a9f70.patch"
     kdebug-399354.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/f2afc13d6b3adb439c0571695ecd1e68d63b6a5f.patch"
     # kdebug-433293.patch::"https://invent.kde.org/plasma/plasma-workspace/commit/f377696bff39e35ae0f7ae6104d8732b3856744e.patch"
+    https://invent.kde.org/plasma/plasma-workspace/-/commit/70d23b89.patch
+    https://invent.kde.org/plasma/plasma-workspace/-/commit/926f8647.patch
 )
-sha256sums=('13ec4eedfaae97fe441aaad57cdd6bf949d06d42370e15e3426e41f49c3ea34d'
+sha256sums=('2ebee6ab2f10cabc350e0f75a0d8462ae0b7616a795d078f6bb5765396052575'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
             'd84c90ff64dfbd73a6be520d057ecef9da7faf45ab0ecec4b3d2c0f3bc675928'
             '8bba979818d5e255320f1e88ca197d250b6134a97bc19524ecb02ee600f630a8'
-            'c79a24218ab04e9fe8c688331d5394550a2cf0a0e4a73ee3670ecdc40482cdcc')
+            'c79a24218ab04e9fe8c688331d5394550a2cf0a0e4a73ee3670ecdc40482cdcc'
+            '810660c3d7948c21c61f8d4c7d604ca7cb51c85e1a41c6225d1f39c72feae808'
+            'fe5ae91bc2c5e1b9021523efec60dc7740285e2c74684639e8238e9df9f58572')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -54,6 +58,8 @@ prepare() {
     patch -d $pkgname-$pkgver -p1 -i ../kdebug-399354.patch
     # msg "Add kdebug 433293 patch; fix in 5.24"
     # patch -d $pkgname-$pkgver -p1 -i ../kdebug-433293.patch
+    patch -d $pkgbase-$pkgver -p1 < 70d23b89.patch # Remove implicit kinit dependency on shell runner
+    patch -d $pkgbase-$pkgver -p1 < 926f8647.patch # Fix missing taskbar thumbnails on Wayland
 }
 
 build() {
