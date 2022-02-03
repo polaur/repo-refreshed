@@ -8,7 +8,7 @@
 # Contributor: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=dolphin
-pkgver=21.12.1
+pkgver=21.12.2
 pkgrel=1.1
 pkgdesc="KDE File Manager"
 arch=(x86_64)
@@ -25,7 +25,7 @@ source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$p
     commit-416b164c.patch::"https://invent.kde.org/system/dolphin/-/commit/416b164ce00323da342f0a6d49b58ee5bcf80905.patch"
 )
 
-sha256sums=('e70fc08ee292c5f9bfd4fc3bb12eef524528bee8e856d294bf484b3eff7b2669'
+sha256sums=('968fd26b5d7663f52378f322aba6a19d5a96040faef0153f0e2dd0275b980f30'
             'SKIP'
             'f1acc8e05d1d32bb49d867cb268fbc0d26d1f5483d03139198accacd5a61a549'
             '02714f06a390daa155b5aa0bd8e01f6c50215eea839eb531545c0138a700a886'
