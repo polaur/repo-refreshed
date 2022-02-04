@@ -2,7 +2,7 @@
 
 pkgname=kmod
 pkgver=29
-pkgrel=2.1
+pkgrel=2.2
 pkgdesc="Linux kernel module management tools and library"
 arch=('x86_64')
 url='https://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git'
@@ -17,12 +17,14 @@ validpgpkeys=('EAB33C9690013C733916AC839BA2A5A630CBEA53')  # Lucas DeMarchi
 source=("https://www.kernel.org/pub/linux/utils/kernel/$pkgname/$pkgname-$pkgver.tar."{xz,sign}
         '0001-libkmod-module-check-new_from_name-return-value-in-g.patch'
         '0002-libkmod-add-a-library-notice-log-level-print.patch'
+        "0003-libkmod-Set-builtin-to-no-when-module-is-created-fro.patch"
         'depmod-search.conf'
         'depmod.hook' 'depmod.script')
 md5sums=('e81e63acd80697d001c8d85c1acb38a0'
          'SKIP'
-         '495ccf7711609a982730c6a4b2f389fa'
-         'bc437f5b97703229531f87399ae064b0'
+         '1c47cfeba2ecfbefea1f6b98369d967a'
+         '4992d28568ffc55f6eea766df9e3b8d2'
+         'a427520c103329319763097d8352b53f'
          'dd62cbf62bd8f212f51ef8c43bec9a77'
          'e179ace75721e92b04b2e145b69dab29'
          '18fb3d1f6024a5a84514c8276cb3ebff')
