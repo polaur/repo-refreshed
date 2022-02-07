@@ -8,7 +8,7 @@
 # Contributor: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=dolphin
-pkgver=21.12.2
+pkgver=21.12.2.1
 pkgrel=1.1
 pkgdesc="KDE File Manager"
 arch=(x86_64)
@@ -19,13 +19,13 @@ makedepends=(extra-cmake-modules kdoctools)
 optdepends=('kde-cli-tools: for editing file type options' 'ffmpegthumbs: video thumbnails' 'kdegraphics-thumbnailers: PDF and PS thumbnails'
             'konsole: terminal panel' 'purpose: share context menu')
 groups=(kde-applications kde-system)
-source=("https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz"{,.sig}
+source=(https://download.kde.org/stable/release-service/${pkgver%.*}/src/$pkgname-$pkgver.tar.xz{,.sig}
     kdebug-442275.patch::"https://invent.kde.org/system/dolphin/commit/3d49996615a094df8fc2cb613955abb740a0463a.patch"
     kdebug-441617.patch::"https://invent.kde.org/system/dolphin/-/commit/2ef87708fdc0ff9d0337482b994bd6efa6b9b623.patch"
     commit-416b164c.patch::"https://invent.kde.org/system/dolphin/-/commit/416b164ce00323da342f0a6d49b58ee5bcf80905.patch"
 )
 
-sha256sums=('968fd26b5d7663f52378f322aba6a19d5a96040faef0153f0e2dd0275b980f30'
+sha256sums=('180a9aa1982d58171f85d00434e94a93d819a7640ec98ef3f68603a932720d07'
             'SKIP'
             'f1acc8e05d1d32bb49d867cb268fbc0d26d1f5483d03139198accacd5a61a549'
             '02714f06a390daa155b5aa0bd8e01f6c50215eea839eb531545c0138a700a886'
