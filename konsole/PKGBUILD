@@ -6,7 +6,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=konsole
-pkgver=21.12.2
+pkgver=21.12.3
 pkgrel=1.1
 arch=(x86_64)
 url='https://apps.kde.org/konsole/'
@@ -21,7 +21,7 @@ kdebug-302731.patch::"https://invent.kde.org/utilities/konsole/commit/027e8c150c
 commit-295435d8.patch::"https://invent.kde.org/utilities/konsole/-/commit/295435d8fa056151409c135ef0cceddba2ac0a47.patch"
 )
 
-sha256sums=('f3529987eb7b7c1a11f2efa110023925a47a7d02cc96a41160e671742fe36f73'
+sha256sums=('1a9727a1ab878bce3419a3fa9cedf41cf0ed778dc7d9ce5a66314755bba8581b'
             'SKIP'
             '08fb0944950db657c917fb1a0a34be06b50e3344f78c9a81dda0f4900f4ae332'
             'e1a48bd6b38e9d76baeec4990da0b338beed8e66655c331149019629761a0246')
