@@ -1,0 +1,29 @@
+From 72f62dd682168d46a1eaf4cdd293013201903893 Mon Sep 17 00:00:00 2001
+From: Lucas De Marchi <lucas.demarchi@intel.com>
+Date: Tue, 15 Feb 2022 22:47:06 -0800
+Subject: [PATCH 10/15] libkmod: Update docs about indexes order
+
+New indexes were created without updating the documentation about the
+order in kmod_module_new_from_lookup(). Add them to the documentation.
+
+Reviewed-by: Luis Chamberlain <mcgrof@kernel.org>
+---
+ libkmod/libkmod-module.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libkmod/libkmod-module.c b/libkmod/libkmod-module.c
+index 7cb6d26..1c6ff24 100644
+--- a/libkmod/libkmod-module.c
++++ b/libkmod/libkmod-module.c
+@@ -534,7 +534,7 @@ static int __kmod_module_new_from_lookup(struct kmod_ctx *ctx, const lookup_func
+  *
+  * The search order is: 1. aliases in configuration file; 2. module names in
+  * modules.dep index; 3. symbol aliases in modules.symbols index; 4. aliases
+- * in modules.alias index.
++ * from install commands; 5. builtin indexes from kernel.
+  *
+  * The initial refcount is 1, and needs to be decremented to release the
+  * resources of the kmod_module. The returned @list must be released by
+-- 
+2.35.1.354.g715d08a9e5
+

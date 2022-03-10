@@ -2,7 +2,7 @@
 
 pkgname=kmod
 pkgver=29
-pkgrel=2.2
+pkgrel=2.3
 pkgdesc="Linux kernel module management tools and library"
 arch=('x86_64')
 url='https://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git'
@@ -18,13 +18,37 @@ source=("https://www.kernel.org/pub/linux/utils/kernel/$pkgname/$pkgname-$pkgver
         '0001-libkmod-module-check-new_from_name-return-value-in-g.patch'
         '0002-libkmod-add-a-library-notice-log-level-print.patch'
         "0003-libkmod-Set-builtin-to-no-when-module-is-created-fro.patch"
+        "0004-libkmod-Prefer-builtin-index-over-builtin.alias.patch"
+        "0005-depmod-Do-not-duplicate-builtin-index.patch"
+        "0006-depmod-Stop-opening-modules.modinfo-once-per-module.patch"
+        "0007-test-initstate-Check-for-negative-value-on-error.patch"
+        "0008-libkmod-module-Fix-return-code-for-kmod_module_new_f.patch"
+        "0009-libkmod-Add-helper-function-to-iterate-lookup-option.patch"
+        "0010-libkmod-Update-docs-about-indexes-order.patch"
+        "0011-libkmod-Add-lookup-from-module-name.patch"
+        "0012-modinfo-Update-help-message-with-modulename.patch"
+        "0013-modinfo-Allow-to-force-arg-as-module-name.patch"
+        "0014-libkmod-Fix-use-of-sizeof-instead-of-ARRAY_SIZE.patch"
+        "0015-docs-Add-missing-functions-to-documentation.patch"
         'depmod-search.conf'
         'depmod.hook' 'depmod.script')
 md5sums=('e81e63acd80697d001c8d85c1acb38a0'
          'SKIP'
-         '1c47cfeba2ecfbefea1f6b98369d967a'
-         '4992d28568ffc55f6eea766df9e3b8d2'
-         'a427520c103329319763097d8352b53f'
+         '8a2f8e8182669581ef13f0815da68b73'
+         'd8eda46644b50480ab717be268fb519c'
+         'bfd1f2ec9d09590fae614eb91e909c31'
+         '1feb29e1c9bccae0f9877a711d0f64ca'
+         'ab9ddb8c16020c88084d022ba171ec06'
+         'e2511b86bba4945cabdd5264ad4207ba'
+         '2e8166f84522d8887ffbf699ddf34d8a'
+         'c2de5599324e4201f2e95b98789252f9'
+         '32cfa655ac8dd8b1113951d54c754b69'
+         'c95687d31126754ffa317c812fad46e9'
+         'b4513020eaee467f3a173e086e6d7b24'
+         'c3c364525d20744a59e1f4dc5f10927a'
+         'de40c12ccc1049e8020eb31c1c4bd823'
+         '45818b2a7c4f8c4c33ecf0c74990868a'
+         '4f23e3be0a6c012b09d796c713746e57'
          'dd62cbf62bd8f212f51ef8c43bec9a77'
          'e179ace75721e92b04b2e145b69dab29'
          '18fb3d1f6024a5a84514c8276cb3ebff')

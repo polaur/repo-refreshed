@@ -1,0 +1,33 @@
+From 65865a646baacf96806b6e43655d3b98d4240007 Mon Sep 17 00:00:00 2001
+From: Lucas De Marchi <lucas.demarchi@intel.com>
+Date: Thu, 3 Mar 2022 00:57:10 -0800
+Subject: [PATCH 15/15] docs: Add missing functions to documentation
+
+Signed-off-by: Lucas De Marchi <lucas.demarchi@intel.com>
+---
+ libkmod/docs/libkmod-sections.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/libkmod/docs/libkmod-sections.txt b/libkmod/docs/libkmod-sections.txt
+index e59ab7a..33d9eec 100644
+--- a/libkmod/docs/libkmod-sections.txt
++++ b/libkmod/docs/libkmod-sections.txt
+@@ -15,6 +15,7 @@ kmod_get_log_priority
+ kmod_set_log_fn
+ kmod_get_userdata
+ kmod_set_userdata
++kmod_get_dirname
+ </SECTION>
+ 
+ <SECTION>
+@@ -46,6 +47,7 @@ kmod_config_iter_free_iter
+ <FILE>libkmod-module</FILE>
+ kmod_module
+ kmod_module_new_from_lookup
++kmod_module_new_from_name_lookup
+ kmod_module_new_from_name
+ kmod_module_new_from_path
+ 
+-- 
+2.35.1.354.g715d08a9e5
+

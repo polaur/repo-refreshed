@@ -1,0 +1,49 @@
+From 09e29ca4a3224ef14a053120abaa9f707902c694 Mon Sep 17 00:00:00 2001
+From: Lucas De Marchi <lucas.demarchi@intel.com>
+Date: Wed, 9 Feb 2022 18:21:03 -0800
+Subject: [PATCH 04/15] libkmod: Prefer builtin index over builtin.alias
+
+The modules.builtin.alias.bin is way larger than the
+modules.builtin.bin.  On a normal "distro kernel":
+
+	21k modules.builtin.alias.bin
+	11k modules.builtin.bin
+
+From the kernel we get both modules.builtin and modules.builtin.modinfo.
+depmod generates modules.builtin.bin and modules.builtin.alias.bin
+from them respectively. modules.bultin is not going away: it's not
+deprecated by the new index added. So, let's just stop duplicating the
+information inside modules.builtin.alias.bin and just use the other
+index.
+---
+ libkmod/libkmod-module.c | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/libkmod/libkmod-module.c b/libkmod/libkmod-module.c
+index 6f7747c..6423339 100644
+--- a/libkmod/libkmod-module.c
++++ b/libkmod/libkmod-module.c
+@@ -576,13 +576,15 @@ KMOD_EXPORT int kmod_module_new_from_lookup(struct kmod_ctx *ctx,
+ 	err = kmod_lookup_alias_from_aliases_file(ctx, alias, list);
+ 	CHECK_ERR_AND_FINISH(err, fail, list, finish);
+ 
++	DBG(ctx, "lookup modules.builtin %s\n", alias);
++	err = kmod_lookup_alias_from_builtin_file(ctx, alias, list);
++	CHECK_ERR_AND_FINISH(err, fail, list, finish);
++
+ 	DBG(ctx, "lookup modules.builtin.modinfo %s\n", alias);
+ 	err = kmod_lookup_alias_from_kernel_builtin_file(ctx, alias, list);
+-	if (err == -ENOSYS) {
+-		/* Optional index missing, try the old one */
+-		DBG(ctx, "lookup modules.builtin %s\n", alias);
+-		err = kmod_lookup_alias_from_builtin_file(ctx, alias, list);
+-	}
++	/* Optional index missing, ignore */
++	if (err == -ENOSYS)
++		err = 0;
+ 	CHECK_ERR_AND_FINISH(err, fail, list, finish);
+ 
+ 
+-- 
+2.35.1.354.g715d08a9e5
+

@@ -1,0 +1,33 @@
+From bf4882e78778bef295be9ed73a6a535cc8565921 Mon Sep 17 00:00:00 2001
+From: Lucas De Marchi <lucas.demarchi@intel.com>
+Date: Tue, 15 Feb 2022 23:16:33 -0800
+Subject: [PATCH 12/15] modinfo: Update help message with "modulename"
+
+man page correctly states the a module name can be used in place of a
+file name:
+
+	modinfo [-0] [-F field] [-k kernel] [modulename|filename...]
+
+Update the help message accordingly.
+
+Reviewed-by: Luis Chamberlain <mcgrof@kernel.org>
+---
+ tools/modinfo.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tools/modinfo.c b/tools/modinfo.c
+index f6a971f..f51b7e4 100644
+--- a/tools/modinfo.c
++++ b/tools/modinfo.c
+@@ -337,7 +337,7 @@ static const struct option cmdopts[] = {
+ static void help(void)
+ {
+ 	printf("Usage:\n"
+-		"\t%s [options] filename [args]\n"
++		"\t%s [options] <modulename|filename> [args]\n"
+ 		"Options:\n"
+ 		"\t-a, --author                Print only 'author'\n"
+ 		"\t-d, --description           Print only 'description'\n"
+-- 
+2.35.1.354.g715d08a9e5
+

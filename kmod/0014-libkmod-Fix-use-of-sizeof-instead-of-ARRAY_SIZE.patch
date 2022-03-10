@@ -1,0 +1,36 @@
+From ae1358020ad5636256543edfccc9d596e1d7b70a Mon Sep 17 00:00:00 2001
+From: Lucas De Marchi <lucas.demarchi@intel.com>
+Date: Wed, 23 Feb 2022 10:19:13 -0800
+Subject: [PATCH 14/15] libkmod: Fix use of sizeof instead of ARRAY_SIZE
+
+Link: https://github.com/kmod-project/kmod/issues/12
+Signed-off-by: Lucas De Marchi <lucas.demarchi@intel.com>
+---
+ libkmod/libkmod-module.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/libkmod/libkmod-module.c b/libkmod/libkmod-module.c
+index a1839fa..efdd679 100644
+--- a/libkmod/libkmod-module.c
++++ b/libkmod/libkmod-module.c
+@@ -578,7 +578,7 @@ KMOD_EXPORT int kmod_module_new_from_lookup(struct kmod_ctx *ctx,
+ 
+ 	DBG(ctx, "input alias=%s, normalized=%s\n", given_alias, alias);
+ 
+-	err = __kmod_module_new_from_lookup(ctx, lookup, sizeof(lookup),
++	err = __kmod_module_new_from_lookup(ctx, lookup, ARRAY_SIZE(lookup),
+ 					    alias, list);
+ 
+ 	DBG(ctx, "lookup=%s found=%d\n", alias, err >= 0 && *list);
+@@ -635,7 +635,7 @@ KMOD_EXPORT int kmod_module_new_from_name_lookup(struct kmod_ctx *ctx,
+ 
+ 	DBG(ctx, "input modname=%s, normalized=%s\n", modname, name_norm);
+ 
+-	err = __kmod_module_new_from_lookup(ctx, lookup, sizeof(lookup),
++	err = __kmod_module_new_from_lookup(ctx, lookup, ARRAY_SIZE(lookup),
+ 					    name_norm, &list);
+ 
+ 	DBG(ctx, "lookup=%s found=%d\n", name_norm, err >= 0 && list);
+-- 
+2.35.1.354.g715d08a9e5
+
