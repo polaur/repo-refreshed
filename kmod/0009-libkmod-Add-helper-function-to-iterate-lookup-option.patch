@@ -1,7 +1,7 @@
-From 6839a42e2650c3915900b8147b9333f2a025c29f Mon Sep 17 00:00:00 2001
+From 4680546059d94ace3ebaff8ff2a4d633b9619933 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Tue, 15 Feb 2022 19:12:05 -0800
-Subject: [PATCH 09/15] libkmod: Add helper function to iterate lookup options
+Subject: [PATCH 09/19] libkmod: Add helper function to iterate lookup options
 
 The CHECK_ERR_AND_FINISH macro with conditional code flow changes has
 been a source of bugs. Get rid of it replacing with a helper function
@@ -127,5 +127,5 @@ index 1b59c3c..7cb6d26 100644
  /**
   * kmod_module_unref_list:
 -- 
-2.35.1.354.g715d08a9e5
+2.35.1.677.gabf474a5dd
 

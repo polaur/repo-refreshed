@@ -1,7 +1,7 @@
-From 572cfe76b617085764ac77334cfa9053f17f4e2a Mon Sep 17 00:00:00 2001
+From 164f9062b98e7b0eed9ef5440aea1ab8f3012416 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Tue, 15 Feb 2022 14:05:13 -0800
-Subject: [PATCH 07/15] test-initstate: Check for negative value on error
+Subject: [PATCH 07/19] test-initstate: Check for negative value on error
 
 Documentation says kmod_module_new_from_lookup() returns < 0 on error
 and 0 otherwise. There are bugs in libkmod however making it return
@@ -28,5 +28,5 @@ index da2303a..9332e8f 100644
  		exit(EXIT_FAILURE);
  	}
 -- 
-2.35.1.354.g715d08a9e5
+2.35.1.677.gabf474a5dd
 

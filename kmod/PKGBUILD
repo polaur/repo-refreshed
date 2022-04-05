@@ -2,7 +2,7 @@
 
 pkgname=kmod
 pkgver=29
-pkgrel=2.3
+pkgrel=3.1
 pkgdesc="Linux kernel module management tools and library"
 arch=('x86_64')
 url='https://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git'
@@ -30,28 +30,36 @@ source=("https://www.kernel.org/pub/linux/utils/kernel/$pkgname/$pkgname-$pkgver
         "0013-modinfo-Allow-to-force-arg-as-module-name.patch"
         "0014-libkmod-Fix-use-of-sizeof-instead-of-ARRAY_SIZE.patch"
         "0015-docs-Add-missing-functions-to-documentation.patch"
+        "0016-modprobe-Rename-rmmod_do_deps_list.patch"
+        "0017-depmod-Add-support-for-excluding-a-directory.patch"
+        "0018-modprobe-fix-the-NULL-termination-of-new_argv.patch"
+        "0019-modprobe-remove-unneeded-variable-str_start.patch"
         'depmod-search.conf'
         'depmod.hook' 'depmod.script')
 md5sums=('e81e63acd80697d001c8d85c1acb38a0'
          'SKIP'
-         '8a2f8e8182669581ef13f0815da68b73'
-         'd8eda46644b50480ab717be268fb519c'
-         'bfd1f2ec9d09590fae614eb91e909c31'
-         '1feb29e1c9bccae0f9877a711d0f64ca'
-         'ab9ddb8c16020c88084d022ba171ec06'
-         'e2511b86bba4945cabdd5264ad4207ba'
-         '2e8166f84522d8887ffbf699ddf34d8a'
-         'c2de5599324e4201f2e95b98789252f9'
-         '32cfa655ac8dd8b1113951d54c754b69'
-         'c95687d31126754ffa317c812fad46e9'
-         'b4513020eaee467f3a173e086e6d7b24'
-         'c3c364525d20744a59e1f4dc5f10927a'
-         'de40c12ccc1049e8020eb31c1c4bd823'
-         '45818b2a7c4f8c4c33ecf0c74990868a'
-         '4f23e3be0a6c012b09d796c713746e57'
+         'e21279b7af431f2696c58b0f41aa4f48'
+         'ea29e099d5f28c196012c5fe808cd8de'
+         '29e51b26ba830251801c0a191b951e80'
+         'afde1757c0332bbecad8ce69b05d4ec9'
+         '5c0840a204fd88353ef55a691ab8f05f'
+         'd655b12b95ab4223d2b3213d264b38f0'
+         '1be394ad9981766b966f6ee4e2735375'
+         'a3376537ba128b89cd0bbf827691bcfe'
+         '8179ed7cc88a7a3493dcc0135a0fe3b4'
+         'a9bf27dd26b7e955c08cee48520cfad0'
+         'a94e7c4470aa7d4ae6cd68acd02b208e'
+         'bb5aa28cef0522665177f369b810aa9c'
+         '19e3a124f56c65d26b7635ecc7e102c4'
+         '190f6f7408eefe0e44342e3b9ea7b37e'
+         '2f9d62c4affbd908c5411ade2611a9a2'
+         '64afbde6a00133fe823e776c0ec5fdcf'
+         '1cade7983d785627c9ee11fdca4e8c55'
+         '3450fa8738f3ade9690d38aab5a6a05c'
+         '3416d3cd40f2594a1d6535100412c29b'
          'dd62cbf62bd8f212f51ef8c43bec9a77'
          'e179ace75721e92b04b2e145b69dab29'
-         '18fb3d1f6024a5a84514c8276cb3ebff')
+         'b00253ca0d4ebfb2414e4596597bdebd')
 
 prepare() {
   cd $pkgname-$pkgver

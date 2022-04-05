@@ -1,7 +1,7 @@
-From cc2d738cff455ff69271a9e7a6ce5c03314e1256 Mon Sep 17 00:00:00 2001
+From 92a41a179a64f3e78e8790d902737b894a8b3d08 Mon Sep 17 00:00:00 2001
 From: Yauheni Kaliuta <ykaliuta@redhat.com>
 Date: Tue, 8 Jun 2021 09:29:22 +0300
-Subject: [PATCH 01/15] libkmod-module: check "new_from_name" return value in
+Subject: [PATCH 01/19] libkmod-module: check "new_from_name" return value in
  get_builtin
 
 kmod_module_new_from_name() may fail and return error value. It is
@@ -30,5 +30,5 @@ index b6320cc..6e0ff1a 100644
  
  		*list = kmod_list_append(*list, mod);
 -- 
-2.35.1.354.g715d08a9e5
+2.35.1.677.gabf474a5dd
 
