@@ -1,7 +1,7 @@
-From f0ec0df3aade4de432d2f1a5e9e6b77437cb25a3 Mon Sep 17 00:00:00 2001
+From 2391514576596d3bdee6514063ce5a90fa5483a0 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Mon, 28 Mar 2022 23:55:03 -0700
-Subject: [PATCH 16/19] modprobe: Rename rmmod_do_deps_list
+Subject: [PATCH 16/22] modprobe: Rename rmmod_do_deps_list
 
 It's used not only for dependencies, but also for pre and post softdep.
 

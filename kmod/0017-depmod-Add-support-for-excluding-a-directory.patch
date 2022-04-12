@@ -1,7 +1,7 @@
-From 1d3030d959c5a82d11a8920ad819a25c4b760691 Mon Sep 17 00:00:00 2001
+From 010cc007421748412183eff362b39b47790c1b77 Mon Sep 17 00:00:00 2001
 From: Saul Wold <saul.wold@windriver.com>
 Date: Thu, 31 Mar 2022 14:56:28 -0700
-Subject: [PATCH 17/19] depmod: Add support for excluding a directory
+Subject: [PATCH 17/22] depmod: Add support for excluding a directory
 
 This adds support to depmod to enable a new exclude directive in
 the depmod.d/*.conf configuration file. Currently depmod

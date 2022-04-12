@@ -1,7 +1,7 @@
-From ad892a33ee07411857b74f14db29beaefce30a0a Mon Sep 17 00:00:00 2001
+From 0a3f95f80efd6769114f2698c7f9ca1e83437e32 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Wed, 9 Feb 2022 18:21:03 -0800
-Subject: [PATCH 04/19] libkmod: Prefer builtin index over builtin.alias
+Subject: [PATCH 04/22] libkmod: Prefer builtin index over builtin.alias
 
 The modules.builtin.alias.bin is way larger than the
 modules.builtin.bin.  On a normal "distro kernel":

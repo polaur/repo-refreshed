@@ -1,7 +1,7 @@
-From f4aefdadd37318303ea2c5fb447f38b0c8972a08 Mon Sep 17 00:00:00 2001
+From 569330538ce89a46b5c62265d65960d194af7338 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Tue, 15 Feb 2022 23:10:58 -0800
-Subject: [PATCH 11/19] libkmod: Add lookup from module name
+Subject: [PATCH 11/22] libkmod: Add lookup from module name
 
 Slightly different than kmod_module_new_from_lookup(): it doesn't
 consider aliases, only module names. This is useful for cases we want to

@@ -2,7 +2,7 @@
 
 pkgname=kmod
 pkgver=29
-pkgrel=3.1
+pkgrel=3.2
 pkgdesc="Linux kernel module management tools and library"
 arch=('x86_64')
 url='https://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git'
@@ -34,29 +34,35 @@ source=("https://www.kernel.org/pub/linux/utils/kernel/$pkgname/$pkgname-$pkgver
         "0017-depmod-Add-support-for-excluding-a-directory.patch"
         "0018-modprobe-fix-the-NULL-termination-of-new_argv.patch"
         "0019-modprobe-remove-unneeded-variable-str_start.patch"
+        "0020-modprobe-Fix-holders-removal.patch"
+        "0021-modprobe-move-check-for-remove_holders-to-caller.patch"
+        "0022-modprobe-Make-rmmod_do_module-contain-all-the-remova.patch"
         'depmod-search.conf'
         'depmod.hook' 'depmod.script')
 md5sums=('e81e63acd80697d001c8d85c1acb38a0'
          'SKIP'
-         'e21279b7af431f2696c58b0f41aa4f48'
-         'ea29e099d5f28c196012c5fe808cd8de'
-         '29e51b26ba830251801c0a191b951e80'
-         'afde1757c0332bbecad8ce69b05d4ec9'
-         '5c0840a204fd88353ef55a691ab8f05f'
-         'd655b12b95ab4223d2b3213d264b38f0'
-         '1be394ad9981766b966f6ee4e2735375'
-         'a3376537ba128b89cd0bbf827691bcfe'
-         '8179ed7cc88a7a3493dcc0135a0fe3b4'
-         'a9bf27dd26b7e955c08cee48520cfad0'
-         'a94e7c4470aa7d4ae6cd68acd02b208e'
-         'bb5aa28cef0522665177f369b810aa9c'
-         '19e3a124f56c65d26b7635ecc7e102c4'
-         '190f6f7408eefe0e44342e3b9ea7b37e'
-         '2f9d62c4affbd908c5411ade2611a9a2'
-         '64afbde6a00133fe823e776c0ec5fdcf'
-         '1cade7983d785627c9ee11fdca4e8c55'
-         '3450fa8738f3ade9690d38aab5a6a05c'
-         '3416d3cd40f2594a1d6535100412c29b'
+         'beead29e9aa5ad0fdef560f4b7480660'
+         '060d341198a433a05d4fad166b9ab746'
+         '484cbcc4f95dac360e3086d75ae5594e'
+         '9a111fee82eb2415da410d5d7c8f2934'
+         '630af5f261c3ed711e9645bcd776e2e9'
+         '0b9ba28946a87b36543621bcf04e7d28'
+         '1eb0e04a44ae0b502b2f7260f046050d'
+         '9dc763116d209ebd401ee200e7c6afc7'
+         '5de7958230a49c0c043a9ba6211e5bdb'
+         'cbfb600dc3fae122e1dc8ffa9d856a40'
+         'a9586d9a4720472e0053c27924c0d2cc'
+         '79bac270d653b136557bf40fe5a66d2a'
+         '3f99307b57963da8afd32333aa4a5f2b'
+         'f2e55b5f50959363a134b76a2605e6fa'
+         '18ae32ac9e62e9b2d47acb7cb8bf2807'
+         '10fea8ab8922f5f47f06115ad55460fc'
+         'df1b220a31c8c30419df967a016ed520'
+         '81daccde75f92b860810e1f53c4b6894'
+         'd667c29e883cb783ac83af7727e92fe8'
+         '32c0749ff59d7b07056d74f8caa56233'
+         '785c3ede4d836087628b9a7bdae5cdb8'
+         '067183acbd232e6084b3444b800ab31f'
          'dd62cbf62bd8f212f51ef8c43bec9a77'
          'e179ace75721e92b04b2e145b69dab29'
          'b00253ca0d4ebfb2414e4596597bdebd')

@@ -1,7 +1,7 @@
-From dcc9a6a1fccc6403d8d80aff47c736067442145b Mon Sep 17 00:00:00 2001
+From 4225e770109c55eb15527c89765511db0fa02a3e Mon Sep 17 00:00:00 2001
 From: Masahiro Yamada <masahiroy@kernel.org>
 Date: Thu, 10 Feb 2022 11:14:22 +0900
-Subject: [PATCH 18/19] modprobe: fix the NULL-termination of new_argv
+Subject: [PATCH 18/22] modprobe: fix the NULL-termination of new_argv
 
 The number of new arguments is (i + argc - 1) as it is set to *p_argc
 one line below.

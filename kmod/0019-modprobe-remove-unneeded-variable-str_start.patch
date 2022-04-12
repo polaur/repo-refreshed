@@ -1,7 +1,7 @@
-From 656294b089739e2f81c47b83a5b0c76a55cc928f Mon Sep 17 00:00:00 2001
+From 436f9ad234962585e9f7af52a9bf83127dc82563 Mon Sep 17 00:00:00 2001
 From: Masahiro Yamada <masahiroy@kernel.org>
 Date: Thu, 10 Feb 2022 11:14:23 +0900
-Subject: [PATCH 19/19] modprobe: remove unneeded variable str_start
+Subject: [PATCH 19/22] modprobe: remove unneeded variable str_start
 
 The variable 'str_start' is not useful here.
 

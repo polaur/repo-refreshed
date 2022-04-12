@@ -1,7 +1,7 @@
-From 41dcebc65acba32dd2e5bb040d7578d95a61d0a8 Mon Sep 17 00:00:00 2001
+From c16a004718c3495dc9166a0442d98546c940d329 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Thu, 3 Mar 2022 00:57:10 -0800
-Subject: [PATCH 15/19] docs: Add missing functions to documentation
+Subject: [PATCH 15/22] docs: Add missing functions to documentation
 
 Signed-off-by: Lucas De Marchi <lucas.demarchi@intel.com>
 ---

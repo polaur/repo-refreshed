@@ -1,7 +1,7 @@
-From fb9fd193ddcc449f747cfa6e80b58a19ef744c17 Mon Sep 17 00:00:00 2001
+From cefdd5f817c8178233be90369d870ac89e6e0674 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Tue, 15 Feb 2022 14:09:14 -0800
-Subject: [PATCH 08/19] libkmod-module: Fix return code for
+Subject: [PATCH 08/22] libkmod-module: Fix return code for
  kmod_module_new_from_lookup()
 
 When kmod_module_new_from_lookup() resolves to an alias, `err` will be

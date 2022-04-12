@@ -1,7 +1,7 @@
-From 4f441d3266c037c5038d708d0d2805d9b28bff1d Mon Sep 17 00:00:00 2001
+From 75cd3e9f8571fc6b026c24c077a7428499338cf0 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Wed, 23 Feb 2022 10:19:13 -0800
-Subject: [PATCH 14/19] libkmod: Fix use of sizeof instead of ARRAY_SIZE
+Subject: [PATCH 14/22] libkmod: Fix use of sizeof instead of ARRAY_SIZE
 
 Link: https://github.com/kmod-project/kmod/issues/12
 Signed-off-by: Lucas De Marchi <lucas.demarchi@intel.com>

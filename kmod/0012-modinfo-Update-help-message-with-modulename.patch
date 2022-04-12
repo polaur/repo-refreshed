@@ -1,7 +1,7 @@
-From 63393c08aeb5907d32bc9ba4c7fcbaa8b87aa7a9 Mon Sep 17 00:00:00 2001
+From fd731f2e7d33939046fbaaf49eee8b4bc3c9be2a Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Tue, 15 Feb 2022 23:16:33 -0800
-Subject: [PATCH 12/19] modinfo: Update help message with "modulename"
+Subject: [PATCH 12/22] modinfo: Update help message with "modulename"
 
 man page correctly states the a module name can be used in place of a
 file name:

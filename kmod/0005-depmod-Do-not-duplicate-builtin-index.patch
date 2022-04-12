@@ -1,7 +1,7 @@
-From 57eedeb8bd7dc016f3134ce0e0dec64fcc30ac99 Mon Sep 17 00:00:00 2001
+From 3d500a5682b3e76565d3e2331785ad8ad5944059 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Wed, 9 Feb 2022 18:46:34 -0800
-Subject: [PATCH 05/19] depmod: Do not duplicate builtin index
+Subject: [PATCH 05/22] depmod: Do not duplicate builtin index
 
 Now that libkmod uses modules.builtin.bin again, we don't need to add
 the module names in modules.builtin.alias.bin and just add the aliases.

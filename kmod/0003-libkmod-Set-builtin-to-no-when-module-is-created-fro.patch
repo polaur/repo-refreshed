@@ -1,7 +1,7 @@
-From 33faf7da1478dacb12dd06c43bfac94c131636aa Mon Sep 17 00:00:00 2001
+From 81907bce9b54b035975c593ffc39e2b32ee6efd0 Mon Sep 17 00:00:00 2001
 From: Michal Suchanek <msuchanek@suse.de>
 Date: Wed, 18 Aug 2021 22:52:00 +0200
-Subject: [PATCH 03/19] libkmod: Set builtin to no when module is created from
+Subject: [PATCH 03/22] libkmod: Set builtin to no when module is created from
  path.
 
 A recent bug report showed that modinfo doesn't give the signature

@@ -1,7 +1,7 @@
-From f220de3c6780718a6dbf509d996a161eb94c7e78 Mon Sep 17 00:00:00 2001
+From 8a65051609137c5f1c33d2a759c11cbde2bf485d Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Tue, 15 Feb 2022 22:47:06 -0800
-Subject: [PATCH 10/19] libkmod: Update docs about indexes order
+Subject: [PATCH 10/22] libkmod: Update docs about indexes order
 
 New indexes were created without updating the documentation about the
 order in kmod_module_new_from_lookup(). Add them to the documentation.

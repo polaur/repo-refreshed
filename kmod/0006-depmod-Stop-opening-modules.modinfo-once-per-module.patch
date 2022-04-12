@@ -1,7 +1,7 @@
-From b30a3f235b062fa84aceaf9f4a814fe5e384b5ca Mon Sep 17 00:00:00 2001
+From be807d6ac5d42fc1bbcdd02c65c7393be65aa048 Mon Sep 17 00:00:00 2001
 From: Lucas De Marchi <lucas.demarchi@intel.com>
 Date: Wed, 9 Feb 2022 18:07:03 -0800
-Subject: [PATCH 06/19] depmod: Stop opening modules.modinfo once per module
+Subject: [PATCH 06/22] depmod: Stop opening modules.modinfo once per module
 
 Since the addition of modules.aliases.bin, depmod has to open that
 index multiple times and parse it over and over again:

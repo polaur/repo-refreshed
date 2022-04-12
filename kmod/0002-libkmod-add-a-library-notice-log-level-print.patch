@@ -1,7 +1,7 @@
-From b9113bccc92ee9dd4d40afe9b0ae42d6769a7375 Mon Sep 17 00:00:00 2001
+From d6a916ecf1c80fee94f0a0d80f3a683d2d5035b9 Mon Sep 17 00:00:00 2001
 From: Luis Chamberlain <mcgrof@kernel.org>
 Date: Mon, 9 Aug 2021 22:16:00 -0700
-Subject: [PATCH 02/19] libkmod: add a library notice log level print
+Subject: [PATCH 02/22] libkmod: add a library notice log level print
 
 When you use pass the -v argument to modprobe we bump
 the log level from the default modprobe log level of
