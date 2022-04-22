@@ -8,7 +8,7 @@
 # Contributor: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=dolphin
-pkgver=21.12.3
+pkgver=22.04.0
 pkgrel=1.1
 pkgdesc="KDE File Manager"
 arch=(x86_64)
@@ -20,26 +20,18 @@ optdepends=('kde-cli-tools: for editing file type options' 'ffmpegthumbs: video 
             'konsole: terminal panel' 'purpose: share context menu')
 groups=(kde-applications kde-system)
 source=(https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pkgver.tar.xz{,.sig}
-    kdebug-442275.patch::"https://invent.kde.org/system/dolphin/commit/3d49996615a094df8fc2cb613955abb740a0463a.patch"
-    kdebug-441617.patch::"https://invent.kde.org/system/dolphin/-/commit/2ef87708fdc0ff9d0337482b994bd6efa6b9b623.patch"
-    commit-416b164c.patch::"https://invent.kde.org/system/dolphin/-/commit/416b164ce00323da342f0a6d49b58ee5bcf80905.patch"
+        commit-416b164c.patch::"https://invent.kde.org/system/dolphin/-/commit/416b164ce00323da342f0a6d49b58ee5bcf80905.patch"
 )
 
-sha256sums=('5812238be9a4ee204e864cd30166285af599c6478eb9ce53cf9a552091c2b654'
+sha256sums=('58c6cdd0d3b8ac41880e5ea2322cad92380c8c45336150c3c39f9357dfa4f100'
             'SKIP'
-            'f1acc8e05d1d32bb49d867cb268fbc0d26d1f5483d03139198accacd5a61a549'
-            '02714f06a390daa155b5aa0bd8e01f6c50215eea839eb531545c0138a700a886'
             '62ff7d41890f03dc83c87070356944d144feba68586190389faba709ceb82172')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
               F23275E4BF10AFC1DF6914A6DBD2CE893E2D1C87 # Christoph Feck <cfeck@kde.org>
               D81C0CB38EB725EF6691C385BB463350D6EF31EF) # Heiko Becker
 
 prepare() {
-    msg "Add kdebug 442275 patch; fix in 22.04"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-442275.patch
-    msg "Add kdebug 441617 patch; fix in 22.04"
-    patch -d $pkgname-$pkgver -p1 -i ../kdebug-441617.patch
-    msg "Add commit-416b164c patch; fix in 22.04"
+    msg "Add commit-416b164c patch"
     patch -d $pkgname-$pkgver -p1 -i ../commit-416b164c.patch
     
 }
