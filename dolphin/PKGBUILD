@@ -8,7 +8,7 @@
 # Contributor: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=dolphin
-pkgver=22.04.0
+pkgver=22.04.1
 pkgrel=1.1
 pkgdesc="KDE File Manager"
 arch=(x86_64)
@@ -23,7 +23,7 @@ source=(https://download.kde.org/stable/release-service/$pkgver/src/$pkgname-$pk
         commit-416b164c.patch::"https://invent.kde.org/system/dolphin/-/commit/416b164ce00323da342f0a6d49b58ee5bcf80905.patch"
 )
 
-sha256sums=('58c6cdd0d3b8ac41880e5ea2322cad92380c8c45336150c3c39f9357dfa4f100'
+sha256sums=('9cf51ac21ffc3d12a919e99cca80f3bb14741eed2a3af54b4499332ccd979a7b'
             'SKIP'
             '62ff7d41890f03dc83c87070356944d144feba68586190389faba709ceb82172')
 validpgpkeys=(CA262C6C83DE4D2FB28A332A3A6A4DB839EAA6D7  # Albert Astals Cid <aacid@kde.org>
