@@ -1,0 +1,86 @@
+# Maintainer: Jacek Bienias <sp7ezd at ymail.com>
+# Base: Damian N. <nycko123 at gmail>
+# Contributor: Christian Hesse <mail@eworm.de>
+# Contributor: Bartłomiej Piotrowski <bpiotrowski@archlinux.org>
+# Contributor: Eivind Uggedal <eivind@uggedal.com>
+
+pkgname=mpv-pipewire
+pkgver=0.34.1
+pkgrel=3.1
+_tag='df6d84c1cf4bbc2b998f4d320542c78df674512d' # git rev-parse v${pkgver}
+pkgdesc='a free, open source, and cross-platform media player including an experimental PipeWire audio backend (polaur - changed: removed smbclient libcdio-paranoia libdvdnav dvb )'
+arch=('x86_64')
+# We link against libraries that are licensed GPLv3 explicitly, libsmbclient
+# being one of these. So our package is GPLv3 only as well.
+license=('GPL3')
+url='https://mpv.io/'
+depends=('alsa-lib' 'desktop-file-utils' 'ffmpeg'
+         'glibc' 'hicolor-icon-theme' 'jack' 'lcms2' 'libarchive'
+         'libdrm' 'libegl' 'libgl' 'libglvnd'
+         'libjpeg' 'libass'
+         'libva' 'libvdpau' 'libx11'
+         'libxext' 'libxinerama' 'libxkbcommon' 'libxrandr' 'libxss'
+         'libxv' 'lua' 'mesa' 'mujs' 'rubberband' 'shaderc'
+         'uchardet' 'vulkan-icd-loader' 'wayland' 'xdg-utils'
+         'zlib')
+makedepends=('git' 'python-docutils' 'ladspa' 'wayland-protocols'
+             'ffnvcodec-headers' 'vulkan-headers' 'waf')
+optdepends=('yt-dlp: for video-sharing websites playback'
+            'youtube-dl: for video-sharing websites playback')
+provides=('libmpv.so' 'mpv')
+conflicts=('mpv' 'mpv-light')
+options=('!emptydirs')
+validpgpkeys=('145077D82501AA20152CACCE8D769208D5E31419') # sfan5 <sfan5@live.de>
+source=("git+https://github.com/mpv-player/mpv.git#tag=${_tag}?signed"
+        "Add-Pipewire-audio-backend.patch")
+sha256sums=('SKIP'
+            'bf5d2a1642507198ade56244ba29fed121f10f2c60879f6b83148aabe74abb8c')
+
+prepare() {
+  cd mpv
+
+  git cherry-pick -n \
+    '79bfcc672343ddbc348e040ad899d61a0bafc050' \
+    'fc94c8c365ebeb038af6052bf4ea0506c1220559'
+
+  # patch the PipeWire audio backend (I had to remove the meson patch to make it build with the current release)
+  # https://github.com/mpv-player/mpv/pull/9587
+  patch -Np1 -i ../Add-Pipewire-audio-backend.patch
+}
+
+build() {
+  # cd ${pkgname%-*}-${pkgver}
+  cd mpv
+
+  waf configure --prefix=/usr \
+    --confdir=/etc/mpv \
+    --disable-cdda \
+    --disable-dvb \
+    --disable-dvdnav \
+    --enable-libarchive \
+    --enable-libmpv-shared \
+	--disable-build-date \
+	--disable-caca \
+	--disable-libbluray \
+	--disable-libplacebo \
+	--disable-cuda-hwaccel \
+	--disable-cuda-interop \
+	--disable-d3d-hwaccel \
+	--disable-d3d9-hwaccel \
+	--disable-android
+
+  waf build
+}
+
+package() {
+  # cd ${pkgname%-*}-${pkgver}
+  cd mpv
+
+  waf install --destdir="$pkgdir"
+
+  install -m0644 DOCS/{encoding.rst,tech-overview.txt} \
+    "$pkgdir"/usr/share/doc/mpv
+
+  install -m0644 TOOLS/lua/* \
+    -D -t "$pkgdir"/usr/share/mpv/scripts
+}
