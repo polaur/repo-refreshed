@@ -1,0 +1,58 @@
+# Maintainer: pavbaranov <pavbaranov at gmail dot com>
+# only for version with bugfixes and improves from upcomming version
+# based on the original works by:
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kdeplasma-addons
+pkgver=5.25.2
+pkgrel=1.1
+pkgdesc='All kind of addons to improve your Plasma experience'
+arch=(x86_64)
+url='https://kde.org/plasma-desktop/'
+license=(LGPL)
+depends=(plasma-workspace kunitconversion)
+makedepends=(extra-cmake-modules qt5-webengine)
+optdepends=('purpose: Quickshare applet'
+            'quota-tools: disk quota applet'
+            'qt5-webengine: dictionary and webbrowser applets')
+groups=(plasma)
+source=(https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz{,.sig}
+kdebug-453878.patch::"https://invent.kde.org/plasma/kdeplasma-addons/-/commit/be5f636c0baa63de4981b89b6970ba02fe2abb87.patch" # fix in 5.26
+#kdebug-429892.patch::"https://invent.kde.org/plasma/kdeplasma-addons/-/commit/47bcfc37665348b12fa7100e48c41463825b8277.patch" #dix in 5.26
+improve-1ffba97c::"https://invent.kde.org/plasma/kdeplasma-addons/-/commit/1ffba07cef9fdcdd56c650d945fdf83258493d2c.patch" #fix in 5.26
+)
+sha256sums=('f3633ae9f851d93e8d196c70af59bc1f8be3d770416f1443577c33f18d06c012'
+            'SKIP'
+            '4c1a2fe0e39ec7f421764be17c4893ceca3e96595f7f8ef6201bfefd52c42f0b'
+            '7ab0f1933cce895e597bbdb4bf78421d17429ce54705f4d564832a5d1dadcff3')
+validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
+              '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
+              'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
+              '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+#options=(debug)
+
+prepare() {
+cd $pkgname-$pkgver
+### Patching sources
+        local src
+        for src in "${source[@]}"; do
+          src="${src%%::*}"
+          src="${src##*/}"
+          [[ $src = *.patch ]] || continue
+          echo "Applying patch $src..."
+          patch -Np1 < "../$src"
+        done
+}
+
+build() {
+  cmake -B build -S $pkgname-$pkgver \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
