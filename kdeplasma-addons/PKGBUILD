@@ -7,7 +7,7 @@
 
 pkgname=kdeplasma-addons
 pkgver=5.25.2
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='All kind of addons to improve your Plasma experience'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -22,10 +22,14 @@ source=(https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz{,
 kdebug-453878.patch::"https://invent.kde.org/plasma/kdeplasma-addons/-/commit/be5f636c0baa63de4981b89b6970ba02fe2abb87.patch" # fix in 5.26
 #kdebug-429892.patch::"https://invent.kde.org/plasma/kdeplasma-addons/-/commit/47bcfc37665348b12fa7100e48c41463825b8277.patch" #dix in 5.26
 #improve-1ffba97c.patch::"https://invent.kde.org/plasma/kdeplasma-addons/-/commit/1ffba07cef9fdcdd56c650d945fdf83258493d2c.patch" #fix in 5.26
+kdebug-441241.patch::"https://invent.kde.org/plasma/kdeplasma-addons/-/commit/2b0069baa5bf8b901bfffa288fe1188ef3faaeed.patch" #fix in 5.25.3
+kdebug-451997.patch::"https://invent.kde.org/plasma/kdeplasma-addons/-/commit/e58ad3af86850b21706f139b0025c6c42317cc6d.patch" #fix in 5.25.3
 )
 sha256sums=('f3633ae9f851d93e8d196c70af59bc1f8be3d770416f1443577c33f18d06c012'
             'SKIP'
-            '4c1a2fe0e39ec7f421764be17c4893ceca3e96595f7f8ef6201bfefd52c42f0b')
+            '4c1a2fe0e39ec7f421764be17c4893ceca3e96595f7f8ef6201bfefd52c42f0b'
+            '813617713064b62242887e868b287381748a8e02627cbd94f2a47b15cd3ffd85'
+            '0d852c87870c9f7a5577859d466d1dff6ab018908327a5be615db34740769e80')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
