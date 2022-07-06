@@ -7,7 +7,7 @@
 
 pkgname=kio
 pkgver=5.95.0
-pkgrel=1.3
+pkgrel=2.1
 pkgdesc='Resource and network access abstraction'
 arch=(x86_64)
 url='https://community.kde.org/Frameworks'
@@ -21,12 +21,14 @@ source=(https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver
 kdebug-297003.patch::"https://invent.kde.org/frameworks/kio/-/commit/da65b36c78644ce39fcb8c2db1b02461644eb81d.patch" #fix in 5.96
 kdebug-456091.patch::"https://invent.kde.org/frameworks/kio/-/commit/ebe6706ccad4bd94d767dff4ebd4fde4c73cb31c.patch" #finx in 5.96
 kdebug-456046.patch::"https://invent.kde.org/frameworks/kio/-/commit/0dd0e96c10f634974c63f85c2068e44019c27591.patch" #fix in 5.96
+kdebug-434912.patch::"https://invent.kde.org/frameworks/kio/-/commit/a5b354b9cf350043e106ecd041de595d4fe7ed27.patch" #fix in 5.96
 )
 sha256sums=('97c7f0df5aec1249b0f1ceed52bfbcea49ba5742b78395a1e84815b31ce37687'
             'SKIP'
             '19642fae2628d9461d42a6e5f864e9fa7bb1d0ec120571a8b1050228120f1cd0'
             '3f4392614af7c767e0d7a75bc6cce6953b43c200a6dbf78963cf976f090b67fe'
-            '387c6b7c25c9f8bdb4046366420d0e53df088e1884679ff8b27f6666870e4e50')
+            '387c6b7c25c9f8bdb4046366420d0e53df088e1884679ff8b27f6666870e4e50'
+            'ca3ca8d1cb09f0c30c09f24b55f7428ddb5238a40ca25a4ad82dea013ba88d26')
 validpgpkeys=(53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB) # David Faure <faure@kde.org>
 #options=(debug)
 
