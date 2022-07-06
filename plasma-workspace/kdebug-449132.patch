@@ -1,0 +1,66 @@
+From 520e30a64a4e7d13c56fb8cd1df27698cae234ea Mon Sep 17 00:00:00 2001
+From: ivan tkachenko <me@ratijas.tk>
+Date: Sun, 26 Jun 2022 01:46:16 +0300
+Subject: [PATCH] applets/kicker: Get rid of a separator just above title menu
+ item
+
+BUG: 449132
+(cherry picked from commit c0d5d824f46ab9b70b5a6b2bd126e6e7a7df8d9b)
+---
+ applets/kicker/plugin/recentusagemodel.cpp   |  8 ++++++--
+ applets/kicker/plugin/runnermatchesmodel.cpp | 11 +++++++++--
+ 2 files changed, 15 insertions(+), 4 deletions(-)
+
+diff --git a/applets/kicker/plugin/recentusagemodel.cpp b/applets/kicker/plugin/recentusagemodel.cpp
+index 87232ce4b..f9c01bfbb 100644
+--- a/applets/kicker/plugin/recentusagemodel.cpp
++++ b/applets/kicker/plugin/recentusagemodel.cpp
+@@ -230,12 +230,16 @@ QVariant RecentUsageModel::appData(const QString &resource, int role) const
+ 
+         const QVariantList &jumpList = Kicker::jumpListActions(service);
+         if (!jumpList.isEmpty()) {
+-            actionList << jumpList << Kicker::createSeparatorActionItem();
++            actionList << jumpList;
+         }
+ 
+         const QVariantList &recentDocuments = Kicker::recentDocumentActions(service);
+         if (!recentDocuments.isEmpty()) {
+-            actionList << recentDocuments << Kicker::createSeparatorActionItem();
++            actionList << recentDocuments;
++        }
++
++        if (!actionList.isEmpty()) {
++            actionList << Kicker::createSeparatorActionItem();
+         }
+ 
+         const QVariantMap &forgetAction = Kicker::createActionItem(i18n("Forget Application"), QStringLiteral("edit-clear-history"), QStringLiteral("forget"));
+diff --git a/applets/kicker/plugin/runnermatchesmodel.cpp b/applets/kicker/plugin/runnermatchesmodel.cpp
+index 8c70382ec..a01ffd701 100644
+--- a/applets/kicker/plugin/runnermatchesmodel.cpp
++++ b/applets/kicker/plugin/runnermatchesmodel.cpp
+@@ -122,13 +122,20 @@ QVariant RunnerMatchesModel::data(const QModelIndex &index, int role) const
+             }
+ 
+             const QVariantList &addLauncherActions = Kicker::createAddLauncherActionList(appletInterface, service);
++            bool needsSeparator = false;
+             if (!systemImmutable && !addLauncherActions.isEmpty()) {
+-                actionList << addLauncherActions << Kicker::createSeparatorActionItem();
++                actionList << addLauncherActions;
++                needsSeparator = true;
+             }
+ 
+             const QVariantList &recentDocuments = Kicker::recentDocumentActions(service);
+             if (!recentDocuments.isEmpty()) {
+-                actionList << recentDocuments << Kicker::createSeparatorActionItem();
++                actionList << recentDocuments;
++                needsSeparator = false;
++            }
++
++            if (needsSeparator) {
++                actionList << Kicker::createSeparatorActionItem();
+             }
+ 
+             const QVariantList &additionalActions = Kicker::additionalAppActions(service);
+-- 
+GitLab
+

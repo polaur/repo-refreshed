@@ -1,0 +1,115 @@
+From 9bad434fbf94b1398056fafd8caf49a371ea6140 Mon Sep 17 00:00:00 2001
+From: Nicolas Fella <nicolas.fella@gmx.de>
+Date: Fri, 1 Jul 2022 16:37:26 +0000
+Subject: [PATCH] kcms/autostart: Warn when adding a non-executable script and
+ offer to fix it
+
+The login/logout script files need to be executable. To avoid the user
+wondering why their script isn't executing, warn them if the file is not
+executable and offer to fix it.
+
+CCBUG: 391609
+---
+ kcms/autostart/autostartmodel.cpp           | 13 +++++++++
+ kcms/autostart/autostartmodel.h             |  2 ++
+ kcms/autostart/package/contents/ui/main.qml | 29 ++++++++++++++++++++-
+ 3 files changed, 43 insertions(+), 1 deletion(-)
+
+diff --git a/kcms/autostart/autostartmodel.cpp b/kcms/autostart/autostartmodel.cpp
+index a5d7bb380..ea494231f 100644
+--- a/kcms/autostart/autostartmodel.cpp
++++ b/kcms/autostart/autostartmodel.cpp
+@@ -298,6 +298,12 @@ void AutostartModel::addScript(const QUrl &url, AutostartModel::AutostartEntrySo
+         return;
+     }
+ 
++    QFile scriptFile(url.toLocalFile());
++
++    if (!(scriptFile.permissions() & QFile::ExeUser)) {
++        Q_EMIT nonExecutableScript(url.toLocalFile(), kind);
++    }
++
+     const QString fileName = url.fileName();
+ 
+     if (kind == AutostartModel::AutostartEntrySource::XdgScripts) {
+@@ -410,3 +416,10 @@ void AutostartModel::editApplication(int row, QQuickItem *context)
+     });
+     dlg->open();
+ }
++
++void AutostartModel::makeFileExecutable(const QString &fileName)
++{
++    QFile file(fileName);
++
++    file.setPermissions(file.permissions() | QFile::ExeUser);
++}
+diff --git a/kcms/autostart/autostartmodel.h b/kcms/autostart/autostartmodel.h
+index 6897c9c93..d84bcc77a 100644
+--- a/kcms/autostart/autostartmodel.h
++++ b/kcms/autostart/autostartmodel.h
+@@ -49,11 +49,13 @@ public:
+     Q_INVOKABLE void editApplication(int row, QQuickItem *context);
+     Q_INVOKABLE void addScript(const QUrl &url, AutostartEntrySource kind);
+     Q_INVOKABLE void showApplicationDialog(QQuickItem *context);
++    Q_INVOKABLE void makeFileExecutable(const QString &fileName);
+ 
+     void load();
+ 
+ Q_SIGNALS:
+     void error(const QString &message);
++    void nonExecutableScript(const QString &fileName, AutostartModel::AutostartEntrySource kind);
+ 
+ private:
+     void addApplication(const KService::Ptr &service);
+diff --git a/kcms/autostart/package/contents/ui/main.qml b/kcms/autostart/package/contents/ui/main.qml
+index 2ff6cc880..a3bf481af 100644
+--- a/kcms/autostart/package/contents/ui/main.qml
++++ b/kcms/autostart/package/contents/ui/main.qml
+@@ -21,16 +21,43 @@ KCM.ScrollViewKCM {
+ 
+     header: Kirigami.InlineMessage {
+         id: errorMessage
+-        type: Kirigami.MessageType.Error
+         showCloseButton: true
+ 
++
+         Connections {
+             target: kcm.model
+             function onError(message) {
++                errorMessage.type = Kirigami.MessageType.Error
+                 errorMessage.visible = true
+                 errorMessage.text = message
+             }
+         }
++
++        Connections {
++            target: kcm.model
++            property var fixItAction: Kirigami.Action {
++                property string fileName
++                text: i18n("Make Executable")
++                icon.name: "dialog-ok"
++                onTriggered: {
++                    kcm.model.makeFileExecutable(fileName)
++                    errorMessage.visible = false
++                }
++            }
++            function onNonExecutableScript(fileName, kind) {
++                fixItAction.fileName = fileName
++                errorMessage.type = Kirigami.MessageType.Warning
++                errorMessage.visible = true
++                errorMessage.actions = [fixItAction]
++
++                if (kind === AutostartModel.PlasmaShutdown) {
++                    errorMessage.text = i18nd("kcm_autostart", "The file '%1' must be executable to run at logout.", fileName)
++                } else {                                                 '  '
++                    errorMessage.text = i18nd("kcm_autostart", "The file '%1' must be executable to run at login.", fileName)
++                }
++            }
++        }
++
+     }
+ 
+     view: ListView {
+-- 
+GitLab
+

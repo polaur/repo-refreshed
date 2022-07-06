@@ -1,0 +1,29 @@
+From 0e3b24c95428a4f70867d33bf5536b0720339f94 Mon Sep 17 00:00:00 2001
+From: Alexander Lohnau <alexander.lohnau@gmx.de>
+Date: Sat, 28 May 2022 08:34:01 +0200
+Subject: [PATCH] runners/recentdocuments: Do not set match type to exact match
+ when query is short
+
+BUG: 431603
+---
+ runners/recentdocuments/recentdocuments.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/runners/recentdocuments/recentdocuments.cpp b/runners/recentdocuments/recentdocuments.cpp
+index 62a8c8447..06e82b97a 100644
+--- a/runners/recentdocuments/recentdocuments.cpp
++++ b/runners/recentdocuments/recentdocuments.cpp
+@@ -71,8 +71,8 @@ void RecentDocuments::match(Plasma::RunnerContext &context)
+         Plasma::QueryMatch match(this);
+ 
+         auto relevance = 0.5;
+-        match.setType(Plasma::QueryMatch::PossibleMatch);
+-        if (url.fileName() == term) {
++        match.setType(Plasma::QueryMatch::CompletionMatch);
++        if (term.size() >= 5 && url.fileName() == term) {
+             relevance = 1.0;
+             match.setType(Plasma::QueryMatch::ExactMatch);
+         } else if (url.fileName().startsWith(term)) {
+-- 
+GitLab
+

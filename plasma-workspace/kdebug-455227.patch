@@ -1,0 +1,63 @@
+From 298ffbc22253bb96dc2b08e482856c6a01d250d6 Mon Sep 17 00:00:00 2001
+From: Derek Christ <christ.derek@gmail.com>
+Date: Wed, 29 Jun 2022 15:58:20 +0000
+Subject: [PATCH] Fix password field in lock screen not clearing after failed
+ login attempt
+
+This bug was introduced by plasma/plasma-workspace!1754.
+
+`lockScreenUi.hadPrompt` was set to `false` in `onFailed()` to avoid
+unintentionally clearing the password after the text field had faded
+out after 10 seconds and the user pressed a button. Unfortunately this
+also caused the password field to not clear right after the failed event.
+
+So instead the statement is moved into the trigger of `fadeoutTimer` which
+fixes both issues.
+
+BUG: 455227
+FIXED-IN: 5.25.3
+(cherry picked from commit 923ce7e5887db1471c7c9b547c8682068648f458)
+---
+ lookandfeel/contents/lockscreen/LockScreenUi.qml | 15 ++++++---------
+ 1 file changed, 6 insertions(+), 9 deletions(-)
+
+diff --git a/lookandfeel/contents/lockscreen/LockScreenUi.qml b/lookandfeel/contents/lockscreen/LockScreenUi.qml
+index 2a77d0cb7..50f4ccd85 100644
+--- a/lookandfeel/contents/lockscreen/LockScreenUi.qml
++++ b/lookandfeel/contents/lockscreen/LockScreenUi.qml
+@@ -67,18 +67,12 @@ PlasmaCore.ColorScope {
+ 
+         function onPrompt(msg) {
+             root.notification = msg;
+-            mainBlock.echoMode = TextInput.Normal
+-            if (lockScreenUi.hadPrompt) {
+-                mainBlock.mainPasswordBox.text = "";
+-            }
++            mainBlock.showPassword = true;
+             mainBlock.mainPasswordBox.forceActiveFocus();
+             lockScreenUi.hadPrompt = true;
+         }
+         function onPromptForSecret(msg) {
+-            mainBlock.echoMode = TextInput.Password
+-            if (lockScreenUi.hadPrompt) {
+-                mainBlock.mainPasswordBox.text = "";
+-            }
++            mainBlock.showPassword = false;
+             mainBlock.mainPasswordBox.forceActiveFocus();
+             lockScreenUi.hadPrompt = true;
+         }
+@@ -182,7 +176,10 @@ PlasmaCore.ColorScope {
+         Timer {
+             id: graceLockTimer
+             interval: 3000
+-            onTriggered: authenticator.tryUnlock();
++            onTriggered: {
++                root.clearPassword();
++                authenticator.tryUnlock();
++            }
+         }
+ 
+         Component.onCompleted: PropertyAnimation { id: launchAnimation; target: lockScreenRoot; property: "opacity"; from: 0; to: 1; duration: PlasmaCore.Units.veryLongDuration * 2 }
+-- 
+GitLab
+
