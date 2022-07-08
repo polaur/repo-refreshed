@@ -9,7 +9,7 @@ pkgname=kio
 pkgver=5.95.0
 pkgrel=2.1
 pkgdesc='Resource and network access abstraction'
-arch=(x86_64)
+arch=(x86_64_v3)
 url='https://community.kde.org/Frameworks'
 license=(LGPL)
 depends=(solid kjobwidgets kbookmarks libxslt kwallet ktextwidgets kded)
@@ -21,7 +21,7 @@ source=(https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver
 kdebug-297003.patch::"https://invent.kde.org/frameworks/kio/-/commit/da65b36c78644ce39fcb8c2db1b02461644eb81d.patch" #fix in 5.96
 kdebug-456091.patch::"https://invent.kde.org/frameworks/kio/-/commit/ebe6706ccad4bd94d767dff4ebd4fde4c73cb31c.patch" #finx in 5.96
 kdebug-456046.patch::"https://invent.kde.org/frameworks/kio/-/commit/0dd0e96c10f634974c63f85c2068e44019c27591.patch" #fix in 5.96
-kdebug-434912.patch::"https://invent.kde.org/frameworks/kio/-/commit/a5b354b9cf350043e106ecd041de595d4fe7ed27.patch" #fix in 5.96
+kdebug-434917.patch::"https://invent.kde.org/frameworks/kio/-/commit/a5b354b9cf350043e106ecd041de595d4fe7ed27.patch" #fix in 5.96
 )
 sha256sums=('97c7f0df5aec1249b0f1ceed52bfbcea49ba5742b78395a1e84815b31ce37687'
             'SKIP'
