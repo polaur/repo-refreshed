@@ -1,0 +1,89 @@
+# Maintainer: Damian N. <nycko123 at gmail>
+# Maintainer: Christian Hesse <mail@eworm.de>
+# Contributor: Bartłomiej Piotrowski <bpiotrowski@archlinux.org>
+# Contributor: Eivind Uggedal <eivind@uggedal.com>
+
+pkgname=mpv
+epoch=1
+pkgver=0.35.1
+pkgrel=3.2
+_tag='5ae02ccad10542a74b397e39800ec01def0db4e1' # git rev-parse v${pkgver}
+pkgdesc='lighter version of a free, open source, and cross-platform media player (changed: removed smbclient libcdio-paranoia libdvdnav dvb) from POLAUR'
+groups=('modified' 'polaur')
+arch=('x86_64' 'x86_64_3')
+# We link against libraries that are licensed GPLv3 explicitly, libsmbclient
+# being one of these. So our package is GPLv3 only as well.
+license=('GPL3')
+url='https://mpv.io/'
+depends=('alsa-lib' 'desktop-file-utils' 'ffmpeg'
+         'glibc' 'hicolor-icon-theme' 'jack' 'lcms2'
+         'libdrm' 'libegl' 'libgl' 'libglvnd'
+         'libjpeg' 'libass' 'libxpresent'
+         'libva' 'libvdpau' 'libx11'
+         'libxext' 'libxinerama' 'libxkbcommon' 'libxrandr' 'libxss'
+         'libxv' 'lua' 'mesa' 'rubberband' 'shaderc'
+         'uchardet' 'vulkan-icd-loader' 'wayland' 'xdg-utils'
+         'zlib')
+makedepends=('git' 'python-docutils' 'ladspa' 'wayland-protocols'
+             'ffnvcodec-headers' 'vulkan-headers' 'waf')
+optdepends=('yt-dlp: for video-sharing websites playback'
+            'youtube-dl: for video-sharing websites playback')
+provides=('libmpv.so')
+conflicts=('mpv-light' 'mpv-git')
+options=('!emptydirs' '!debug' 'lto')
+validpgpkeys=('145077D82501AA20152CACCE8D769208D5E31419') # sfan5 <sfan5@live.de>
+source=("git+https://github.com/mpv-player/mpv.git#tag=${_tag}?signed")
+sha256sums=('SKIP')
+
+build() {
+	local _meson_options=(
+	--auto-features auto
+
+	-Dlibmpv=true
+
+	-Dcaca=disabled
+	-Dcdda=disabled
+	-Ddvbin=disabled
+	-Ddvdnav=disabled
+	-Dlibarchive=disabled
+	-Dlibbluray=disabled
+	-Dlibplacebo=disabled
+	-Dcuda-hwaccel=disabled
+	-Dcuda-interop=disabled
+	-Dd3d11=disabled
+	-Ddirect3d=disabled
+	-Dd3d-hwaccel=disabled
+	-Dd3d9-hwaccel=disabled
+	-Dcuda-hwaccel=disabled
+	-Djavascript=disabled
+	-Dhtml-build=disabled
+	-Dpdf-build=disabled
+	-Duwp=disabled
+	-Dpulse=disabled
+	-Doss-audio=disabled
+	-Dx11=enabled
+	-Dalsa=enabled
+	-Dvulkan=disabled
+	)
+
+	arch-meson "${pkgname}" build "${_meson_options[@]}"
+
+	meson compile -C build
+}
+
+check() {
+	meson test -C build
+}
+
+package() {
+  meson install -C build --destdir "${pkgdir}"
+
+  # delete private entries only required for static linking
+  sed -i -e '/Requires.private/d' -e '/Libs.private/d' "${pkgdir}"/usr/lib/pkgconfig/mpv.pc
+
+  install -m0644 "${pkgname}"/DOCS/{encoding.rst,tech-overview.txt} \
+    "${pkgdir}"/usr/share/doc/mpv
+
+  install -m0644 "${pkgname}"/TOOLS/lua/* \
+    -D -t "${pkgdir}"/usr/share/mpv/scripts
+}
