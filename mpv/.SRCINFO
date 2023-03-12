@@ -9,6 +9,7 @@ pkgbase = mpv
 	groups = modified
 	groups = polaur
 	license = GPL3
+	makedepends = meson
 	makedepends = git
 	makedepends = python-docutils
 	makedepends = ladspa

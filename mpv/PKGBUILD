@@ -24,7 +24,7 @@ depends=('alsa-lib' 'desktop-file-utils' 'ffmpeg'
          'libxv' 'lua' 'mesa' 'rubberband' 'shaderc'
          'uchardet' 'vulkan-icd-loader' 'wayland' 'xdg-utils'
          'zlib')
-makedepends=('git' 'python-docutils' 'ladspa' 'wayland-protocols'
+makedepends=('meson' 'git' 'python-docutils' 'ladspa' 'wayland-protocols'
              'ffnvcodec-headers' 'vulkan-headers' 'waf')
 optdepends=('yt-dlp: for video-sharing websites playback'
             'youtube-dl: for video-sharing websites playback')
